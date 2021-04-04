@@ -2,13 +2,16 @@
 
 namespace App\Entity;
 
-use App\Repository\CategoryRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\CategoryRepository;
+use Doctrine\Common\Collections\Collection;
+use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Annotation\ApiSubresource;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass=CategoryRepository::class)
+ * @ApiResource()
  */
 class Category
 {
@@ -21,8 +24,14 @@ class Category
 
     /**
      * @ORM\OneToMany(targetEntity=Product::class, mappedBy="category")
+     * @ApiSubresource()
      */
     private $products;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $categoryName;
 
     public function __construct()
     {
@@ -60,6 +69,18 @@ class Category
                 $product->setCategory(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCategoryName(): ?string
+    {
+        return $this->categoryName;
+    }
+
+    public function setCategoryName(string $categoryName): self
+    {
+        $this->categoryName = $categoryName;
 
         return $this;
     }

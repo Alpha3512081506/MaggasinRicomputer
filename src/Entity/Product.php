@@ -2,11 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\ProductRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ProductRepository;
+use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
  * @ORM\Entity(repositoryClass=ProductRepository::class)
+ * @ApiResource()
  */
 class Product
 {
@@ -18,12 +20,12 @@ class Product
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string")
      */
     private $productId;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=false)
      */
     private $productName;
 
@@ -72,17 +74,22 @@ class Product
      */
     private $location;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="products")
+     */
+    private $user;
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getProductId(): ?int
+    public function getProductId(): ?string
     {
         return $this->productId;
     }
 
-    public function setProductId(int $productId): self
+    public function setProductId(string $productId): self
     {
         $this->productId = $productId;
 
@@ -205,6 +212,18 @@ class Product
     public function setLocation(?Location $location): self
     {
         $this->location = $location;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

@@ -2,13 +2,16 @@
 
 namespace App\Entity;
 
-use App\Repository\LocationRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\LocationRepository;
+use Doctrine\Common\Collections\Collection;
+use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Annotation\ApiSubresource;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass=LocationRepository::class)
+ * @ApiResource()
  */
 class Location
 {
@@ -21,8 +24,14 @@ class Location
 
     /**
      * @ORM\OneToMany(targetEntity=Product::class, mappedBy="location")
+     * @ApiSubresource()
      */
     private $prodcuts;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $locationName;
 
     public function __construct()
     {
@@ -60,6 +69,18 @@ class Location
                 $prodcut->setLocation(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getLocationName(): ?string
+    {
+        return $this->locationName;
+    }
+
+    public function setLocationName(string $locationName): self
+    {
+        $this->locationName = $locationName;
 
         return $this;
     }
