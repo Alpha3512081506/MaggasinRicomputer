@@ -26,6 +26,13 @@ services:
     App\Controller\:
         resource: '../src/Controller/'
         tags: ['controller.service_arguments']
+    App\Event\JwtCreatedSubcriber: 
+        tags:
+            -  {
+                  name: name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_created,
+                  method: updateJwtData
+
+               }
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

@@ -8,10 +8,14 @@ use Doctrine\Common\Collections\Collection;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Annotation\ApiSubresource;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=LocationRepository::class)
- * @ApiResource()
+ * @ApiResource(
+ * normalizationContext= {
+ * "groups" = {"location_read"}}
+ * )
  */
 class Location
 {
@@ -24,12 +28,14 @@ class Location
 
     /**
      * @ORM\OneToMany(targetEntity=Product::class, mappedBy="location")
-     * @ApiSubresource()
+     * @Groups({"location_read"})
+     *
      */
     private $prodcuts;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"location_read", "product_read"})
      */
     private $locationName;
 

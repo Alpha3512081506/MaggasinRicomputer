@@ -8,10 +8,17 @@ use Doctrine\Common\Collections\Collection;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Annotation\ApiSubresource;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass=CategoryRepository::class)
- * @ApiResource()
+ * @ApiResource(
+ * normalizationContext={
+ * "groups"={"category_read"}
+ * }
+ * )
  */
 class Category
 {
@@ -24,12 +31,21 @@ class Category
 
     /**
      * @ORM\OneToMany(targetEntity=Product::class, mappedBy="category")
-     * @ApiSubresource()
+     * @Groups({"category_read"})
+     *
      */
     private $products;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"category_read","product_read"})
+     * @Assert\NotBlank(message="Il nome della categoria è obligatorio")
+     * @Assert\Length(
+     *      min = 4,
+     *      max = 50,
+     *      minMessage = "nom poi avere meno di {{ limit }} characters long",
+     *      maxMessage = "Nom poi avere piu {{ limit }} characters"
+     * )
      */
     private $categoryName;
 

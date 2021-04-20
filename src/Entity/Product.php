@@ -3,12 +3,27 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\PrePersist;
 use App\Repository\ProductRepository;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Annotation\ApiSubresource;
+use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
+use Symfony\Component\Validator\Constraints\Date;
+use Symfony\Component\Validator\Constraints\Type;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 
 /**
  * @ORM\Entity(repositoryClass=ProductRepository::class)
- * @ApiResource()
+ * @ApiResource(
+ * normalizationContext= {"groups" = {"product_read"}},
+ * denormalizationContext={"disable_type_enforcement"=true}
+ * )
+ * @UniqueEntity("productId")
+ * @HasLifecycleCallbacks
+ * 
  */
 class Product
 {
@@ -16,66 +31,109 @@ class Product
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"product_read"})
+     * 
      */
     private $id;
 
     /**
      * @ORM\Column(type="string")
+     * @Groups({"product_read""category_read",})
+     * @Assert\NotBlank(message="la categoria del prodotto è obbligatoria")
+     * @Assert\Length(
+     *      min = 4,
+     *      max = 50,
+     *      minMessage = "nom poi avere meno di {{ limit }} characters long",
+     *      maxMessage = "Nom poi avere piu {{ limit }} characters"
+     * )
+     * 
      */
     private $productId;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
+     * @Groups({"product_read","category_read"})
+     * @Assert\NotBlank(message="Il nome del prodotto è obligatorio")
+     * @Assert\Length(
+     *      min = 4,
+     *      max = 50,
+     *      minMessage = "nom poi avere meno di {{ limit }} characters long",
+     *      maxMessage = "Nom poi avere piu {{ limit }} characters"
+     * )
      */
     private $productName;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"product_read", "category_read"})
+     * @Assert\NotBlank
+     * @Assert\Type(
+     *     type="numeric",
+     *     message="il valore {{ value }} non è un tipo valido {{ type }}."
+     * )
      */
     private $currentQuantity;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"product_read", "category_read"})
+     * @Assert\NotBlank
      */
     private $alertQuanty;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"product_read"})
+     * 
      */
     private $customField1;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"product_read"})
      */
     private $customField2;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"product_read"})
      */
     private $customField3;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"product_read"})
      */
     private $note;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\Date
      */
     private $createdAt;
 
     /**
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="products")
+     * @ApiSubresource()
+     * @Groups({"product_read"})
+     * @Assert\NotBlank(message="la categoria del prodotto è obbligatoria")
+     *  
      */
     private $category;
 
     /**
      * @ORM\ManyToOne(targetEntity=Location::class, inversedBy="prodcuts")
+     * @ApiSubresource()
+     * @Groups({"product_read"})
+     * @Assert\NotBlank(message="la location del prodotto è obbligatoria")
+     *  
      */
     private $location;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="products")
+     * @Groups({"product_read"})
+     *  
      */
     private $user;
 
@@ -113,7 +171,7 @@ class Product
         return $this->currentQuantity;
     }
 
-    public function setCurrentQuantity(int $currentQuantity): self
+    public function setCurrentQuantity($currentQuantity): self
     {
         $this->currentQuantity = $currentQuantity;
 
@@ -226,5 +284,11 @@ class Product
         $this->user = $user;
 
         return $this;
+    }
+
+    /** @PrePersist */
+    public function createdAtPrePersist()
+    {
+        $this->createdAt = new \DateTime();
     }
 }
