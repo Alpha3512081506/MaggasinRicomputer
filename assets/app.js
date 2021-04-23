@@ -48,14 +48,14 @@ const App = () => {
                 <main className="container pt-5">
                     <Switch>
                         <Route path="/login" component={LoginPage} />
-                        <Route path="/locationlist" component={Location}
+                        <PrivateRoute path="/locationlist" component={Location}
                         />
-                        <Route path="/productlist" component={ProductList} />
-                        <Route path="/productadd" component={ProductNew} />
-                        <Route path="/categoryadd" component={CategoryAdd} />
-                        <Route path="/locationadd" component={LocationAdd} />
-                        <Route path="/categorylist" component={CategoryPage} />
-                        <Route exact={true} path="/" component={HomePage} />
+                        <PrivateRoute path="/productlist" component={ProductList} />
+                        <PrivateRoute path="/productadd" component={ProductNew} />
+                        <PrivateRoute path="/categoryadd" component={CategoryAdd} />
+                        <PrivateRoute path="/locationadd" component={LocationAdd} />
+                        <PrivateRoute path="/categorylist" component={CategoryPage} />
+                        <PrivateRoute exact={true} path="/" component={HomePage} />
 
                     </Switch>
 

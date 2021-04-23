@@ -34,8 +34,9 @@ class ProductUserSubscriber implements EventSubscriberInterface
         $method = $event->getRequest()->getMethod();
 
 
-        if ($product instanceof Product && $method === 'POST')
+        if ($product instanceof Product && $method === 'POST') {
             $user = $this->security->getUser();
-        $product->setUser($user);
+            $product->setUser($user);
+        }
     }
 }

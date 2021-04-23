@@ -1,8 +1,11 @@
+import axios from 'axios';
 import React, { useState, useContext } from 'react';
 import { toast } from 'react-toastify';
 import AuthContext from '../context/AuthContext';
+import APISERVICE from '../services/APISERVICE';
 import AuthApi from '../services/AuthApi';
 const LoginPage = ({ history }) => {
+
     const { setIsAuthenticated } = useContext(AuthContext);
     const [error, setError] = useState("");
     const [credentials, setCredentials] = useState({ username: '', password: '' });
@@ -13,18 +16,39 @@ const LoginPage = ({ history }) => {
     }
     const handleSubmit = async event => {
         event.preventDefault();
+        /*   try {
+              await AuthApi.authenticate(credentials);
+              // console.log(credentials)
+              setIsAuthenticated(true);
+              toast.success("Ben tornato 🙌❤");
+              setError("");
+              history.replace("/#");
+  
+          } catch (error) {
+              console.log(error.response)
+              setError("Nessun Account Ha Questo Indirizzo o Le Informazioni Non Corrispondono");
+              toast.error("si è verificato un errore");
+          } */
         try {
-            let test = await AuthApi.authenticate(credentials);
-            console.log(test)
-            setIsAuthenticated(true);
-            toast.success("Ben tornato 🙌❤");
+            await AuthApi.authenticate(credentials);
+
+            // const token = await axios.post("https://localhost:8000/api/login_check", credentials)
+            //     .then(response => response.data.token);
+            // setError("");
+            // window.localStorage.setItem("authToken", token);
+            // axios.defaults.headers["Authorization"] = "Bearer " + token;
+            // const test = await APISERVICE.findAll("products");
+            // console.log(test);
             setError("");
+            toast.success("Ben tornato 🙌❤");
             history.replace("/#");
 
         } catch (error) {
 
             setError("Nessun Account Ha Questo Indirizzo o Le Informazioni Non Corrispondono");
             toast.error("si è verificato un errore");
+
+
         }
     }
     return (<>

@@ -20,7 +20,7 @@ const ProductList = (props) => {
             setProduct(data);
             toast.success("connessione al server effettuata ✔")
         } catch (error) {
-            toast.error("il prodotto è stato cancellato");
+            toast.error("Impossibile di collegarsi al server");
         }
 
     }
@@ -38,15 +38,15 @@ const ProductList = (props) => {
 
     }
     const itemsPerPage = 5;
-    const filteredProducts = products.filter(product =>
-        product.productId.toLowerCase().includes(search.toLowerCase())
-        || product.productName.toLowerCase().includes(search.toLowerCase())
-        || product.category.toLowerCase().includes(search.toLowerCase())
-        || product.location.toLowerCase().includes(search.toLowerCase())
-        || product.customField1.toLowerCase().includes(search.toLowerCase())
-        || product.customField2.toLowerCase().includes(search.toLowerCase())
-        || product.customField3.toLowerCase().includes(search.toLowerCase())
-        || product.note.toLowerCase().includes(search.toLowerCase())
+    const filteredProducts = products.filter(product => console.log("hello")
+        // product.productId.toLowerCase().includes(search.toLowerCase())
+        // || product.productName.toLowerCase().includes(search.toLowerCase())
+        // || product.category.toLowerCase().includes(search.toLowerCase())
+        // || product.location.toLowerCase().includes(search.toLowerCase())
+        // || product.customField1.toLowerCase().includes(search.toLowerCase())
+        // || product.customField2.toLowerCase().includes(search.toLowerCase())
+        // || product.customField3.toLowerCase().includes(search.toLowerCase())
+        // || product.note.toLowerCase().includes(search.toLowerCase())
     )
 
     const handlePageChange = page => { setCurrentPage(page) }
