@@ -38,7 +38,7 @@ const ProductList = (props) => {
 
     }
     const itemsPerPage = 5;
-    const filteredProducts = products.filter(product => console.log("hello")
+    const filteredProducts = products.filter(product => console.log(product)
         // product.productId.toLowerCase().includes(search.toLowerCase())
         // || product.productName.toLowerCase().includes(search.toLowerCase())
         // || product.category.toLowerCase().includes(search.toLowerCase())

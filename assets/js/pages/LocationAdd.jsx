@@ -18,7 +18,7 @@ const LocationAdd = ({ props }) => {
         event.preventDefault();
         try {
             const data = await APISERVICE.addNew("locations", locationName);
-            setCategory(data);
+            setLocationName(data);
             console.log(data);
         } catch (error) {
             console.log(error.response)
@@ -26,21 +26,19 @@ const LocationAdd = ({ props }) => {
     }
     return (<>
         <div className="mb-3 d-flex justify-content-between align-items-center">
-            <h1>Crea Categoria</h1>
+            <h1>Crea luogo dei prodotti</h1>
             <button className="btn btn-outline-success">Scan CodeBarre</button>
         </div>
         <form onSubmit={handleSubmit}>
-            <Field name="categoryName"
-                label="Category Name" placeholder="nome della categoria"
+            <Field name="locationName"
+                label="Luogo" placeholder="nome della location"
                 onChange={handleChange}
                 value={locationName.locationName}
                 error={locationName.locationName}
             />
-
-
             <div className="form-group">
                 <button type="submit" className="btn btn-outline-success ">Crea la Location</button>
-                <Link to=""><button className="btn btn-outline-success ">Vai alla lista dei prodotti</button>
+                <Link to=""><button className="btn btn-outline-success ">tutti i luoghi</button>
                 </Link>
 
             </div>

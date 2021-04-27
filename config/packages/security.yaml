@@ -54,9 +54,9 @@ security:
     access_control:
          - { path: ^/api/login, roles: IS_AUTHENTICATED_FULLY }
          - { path: ^/api/users, roles: IS_AUTHENTICATED_FULLY ,methods: [GET,PUT,DELETE]}
-         - { path: ^/api/products, roles:  IS_AUTHENTICATED_FULLY }
-         - { path: ^/api/locations, roles: IS_AUTHENTICATED_FULLY }
-         - { path: ^/api/categories, roles: IS_AUTHENTICATED_FULLY }
+         - { path: ^/api/products, roles:  IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/api/locations, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/api/categories, roles: IS_AUTHENTICATED_ANONYMOUSLY }
 
 
 

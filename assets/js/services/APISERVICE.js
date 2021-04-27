@@ -1,29 +1,30 @@
 import axios from 'axios';
-let url = "https://localhost:8000/api/";
+import { API_URL } from './Config'
+
 function findAll(resource) {
     return axios
-        .get(url + resource)
+        .get(API_URL + resource)
         .then(response => response.data['hydra:member']);
 }
 function findId(ressource, id) {
     return axios
-        .get(url + ressource + "/" + id)
+        .get(API_URL + ressource + "/" + id)
         .then(response => response.data['hydra:member']);
 
 }
 function editId(ressource, id) {
     axios
-        .put(url + ressource + "/" + id)
+        .put(API_URL + ressource + "/" + id)
         .then(response => response.data['hydra:member']);
 }
 function addNew(resource, data) {
     return axios
-        .post(url + resource, data);
+        .post(API_URL + resource, data);
 
 }
 function deleteId(id, ressource) {
     return axios
-        .delete(url + ressource + "/" + id)
+        .delete(API_URL + ressource + "/" + id)
         .then(response => console.log(response));
 }
 

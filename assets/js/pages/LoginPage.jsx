@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { useState, useContext } from 'react';
 import { toast } from 'react-toastify';
 import AuthContext from '../context/AuthContext';
@@ -9,11 +8,13 @@ const LoginPage = ({ history }) => {
     const { setIsAuthenticated } = useContext(AuthContext);
     const [error, setError] = useState("");
     const [credentials, setCredentials] = useState({ username: '', password: '' });
+    //Gestion des Champs 
     const handleChang = ({ currentTarget }) => {
         const { value, name } = currentTarget;
 
         setCredentials({ ...credentials, [name]: value });
     }
+    //Gestion du Submit
     const handleSubmit = async event => {
         event.preventDefault();
         /*   try {
@@ -40,8 +41,8 @@ const LoginPage = ({ history }) => {
             // const test = await APISERVICE.findAll("products");
             // console.log(test);
             setError("");
-            toast.success("Ben tornato 🙌❤");
             history.replace("/#");
+            toast.success("Ben tornato 🙌❤");
 
         } catch (error) {
 

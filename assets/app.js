@@ -36,21 +36,22 @@ AuthApi.setUp();
 
 
 const App = () => {
-    const [isAuthenticated, setIsAuthenticated] = useState(AuthApi.isAuthenticated());
+    //   const [isAuthenticated, setIsAuthenticated] = useState(AuthApi.isAuthenticated());
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
 
     const NavbarWithRouter = withRouter(Navbar);
-
-    return (
-        <AuthContext.Provider value={isAuthenticated,
+    /**
+     * <AuthContext.Provider value={isAuthenticated,
             setIsAuthenticated}>
             <HashRouter>
-                <NavbarWithRouter />
+                <NavbarWithRouter isAuthenticated={isAuthenticated} />
                 <main className="container pt-5">
                     <Switch>
-                        <Route path="/login" component={LoginPage} />
+                        <Route path="/login" render={(props) => <LoginPage isAuthenticated={isAuthenticated}
+                            onLogin={setIsAuthenticated} />} />
                         <PrivateRoute path="/locationlist" component={Location}
                         />
-                        <PrivateRoute path="/productlist" component={ProductList} />
+                        <Route path="/productlist" component={ProductList} />
                         <PrivateRoute path="/productadd" component={ProductNew} />
                         <PrivateRoute path="/categoryadd" component={CategoryAdd} />
                         <PrivateRoute path="/locationadd" component={LocationAdd} />
@@ -63,6 +64,31 @@ const App = () => {
             </HashRouter>
             <ToastContainer position={toast.POSITION.BOTTOM_LEFT} />
         </AuthContext.Provider>
+     */
+
+    return (<>
+        <HashRouter>
+            <NavbarWithRouter isAuthenticated={isAuthenticated} onLogout={setIsAuthenticated} />
+            <main className="container pt-5">
+                <Switch>
+                    <Route path="/login" render={(props) => <LoginPage isAuthenticated={isAuthenticated}
+                        onLogin={setIsAuthenticated} />} />
+                    <Route path="/locationlist" component={Location}
+                    />
+                    <Route path="/productlist" component={ProductList} />
+                    <Route path="/productadd" component={ProductNew} />
+                    <Route path="/categoryadd" component={CategoryAdd} />
+                    <Route path="/locationadd" component={LocationAdd} />
+                    <Route path="/categorylist" component={CategoryPage} />
+                    <Route exact={true} path="/" component={HomePage} />
+
+
+                </Switch>
+
+            </main>
+        </HashRouter>
+        <ToastContainer position={toast.POSITION.BOTTOM_LEFT} />
+    </>
     );
 }
 const rootElement = document.querySelector("#app");

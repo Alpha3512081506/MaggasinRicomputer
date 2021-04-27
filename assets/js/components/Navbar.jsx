@@ -1,15 +1,15 @@
-import React, { useContext } from 'react'
+import React, { /*useContext*/ } from 'react'
 import { Link, NavLink } from 'react-router-dom';
 import AuthAlpi from '../services/AuthApi';
-import AuthContext from '../context/AuthContext';
+//import AuthContext from '../context/AuthContext';
 import { toast } from 'react-toastify';
 
-const Navbar = ({ history }) => {
-    const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
-
+const Navbar = ({ history, isAuthenticated, onLogout }) => {
+    //   const { isAuthenticated, onLogout } = useContext(AuthContext);
+    //const [isAuthenticated, onLogout] = useState(true);;
     const handleLogout = () => {
+        onLogout(false)
         AuthAlpi.logout();
-        setIsAuthenticated(false);
         toast.success("ora sei disconnesso dall'applicazione 😒");
         history.push("/login");
 
@@ -33,6 +33,16 @@ const Navbar = ({ history }) => {
 
             </ul>
             <ul className="navbar-nav ml-auto ">
+
+                <li className="nav-item"><NavLink to="/inscription"
+                    className="nav-link">Inscription</NavLink></li>
+                <li className="nav-item"><NavLink to="/login"
+                    className="btn btn-success mx-3">connexion</NavLink></li>
+                <li className="nav-item"><button onClick={handleLogout}
+                    className="btn btn-danger">logout</button></li>
+
+            </ul>
+            {/*  <ul className="navbar-nav ml-auto ">
                 {!isAuthenticated && <>
                     <li className="nav-item"><NavLink to="/inscription"
                         className="nav-link">Inscription</NavLink></li>
@@ -41,9 +51,7 @@ const Navbar = ({ history }) => {
                 </> || <li className="nav-item"><button onClick={handleLogout}
                     className="btn btn-danger">logout</button></li>
                 }
-
-
-            </ul>
+            </ul> */}
         </div>
     </nav>
 

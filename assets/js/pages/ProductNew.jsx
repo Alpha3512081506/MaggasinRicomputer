@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 
 import Field from '../form/Field';
 import APISERVICE from '../services/APISERVICE';
+import CategoryAdd from "./CategoryAdd";
+import LocationAdd from "./LocationAdd";
 const ProductNew = ({ props }) => {
     const [product, setProduct] = useState({
         productId: "",
@@ -71,12 +73,15 @@ const ProductNew = ({ props }) => {
                 value={product.category}
                 error={errors.category}
             />
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i></button>
             <Field name="location" label="Location"
                 placeholder="luogo di stockaggio"
                 onChange={handleChange}
                 value={product.location}
                 error={errors.location}
             />
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal2"><i class="fa fa-plus"></i></button>
+
             <Field name="currentQuantity" label="CurrentQuantity"
                 placeholder="quantita del  prodotto" type="number"
                 onChange={handleChange}
@@ -127,6 +132,34 @@ const ProductNew = ({ props }) => {
 
 
         </form>
+        <div class="modal fade" id="myModal">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <CategoryAdd />
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div className="modal fade" id="myModal2">
+            <div className="modal-dialog modal-dialog-centered">
+                <div className="modal-content">
+                    <div className="modal-body">
+                        <LocationAdd />
+                    </div>
+                    <div className="modal-footer">
+                        <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
     </>);
 }
 
