@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Pagination from '../components/Pagination';
 import Loading from '../components/Loading';
-import APISERVICE from '../services/APISERVICE';
+import APISERVICE from '../services/PRODUCTSERVICE';
 import { Link } from 'react-router-dom';
 import BarcodeScannerComponent from 'react-webcam-barcode-scanner';
 import { toast } from 'react-toastify';
@@ -16,7 +16,7 @@ const ProductList = (props) => {
     let [dataScan, setDataScan] = useState([]);
     const findAll = async () => {
         try {
-            const data = await APISERVICE.findAll("products");
+            const data = await APISERVICE.findAll();
             setProduct(data);
             toast.success("connessione al server effettuata ✔")
         } catch (error) {
@@ -29,7 +29,7 @@ const ProductList = (props) => {
         const originalProduct = [...products];
         setProduct(products.filter(product => product.id !== id));
         try {
-            await APISERVICE.deleteId(id, "products")
+            await APISERVICE.deleteId(id)
             toast.success("il prodotto è stato cancellato")
         } catch (error) {
             setProduct(originalProduct);
@@ -37,33 +37,33 @@ const ProductList = (props) => {
         }
 
     }
+    const PaginatedProduct=Pagination.getData(products,currentPage,5)
+   // console.log(PaginatedProduct)
     const itemsPerPage = 5;
-    const filteredProducts = products.filter(product => console.log(product)
-        // product.productId.toLowerCase().includes(search.toLowerCase())
-        // || product.productName.toLowerCase().includes(search.toLowerCase())
-        // || product.category.toLowerCase().includes(search.toLowerCase())
-        // || product.location.toLowerCase().includes(search.toLowerCase())
-        // || product.customField1.toLowerCase().includes(search.toLowerCase())
-        // || product.customField2.toLowerCase().includes(search.toLowerCase())
-        // || product.customField3.toLowerCase().includes(search.toLowerCase())
-        // || product.note.toLowerCase().includes(search.toLowerCase())
+    const filteredProducts = products.filter(product =>
+        product.productId.toLowerCase().includes(search.toLowerCase())
+          ||product.productName.toLowerCase().includes(search.toLowerCase())
+         || product.category.categoryName.toLowerCase().includes(search.toLowerCase())
+         || product.location.locationName.toLowerCase().includes(search.toLowerCase())
+        || product.customField1.toLowerCase().includes(search.toLowerCase())
+         || product.customField2.toLowerCase().includes(search.toLowerCase())
+         || product.customField3.toLowerCase().includes(search.toLowerCase())
+         || product.note.toLowerCase().includes(search.toLowerCase())
     )
 
     const handlePageChange = page => { setCurrentPage(page) }
     const paginatedProducts = Pagination.getData(
         filteredProducts, currentPage, itemsPerPage)
+    console.log(paginatedProducts)
+    //ici je dois gerer le sccan en changeant const par let ou var
     const handleSearch = (event) => {
-        let value = event.currentTarget.value;
-        if (!value) {
-            value = dataScan.text;
-            console.log(value);
-        }
+        const value = event.currentTarget.value;
         setSearch(value);
-        toast.success("la scansione viene eseguita correttamente");
+
         setCurrentPage(1)
     }
     const handleScan = () => {
-        setIsScan(true);
+        console.log("hadle scan")
 
 
 
@@ -93,7 +93,9 @@ const ProductList = (props) => {
                 <Link to="/productadd" className="btn btn-outline-success">crea prodotto</Link>
             </div>
             <div className="form-group">
-                <input type="text" placeholder="search" onChange={handleSearch} value={search} className="form-control" />
+                <input type="text" placeholder="search....."
+                       onChange={handleSearch} value={search}
+                       className="form-control" />
             </div>
             <table className="table table-responsive table-hover table-bordered table-sm w-100">
                 <thead className="thead-dark  " >
@@ -115,7 +117,7 @@ const ProductList = (props) => {
                 <tbody>
                     {products.length === 0 && <tr><td colSpan="11"><Loading /></td></tr>}
                     {paginatedProducts.map(product => <tr key={product.id}><td>
-                        <Link to="/"> <button className="btn btn-outline-success "><i className="fa fa-search"></i></button></Link>
+                        <Link to="/productlist/show/:id"> <button className="btn btn-outline-success "><i className="fa fa-search"></i></button></Link>
                         <Link to="/"> <button className="btn btn-outline-success "><i className="fa fa-pencil"></i></button></Link>
                         <button onClick={() => handleDelete(product.id)} className="btn btn-outline-success "><i className="fa fa-trash"></i></button>
 

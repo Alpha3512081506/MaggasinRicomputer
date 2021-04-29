@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import Field from '../form/Field';
-import APISERVICE from '../services/APISERVICE';
+import PRODUCTSERVICE from '../services/PRODUCTSERVICE';
 import CategoryAdd from "./CategoryAdd";
 import LocationAdd from "./LocationAdd";
+import {toast} from "react-toastify";
 const ProductNew = ({ props }) => {
     const [product, setProduct] = useState({
         productId: "",
@@ -38,10 +39,13 @@ const ProductNew = ({ props }) => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const data = APISERVICE.addNew("products", product);
+            const data = await PRODUCTSERVICE.addNew(product);
             console.log(data);
+            toast.success("il prodotto è stato registrato con successo")
+
         } catch (error) {
             console.log(error.response)
+            toast.error("Errerur impossibile di registrare il prodotto")
         }
 
 
@@ -67,20 +71,23 @@ const ProductNew = ({ props }) => {
                 value={product.productName}
                 error={errors.productName}
             />
-            <Field name="category" label="Category"
-                placeholder="Categoria del prodotto"
-                onChange={handleChange}
-                value={product.category}
-                error={errors.category}
-            />
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i></button>
+            <div className="form-group">
+                <label htmlFor="sel1">Category:</label>
+                <select className="form-control" id="sel1">
+                    <option>categorie1</option>
+                    <option>categorie2</option>
+                    <option>categorie3</option>
+                    <option>categorie4</option>
+                </select>
+            </div>
+            <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#myModal"><i className="fa fa-plus"></i></button>
             <Field name="location" label="Location"
                 placeholder="luogo di stockaggio"
                 onChange={handleChange}
                 value={product.location}
                 error={errors.location}
             />
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal2"><i class="fa fa-plus"></i></button>
+            <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#myModal2"><i className="fa fa-plus"></i></button>
 
             <Field name="currentQuantity" label="CurrentQuantity"
                 placeholder="quantita del  prodotto" type="number"
@@ -132,14 +139,14 @@ const ProductNew = ({ props }) => {
 
 
         </form>
-        <div class="modal fade" id="myModal">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-body">
+        <div className="modal fade" id="myModal">
+            <div className="modal-dialog modal-dialog-centered">
+                <div className="modal-content">
+                    <div className="modal-body">
                         <CategoryAdd />
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <div className="modal-footer">
+                        <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
 
                 </div>

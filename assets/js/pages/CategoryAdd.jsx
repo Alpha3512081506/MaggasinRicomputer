@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import Field from '../form/Field';
-import APISERVICE from '../services/APISERVICE';
+import CATEGORYSERVICE from '../services/CATEGORYSERVICE.JS';
+import {toast} from "react-toastify";
 const CategoryAdd = ({ props }) => {
     const [category, setCategory] = useState({
         categoryName: "",
@@ -17,11 +18,13 @@ const CategoryAdd = ({ props }) => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const data = await APISERVICE.addNew("categories", category);
+            const data = await CATEGORYSERVICE.addNew(category);
             setCategory(data);
             console.log(data);
+            toast.success("La Categoria è stata registrato")
         } catch (error) {
             console.log(error.response)
+            toast.error("Erreur! impossibile di registrare la categoria")
         }
     }
     return (<>

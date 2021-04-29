@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import Field from '../form/Field';
-import APISERVICE from '../services/APISERVICE';
+
 const LocationAdd = ({ props }) => {
     const [locationName, setLocationName] = useState({
         locationName: "",
@@ -12,16 +13,17 @@ const LocationAdd = ({ props }) => {
         setLocationName({ ...locationName, [name]: value })
     }
     const [errors, setErrors] = useState({
-        L: "",
+        locationName: "",
     });
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const data = await APISERVICE.addNew("locations", locationName);
-            setLocationName(data);
+            const data = await APISERVICE.addNew(locationName);
+            //setLocationName(data);
             console.log(data);
+            toast.success("la location è stata creata")
         } catch (error) {
-            console.log(error.response)
+            toast.error("C'è stato un errore")
         }
     }
     return (<>

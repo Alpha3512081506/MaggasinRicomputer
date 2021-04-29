@@ -37,16 +37,15 @@ class Product
     private $id;
 
     /**
-     * @ORM\Column(type="string")
-     * @Groups({"product_read""category_read",})
-     * @Assert\NotBlank(message="la categoria del prodotto è obbligatoria")
+     * @ORM\Column(type="string", length=255, nullable=false)
+     * @Groups({"product_read","category_read"})
+     * @Assert\NotBlank(message="productId del prodotto è obligatorio")
      * @Assert\Length(
      *      min = 4,
      *      max = 50,
      *      minMessage = "nom poi avere meno di {{ limit }} characters long",
      *      maxMessage = "Nom poi avere piu {{ limit }} characters"
      * )
-     * 
      */
     private $productId;
 

@@ -1,30 +1,30 @@
 import axios from 'axios';
-import { API_URL } from './Config'
+import { API_PRODUCT, API_URL } from './Config'
 
-function findAll(resource) {
+function findAll() {
     return axios
-        .get(API_URL + resource)
+        .get(API_PRODUCT)
         .then(response => response.data['hydra:member']);
 }
-function findId(ressource, id) {
+function findId(id) {
     return axios
-        .get(API_URL + ressource + "/" + id)
+        .get(API_PRODUCT + "/" + id)
         .then(response => response.data['hydra:member']);
 
 }
-function editId(ressource, id) {
+function editId(id) {
     axios
-        .put(API_URL + ressource + "/" + id)
+        .put(API_PRODUCT + ressource + "/" + id)
         .then(response => response.data['hydra:member']);
 }
-function addNew(resource, data) {
+function addNew(data) {
     return axios
-        .post(API_URL + resource, data);
+        .post("https://localhost:8000/api/products", data);
 
 }
-function deleteId(id, ressource) {
+function deleteId(id) {
     return axios
-        .delete(API_URL + ressource + "/" + id)
+        .delete(API_PRODUCT + "/" + id)
         .then(response => console.log(response));
 }
 

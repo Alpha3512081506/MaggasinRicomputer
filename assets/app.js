@@ -30,6 +30,7 @@ import CategoryAdd from './js/pages/CategoryAdd';
 import LocationAdd from './js/pages/LocationAdd';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import ShowProductById from "./js/pages/ShowProductById";
 
 AuthApi.setUp();
 
@@ -73,11 +74,15 @@ const App = () => {
                 <Switch>
                     <Route path="/login" render={(props) => <LoginPage isAuthenticated={isAuthenticated}
                         onLogin={setIsAuthenticated} />} />
+                    <Route path="/locationlist/:id" component={LocationAdd}
+                    />
                     <Route path="/locationlist" component={Location}
                     />
+                    <Route path="/productlist/show/:id" component={ShowProductById} />
+                    <Route path="/productlist/:id" component={ProductNew} />
                     <Route path="/productlist" component={ProductList} />
                     <Route path="/productadd" component={ProductNew} />
-                    <Route path="/categoryadd" component={CategoryAdd} />
+                    <Route path="/categorylist/:id" component={CategoryAdd} />
                     <Route path="/locationadd" component={LocationAdd} />
                     <Route path="/categorylist" component={CategoryPage} />
                     <Route exact={true} path="/" component={HomePage} />
