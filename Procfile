@@ -1,1 +1,1 @@
-echo web: heroku-php-apache2 public/
+echo web: $(composer config bin-dir)/heroku-php-apache2 public/
