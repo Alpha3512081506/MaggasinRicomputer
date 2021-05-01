@@ -1,7 +1,21 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
+import PRODUCTSERVICE from "../services/PRODUCTSERVICE";
 
 const ShowProductById = (props)=>{
+ /*   const [product , setProduct]= useState();
+    useEffect(async ()=>{
+       const data= await PRODUCTSERVICE.findId(id);
+           setProduct(data)
+        console.log(data)
 
+    },[product.id])
+    const handleShow=async(id)=>{
+      try {
+          const p= await PRODUCTSERVICE.findId(id)
+      }  catch(error){console.log(error.response)}
+
+    }
+*/
     return(
         <>
             <div className="card bg-success">

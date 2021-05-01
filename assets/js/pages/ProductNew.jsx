@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
 
 import Field from '../form/Field';
@@ -6,7 +6,12 @@ import PRODUCTSERVICE from '../services/PRODUCTSERVICE';
 import CategoryAdd from "./CategoryAdd";
 import LocationAdd from "./LocationAdd";
 import {toast} from "react-toastify";
-const ProductNew = ({ props }) => {
+const ProductNew =  props  => {
+
+    const {id="new"} = props.match.params;
+    // const { id } = props.match.params;
+
+
     const [product, setProduct] = useState({
         productId: "",
         productName: "",
@@ -23,6 +28,7 @@ const ProductNew = ({ props }) => {
         const { name, value } = currentTarget;
         setProduct({ ...product, [name]: value })
 
+
     }
     const [errors, setErrors] = useState({
         productId: "",
@@ -38,9 +44,10 @@ const ProductNew = ({ props }) => {
     });
     const handleSubmit = async (event) => {
         event.preventDefault();
+        console.log(product);
         try {
-            const data = await PRODUCTSERVICE.addNew(product);
-            console.log(data);
+            await PRODUCTSERVICE.addNew(product);
+
             toast.success("il prodotto è stato registrato con successo")
 
         } catch (error) {
@@ -50,9 +57,14 @@ const ProductNew = ({ props }) => {
 
 
     }
+    const [editing, setEditing]= useState(false)
+
+   useEffect(()=>{
+       if (id !== "new") setEditing(true)
+   },[id])
     return (<>
         <div className="mb-3 d-flex justify-content-between align-items-center">
-            <h1>Crea prodotto</h1>
+            {!editing && <h1>Crea prodotto</h1>||<h1>Edit Prodotto</h1>}
             <button className="btn btn-outline-success" ><i className="fa fa-camera-retro">Scan CodeBarre</i></button>
             <button className="btn btn-outline-success" ><i className="fa fa-camera-retro">Close Camera </i></button>
 

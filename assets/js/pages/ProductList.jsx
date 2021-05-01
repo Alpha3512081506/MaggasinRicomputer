@@ -1,18 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useParams } from "react-router-dom";
+
 import Pagination from '../components/Pagination';
 import Loading from '../components/Loading';
 import APISERVICE from '../services/PRODUCTSERVICE';
 import { Link } from 'react-router-dom';
 import BarcodeScannerComponent from 'react-webcam-barcode-scanner';
 import { toast } from 'react-toastify';
+import PRODUCTSERVICE from "../services/PRODUCTSERVICE";
 
 
 const ProductList = (props) => {
+
     const [products, setProduct] = useState([]);
+
     const [currentPage, setCurrentPage] = useState(1);
     const [search, setSearch] = useState("");
     const [isScan, setIsScan] = useState(false);
+
     let [dataScan, setDataScan] = useState([]);
     const findAll = async () => {
         try {
@@ -54,7 +60,7 @@ const ProductList = (props) => {
     const handlePageChange = page => { setCurrentPage(page) }
     const paginatedProducts = Pagination.getData(
         filteredProducts, currentPage, itemsPerPage)
-    console.log(paginatedProducts)
+    //console.log(paginatedProducts)
     //ici je dois gerer le sccan en changeant const par let ou var
     const handleSearch = (event) => {
         const value = event.currentTarget.value;
@@ -67,6 +73,9 @@ const ProductList = (props) => {
 
 
 
+    }
+    const handeShow= (id)=>{
+       console.log(id)
     }
     return (
         <>
@@ -117,7 +126,7 @@ const ProductList = (props) => {
                 <tbody>
                     {products.length === 0 && <tr><td colSpan="11"><Loading /></td></tr>}
                     {paginatedProducts.map(product => <tr key={product.id}><td>
-                        <Link to="/productlist/show/:id"> <button className="btn btn-outline-success "><i className="fa fa-search"></i></button></Link>
+                        <Link to="/productlist/show/:id"> <button className="btn btn-outline-success " onClick={()=>handeShow(product.id)}><i className="fa fa-search"></i></button></Link>
                         <Link to="/"> <button className="btn btn-outline-success "><i className="fa fa-pencil"></i></button></Link>
                         <button onClick={() => handleDelete(product.id)} className="btn btn-outline-success "><i className="fa fa-trash"></i></button>
 
