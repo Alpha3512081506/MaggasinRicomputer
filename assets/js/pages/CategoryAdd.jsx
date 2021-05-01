@@ -5,7 +5,9 @@ import Field from '../form/Field';
 import CATEGORYSERVICE from '../services/CATEGORYSERVICE.JS';
 import {toast} from "react-toastify";
 const CategoryAdd = (props ) => {
-    const {d ="new"}=props.match.params ;
+   // const {id ="new"}=props.match.params ;
+    console.log(props);
+  //  console.log(id);
 
     const [category, setCategory] = useState({
         categoryName: "",
