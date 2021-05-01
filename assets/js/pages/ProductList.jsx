@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 import BarcodeScannerComponent from 'react-webcam-barcode-scanner';
 import { toast } from 'react-toastify';
 import PRODUCTSERVICE from "../services/PRODUCTSERVICE";
+import Alert from '../components/Alert';
 
 
 const ProductList = (props) => {
@@ -43,18 +44,18 @@ const ProductList = (props) => {
         }
 
     }
-    const PaginatedProduct=Pagination.getData(products,currentPage,5)
-   // console.log(PaginatedProduct)
+    const PaginatedProduct = Pagination.getData(products, currentPage, 5)
+    // console.log(PaginatedProduct)
     const itemsPerPage = 5;
     const filteredProducts = products.filter(product =>
         product.productId.toLowerCase().includes(search.toLowerCase())
-          ||product.productName.toLowerCase().includes(search.toLowerCase())
-         || product.category.categoryName.toLowerCase().includes(search.toLowerCase())
-         || product.location.locationName.toLowerCase().includes(search.toLowerCase())
+        || product.productName.toLowerCase().includes(search.toLowerCase())
+        || product.category.categoryName.toLowerCase().includes(search.toLowerCase())
+        || product.location.locationName.toLowerCase().includes(search.toLowerCase())
         || product.customField1.toLowerCase().includes(search.toLowerCase())
-         || product.customField2.toLowerCase().includes(search.toLowerCase())
-         || product.customField3.toLowerCase().includes(search.toLowerCase())
-         || product.note.toLowerCase().includes(search.toLowerCase())
+        || product.customField2.toLowerCase().includes(search.toLowerCase())
+        || product.customField3.toLowerCase().includes(search.toLowerCase())
+        || product.note.toLowerCase().includes(search.toLowerCase())
     )
 
     const handlePageChange = page => { setCurrentPage(page) }
@@ -74,8 +75,8 @@ const ProductList = (props) => {
 
 
     }
-    const handeShow= (id)=>{
-       console.log(id)
+    const handeShow = (id) => {
+        console.log(id)
     }
     return (
         <>
@@ -94,20 +95,24 @@ const ProductList = (props) => {
                 }}
             />
             }
-            <div className="mb-3 d-flex justify-content-between align-items-center">
-                <h1>Liste des produits</h1>
-                <button className="btn btn-outline-success" onClick={handleScan}><i className="fa fa-camera-retro">Scan CodeBarre</i></button>
-                <button className="btn btn-outline-success" onClick={() => { setIsScan(false) }}><i className="fa fa-camera-retro">Close Camera </i></button>
-
-                <Link to="/productadd" className="btn btn-outline-success">crea prodotto</Link>
+            <div className="row">
+                <div className="col-sm-6">
+                    <div className="mb-3 d-flex justify-content-between align-items-center">
+                        <button className="btn btn-outline-success" onClick={handleScan}><i className="fa fa-camera-retro">Scan CodeBarre</i></button>
+                        <button className="btn btn-outline-success" onClick={() => { setIsScan(false) }}><i className="fa fa-camera-retro">Close Camera </i></button>
+                        <Link to="/productadd" className="btn btn-outline-success">crea prodotto</Link>
+                    </div>
+                </div>
             </div>
+
             <div className="form-group">
                 <input type="text" placeholder="search....."
-                       onChange={handleSearch} value={search}
-                       className="form-control" />
+                    onChange={handleSearch} value={search}
+                    className="form-control" />
             </div>
+            <h3 className="text-center">Liste des produits</h3>
             <table className="table table-responsive table-hover table-bordered table-sm w-100">
-                <thead className="thead-dark  " >
+                <thead className="thead-dark " >
                     <tr className="w-100">
                         <th></th>
                         <th >ProductId</th>
@@ -126,7 +131,7 @@ const ProductList = (props) => {
                 <tbody>
                     {products.length === 0 && <tr><td colSpan="11"><Loading /></td></tr>}
                     {paginatedProducts.map(product => <tr key={product.id}><td>
-                        <Link to="/productlist/show/:id"> <button className="btn btn-outline-success " onClick={()=>handeShow(product.id)}><i className="fa fa-search"></i></button></Link>
+                        <Link to="/productlist/show/:id"> <button className="btn btn-outline-success " onClick={() => handeShow(product.id)}><i className="fa fa-search"></i></button></Link>
                         <Link to="/"> <button className="btn btn-outline-success "><i className="fa fa-pencil"></i></button></Link>
                         <button onClick={() => handleDelete(product.id)} className="btn btn-outline-success "><i className="fa fa-trash"></i></button>
 
@@ -159,7 +164,7 @@ const ProductList = (props) => {
                     </tr>
                 </tfoot>
             </table>
-
+            <Alert />
 
         </>
     )

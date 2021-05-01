@@ -1,14 +1,15 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import Field from '../form/Field';
 import PRODUCTSERVICE from '../services/PRODUCTSERVICE';
 import CategoryAdd from "./CategoryAdd";
 import LocationAdd from "./LocationAdd";
-import {toast} from "react-toastify";
-const ProductNew =  props  => {
+import { toast } from "react-toastify";
+import Alert from '../components/Alert';
+const ProductNew = props => {
 
-    const {id="new"} = props.match.params;
+    const { id = "new" } = props.match.params;
     // const { id } = props.match.params;
 
 
@@ -57,18 +58,19 @@ const ProductNew =  props  => {
 
 
     }
-    const [editing, setEditing]= useState(false)
+    const [editing, setEditing] = useState(false)
 
-   useEffect(()=>{
-       if (id !== "new") setEditing(true)
-   },[id])
+    useEffect(() => {
+        if (id !== "new") setEditing(true)
+    }, [id])
     return (<>
+        {!editing && <h3 className="text-center">Crea prodotto</h3> || <h3 className="text-center">Edit Prodotto</h3>}
         <div className="mb-3 d-flex justify-content-between align-items-center">
-            {!editing && <h1>Crea prodotto</h1>||<h1>Edit Prodotto</h1>}
+
             <button className="btn btn-outline-success" ><i className="fa fa-camera-retro">Scan CodeBarre</i></button>
             <button className="btn btn-outline-success" ><i className="fa fa-camera-retro">Close Camera </i></button>
 
-            <Link to="/productadd" className="btn btn-outline-success">crea prodotto</Link>
+            <Link to="/productadd" className="btn btn-outline-success">Crea Prodotti</Link>
         </div>
         <form onSubmit={handleSubmit} className="form-horizontal">
             <Field name="productId"
@@ -178,6 +180,7 @@ const ProductNew =  props  => {
                 </div>
             </div>
         </div>
+        <Alert />
 
     </>);
 }
