@@ -3,7 +3,7 @@ const HomePage = (props) => {
     return (<>
 
         <div className="row">
-            <div className="col-sm-12 col-lg-8">
+            <div className="col">
                 <div className="row">
                     <div className="col-sm-12 col-md-6 col-lg-4  d-flex align-content-center">
                         <div className="alert alert-dismissible alert-success shadow-lg p-4 mb-4 bg-white">
