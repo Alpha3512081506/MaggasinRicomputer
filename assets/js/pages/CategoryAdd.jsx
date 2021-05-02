@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 
 import Field from '../form/Field';
 import CATEGORYSERVICE from '../services/CATEGORYSERVICE.JS';
-import {toast} from "react-toastify";
-const CategoryAdd = (props ) => {
-   // const {id ="new"}=props.match.params ;
+import { toast } from "react-toastify";
+const CategoryAdd = (props) => {
+    // const {id ="new"}=props.match.params ;
     console.log(props);
-  //  console.log(id);
+    //  console.log(id);
 
     const [category, setCategory] = useState({
         categoryName: "",
@@ -33,7 +33,7 @@ const CategoryAdd = (props ) => {
     }
     return (<>
         <div className="mb-3 d-flex justify-content-between align-items-center">
-            <h1>Crea Categoria</h1>
+            <h3>Crea Categoria</h3>
             <button className="btn btn-outline-success">Scan CodeBarre</button>
         </div>
         <form onSubmit={handleSubmit}>

@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import {toast} from "react-toastify";
-import {Link} from "react-router-dom";
+import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 const CategoryPage = (props) => {
     const [categories, setCategories] = useState([]);
     useEffect(() => {
         axios.get("https://localhost:8000/api/categories")
             .then(response => response.data['hydra:member'])
-            .then(data => {setCategories(data)
+            .then(data => {
+                setCategories(data)
             })
 
             ;
@@ -17,7 +18,7 @@ const CategoryPage = (props) => {
         const originalCategories = [...categories]
         axios.delete("https://localhost:8000/api/categories/" + id)
             .then(response => setCategories(categories.filter(category => category.id !== id)))
-            toast.success("La categoria  è stato cancellata")
+        toast.success("La categoria  è stato cancellata")
             .catch(error => {
                 setCategories(originalCategories);
                 toast.error("Impossible di cancellare la categoria")
@@ -40,13 +41,13 @@ const CategoryPage = (props) => {
     return (<>
 
         <div className="mb-3 d-flex justify-content-between align-items-center">
-            <h1>Liste des produits</h1>
+
             <button className="btn btn-outline-success"><i className="fa fa-camera-retro">Scan CodeBarre</i></button>
             <button className="btn btn-outline-success" ><i className="fa fa-camera-retro">Close Camera </i></button>
 
             <Link to="/categorylist/:id" className="btn btn-outline-success">crea Categoria</Link>
         </div>
-        <h1>List des cateogories</h1>
+        <h3>List des cateogories</h3>
         <table className="table table-hover table-border">
             <thead>
                 <tr>
