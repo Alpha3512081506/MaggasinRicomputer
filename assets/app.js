@@ -11,7 +11,10 @@ import "../node_modules/jquery/dist/jquery.min.js";
 import "../node_modules/popper.js/dist/popper.js";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import "../node_modules/bootstrap/dist/js/bootstrap.min.js"
+import "../node_modules/font-awesome/css/font-awesome.css"
+
 // any CSS you import will output into a single css file (app.css in this case)
+import './styles/bootswatch.css'
 import './styles/app.css';
 
 // start the Stimulus application
