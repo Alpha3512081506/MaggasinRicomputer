@@ -2,27 +2,34 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
+import CATEGORYSERVICE from '../services/CATEGORYSERVICE.JS';
 const CategoryPage = (props) => {
     const [categories, setCategories] = useState([]);
-    useEffect(() => {
-        axios.get("https://localhost:8000/api/categories")
-            .then(response => response.data['hydra:member'])
-            .then(data => {
-                setCategories(data)
-            })
+    const findAll = async () => {
+        try {
+            const data = await CATEGORYSERVICE.findAll();
+            setCategories(data)
+            toast.success("connessione al server effettuata ✔ ")
+        } catch (error) {
+            toast.error("Impossibile di collegarsi al server")
 
-            ;
-    }, []);
+        }
+    }
+    useEffect(() => { findAll() }, []);
     const [currentPage, setCurrentPage] = useState(1);
-    const handleDelete = (id) => {
+    const handleDelete = async (id) => {
         const originalCategories = [...categories]
-        axios.delete("https://localhost:8000/api/categories/" + id)
-            .then(response => setCategories(categories.filter(category => category.id !== id)))
-        toast.success("La categoria  è stato cancellata")
-            .catch(error => {
-                setCategories(originalCategories);
-                toast.error("Impossible di cancellare la categoria")
-            });
+        setCategories(categories.filter(category => category.id !== id))
+
+        try {
+            await CATEGORYSERVICE.deleteId(id)
+            toast.success("La categoria  è stato cancellata");
+        } catch (error) {
+            setCategories(originalCategories);
+            toast.error("Impossible di cancellare la categoria")
+        };
+
+
     };
     const itemPerPage = 2;
     const pageCount = Math.ceil(categories.length / itemPerPage);
@@ -52,7 +59,9 @@ const CategoryPage = (props) => {
             <thead>
                 <tr>
                     <th></th>
-                    <th>ProductName</th>
+                    <th>CategoryName</th>
+                    <th>ProductCount</th>
+
                 </tr>
 
             </thead>
@@ -67,6 +76,7 @@ const CategoryPage = (props) => {
                     </td>
                         <td>{category.categoryName}
                         </td>
+                        <td><span className="badge badge-info">{category.products.length}</span></td>
                     </tr>
 
                 ))}

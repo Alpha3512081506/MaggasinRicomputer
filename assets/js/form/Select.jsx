@@ -4,7 +4,9 @@ const Select = ({ placeholder = "",
     name,
     value,
     error = "",
-    onChange }) => {
+    onChange,
+    children
+}) => {
     return (
         <div className="form-group row">
             <label htmlFor={name} className="col-sm-2 control-label">{label}</label>

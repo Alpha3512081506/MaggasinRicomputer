@@ -24,8 +24,8 @@ function addNew(data) {
 }
 function deleteId(id) {
     return axios
-        .delete(API_CATEGORY + "/" + id)
-        .then(response => console.log(response));
+        .delete(API_CATEGORY + "/" + id);
+
 }
 
 export default {

@@ -47,7 +47,7 @@ const CategoryAdd = (props) => {
 
             <div className="form-group">
                 <button type="submit" className="btn btn-outline-success ">Crea la Categoria</button>
-                <Link to=""><button className="btn btn-outline-success ">Vai alla lista dei prodotti</button>
+                <Link to="/categorylist"><button className="btn btn-outline-success ">Vai alla lista delle categorie</button>
                 </Link>
 
             </div>
