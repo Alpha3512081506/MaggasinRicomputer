@@ -23,6 +23,7 @@ class Location
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"location_read"})
      */
     private $id;
 

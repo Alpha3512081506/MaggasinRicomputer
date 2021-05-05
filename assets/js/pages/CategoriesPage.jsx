@@ -3,6 +3,7 @@ import axios from 'axios';
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import CATEGORYSERVICE from '../services/CATEGORYSERVICE.JS';
+import NestedProduct from "../components/NestedProduct";
 const CategoryPage = (props) => {
     const [categories, setCategories] = useState([]);
     const findAll = async () => {
@@ -43,6 +44,9 @@ const CategoryPage = (props) => {
     const handleChangPage = (page) => {
         setCurrentPage(page);
     }
+    const handleNestedShow =()=>{
+        console.log("handleNested")
+    }
 
 
     return (<>
@@ -72,11 +76,14 @@ const CategoryPage = (props) => {
                         <button className="btn btn-primary"><i className="fa fa-search"></i></button>
                         <button className="btn btn-primary"><i className="fa fa-pencil"></i></button>
                         <button onClick={() => handleDelete(category.id)}
-                            className="btn btn-primary"><i className="fa fa-trash"></i></button>
+                            className="btn btn-danger"><i className="fa fa-trash"></i></button>
                     </td>
                         <td>{category.categoryName}
                         </td>
-                        <td><span className="badge badge-info">{category.products.length}</span></td>
+
+                        <td><button className="badge badge-info" >{category.products.length}</button>
+
+                        </td>
                     </tr>
 
                 ))}
@@ -104,6 +111,7 @@ const CategoryPage = (props) => {
 
             </tbody>
         </table>
+
 
     </>)
 }

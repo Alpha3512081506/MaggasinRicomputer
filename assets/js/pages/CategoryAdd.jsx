@@ -24,7 +24,7 @@ const CategoryAdd = (props) => {
         try {
             const data = await CATEGORYSERVICE.addNew(category);
             setCategory(data);
-            console.log(data);
+           // console.log(data);
             toast.success("La Categoria è stata registrato")
         } catch (error) {
             console.log(error.response)

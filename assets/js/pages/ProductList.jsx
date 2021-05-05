@@ -133,7 +133,7 @@ const ProductList = (props) => {
                     {paginatedProducts.map(product => <tr key={product.id}><td>
                         <Link to="/productlist/show/:id"> <button className="btn btn-outline-success " onClick={() => handeShow(product.id)}><i className="fa fa-search"></i></button></Link>
                         <Link to="/"> <button className="btn btn-outline-success "><i className="fa fa-pencil"></i></button></Link>
-                        <button onClick={() => handleDelete(product.id)} className="btn btn-outline-success "><i className="fa fa-trash"></i></button>
+                        <button onClick={() => handleDelete(product.id)} className="btn btn-outline-danger "><i className="fa fa-trash"></i></button>
 
 
                     </td>
