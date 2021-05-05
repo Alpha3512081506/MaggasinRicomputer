@@ -58,7 +58,7 @@ const CategoryPage = (props) => {
 
             <Link to="/categorylist/:id" className="btn btn-outline-success">crea Categoria</Link>
         </div>
-        <h3>List des cateogories</h3>
+        <h3> Cateogories Liste</h3>
         <table className="table table-hover table-border">
             <thead>
                 <tr>
