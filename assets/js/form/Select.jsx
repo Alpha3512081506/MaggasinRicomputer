@@ -1,5 +1,5 @@
 import React from 'react';
-const Select = ({ placeholder = "",
+const Select = ({
     label,
     name,
     value,
@@ -10,16 +10,15 @@ const Select = ({ placeholder = "",
     return (
         <div className="form-group row">
             <label htmlFor={name} className="col-sm-2 control-label">{label}</label>
-            <input
 
-                placeholder={placeholder}
-                value={value}
-                name={name}
+            <select name={name} id={name}
+                onChange={onChange} value={value}
+                className={"form-control" + (error && " invalid ")}
+            >
+                {children}
 
-                className={" col-sm-10 form-control" + (error && " is-invalid")}
-                onChange={onChange}
-
-            />
+            </select>
+            <p className="invalid-feeback">{error}</p>
         </div>
     );
 }

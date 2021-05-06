@@ -6,7 +6,6 @@ import CATEGORYSERVICE from '../services/CATEGORYSERVICE.JS';
 import { toast } from "react-toastify";
 const CategoryAdd = (props) => {
     // const {id ="new"}=props.match.params ;
-    console.log(props);
     //  console.log(id);
 
     const [category, setCategory] = useState({

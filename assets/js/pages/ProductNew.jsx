@@ -7,6 +7,9 @@ import CategoryAdd from "./CategoryAdd";
 import LocationAdd from "./LocationAdd";
 import { toast } from "react-toastify";
 import Alert from '../components/Alert';
+import CATEGORYSERVICE from '../services/CATEGORYSERVICE.JS';
+import Select from '../form/Select';
+import LOCATIONSERVICE from '../services/LOCATIONSERVICE.JS';
 const ProductNew = props => {
 
     const { id = "new" } = props.match.params;
@@ -25,6 +28,7 @@ const ProductNew = props => {
         specify: "",
         note: ""
     });
+
     const handleChange = ({ currentTarget }) => {
         const { name, value } = currentTarget;
         setProduct({ ...product, [name]: value })
@@ -63,6 +67,28 @@ const ProductNew = props => {
     useEffect(() => {
         if (id !== "new") setEditing(true)
     }, [id])
+
+    const [categories, setCategories] = useState([]);
+    const findAllCategories = async () => {
+        try {
+            const data = await CATEGORYSERVICE.findAllCategories();
+            setCategories(data)
+            console.log(data)
+        } catch (error) {
+        }
+    }
+    useEffect(() => { findAllCategories() }, []);
+    const [location, setLocation] = useState([])
+    const findLocation = async () => {
+        try {
+            const data = await LOCATIONSERVICE.findAll()
+            setLocation(data);
+            console.log(data)
+        } catch (error) {
+            console.log(error)
+
+        }
+    }
     return (<>
         {!editing && <h3 className="text-center">Crea prodotto</h3> || <h3 className="text-center">Edit Prodotto</h3>}
         <div className="mb-3 d-flex justify-content-between align-items-center">
@@ -85,23 +111,44 @@ const ProductNew = props => {
                 value={product.productName}
                 error={errors.productName}
             />
-            <div className="form-group">
-                <label htmlFor="sel1">Category:</label>
-                <select className="form-control" id="sel1">
-                    <option>categorie1</option>
-                    <option>categorie2</option>
-                    <option>categorie3</option>
-                    <option>categorie4</option>
-                </select>
+            <div className="row">
+                <div className="col-10">
+                    <Select label="Category"
+                        name="category"
+                        value="product.category"
+                        onChange={handleChange}
+                        error={errors.category}
+                    >
+                        <option value="volvo">Volvo</option>
+                        <option value="saab">Saab</option>
+                        <option value="mercedes">Mercedes</option>
+                        <option value="audi">Audi</option>
+                    </Select>
+                </div>
+                <div className="col-2">
+                    <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#myModal"><i className="fa fa-plus"></i></button>
+                </div>
             </div>
-            <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#myModal"><i className="fa fa-plus"></i></button>
-            <Field name="location" label="Location"
-                placeholder="luogo di stockaggio"
-                onChange={handleChange}
-                value={product.location}
-                error={errors.location}
-            />
-            <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#myModal2"><i className="fa fa-plus"></i></button>
+
+            <div className="row">
+                <div className="col-10">
+                    <Select label="Location"
+                        name="location"
+                        value="product.location"
+                        onChange={handleChange}
+                        error={errors.location}
+                    >
+                        <option value="volvo">Volvo</option>
+                        <option value="saab">Saab</option>
+                        <option value="mercedes">Mercedes</option>
+                        <option value="audi">Audi</option>
+                    </Select>
+                </div>
+                <div className="col-2">
+                    <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#myModal2"><i className="fa fa-plus"></i></button>
+
+                </div>
+            </div>
 
             <Field name="currentQuantity" label="CurrentQuantity"
                 placeholder="quantita del  prodotto" type="number"
@@ -141,7 +188,7 @@ const ProductNew = props => {
             />
             <div className="form-group">
                 <button type="submit" className="btn btn-outline-success ">Crea il Prodotto</button>
-                <Link to=""><button className="btn btn-outline-success ">Vai alla lista dei prodotti</button>
+                <Link to="/productlist"><button className="btn btn-outline-success ">Vai alla lista dei prodotti</button>
                 </Link>
 
             </div>
