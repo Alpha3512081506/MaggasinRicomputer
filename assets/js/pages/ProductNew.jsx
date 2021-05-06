@@ -71,14 +71,16 @@ const ProductNew = props => {
     const [categories, setCategories] = useState([]);
     const findAllCategories = async () => {
         try {
-            const data = await CATEGORYSERVICE.findAllCategories();
+            const data = await CATEGORYSERVICE.findAll();
             setCategories(data)
             console.log(data)
         } catch (error) {
+            console.log(error);
+            toast.error("Erreur de chargement des categories")
         }
     }
     useEffect(() => { findAllCategories() }, []);
-    const [location, setLocation] = useState([])
+    const [locations, setLocation] = useState([])
     const findLocation = async () => {
         try {
             const data = await LOCATIONSERVICE.findAll()
@@ -89,14 +91,14 @@ const ProductNew = props => {
 
         }
     }
+
+    useEffect(() => { findLocation() }, []);
     return (<>
         {!editing && <h3 className="text-center">Crea prodotto</h3> || <h3 className="text-center">Edit Prodotto</h3>}
         <div className="mb-3 d-flex justify-content-between align-items-center">
 
             <button className="btn btn-outline-success" ><i className="fa fa-camera-retro">Scan CodeBarre</i></button>
             <button className="btn btn-outline-success" ><i className="fa fa-camera-retro">Close Camera </i></button>
-
-            <Link to="/productadd" className="btn btn-outline-success">Crea Prodotti</Link>
         </div>
         <form onSubmit={handleSubmit} className="form-horizontal">
             <Field name="productId"
@@ -119,10 +121,8 @@ const ProductNew = props => {
                         onChange={handleChange}
                         error={errors.category}
                     >
-                        <option value="volvo">Volvo</option>
-                        <option value="saab">Saab</option>
-                        <option value="mercedes">Mercedes</option>
-                        <option value="audi">Audi</option>
+                        {categories.map(category => <option key={category.id}
+                            value={category.id}>{category.categoryName}</option>)}
                     </Select>
                 </div>
                 <div className="col-2">
@@ -138,10 +138,8 @@ const ProductNew = props => {
                         onChange={handleChange}
                         error={errors.location}
                     >
-                        <option value="volvo">Volvo</option>
-                        <option value="saab">Saab</option>
-                        <option value="mercedes">Mercedes</option>
-                        <option value="audi">Audi</option>
+                        {locations.map(location => <option key={location.id}
+                            value={location.id}>{location.locationName}</option>)}
                     </Select>
                 </div>
                 <div className="col-2">
