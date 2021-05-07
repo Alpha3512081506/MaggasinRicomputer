@@ -9,6 +9,7 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Annotation\ApiSubresource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=LocationRepository::class)
@@ -37,6 +38,12 @@ class Location
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"location_read", "product_read"})
+     * @Assert\NotNull(message="Il nome della location è obligatorio")
+     * @Assert\Length(
+     *      min = 4,
+     *      max = 50,
+     *      minMessage = "nom poi avere meno di {{ limit }} characters long",
+     *      maxMessage = "Nom poi avere piu {{ limit }} characters")
      */
     private $locationName;
 

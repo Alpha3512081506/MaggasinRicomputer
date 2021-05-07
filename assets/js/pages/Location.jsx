@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import LOCATIONSERVICE from "../services/LOCATIONSERVICE.JS";
 import { toast } from "react-toastify";
+import {Link} from "react-router-dom";
 
 const Location = (props) => {
     const [locations, setLocation] = useState([]);
@@ -16,7 +17,10 @@ const Location = (props) => {
     }
     useEffect(() => { findAll() }, [])
     return (<>
+        <Link to="/locationadd" className="btn btn-outline-success">crea un luogo</Link>
+        <button className="btn btn-outline-success">Scan CodeBarre</button>
         <h1>Locations List</h1>
+
         <table className="table table-hover table-bordered table-sm">
             <thead className="thead-dark">
                 <tr>

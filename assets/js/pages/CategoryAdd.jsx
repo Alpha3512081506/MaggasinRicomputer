@@ -21,12 +21,19 @@ const CategoryAdd = (props) => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const data = await CATEGORYSERVICE.addNew(category);
-            setCategory(data);
+            const response = await CATEGORYSERVICE.addNew(category);
+            setCategory(response);
            // console.log(data);
             toast.success("La Categoria è stata registrato")
         } catch (error) {
-            console.log(error.response)
+            if (error.response.data.violations){
+               const apiErr = {};
+               error.response.data.violations.forEach(violation=>{
+                   apiErr[violation.propertyPath]= violation.message ;
+               })
+                setErrors(apiErr)
+            }
+
             toast.error("Erreur! impossibile di registrare la categoria")
         }
     }
@@ -39,8 +46,8 @@ const CategoryAdd = (props) => {
             <Field name="categoryName"
                 label="Category Name" placeholder="nome della categoria"
                 onChange={handleChange}
-                value={category.name}
-                error={errors.name}
+                value={category.categoryName}
+                error={errors.categoryName}
             />
 
 

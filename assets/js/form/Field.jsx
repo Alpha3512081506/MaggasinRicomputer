@@ -19,6 +19,7 @@ const Field = ({ placeholder = "",
                 onChange={onChange}
 
             />
+            {error && <p className="invalid-feedback text-center">{error}</p>}
         </div>
     );
 }

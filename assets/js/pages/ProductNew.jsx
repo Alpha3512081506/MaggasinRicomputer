@@ -51,11 +51,18 @@ const ProductNew = props => {
         event.preventDefault();
         console.log(product);
         try {
-            await PRODUCTSERVICE.addNew(product);
-
+           const response= await PRODUCTSERVICE.addNew(product);
+            setProduct(response)
             toast.success("il prodotto è stato registrato con successo")
 
         } catch (error) {
+            if (error.response.data.violations){
+                const apiErr = {};
+                error.response.data.violations.forEach(violation=>{
+                    apiErr[violation.propertyPath]= violation.message ;
+                })
+                setErrors(apiErr)
+            }
             console.log(error.response)
             toast.error("Errerur impossibile di registrare il prodotto")
         }
