@@ -197,13 +197,6 @@ const ProductNew = props => {
                 </Link>
 
             </div>
-
-
-
-
-
-
-
         </form>
         <div className="modal fade" id="myModal">
             <div className="modal-dialog modal-dialog-centered">

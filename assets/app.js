@@ -41,8 +41,8 @@ AuthApi.setUp();
 
 
 const App = () => {
-    //   const [isAuthenticated, setIsAuthenticated] = useState(AuthApi.isAuthenticated());
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
+      const [isAuthenticated, setIsAuthenticated] = useState(AuthApi.isAuthenticated());
+    //const [isAuthenticated, setIsAuthenticated] = useState(false);
 
     const NavbarWithRouter = withRouter(Navbar);
     /**

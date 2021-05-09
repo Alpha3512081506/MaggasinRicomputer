@@ -4,11 +4,12 @@ const Field = ({ placeholder = "",
     label,
     name,
     value,
+    icon="",
     error = "",
     onChange }) => {
     return (
         <div className="form-group row">
-            <label htmlFor={name} className="col-sm-2 control-label">{label}</label>
+            <label htmlFor={name} className="col-sm-2 control-label"><i className={icon}></i>{label}</label>
             <input
                 type={type}
                 placeholder={placeholder}

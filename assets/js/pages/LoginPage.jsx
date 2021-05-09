@@ -1,78 +1,62 @@
-import React, { useState, useContext } from 'react';
-import { toast } from 'react-toastify';
-import AuthContext from '../context/AuthContext';
-import APISERVICE from '../services/PRODUCTSERVICE';
-import AuthApi from '../services/AuthApi';
-const LoginPage = ({ history }) => {
-
-    const { setIsAuthenticated } = useContext(AuthContext);
-    const [error, setError] = useState("");
-    const [credentials, setCredentials] = useState({ username: '', password: '' });
-    //Gestion des Champs 
-    const handleChang = ({ currentTarget }) => {
-        const { value, name } = currentTarget;
-
-        setCredentials({ ...credentials, [name]: value });
+import React, {useState} from 'react';
+import Field from "../form/Field";
+import {Link} from "react-router-dom";
+import AuthAPI from "../services/AuthApi";
+import {toast} from "react-toastify";
+const LoginPage = ({onLogin}) => {
+    const [credentials, setCredentials] = useState({
+        username:"",
+        password:""
+    })
+    const [errors, setErrors] = useState("");
+    //Gestion dess Champs
+    const handleChange=({currentTarget})=>{
+        const {name, value}=currentTarget
+        setCredentials({...credentials, [name]: value})
     }
     //Gestion du Submit
-    const handleSubmit = async event => {
+    const handleSubmit = async event=>{
         event.preventDefault();
-        /*   try {
-              await AuthApi.authenticate(credentials);
-              // console.log(credentials)
-              setIsAuthenticated(true);
-              toast.success("Ben tornato 🙌❤");
-              setError("");
-              history.replace("/#");
-  
-          } catch (error) {
-              console.log(error.response)
-              setError("Nessun Account Ha Questo Indirizzo o Le Informazioni Non Corrispondono");
-              toast.error("si è verificato un errore");
-          } */
         try {
-            await AuthApi.authenticate(credentials);
-
-            // const token = await axios.post("https://localhost:8000/api/login_check", credentials)
-            //     .then(response => response.data.token);
-            // setError("");
-            // window.localStorage.setItem("authToken", token);
-            // axios.defaults.headers["Authorization"] = "Bearer " + token;
-            // const test = await APISERVICE.findAll("products");
-            // console.log(test);
-            setError("");
-            history.replace("/#");
-            toast.success("Ben tornato 🙌❤");
-
-        } catch (error) {
-
-            setError("Nessun Account Ha Questo Indirizzo o Le Informazioni Non Corrispondono");
-            toast.error("si è verificato un errore");
+            const response = await AuthAPI.authenticate(credentials)
+          // const response = await axios.post(LOGIN_API,credentials)
+            toast.success("Ben Tornato  ✅✅✅")
+            setErrors("");
+            onLogin(true)
 
 
+        }catch (error) {
+            setErrors("Invalide Credentials, il Nome dell'Utente o La Password non è Corretto ")
+            toast.error("C'è Stato un errore 🥱🥱🥱🥱🥱🥱")
+            console.log(error.response)
         }
+
+
     }
     return (<>
-        <h1>Connect to App</h1>
+            <h1>Connect To App</h1>
         <form onSubmit={handleSubmit}>
-            <div className="form-group"><label htmlFor="username">Indirizzo email</label>
-                <input type="email"
-                    name="username" className={"form-control" + (error && " is-invalid")}
-                    id="username"
-                    placeholder="indirizzo email di connessione "
-                    value={credentials.username}
-                    onChange={handleChang}
-                />
-                {error && <p className="invalid-feedback">{error}</p>}
+            <Field name="username"
+                   icon="fa fa-user"
+                   label="Nome del'Utente" placeholder="Nome del'Utente"
+                   onChange={handleChange}
+                   value={credentials.username}
+                   error={errors}
+            />
+        <Field name="password"
+               type="password"
+               icon="fa fa-unlock"
+               label="Password" placeholder="password"
+               onChange={handleChange}
+               value={credentials.password}
+               error={errors}
+        />
+            <div className="form-group align-items-center">
+                <button type="submit" className="btn btn-outline-success mr-4">Login</button>
+                <Link to="/registration"><button className="btn btn-outline-success mr-4 ">Register</button>
+                </Link>
+
             </div>
-            <div className="form-group"><label htmlFor="password">Password</label>
-                <input type="password" value={credentials.password}
-                    name="password" className="form-control"
-                    id="password"
-                    placeholder="password per collegarsi"
-                    onChange={handleChang}
-                /></div>
-            <div className="form-group"><button type="submit" className="btn btn-success">Connect</button></div>
         </form>
     </>);
 }
