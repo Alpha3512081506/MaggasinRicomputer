@@ -78,19 +78,35 @@ const App = () => {
                 <Switch>
                     <Route path="/login" render={props => <LoginPage isAuthenticated={isAuthenticated} {...props}
                         onLogin={setIsAuthenticated} />} />
-                    <Route path="/locationlist/:id" component={LocationAdd}
-                    />
-                    <Route path="/locationlist" component={Location}
-                    />
-                    <Route path="/productlist/show/:id" component={ShowProductById} />
-                    <Route path="/productlist/:id" component={ProductNew} />
-                    <Route path="/productlist" component={ProductList} />
+                    <Route path="/locationlist/:id"
+                           render={props=>isAuthenticated ? (< LocationAdd{...props}/>):
+                               (<Redirect to="/login"/>)}/>
+                    <Route path="/locationlist"
+                           render={props=>isAuthenticated ? (< Location{...props}/>):
+                               (<Redirect to="/login"/>)}/>
+                    <Route path="/productlist/show/:id"
+                           render={props=>isAuthenticated ? (< ShowProductById{...props}/>):
+                               (<Redirect to="/login"/>)}/>
+                    <Route path="/productlist/:id"
+                           render={props=>isAuthenticated ? (< ProductNew{...props}/>):
+                               (<Redirect to="/login"/>)}/>
+                    <Route path="/productlist"
+                           render={props=>isAuthenticated ? (<ProductList {...props}/>):
+                               (<Redirect to="/login"/>)} />
                     <Route path="/inscription" component={Registration} />
-                    <Route path="/productadd" component={ProductNew} />
-                    <Route path="/categorylist/:id" component={CategoryAdd} />
-                    <Route path="/locationadd" component={LocationAdd} />
-                    <Route path="/categorylist" component={CategoryPage} />
-                    <Route exact={true} path="/" component={HomePage} />
+                    <Route path="/productadd"
+                           render={props=>isAuthenticated ? (< ProductNew{...props}/>):
+                               (<Redirect to="/login"/>)}/>
+                    <Route path="/categorylist/:id"
+                           render={props=>isAuthenticated ? (< CategoryAdd{...props}/>):
+                               (<Redirect to="/login"/>)}/>
+                    <Route path="/locationadd"
+                           render={props=>isAuthenticated ? (< LocationAdd{...props}/>):
+                               (<Redirect to="/login"/>)}/>
+                    <Route path="/categorylist"
+                           render={props=>isAuthenticated ? (< CategoryPage{...props}/>):
+                               (<Redirect to="/login"/>)}/>
+                    <Route exact={true} path="/" component={HomePage}/>
 
 
                 </Switch>
