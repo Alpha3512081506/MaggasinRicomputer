@@ -3,7 +3,8 @@ import Field from "../form/Field";
 import {Link} from "react-router-dom";
 import AuthAPI from "../services/AuthApi";
 import {toast} from "react-toastify";
-const LoginPage = ({onLogin}) => {
+const LoginPage = ({onLogin,history}) => {
+
     const [credentials, setCredentials] = useState({
         username:"",
         password:""
@@ -23,6 +24,7 @@ const LoginPage = ({onLogin}) => {
             toast.success("Ben Tornato  ✅✅✅")
             setErrors("");
             onLogin(true)
+            history.replace("/")
 
 
         }catch (error) {

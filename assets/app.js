@@ -76,7 +76,7 @@ const App = () => {
             <NavbarWithRouter isAuthenticated={isAuthenticated} onLogout={setIsAuthenticated} />
             <main className="container pt-5">
                 <Switch>
-                    <Route path="/login" render={(props) => <LoginPage isAuthenticated={isAuthenticated}
+                    <Route path="/login" render={props => <LoginPage isAuthenticated={isAuthenticated} {...props}
                         onLogin={setIsAuthenticated} />} />
                     <Route path="/locationlist/:id" component={LocationAdd}
                     />
