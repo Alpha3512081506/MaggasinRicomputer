@@ -73,6 +73,6 @@ Encore
     //.autoProvidejQuery()
     ;
 Encore.configureDefinePlugin(options => {
-    options["process.env"].API_URL = JSON.stringify(process.env.API_URL);
+    options["process.env"].API_URL=JSON.stringify(process.env.API_URL);
 });
 module.exports = Encore.getWebpackConfig();

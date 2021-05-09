@@ -2,41 +2,129 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Alert from '../components/Alert';
 const HomePage = (props) => {
+    const mystyle ={
+        maxWidth:"20rem"
+    };
     return (<>
         <div className="row d-flex align-items-center justify-content-between">
-            <div className="col-xs-12 col-sm-12 col-md-6 col-lg-3 d-flex align-content-center mw-100 ">
+            <div className="col-12 col-sm-12 col-md-6 col-lg-4 shadow p-3 mb-5 bg-white rounded">
                 <Link to="/productlist">
-                    <div className="alert alert-dismissible alert-success shadow-lg p-4 mb-4 bg-white">
-                        <button type="button" className="close" data-dismiss="alert">&times;</button>
-                        <button type="button" className="btn btn-success btn-lg "><span className="display-5">Products</span></button>
+                    <div className="card text-white bg-success mb-3" style={{maxWidth:"20rem"}}>
+                        <div className="card-body">
+                            <div className="row">
+                                <div className="col-4">
+                                    <i className="fa fa-list fa-4x"></i>
+                                </div>
+                                <div className="col-8">
+                                    <h2 className="card-title">0
+                                    </h2>
+                                    <strong className="h2">Products</strong>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
                 </Link>
             </div>
-            <div className="col-xs-12 col-sm-12 col-md-6 col-lg-3 d-flex align-content-center mw-100">
+            <div className="col-12 col-sm-12 col-md-6 col-lg-4 shadow p-3 mb-5 bg-white rounded">
                 <Link to="/categorylist">
-                    <div className="alert alert-dismissible alert-success shadow-lg p-4 mb-4 bg-white">
-                        <button type="button" className="close" data-dismiss="alert">&times;</button>
-                        <button type="button" className="btn btn-success btn-lg"><span className="display-5">Categories</span></button>
-                    </div>
+
+                        <div className="card text-white bg-success mb-3"style={{maxWidth:"20rem"}}>
+                            <div className="card-body">
+                                <div className="row">
+                                    <div className="col-4">
+                                        <i className="fa fa-list fa-4x"></i>
+                                    </div>
+                                    <div className="col-8">
+                                        <h2 className="card-title">0</h2>
+                                        <strong className="h2">Categories</strong>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
                 </Link>
             </div>
-            <div className="col-xs-12 col-sm-12  col-md-6 col-lg-3 d-flex align-content-center mw-100">
+            <div className="col-12 col-sm-12 col-md-6 col-lg-4 shadow p-3 mb-5 bg-white rounded">
                 <Link to="/locationlist">
-                    <div className="alert alert-dismissible alert-success shadow-lg p-4 mb-4 bg-white">
-                        <button type="button" className="close" data-dismiss="alert">&times;</button>
-                        <button type="button" className="btn btn-success btn-lg"><span className="display-5">Location</span></button>
+                    <div className="card text-white bg-success mb-3" style={{maxWidth:"20rem"}}>
+                        <div className="card-body">
+                            <div className="row">
+                                <div className="col-4">
+                                    <i className="fa fa-list fa-4x"></i>
+                                </div>
+                                <div className="col-8">
+                                    <h2 className="card-title">0</h2>
+                                    <strong className="h2">Locations</strong>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
+
                 </Link>
             </div>
-            <div className="col-xs-12 col-sm-12 col-md-6 col-lg-3 d-flex align-content-center mw-100">
+            <div className="col-12 col-sm-12 col-md-6 col-lg-4 shadow p-3 mb-5 bg-white rounded">
                 <Link to="/users">
-                    <div className="alert alert-dismissible alert-success shadow-lg p-4 mb-4 bg-white">
-                        <button type="button" className="close" data-dismiss="alert">&times;</button>
-                        <button type="button" className="btn btn-success btn-lg"><span className="display-5">Users</span></button>
+                    <div className="card text-white bg-success mb-3" style={{maxWidth:"20rem"}}>
+                        <div className="card-body">
+                            <div className="row">
+                                <div className="col-4">
+                                    <i className="fa fa-users fa-4x"></i>
+                                </div>
+                                <div className="col-8">
+                                    <h2 className="card-title">0</h2>
+                                    <strong className="h2">Users</strong>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
+
                 </Link>
             </div>
-        </div>
+            <div className="col-12 col-sm-12 col-md-6 col-lg-4 shadow p-3 mb-5 bg-white rounded">
+                <Link to="/users">
+                    <div className="card text-white bg-success mb-3" style={{maxWidth:"20rem"}}>
+                        <div className="card-body">
+                            <div className="row">
+                                <div className="col-4">
+                                    <i className="fa fa-arrow-up fa-4x"></i>
+                                </div>
+                                <div className="col-8">
+                                    <h2 className="card-title">0</h2>
+                                    <strong className="h2">StockInput</strong>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </Link>
+            </div>
+            <div className="col-12 col-sm-12 col-md-6 col-lg-4 shadow p-3 mb-5 bg-white rounded">
+                <Link to="/users">
+                    <div className="card text-white bg-success mb-3" style={{maxWidth:"20rem"}}>
+                        <div className="card-body">
+                            <div className="row">
+                                <div className="col-4">
+                                    <i className="fa fa-arrow-down fa-4x"></i>
+                                </div>
+                                <div className="col-8">
+                                    <h2 className="card-title">0</h2>
+                                    <strong className="h2">StokUscito</strong>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                </Link>
+            </div>
+
+            </div>
 
         <hr className="mt-5" />
         <Alert />
