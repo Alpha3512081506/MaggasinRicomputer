@@ -12,7 +12,7 @@ const Location = (props) => {
             toast.success("connessione al server effettuata ✔ ")
         } catch (error) {
             console.log(error)
-            toast.error("Impossibile di collegarsi al server")
+            toast.error("Devi effettuare il login per accedere alle risorse")
         }
     }
     useEffect(() => { findAll() }, [])

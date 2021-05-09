@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Alert = (props) => {
+const Alert = ({Children}) => {
     return (<>
         <div className="alert alert-info">
             <marquee behavior="down" direction="">

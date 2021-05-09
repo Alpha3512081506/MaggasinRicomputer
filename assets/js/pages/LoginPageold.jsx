@@ -41,7 +41,7 @@ const LoginPage = ({ history }) => {
             // const test = await APISERVICE.findAll("products");
             // console.log(test);
             setError("");
-            history.replace("/#");
+            history.push("/#");
             toast.success("Ben tornato 🙌❤");
 
         } catch (error) {
