@@ -22,10 +22,10 @@ const ProductNew = props => {
         category: "",
         location: "",
         currentQuantity: 1,
-        alertQuantity: 0,
-        marque: "",
-        model: "",
-        specify: "",
+        alertQuanty: 0,
+        customField1: "",
+        customField2: "",
+        customField3: "",
         note: ""
     });
 
@@ -41,15 +41,15 @@ const ProductNew = props => {
         category: "",
         location: "",
         currentQuantity: "",
-        alertQuantity: "",
-        marque: "",
-        model: "",
-        specify: "",
+        alertQuanty: "",
+        customField1: "",
+        customField2: "",
+        customField3: "",
         note: ""
     });
     const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log(product);
+        //console.log(product);
         try {
            const response= await PRODUCTSERVICE.addNew(product);
             setProduct(response)
@@ -63,7 +63,7 @@ const ProductNew = props => {
                 })
                 setErrors(apiErr)
             }
-            console.log(error.response)
+            console.log(error.response.data)
             toast.error("Errerur impossibile di registrare il prodotto")
         }
 
@@ -80,19 +80,22 @@ const ProductNew = props => {
         try {
             const data = await CATEGORYSERVICE.findAll();
             setCategories(data)
-            console.log(data)
+            //console.log(data)
         } catch (error) {
             console.log(error);
             toast.error("Erreur de chargement des categories")
         }
     }
+   /* const handleChangeCategory=(event)=> {
+        setCategories({value: event.target.value});
+    }*/
     useEffect(() => { findAllCategories() }, []);
     const [locations, setLocation] = useState([])
     const findLocation = async () => {
         try {
             const data = await LOCATIONSERVICE.findAll()
             setLocation(data);
-            console.log(data)
+            //console.log(data)
         } catch (error) {
             console.log(error)
 
@@ -124,12 +127,12 @@ const ProductNew = props => {
                 <div className="col-10">
                     <Select label="Category"
                         name="category"
-                        value="product.category"
+                        value="product.category['@id']"
                         onChange={handleChange}
                         error={errors.category}
                     >
-                        {categories.map(category => <option key={category.id}
-                            value={category.id}>{category.categoryName}</option>)}
+                        {categories.map(category => <option key={category["@id"]}
+                            value={category["@id"]}>{category.categoryName}</option>)}
                     </Select>
                 </div>
                 <div className="col-2">
@@ -145,8 +148,8 @@ const ProductNew = props => {
                         onChange={handleChange}
                         error={errors.location}
                     >
-                        {locations.map(location => <option key={location.id}
-                            value={location.id}>{location.locationName}</option>)}
+                        {locations.map(location => <option key={location["@id"]}
+                            value={location["@id"]}>{location.locationName}</option>)}
                     </Select>
                 </div>
                 <div className="col-2">
@@ -161,29 +164,29 @@ const ProductNew = props => {
                 value={product.currentQuantity}
                 error={errors.currentQuantity}
             />
-            <Field name="alertQuantity" label="AlertQuantity"
+            <Field name="alertQuanty" label="AlertQuantity"
                 placeholder="quantita del  prodotto" type="number"
                 onChange={handleChange}
-                value={product.alertQuantity}
-                error={errors.alertQuantity}
+                value={product.alertQuanty}
+                error={errors.alertQuanty}
             />
-            <Field name="marque" label="Marque"
+            <Field name="customField1" label="Marque"
                 placeholder="marca del  prodotto"
                 onChange={handleChange}
-                value={product.marque}
-                error={errors.marque}
+                value={product.customField1}
+                error={errors.customField1}
             />
-            <Field name="model" label="Model"
+            <Field name="customField2" label="Model"
                 placeholder="modello  del  prodotto"
                 onChange={handleChange}
-                value={product.model}
-                error={errors.model}
+                value={product.customField2}
+                error={errors.customField2}
             />
-            <Field name="specify" label="Specifiche"
+            <Field name="customField3" label="Specifiche"
                 placeholder="specifiche del  prodotto"
                 onChange={handleChange}
-                value={product.specify}
-                error={errors.specify}
+                value={product.customField3}
+                error={errors.customField3}
             />
             <Field name="note" label="Note" type="textarea"
                 placeholder="note sul  prodotto"
@@ -191,7 +194,7 @@ const ProductNew = props => {
                 value={product.note}
                 error={errors.note}
             />
-            <div className="form-group">
+            <div className="form-group d-flex justify-content-between align-items-center">
                 <button type="submit" className="btn btn-outline-success ">Crea il Prodotto</button>
                 <Link to="/productlist"><button className="btn btn-outline-success ">Vai alla lista dei prodotti</button>
                 </Link>

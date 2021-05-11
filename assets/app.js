@@ -35,6 +35,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ShowProductById from "./js/pages/ShowProductById";
 import Registration from './js/pages/Registration.jsx';
+import Product from "./js/pages/Product";
 
 AuthApi.setUp();
 
@@ -107,6 +108,7 @@ const App = () => {
                            render={props=>isAuthenticated ? (< CategoryPage{...props}/>):
                                (<Redirect to="/login"/>)}/>
                     <Route exact={true} path="/" component={HomePage}/>
+                    <Route  path="/new" component={Product}/>
 
 
                 </Switch>

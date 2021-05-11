@@ -9,16 +9,15 @@ const Select = ({
 }) => {
     return (
         <div className="form-group row">
-            <label htmlFor={name} className="col-sm-2 control-label">{label}</label>
+            <label htmlFor={name} className="col-sm-2 control-label">Sceglie  {label}:</label>
 
-            <select name={name} id={name}
-                onChange={onChange} value={value}
-                className={"form-control" + (error && " invalid ")}
+            <select  name={name} onChange={onChange} defaultValue={value}
+                    className={"form-control" + (error && " invalid ")}
+                    className={"form-control" + (error && " invalid ")}
             >
                 {children}
-
             </select>
-            <p className="invalid-feeback">{error}</p>
+            <p className="invalid-feedback">{error}</p>
         </div>
     );
 }

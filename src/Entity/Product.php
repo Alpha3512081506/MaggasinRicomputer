@@ -76,7 +76,6 @@ class Product
     /**
      * @ORM\Column(type="integer", nullable=true)
      * @Groups({"product_read", "category_read"})
-     * @Assert\NotBlank
      */
     private $alertQuanty;
 

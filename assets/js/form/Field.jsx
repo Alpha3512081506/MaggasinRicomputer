@@ -13,7 +13,7 @@ const Field = ({ placeholder = "",
             <input
                 type={type}
                 placeholder={placeholder}
-                value={value}
+                defaultValue={value}
                 name={name}
                 id={name}
                 className={" col-sm-10 form-control" + (error && " is-invalid")}

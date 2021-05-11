@@ -8,7 +8,6 @@ import APISERVICE from '../services/PRODUCTSERVICE';
 import { Link } from 'react-router-dom';
 import BarcodeScannerComponent from 'react-webcam-barcode-scanner';
 import { toast } from 'react-toastify';
-import PRODUCTSERVICE from "../services/PRODUCTSERVICE";
 import Alert from '../components/Alert';
 
 

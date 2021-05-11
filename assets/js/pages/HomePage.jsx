@@ -1,10 +1,40 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
 import Alert from '../components/Alert';
+import PRODUCTSERVICE from "../services/PRODUCTSERVICE";
+import CATEGORYSERVICE from "../services/CATEGORYSERVICE.JS";
+import LOCATIONSERVICE from "../services/LOCATIONSERVICE.JS";
 const HomePage = (props) => {
-    const mystyle ={
-        maxWidth:"20rem"
-    };
+    const [products , setProducts] =useState([])
+    const [categories, setCategories] =useState([]);
+    const [locations, setLocation] = useState([]);
+    const findProducts=async ()=>{
+       try {
+           const response = await PRODUCTSERVICE.findAll()
+           setProducts(response)
+       }catch (e) {
+
+       }
+    }
+    const findCategory=async ()=>{
+        try {
+          const  response =await CATEGORYSERVICE.findAll();
+          setCategories(categories)
+        }catch (e) {
+
+        }
+    }
+    const findLocations=async ()=>{
+     try {
+         const response = LOCATIONSERVICE.findAll()
+         setLocation(response)
+     }  catch (e) {
+
+     }
+    }
+    useEffect(findCategory(),[]);
+    useEffect(findLocations,[]);
+    useEffect(findProducts,[])
     return (<>
         <div className="row d-flex align-items-center justify-content-between">
             <div className="col-12 col-sm-12 col-md-6 col-lg-4 shadow-sm p-3 mb-3 bg-white rounded">
