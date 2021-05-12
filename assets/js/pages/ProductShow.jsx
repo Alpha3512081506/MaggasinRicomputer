@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+/*import React, { useEffect } from 'react';
 import APISERVICE from '../services/APISERVICE';
 const ProductShow = (props) => {
     const [product, setProduct] = useState([]);
@@ -16,6 +16,6 @@ const ProductShow = (props) => {
     }, [id])
     return (<>
     </>);
-}
+}*/
 
 export default ProductShow;
