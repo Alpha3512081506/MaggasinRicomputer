@@ -107,8 +107,9 @@ const App = () => {
                     <Route path="/categorylist"
                            render={props=>isAuthenticated ? (< CategoryPage{...props}/>):
                                (<Redirect to="/login"/>)}/>
-                    <Route exact={true} path="/" component={HomePage}/>
-                    <Route  path="/new" component={Product}/>
+                    <Route exact={true} path="/"   render={props=>isAuthenticated ? (< HomePage{...props}/>):
+                        (<Redirect to="/login"/>)}/>
+
 
 
                 </Switch>
