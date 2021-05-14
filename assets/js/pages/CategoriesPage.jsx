@@ -53,9 +53,6 @@ const CategoryPage = (props) => {
 
         <div className="mb-3 d-flex justify-content-between align-items-center">
 
-            <button className="btn btn-outline-success"><i className="fa fa-camera-retro">Scan CodeBarre</i></button>
-            <button className="btn btn-outline-success" ><i className="fa fa-camera-retro">Close Camera </i></button>
-
             <Link to="/categorylist/:id" className="btn btn-outline-success">crea Categoria</Link>
         </div>
         <h3> Cateogories Liste</h3>
@@ -73,7 +70,6 @@ const CategoryPage = (props) => {
 
                 {categories.map(category => (
                     <tr key={category.id}><td>
-                        <button className="btn btn-primary"><i className="fa fa-search"></i></button>
                         <button className="btn btn-primary"><i className="fa fa-pencil"></i></button>
                         <button onClick={() => handleDelete(category.id)}
                             className="btn btn-danger"><i className="fa fa-trash"></i></button>

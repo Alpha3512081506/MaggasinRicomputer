@@ -68,14 +68,22 @@ const ProductList = (props) => {
 
         setCurrentPage(1)
     }
-    const handleScan = () => {
-        console.log("hadle scan")
+    const handleScanSuccess = (data) => {
+        setDataScan(data)
+        setIsScan(false)
+
+        console.log(dataScan)
 
 
 
     }
     const handeShow = (id) => {
         console.log(id)
+    }
+    const [errorScan,setErrorScan]= useState("");
+    const handleErrorScan=()=>{
+        toast.error("Scansione fallita");
+        setIsScan(false);
     }
     return (
         <>
@@ -97,7 +105,7 @@ const ProductList = (props) => {
             <div className="row">
                 <div className="col-sm-6">
                     <div className="mb-3 d-flex justify-content-between align-items-center">
-                        <button className="btn btn-outline-success" onClick={handleScan}><i className="fa fa-camera-retro">Scan CodeBarre</i></button>
+                        <button className="btn btn-outline-success" onClick={handleScanSuccess}><i className="fa fa-camera-retro">Scan CodeBarre</i></button>
                         <button className="btn btn-outline-success" onClick={() => { setIsScan(false) }}><i className="fa fa-camera-retro">Close Camera </i></button>
                         <Link to="/productadd" className="btn btn-outline-success">crea prodotto</Link>
                     </div>
@@ -110,6 +118,9 @@ const ProductList = (props) => {
                     className="form-control" />
             </div>
             <h3 className="text-center">Liste des produits</h3>
+           <div id="beep">
+               <audio src="beep.mp3"></audio>
+           </div>
             <table className="table table-responsive table-hover table-bordered table-sm w-100">
                 <thead className="thead-dark " >
                     <tr className="w-100">
@@ -130,7 +141,6 @@ const ProductList = (props) => {
                 <tbody>
                     {products.length === 0 && <tr><td colSpan="11"><Loading /></td></tr>}
                     {paginatedProducts.map(product => <tr key={product.id}><td>
-                        <Link to="/productlist/show/:id"> <button className="btn btn-outline-success " onClick={() => handeShow(product.id)}><i className="fa fa-search"></i></button></Link>
                         <Link to="/"> <button className="btn btn-outline-success "><i className="fa fa-pencil"></i></button></Link>
                         <button onClick={() => handleDelete(product.id)} className="btn btn-outline-danger "><i className="fa fa-trash"></i></button>
 

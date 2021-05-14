@@ -31,7 +31,7 @@ const Location = (props) => {
     }
     return (<>
         <Link to="/locationadd" className="btn btn-outline-success">crea un luogo</Link>
-        <button className="btn btn-outline-success">Scan CodeBarre</button>
+        {/*<button className="btn btn-outline-success">Scan CodeBarre</button>*/}
         <h1>Locations List</h1>
 
         <table className="table table-hover table-bordered table-sm">
@@ -49,8 +49,8 @@ const Location = (props) => {
             <tbody>
                 {locations.map(location => (
                     <tr key={location.id}><td>
-                        <button className="btn btn-outline-success"><i className="fa fa-search"></i></button>
-                        <button className="btn btn-outline-success"><i className="fa fa-pencil"></i></button>
+                       {/* <button className="btn btn-outline-success"><i className="fa fa-search"></i></button>
+                        <button className="btn btn-outline-success"><i className="fa fa-pencil"></i></button>*/}
                         <button className="btn btn-outline-danger" onClick={()=>handleDelete(location.id)}><i className="fa fa-trash"></i></button>
                     </td>
                         <td>{location.locationName}</td>
