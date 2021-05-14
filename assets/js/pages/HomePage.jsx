@@ -181,6 +181,26 @@ const HomePage = (props) => {
             <div className="col-12 col-sm-12 col-md-6 col-lg-4 shadow-sm p-3 mb-5 bg-white rounded">
                 <Link to="/categorylist">
 
+                    <div className="card text-white bg-primary mb-3"style={{maxWidth:"20rem"}}>
+                        <div className="card-body">
+                            <div className="row">
+                                <div className="col-4">
+                                    <i className="fa fa-bell-o fa-4x"></i>
+                                </div>
+                                <div className="col-8">
+                                    <h2 className="card-title">0</h2>
+                                    <strong className="h2">Gruppi</strong>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </Link>
+            </div>
+            <div className="col-12 col-sm-12 col-md-6 col-lg-4 shadow-sm p-3 mb-5 bg-white rounded">
+                <Link to="/categorylist">
+
                     <div className="card text-white bg-danger mb-3"style={{maxWidth:"20rem"}}>
                         <div className="card-body">
                             <div className="row">
