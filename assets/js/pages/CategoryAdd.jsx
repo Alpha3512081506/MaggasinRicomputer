@@ -25,6 +25,7 @@ const CategoryAdd = (props) => {
             setCategory(response);
            // console.log(data);
             toast.success("La Categoria è stata registrato")
+            setCategory({})
         } catch (error) {
             if (error.response.data.violations){
                const apiErr = {};
