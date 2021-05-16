@@ -118,7 +118,7 @@ const ProductList = (props) => {
                     onChange={handleSearch} value={search}
                     className="form-control" />
             </div>
-            <h3 className="text-center">Liste des produits</h3>
+            <h3 className="text-center">Lista dei Prodotti</h3>
             <div id="beep">
                 <audio src="beep.mp3"></audio>
             </div>
