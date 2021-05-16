@@ -1,0 +1,1 @@
+//< select  onChange = { event  =>  formik . handleChange ( event . target . name ) ( parseInt ( event . target . value ,  10 ) ) }  / >

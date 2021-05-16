@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import LOCATIONSERVICE from "../services/LOCATIONSERVICE.JS";
 import { toast } from "react-toastify";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import APISERVICE from "../services/PRODUCTSERVICE";
 
 const Location = (props) => {
@@ -10,6 +10,7 @@ const Location = (props) => {
         try {
             const data = await LOCATIONSERVICE.findAll();
             setLocation(data);
+            console.log(data)
             toast.success("connessione al server effettuata ✔ ")
         } catch (error) {
             console.log(error)
@@ -49,9 +50,9 @@ const Location = (props) => {
             <tbody>
                 {locations.map(location => (
                     <tr key={location.id}><td>
-                       {/* <button className="btn btn-outline-success"><i className="fa fa-search"></i></button>
+                        {/* <button className="btn btn-outline-success"><i className="fa fa-search"></i></button>
                         <button className="btn btn-outline-success"><i className="fa fa-pencil"></i></button>*/}
-                        <button className="btn btn-outline-danger" onClick={()=>handleDelete(location.id)}><i className="fa fa-trash"></i></button>
+                        <button className="btn btn-outline-danger" onClick={() => handleDelete(location.id)}><i className="fa fa-trash"></i></button>
                     </td>
                         <td>{location.locationName}</td>
 

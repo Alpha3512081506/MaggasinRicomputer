@@ -55,6 +55,7 @@ const ProductList = (props) => {
         || product.customField2.toLowerCase().includes(search.toLowerCase())
         || product.customField3.toLowerCase().includes(search.toLowerCase())
         || product.note.toLowerCase().includes(search.toLowerCase())
+        || product.storage.toLowerCase().includes(search.toLowerCase())
     )
 
     const handlePageChange = page => { setCurrentPage(page) }
@@ -80,8 +81,8 @@ const ProductList = (props) => {
     const handeShow = (id) => {
         console.log(id)
     }
-    const [errorScan,setErrorScan]= useState("");
-    const handleErrorScan=()=>{
+    const [errorScan, setErrorScan] = useState("");
+    const handleErrorScan = () => {
         toast.error("Scansione fallita");
         setIsScan(false);
     }
@@ -118,9 +119,9 @@ const ProductList = (props) => {
                     className="form-control" />
             </div>
             <h3 className="text-center">Liste des produits</h3>
-           <div id="beep">
-               <audio src="beep.mp3"></audio>
-           </div>
+            <div id="beep">
+                <audio src="beep.mp3"></audio>
+            </div>
             <table className="table table-responsive table-hover table-bordered table-sm w-100">
                 <thead className="thead-dark " >
                     <tr className="w-100">
@@ -129,12 +130,13 @@ const ProductList = (props) => {
                         <th>ProductName</th>
                         <th>Category</th>
                         <th>Location</th>
-                        <th>CurrentQuantity</th>
-                        <th>AlertQuantity</th>
+                        <th>Prezzo</th>
+                        <th>Prezzo minimale</th>
                         <th>Marque</th>
                         <th>Model</th>
                         <th>Specifiques</th>
                         <th>Note</th>
+                        <th>Dove?</th>
                     </tr>
 
                 </thead>
@@ -157,6 +159,7 @@ const ProductList = (props) => {
                         <td>{product.customField2}</td>
                         <td>{product.customField1} </td>
                         <td>{product.note}</td>
+                        <td>{product.storage}</td>
                     </tr>)}
 
                 </tbody>

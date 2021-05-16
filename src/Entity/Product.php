@@ -63,7 +63,7 @@ class Product
     private $productName;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="decimal")
      * @Groups({"product_read", "category_read"})
      * @Assert\NotBlank
      * @Assert\Type(
@@ -74,7 +74,7 @@ class Product
     private $currentQuantity;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="decimal", nullable=true)
      * @Groups({"product_read", "category_read"})
      */
     private $alertQuanty;
@@ -134,6 +134,17 @@ class Product
      *  
      */
     private $user;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Group::class, inversedBy="products")
+     */
+    private $groupe;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Groups({"product_read", "category_read"})
+     */
+    private $storage;
 
     public function getId(): ?int
     {
@@ -288,5 +299,29 @@ class Product
     public function createdAtPrePersist()
     {
         $this->createdAt = new \DateTime();
+    }
+
+    public function getGroupe(): ?Group
+    {
+        return $this->groupe;
+    }
+
+    public function setGroupe(?Group $groupe): self
+    {
+        $this->groupe = $groupe;
+
+        return $this;
+    }
+
+    public function getStorage(): ?string
+    {
+        return $this->storage;
+    }
+
+    public function setStorage(string $storage): self
+    {
+        $this->storage = $storage;
+
+        return $this;
     }
 }

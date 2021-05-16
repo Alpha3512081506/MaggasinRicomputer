@@ -10,6 +10,7 @@ import Alert from '../components/Alert';
 import CATEGORYSERVICE from '../services/CATEGORYSERVICE.JS';
 import Select from '../form/Select';
 import LOCATIONSERVICE from '../services/LOCATIONSERVICE.JS';
+import GROUPSERVICE from "../services/GROUPSERVICE";
 const ProductNew = props => {
 
     const { id = "new" } = props.match.params;
@@ -26,15 +27,9 @@ const ProductNew = props => {
         customField1: "",
         customField2: "",
         customField3: "",
-        note: ""
+        note: "",
+        group: ""
     });
-
-    const handleChange = ({ currentTarget }) => {
-        const { name, value } = currentTarget;
-        setProduct({ ...product, [name]: value })
-
-
-    }
     const [errors, setErrors] = useState({
         productId: "",
         productName: "",
@@ -45,37 +40,46 @@ const ProductNew = props => {
         customField1: "",
         customField2: "",
         customField3: "",
-        note: ""
+        note: "",
+        group: ""
     });
+    const [editing, setEditing] = useState(false)
+    const [categories, setCategories] = useState([]);
+    const [locations, setLocation] = useState([]);
+    const [group, setGroup] = useState([]);
+
+    const handleChange = ({ currentTarget }) => {
+        const { name, value } = currentTarget;
+        setProduct({ ...product, [name]: value })
+        //console.log(product)
+        // const { name, value, type } = currentTarget;
+        /*  const currentProductFormData = Object.assign({}, group, {
+             [name]: type === "number" ? parseInt(value, 10) : value
+         });
+         console.log(currentProductFormData);
+         setProduct(currentProductFormData) */
+
+    }
     const handleSubmit = async (event) => {
         event.preventDefault();
-        //console.log(product);
         try {
-           const response= await PRODUCTSERVICE.addNew(product);
-            setProduct(response)
+            const resposne = await PRODUCTSERVICE.addNew(product);
             toast.success("il prodotto è stato registrato con successo")
 
+            console.log(resposne)
         } catch (error) {
-            if (error.response.data.violations){
-                const apiErr = {};
-                error.response.data.violations.forEach(violation=>{
-                    apiErr[violation.propertyPath]= violation.message ;
-                })
-                setErrors(apiErr)
-            }
-            console.log(error.response.data)
-            toast.error("Errerur impossibile di registrare il prodotto")
+            console.log(error)
         }
 
 
     }
-    const [editing, setEditing] = useState(false)
+
 
     useEffect(() => {
         if (id !== "new") setEditing(true)
     }, [id])
 
-    const [categories, setCategories] = useState([]);
+
     const findAllCategories = async () => {
         try {
             const data = await CATEGORYSERVICE.findAll();
@@ -86,11 +90,7 @@ const ProductNew = props => {
             toast.error("Erreur de chargement des categories")
         }
     }
-   /* const handleChangeCategory=(event)=> {
-        setCategories({value: event.target.value});
-    }*/
     useEffect(() => { findAllCategories() }, []);
-    const [locations, setLocation] = useState([])
     const findLocation = async () => {
         try {
             const data = await LOCATIONSERVICE.findAll()
@@ -103,6 +103,18 @@ const ProductNew = props => {
     }
 
     useEffect(() => { findLocation() }, []);
+    const findGroup = async () => {
+        try {
+            const data = await GROUPSERVICE.findAll();
+            setGroup(data)
+        } catch (e) {
+            console.log(e.data)
+
+        }
+    }
+    useEffect(() => { findGroup() }, [])
+
+
     return (<>
         {!editing && <h3 className="text-center">Crea prodotto</h3> || <h3 className="text-center">Edit Prodotto</h3>}
         <div className="mb-3 d-flex justify-content-between align-items-center">
@@ -139,6 +151,23 @@ const ProductNew = props => {
                     <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#myModal"><i className="fa fa-plus"></i></button>
                 </div>
             </div>
+            <div className="row">
+                <div className="col-10">
+                    <Select label="Dove?"
+                        name="storage"
+                        value="product.storage"
+                        onChange={handleChange}
+                        error={errors.storage}
+                    >
+                        <option value="Laboratorio">Laboratorio</option>
+                        <option value="Negoggio">Negoggio</option>
+                        <option value="Cabanone">Cabanone</option>
+                    </Select>
+                </div>
+                <div className="col-2">
+                    <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#myModal"><i className="fa fa-plus"></i></button>
+                </div>
+            </div>
 
             <div className="row">
                 <div className="col-10">
@@ -157,14 +186,30 @@ const ProductNew = props => {
 
                 </div>
             </div>
+            <div className="row">
+                <div className="col-10">
+                    <Select label="Grouppo"
+                        name="group"
+                        value="group.group['@id']"
+                        onChange={handleChange}
+                        error={errors.group}
+                    >
+                        {group.map(group => <option key={group["@id"]}
+                            value={group["@id"]}>{group.nameGroup}</option>)}
+                    </Select>
+                </div>
+                <div className="col-2">
+                    <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#myModal"><i className="fa fa-plus"></i></button>
+                </div>
+            </div>
 
-            <Field name="currentQuantity" label="CurrentQuantity"
+            <Field name="currentQuantity" label="Prezzo"
                 placeholder="quantita del  prodotto" type="number"
                 onChange={handleChange}
                 value={product.currentQuantity}
                 error={errors.currentQuantity}
             />
-            <Field name="alertQuanty" label="AlertQuantity"
+            <Field name="alertQuanty" label="Prezzo minimale"
                 placeholder="quantita del  prodotto" type="number"
                 onChange={handleChange}
                 value={product.alertQuanty}
