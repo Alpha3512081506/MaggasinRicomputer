@@ -23,6 +23,25 @@ const GroupList = (props) => {
             <Link to="/group" className="btn btn-outline-success">Grea gruppo</Link>
 
         </div>
+        <div className="row">
+
+            <div className="col-12">
+                <ul className="list-group">
+                {group.map(group=>
+                    (
+                    <Link to="/" key={group.id} >
+                        <li className="list-group-item d-flex justify-content-between align-items-center">
+                            {group.nameGroup}
+
+                            <span className="badge badge-primary badge-pill">{group.products.length}</span>
+                        </li>
+                    </Link>)
+
+
+                )}
+                </ul>
+            </div>
+        </div>
 
     </>);
 }
