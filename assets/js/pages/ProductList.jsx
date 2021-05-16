@@ -18,12 +18,14 @@ const ProductList = (props) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [search, setSearch] = useState("");
     const [isScan, setIsScan] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     let [dataScan, setDataScan] = useState([]);
     const findAll = async () => {
         try {
             const data = await APISERVICE.findAll();
             setProduct(data);
+            setLoading(false)
             toast.success("connessione al server effettuata ✔")
         } catch (error) {
             toast.error("Devi effettuare il login per accedere alle risorse");
@@ -119,10 +121,8 @@ const ProductList = (props) => {
                     className="form-control" />
             </div>
             <h3 className="text-center">Lista dei Prodotti</h3>
-            <div id="beep">
-                <audio src="beep.mp3"></audio>
-            </div>
-            <table className="table table-responsive table-hover table-bordered table-sm w-100">
+            {loading && <Loading />}
+            {!loading && <table className="table table-responsive table-hover table-bordered table-sm w-100">
                 <thead className="thead-dark " >
                     <tr className="w-100">
                         <th></th>
@@ -141,7 +141,6 @@ const ProductList = (props) => {
 
                 </thead>
                 <tbody>
-                    {products.length === 0 && <tr><td colSpan="11"><Loading /></td></tr>}
                     {paginatedProducts.map(product => <tr key={product.id}><td>
                         <Link to="/"> <button className="btn btn-outline-success "><i className="fa fa-pencil"></i></button></Link>
                         <button onClick={() => handleDelete(product.id)} className="btn btn-outline-danger "><i className="fa fa-trash"></i></button>
@@ -175,7 +174,7 @@ const ProductList = (props) => {
                         </td>
                     </tr>
                 </tfoot>
-            </table>
+            </table>}
             <Alert />
 
         </>

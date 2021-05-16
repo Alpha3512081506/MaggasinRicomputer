@@ -12,6 +12,7 @@ const Location = (props) => {
         try {
             const data = await LOCATIONSERVICE.findAll();
             setLocation(data);
+
             setLoading(false)
             toast.success("connessione al server effettuata ✔ ")
         } catch (error) {
@@ -36,6 +37,7 @@ const Location = (props) => {
         <Link to="/locationadd" className="btn btn-outline-success">crea un luogo</Link>
         {/*<button className="btn btn-outline-success">Scan CodeBarre</button>*/}
         <h1>Locations List</h1>
+
         {loading && <TableLoader />}
         {!loading && <table className="table table-hover table-bordered table-sm">
             <thead className="thead-dark">
@@ -57,6 +59,7 @@ const Location = (props) => {
                         <button className="btn btn-outline-danger" onClick={() => handleDelete(location.id)}><i className="fa fa-trash"></i></button>
                     </td>
                         <td>{location.locationName}</td>
+                        <td></td>
 
                     </tr>
                 )
