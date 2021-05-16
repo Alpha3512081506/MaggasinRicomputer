@@ -38,6 +38,7 @@ import Registration from './js/pages/Registration.jsx';
 import Product from "./js/pages/Product";
 import GroupPage from './js/pages/GroupPage.jsx';
 import GroupList from './js/pages/GroupList.jsx';
+import GroupShow from './js/pages/GroupShow.jsx';
 
 AuthApi.setUp();
 
@@ -116,6 +117,10 @@ const App = () => {
                         (<Redirect to="/login" />)} />
                     <Route path="/grouplist" component={GroupList} />
                     <Route path="/test" component={Product} />
+                    //Group
+                    <Route path="/grouplist/show/:id" render={props => isAuthenticated ? (<GroupShow  {...props} />) :
+                        (<Redirect to="/login" />)} />
+
 
 
 
