@@ -3,14 +3,16 @@ import LOCATIONSERVICE from "../services/LOCATIONSERVICE.JS";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import APISERVICE from "../services/PRODUCTSERVICE";
+import TableLoader from '../loader/TableLoader';
 
 const Location = (props) => {
     const [locations, setLocation] = useState([]);
+    const [loading, setLoading] = useState(true);
     const findAll = async () => {
         try {
             const data = await LOCATIONSERVICE.findAll();
             setLocation(data);
-            console.log(data)
+            setLoading(false)
             toast.success("connessione al server effettuata ✔ ")
         } catch (error) {
             console.log(error)
@@ -34,8 +36,8 @@ const Location = (props) => {
         <Link to="/locationadd" className="btn btn-outline-success">crea un luogo</Link>
         {/*<button className="btn btn-outline-success">Scan CodeBarre</button>*/}
         <h1>Locations List</h1>
-
-        <table className="table table-hover table-bordered table-sm">
+        {loading && <TableLoader />}
+        {!loading && <table className="table table-hover table-bordered table-sm">
             <thead className="thead-dark">
                 <tr>
                     <th></th>
@@ -66,7 +68,7 @@ const Location = (props) => {
                     <td colSpan="2"><p>pagination </p></td>
                 </tr>
             </tfoot>
-        </table>
+        </table>}
 
     </>);
 }

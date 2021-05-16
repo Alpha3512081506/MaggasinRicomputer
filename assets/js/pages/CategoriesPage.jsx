@@ -4,12 +4,15 @@ import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import CATEGORYSERVICE from '../services/CATEGORYSERVICE.JS';
 import NestedProduct from "../components/NestedProduct";
+import TableLoader from '../loader/TableLoader';
 const CategoryPage = (props) => {
     const [categories, setCategories] = useState([]);
+    const [loading, setLoading] = useState(true);
     const findAll = async () => {
         try {
             const data = await CATEGORYSERVICE.findAll();
             setCategories(data)
+            setLoading(false)
             toast.success("connessione al server effettuata ✔ ")
         } catch (error) {
             toast.error("Devi effettuare il login per accedere alle risorse")
@@ -44,7 +47,7 @@ const CategoryPage = (props) => {
     const handleChangPage = (page) => {
         setCurrentPage(page);
     }
-    const handleNestedShow =()=>{
+    const handleNestedShow = () => {
         console.log("handleNested")
     }
 
@@ -56,7 +59,8 @@ const CategoryPage = (props) => {
             <Link to="/categorylist/:id" className="btn btn-outline-success">crea Categoria</Link>
         </div>
         <h3> Cateogories Liste</h3>
-        <table className="table table-hover table-border">
+        {loading && <TableLoader />}
+        {!loading && <table className="table table-hover table-border">
             <thead>
                 <tr>
                     <th></th>
@@ -106,7 +110,7 @@ const CategoryPage = (props) => {
                 </tr>
 
             </tbody>
-        </table>
+        </table>}
 
 
     </>)
