@@ -19,7 +19,7 @@ function editId(id) {
 }
 function addNew(data) {
     return axios
-        .post("https://localhost:8000/api/products", data);
+        .post(API_PRODUCT, data);
 
 }
 function deleteId(id) {
