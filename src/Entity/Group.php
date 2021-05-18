@@ -40,10 +40,7 @@ class Group
      */
     private $alertQuantity;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Product::class, mappedBy="groupe")
-     */
-    private $products;
+
 
     public function __construct()
     {

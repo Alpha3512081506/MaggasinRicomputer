@@ -135,17 +135,6 @@ class Product
      */
     private $user;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Group::class, inversedBy="products")
-     */
-    private $groupe;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Groups({"product_read", "category_read"})
-     */
-    private $storage;
-
     public function getId(): ?int
     {
         return $this->id;

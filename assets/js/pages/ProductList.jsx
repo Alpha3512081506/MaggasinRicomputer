@@ -127,7 +127,7 @@ const ProductList = (props) => {
                     <tr className="w-100">
                         <th></th>
                         <th >ProductId</th>
-                        <th>ProductName</th>
+                        <th>Grado</th>
                         <th>Category</th>
                         <th>Location</th>
                         <th>Prezzo</th>
@@ -136,7 +136,7 @@ const ProductList = (props) => {
                         <th>Model</th>
                         <th>Specifiques</th>
                         <th>Note</th>
-                        <th>Dove?</th>
+
                     </tr>
 
                 </thead>
@@ -158,7 +158,7 @@ const ProductList = (props) => {
                         <td>{product.customField2}</td>
                         <td>{product.customField1} </td>
                         <td>{product.note}</td>
-                        <td>{product.storage}</td>
+
                     </tr>)}
 
                 </tbody>

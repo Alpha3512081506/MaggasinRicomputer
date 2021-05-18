@@ -28,7 +28,7 @@ const ProductNew = props => {
         customField2: "",
         customField3: "",
         note: "",
-        group: ""
+
     });
     const [errors, setErrors] = useState({
         productId: "",
@@ -41,23 +41,16 @@ const ProductNew = props => {
         customField2: "",
         customField3: "",
         note: "",
-        group: ""
+
     });
     const [editing, setEditing] = useState(false)
     const [categories, setCategories] = useState([]);
     const [locations, setLocation] = useState([]);
-    const [group, setGroup] = useState([]);
+
 
     const handleChange = ({ currentTarget }) => {
         const { name, value } = currentTarget;
         setProduct({ ...product, [name]: value })
-        //console.log(product)
-        // const { name, value, type } = currentTarget;
-        /*  const currentProductFormData = Object.assign({}, group, {
-             [name]: type === "number" ? parseInt(value, 10) : value
-         });
-         console.log(currentProductFormData);
-         setProduct(currentProductFormData) */
 
     }
     const handleSubmit = async (event) => {
@@ -66,7 +59,6 @@ const ProductNew = props => {
             const resposne = await PRODUCTSERVICE.addNew(product);
             toast.success("il prodotto è stato registrato con successo")
 
-            console.log(resposne)
         } catch (error) {
             console.log(error)
         }
@@ -103,18 +95,6 @@ const ProductNew = props => {
     }
 
     useEffect(() => { findLocation() }, []);
-    const findGroup = async () => {
-        try {
-            const data = await GROUPSERVICE.findAll();
-            setGroup(data)
-        } catch (e) {
-            console.log(e.data)
-
-        }
-    }
-    useEffect(() => { findGroup() }, [])
-
-
     return (<>
         {!editing && <h3 className="text-center">Crea prodotto</h3> || <h3 className="text-center">Edit Prodotto</h3>}
         <div className="mb-3 d-flex justify-content-between align-items-center">
@@ -122,20 +102,20 @@ const ProductNew = props => {
             <button className="btn btn-outline-success" ><i className="fa fa-camera-retro">Scan CodeBarre</i></button>
             <button className="btn btn-outline-success" ><i className="fa fa-camera-retro">Close Camera </i></button>
         </div>
-        <form onSubmit={handleSubmit} className="form-horizontal">
+        <form onSubmit={handleSubmit} className="form-horizontal" >
             <Field name="productId"
                 label="ProductID" placeholder="id del prodotto"
                 onChange={handleChange}
                 value={product.productId}
                 error={errors.productId}
             />
-            <Field name="productName" label="ProductName"
+            <Field name="productName" label="Grado"
                 placeholder="Nome del prodotto"
                 onChange={handleChange}
                 value={product.productName}
                 error={errors.productName}
             />
-            <div className="row">
+            <div className="row d-flex align-content-between align-items-center">
                 <div className="col-10">
                     <Select label="Category"
                         name="category"
@@ -151,25 +131,7 @@ const ProductNew = props => {
                     <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#myModal"><i className="fa fa-plus"></i></button>
                 </div>
             </div>
-            <div className="row">
-                <div className="col-10">
-                    <Select label="Dove?"
-                        name="storage"
-                        value="product.storage"
-                        onChange={handleChange}
-                        error={errors.storage}
-                    >
-                        <option value="Laboratorio">Laboratorio</option>
-                        <option value="Negoggio">Negoggio</option>
-                        <option value="Cabanone">Cabanone</option>
-                    </Select>
-                </div>
-                <div className="col-2">
-                    <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#myModal"><i className="fa fa-plus"></i></button>
-                </div>
-            </div>
-
-            <div className="row">
+            <div className="row d-flex align-content-between align-items-center">
                 <div className="col-10">
                     <Select label="Location"
                         name="location"
@@ -184,22 +146,6 @@ const ProductNew = props => {
                 <div className="col-2">
                     <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#myModal2"><i className="fa fa-plus"></i></button>
 
-                </div>
-            </div>
-            <div className="row">
-                <div className="col-10">
-                    <Select label="Grouppo"
-                        name="group"
-                        value="group.group['@id']"
-                        onChange={handleChange}
-                        error={errors.group}
-                    >
-                        {group.map(group => <option key={group["@id"]}
-                            value={group["@id"]}>{group.nameGroup}</option>)}
-                    </Select>
-                </div>
-                <div className="col-2">
-                    <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#myModal"><i className="fa fa-plus"></i></button>
                 </div>
             </div>
 
@@ -233,12 +179,15 @@ const ProductNew = props => {
                 value={product.customField3}
                 error={errors.customField3}
             />
-            <Field name="note" label="Note" type="textarea"
-                placeholder="note sul  prodotto"
-                onChange={handleChange}
-                value={product.note}
-                error={errors.note}
-            />
+            <div className="form-group">
+                <label htmlFor="note">Note:</label>
+                <textarea className="form-control" rows="5" id="note"
+                          onChange={handleChange}
+                          defaultValue={product.note}
+                          error={errors.note}
+                >
+                </textarea>
+            </div>
             <div className="form-group d-flex justify-content-between align-items-center">
                 <button type="submit" className="btn btn-outline-success ">Crea il Prodotto</button>
                 <Link to="/productlist"><button className="btn btn-outline-success ">Vai alla lista dei prodotti</button>
