@@ -36,9 +36,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import ShowProductById from "./js/pages/ShowProductById";
 import Registration from './js/pages/Registration.jsx';
 import Product from "./js/pages/Product";
-import GroupPage from './js/pages/GroupPage.jsx';
-import GroupList from './js/pages/GroupList.jsx';
-import GroupShow from './js/pages/GroupShow.jsx';
 
 AuthApi.setUp();
 
@@ -107,19 +104,12 @@ const App = () => {
                     <Route path="/locationadd"
                         render={props => isAuthenticated ? (< LocationAdd{...props} />) :
                             (<Redirect to="/login" />)} />
-                    <Route path="/group"
-                        render={props => isAuthenticated ? (< GroupPage{...props} />) :
-                            (<Redirect to="/login" />)} />
                     <Route path="/categorylist"
                         render={props => isAuthenticated ? (< CategoryPage{...props} />) :
                             (<Redirect to="/login" />)} />
                     <Route exact={true} path="/" render={props => isAuthenticated ? (< HomePage{...props} />) :
                         (<Redirect to="/login" />)} />
-                    <Route path="/grouplist" component={GroupList} />
-                    <Route path="/test" component={Product} />
-                    //Group
-                    <Route path="/grouplist/show/:id" render={props => isAuthenticated ? (<GroupShow  {...props} />) :
-                        (<Redirect to="/login" />)} />
+
 
 
 

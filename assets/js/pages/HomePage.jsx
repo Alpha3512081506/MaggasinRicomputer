@@ -4,12 +4,10 @@ import Alert from '../components/Alert';
 import PRODUCTSERVICE from "../services/PRODUCTSERVICE";
 import CATEGORYSERVICE from "../services/CATEGORYSERVICE.JS";
 import LOCATIONSERVICE from "../services/LOCATIONSERVICE.JS";
-import GROUPSERVICE from '../services/GROUPSERVICE';
 const HomePage = (props) => {
     const [products, setProducts] = useState([]);
     const [categories, setCategories] = useState([]);
     const [locations, setLocation] = useState([]);
-    const [group, setGroup] = useState([])
     const findProducts = async () => {
         try {
             const data = await PRODUCTSERVICE.findAll()
@@ -37,20 +35,9 @@ const HomePage = (props) => {
         }
     }
 
-    const findGroup = async () => {
-        try {
-            const response = await GROUPSERVICE.findAll();
-            setGroup(response)
-
-        } catch (erro) {
-
-        }
-    }
-
     useEffect(() => { findCategory() }, []);
     useEffect(() => { findLocations() }, []);
     useEffect(() => { findProducts() }, [])
-    useEffect(() => { findGroup() }, [])
     return (<>
         <div className="row d-flex align-items-center justify-content-between">
             <div className="col-12 col-sm-12 col-md-6 col-lg-4 shadow-sm p-3 mb-3 bg-white rounded">
@@ -184,26 +171,6 @@ const HomePage = (props) => {
                                 <div className="col-8">
                                     <h2 className="card-title">0</h2>
                                     <strong className="h2">Alert</strong>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-
-                </Link>
-            </div>
-            <div className="col-12 col-sm-12 col-md-6 col-lg-4 shadow-sm p-3 mb-5 bg-white rounded">
-                <Link to="/grouplist">
-
-                    <div className="card text-white bg-primary mb-3" style={{ maxWidth: "20rem" }}>
-                        <div className="card-body">
-                            <div className="row">
-                                <div className="col-4">
-                                    <i className="fa fa-bell-o fa-4x"></i>
-                                </div>
-                                <div className="col-8">
-                                    <h2 className="card-title">{group.length}</h2>
-                                    <strong className="h2">Gruppi</strong>
                                 </div>
                             </div>
 

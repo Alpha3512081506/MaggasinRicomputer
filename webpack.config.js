@@ -71,8 +71,15 @@ Encore
 
     // uncomment if you're having problems with a jQuery plugin
     //.autoProvidejQuery()
+    .addLoader({
+        test: /\.(mp3|jpe?g|gif)$/i,
+        use: [
+            {
+                loader: 'file-loader',
+            },]
+    })
     ;
 Encore.configureDefinePlugin(options => {
-    options["process.env"].API_URL=JSON.stringify(process.env.API_URL);
+    options["process.env"].API_URL = JSON.stringify(process.env.API_URL);
 });
 module.exports = Encore.getWebpackConfig();

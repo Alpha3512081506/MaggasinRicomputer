@@ -10,7 +10,6 @@ import Alert from '../components/Alert';
 import CATEGORYSERVICE from '../services/CATEGORYSERVICE.JS';
 import Select from '../form/Select';
 import LOCATIONSERVICE from '../services/LOCATIONSERVICE.JS';
-import GROUPSERVICE from "../services/GROUPSERVICE";
 const ProductNew = props => {
 
     const { id = "new" } = props.match.params;
@@ -27,7 +26,7 @@ const ProductNew = props => {
         customField1: "",
         customField2: "",
         customField3: "",
-        note: "",
+        note: "Please write an essay about your favorite DOM element.",
 
     });
     const [errors, setErrors] = useState({
@@ -56,12 +55,13 @@ const ProductNew = props => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const resposne = await PRODUCTSERVICE.addNew(product);
+            await PRODUCTSERVICE.addNew(product);
             toast.success("il prodotto è stato registrato con successo")
 
         } catch (error) {
             console.log(error)
         }
+
 
 
     }
@@ -182,10 +182,12 @@ const ProductNew = props => {
             <div className="form-group">
                 <label htmlFor="note">Note:</label>
                 <textarea className="form-control" rows="5" id="note"
-                          onChange={handleChange}
-                          defaultValue={product.note}
-                          error={errors.note}
+                    name="note"
+                    onChange={handleChange}
+                    value={product.note}
+                    error={errors.note}
                 >
+                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Error omnis tempore impedit amet dolores, ratione autem minus blanditiis quo obcaecati saepe adipisci iure, rerum incidunt molestiae rem nihil vel accusamus.</p>
                 </textarea>
             </div>
             <div className="form-group d-flex justify-content-between align-items-center">

@@ -1,39 +1,39 @@
-<script src="https://cdn.rawgit.com/serratus/quaggaJS/0420d5e0/dist/quagga.min.js"></script>
+import React from 'react';
+import Quagga from 'quagga'; // ES6
 //Initialisation de la class Audio(javascript resource var audio = new Audio(file.mp3)
-const audi = new  Audio("assets/js/services/beep.mp3")
 
 var _scannerIsRunning = false;
-function initialization(idElement){
-Quagga.init({
-    inputStream : {
-        name : "Live",
-        type : "LiveStream",
-        // Or '#yourElement' (optional)
-        target: document.querySelector(idElement)
-    },
-    frequency:2,
-    decoder : {
-        readers: [
-            "code_128_reader",
-            "ean_reader",
-            "ean_8_reader",
-            "code_39_reader",
-            "code_39_vin_reader",
-            "codabar_reader",
-            "upc_reader",
-            "upc_e_reader",
-            "i2of5_reader"
-        ],//Ajouter les decodeurs disponible;
-    }
-}, function(err) {
-    if (err) {
-        console.log(err);
-        return
-    }
-    console.log("Initialization finished. Ready to start");
-    Quagga.start();
-    var _scannerIsRunning = true;
-});
+function initialization(idElement) {
+    Quagga.init({
+        inputStream: {
+            name: "Live",
+            type: "LiveStream",
+            // Or '#yourElement' (optional)
+            target: document.querySelector(idElement)
+        },
+        frequency: 2,
+        decoder: {
+            readers: [
+                "code_128_reader",
+                "ean_reader",
+                "ean_8_reader",
+                "code_39_reader",
+                "code_39_vin_reader",
+                "codabar_reader",
+                "upc_reader",
+                "upc_e_reader",
+                "i2of5_reader"
+            ],//Ajouter les decodeurs disponible;
+        }
+    }, function (err) {
+        if (err) {
+            console.log(err);
+            return
+        }
+        console.log("Initialization finished. Ready to start");
+        Quagga.start();
+        var _scannerIsRunning = true;
+    });
 }
 function execute() {
 
@@ -81,5 +81,5 @@ export default {
     initialization,
     execute,
     detection,
-    camera
+
 }

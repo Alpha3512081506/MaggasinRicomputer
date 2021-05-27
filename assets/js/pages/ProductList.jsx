@@ -9,10 +9,12 @@ import { Link } from 'react-router-dom';
 import BarcodeScannerComponent from 'react-webcam-barcode-scanner';
 import { toast } from 'react-toastify';
 import Alert from '../components/Alert';
+import Scanner from '../services/SCANNER'
+import Beep from '../services/beep.mp3'
 
 
 const ProductList = (props) => {
-
+    const audio = new Audio(Beep);
     const [products, setProduct] = useState([]);
 
     const [currentPage, setCurrentPage] = useState(1);
@@ -57,7 +59,6 @@ const ProductList = (props) => {
         || product.customField2.toLowerCase().includes(search.toLowerCase())
         || product.customField3.toLowerCase().includes(search.toLowerCase())
         || product.note.toLowerCase().includes(search.toLowerCase())
-        || product.storage.toLowerCase().includes(search.toLowerCase())
     )
 
     const handlePageChange = page => { setCurrentPage(page) }
@@ -71,6 +72,17 @@ const ProductList = (props) => {
 
         setCurrentPage(1)
     }
+
+    const handleQuaquaInit = () => {
+        try {
+            Scanner.initialization("#test")
+            audio.play()
+            Scanner.execute()
+            Scanner.detection()
+        } catch (error) {
+            console.log("il ya une erreur")
+        }
+    }
     const handleScanSuccess = (data) => {
         setDataScan(data)
         setIsScan(false)
@@ -80,9 +92,7 @@ const ProductList = (props) => {
 
 
     }
-    const handeShow = (id) => {
-        console.log(id)
-    }
+
     const [errorScan, setErrorScan] = useState("");
     const handleErrorScan = () => {
         toast.error("Scansione fallita");
@@ -90,6 +100,7 @@ const ProductList = (props) => {
     }
     return (
         <>
+            <p id="test"></p>
             {isScan && <BarcodeScannerComponent
                 width={500}
                 height={500}
@@ -108,7 +119,7 @@ const ProductList = (props) => {
             <div className="row">
                 <div className="col-sm-6">
                     <div className="mb-3 d-flex justify-content-between align-items-center">
-                        <button className="btn btn-outline-success" onClick={handleScanSuccess}><i className="fa fa-camera-retro">Scan CodeBarre</i></button>
+                        <button className="btn btn-outline-success" onClick={handleQuaquaInit}><i className="fa fa-camera-retro">Scan CodeBarre</i></button>
                         <button className="btn btn-outline-success" onClick={() => { setIsScan(false) }}><i className="fa fa-camera-retro">Close Camera </i></button>
                         <Link to="/productadd" className="btn btn-outline-success">crea prodotto</Link>
                     </div>
