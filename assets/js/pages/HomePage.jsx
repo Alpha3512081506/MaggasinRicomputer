@@ -120,7 +120,7 @@ const HomePage = (props) => {
 
                 </Link>
             </div>
-            <div className="col-12 col-sm-12 col-md-6 col-lg-4 shadow-sm p-3 mb-3 bg-white rounded">
+            {/*   <div className="col-12 col-sm-12 col-md-6 col-lg-4 shadow-sm p-3 mb-3 bg-white rounded">
                 <Link to="/users">
                     <div className="card text-white bg-success mb-3" style={{ maxWidth: "20rem" }}>
                         <div className="card-body">
@@ -138,8 +138,8 @@ const HomePage = (props) => {
                     </div>
 
                 </Link>
-            </div>
-            <div className="col-12 col-sm-12 col-md-6 col-lg-4 shadow-sm p-3 mb-5 bg-white rounded">
+            </div> */}
+            {/*   <div className="col-12 col-sm-12 col-md-6 col-lg-4 shadow-sm p-3 mb-5 bg-white rounded">
                 <Link to="/users">
                     <div className="card text-white bg-success mb-3" style={{ maxWidth: "20rem" }}>
                         <div className="card-body">
@@ -158,8 +158,8 @@ const HomePage = (props) => {
                     </div>
 
                 </Link>
-            </div>
-            <div className="col-12 col-sm-12 col-md-6 col-lg-4 shadow-sm p-3 mb-5 bg-white rounded">
+            </div> */}
+            {/*     <div className="col-12 col-sm-12 col-md-6 col-lg-4 shadow-sm p-3 mb-5 bg-white rounded">
                 <Link to="/categorylist">
 
                     <div className="card text-white bg-warning mb-3" style={{ maxWidth: "20rem" }}>
@@ -178,8 +178,8 @@ const HomePage = (props) => {
                     </div>
 
                 </Link>
-            </div>
-            <div className="col-12 col-sm-12 col-md-6 col-lg-4 shadow-sm p-3 mb-5 bg-white rounded">
+            </div> */}
+            {/*    <div className="col-12 col-sm-12 col-md-6 col-lg-4 shadow-sm p-3 mb-5 bg-white rounded">
                 <Link to="/categorylist">
 
                     <div className="card text-white bg-danger mb-3" style={{ maxWidth: "20rem" }}>
@@ -198,7 +198,7 @@ const HomePage = (props) => {
                     </div>
 
                 </Link>
-            </div>
+            </div> */}
         </div>
 
         <hr className="mt-5" />
