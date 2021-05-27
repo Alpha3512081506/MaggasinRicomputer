@@ -289,28 +289,4 @@ class Product
     {
         $this->createdAt = new \DateTime();
     }
-
-    public function getGroupe(): ?Group
-    {
-        return $this->groupe;
-    }
-
-    public function setGroupe(?Group $groupe): self
-    {
-        $this->groupe = $groupe;
-
-        return $this;
-    }
-
-    public function getStorage(): ?string
-    {
-        return $this->storage;
-    }
-
-    public function setStorage(string $storage): self
-    {
-        $this->storage = $storage;
-
-        return $this;
-    }
 }
