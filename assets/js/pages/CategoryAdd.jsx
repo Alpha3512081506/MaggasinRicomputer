@@ -5,8 +5,8 @@ import Field from '../form/Field';
 import CATEGORYSERVICE from '../services/CATEGORYSERVICE.JS';
 import { toast } from "react-toastify";
 const CategoryAdd = (props) => {
-    // const {id ="new"}=props.match.params ;
-    //  console.log(id);
+    const { id = "new" } = props.match.params;
+    console.log(id);
 
     const [category, setCategory] = useState({
         categoryName: "",
@@ -23,14 +23,14 @@ const CategoryAdd = (props) => {
         try {
             const response = await CATEGORYSERVICE.addNew(category);
             setCategory(response);
-           // console.log(data);
+            // console.log(data);
             toast.success("La Categoria è stata registrato")
         } catch (error) {
-            if (error.response.data.violations){
-               const apiErr = {};
-               error.response.data.violations.forEach(violation=>{
-                   apiErr[violation.propertyPath]= violation.message ;
-               })
+            if (error.response.data.violations) {
+                const apiErr = {};
+                error.response.data.violations.forEach(violation => {
+                    apiErr[violation.propertyPath] = violation.message;
+                })
                 setErrors(apiErr)
             }
 

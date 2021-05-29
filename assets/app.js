@@ -79,12 +79,24 @@ const App = () => {
                 <Switch>
                     <Route path="/login" render={props => <LoginPage isAuthenticated={isAuthenticated} {...props}
                         onLogin={setIsAuthenticated} />} />
+                    {/* ===============CATEGORIES ROUTES ========================*/}
+                    <Route path="/categorylist/:id"
+                        render={props => isAuthenticated ? (< CategoryAdd{...props} />) :
+                            (<Redirect to="/login" />)} />
+                    <Route path="/categorylist"
+                        render={props => isAuthenticated ? (< CategoryPage{...props} />) :
+                            (<Redirect to="/login" />)} />
+                    <Route exact={true} path="/" render={props => isAuthenticated ? (< HomePage{...props} />) :
+                        (<Redirect to="/login" />)} />
+
+                    {/* ===============LOCATIONS ROUTES ========================*/}
                     <Route path="/locationlist/:id"
                         render={props => isAuthenticated ? (< LocationAdd{...props} />) :
                             (<Redirect to="/login" />)} />
                     <Route path="/locationlist"
                         render={props => isAuthenticated ? (< Location{...props} />) :
                             (<Redirect to="/login" />)} />
+                    {/* ===============PRODUCTS ROUTES ========================*/}
                     <Route path="/productlist/show/:id"
                         render={props => isAuthenticated ? (< ShowProductById{...props} />) :
                             (<Redirect to="/login" />)} />
@@ -98,21 +110,6 @@ const App = () => {
                     <Route path="/productadd"
                         render={props => isAuthenticated ? (< ProductNew{...props} />) :
                             (<Redirect to="/login" />)} />
-                    <Route path="/categorylist/:id"
-                        render={props => isAuthenticated ? (< CategoryAdd{...props} />) :
-                            (<Redirect to="/login" />)} />
-                    <Route path="/locationadd"
-                        render={props => isAuthenticated ? (< LocationAdd{...props} />) :
-                            (<Redirect to="/login" />)} />
-                    <Route path="/categorylist"
-                        render={props => isAuthenticated ? (< CategoryPage{...props} />) :
-                            (<Redirect to="/login" />)} />
-                    <Route exact={true} path="/" render={props => isAuthenticated ? (< HomePage{...props} />) :
-                        (<Redirect to="/login" />)} />
-
-
-
-
 
 
                 </Switch>

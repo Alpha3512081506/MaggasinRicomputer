@@ -11,9 +11,10 @@ import CATEGORYSERVICE from '../services/CATEGORYSERVICE.JS';
 import Select from '../form/Select';
 import LOCATIONSERVICE from '../services/LOCATIONSERVICE.JS';
 const ProductNew = props => {
-
+    console.log(props)
     const { id = "new" } = props.match.params;
-    // const { id } = props.match.params;
+
+    console.log(id)
 
 
     const [product, setProduct] = useState({
@@ -127,9 +128,9 @@ const ProductNew = props => {
                             value={category["@id"]}>{category.categoryName}</option>)}
                     </Select>
                 </div>
-                <div className="col-2">
+                {/* <div className="col-2">
                     <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#myModal"><i className="fa fa-plus"></i></button>
-                </div>
+                </div> */}
             </div>
             <div className="row d-flex align-content-between align-items-center">
                 <div className="col-10">
@@ -143,10 +144,10 @@ const ProductNew = props => {
                             value={location["@id"]}>{location.locationName}</option>)}
                     </Select>
                 </div>
-                <div className="col-2">
+                {/* <div className="col-2">
                     <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#myModal2"><i className="fa fa-plus"></i></button>
 
-                </div>
+                </div> */}
             </div>
 
             <Field name="currentQuantity" label="Prezzo"
@@ -197,7 +198,7 @@ const ProductNew = props => {
 
             </div>
         </form>
-        <div className="modal fade" id="myModal">
+        {/*   <div className="modal fade" id="myModal">
             <div className="modal-dialog modal-dialog-centered">
                 <div className="modal-content">
                     <div className="modal-body">
@@ -223,7 +224,7 @@ const ProductNew = props => {
 
                 </div>
             </div>
-        </div>
+        </div> */}
         <Alert />
 
     </>);

@@ -5,7 +5,10 @@ import { toast } from 'react-toastify';
 import Field from '../form/Field';
 import LOCATIONSERVICE from "../services/LOCATIONSERVICE.JS";
 
-const LocationAdd = ({ props }) => {
+const LocationAdd = (props) => {
+    const { id = "new" } = props.match.params;
+    console.log(props)
+    console.log(id)
     const [locationName, setLocationName] = useState({
         locationName: "",
     });
@@ -25,10 +28,10 @@ const LocationAdd = ({ props }) => {
             toast.success("la location è stata creata")
         } catch (error) {
 
-            if (error.response.data.violations){
+            if (error.response.data.violations) {
                 const apiErr = {};
-                error.response.data.violations.forEach(violation=>{
-                    apiErr[violation.propertyPath]= violation.message ;
+                error.response.data.violations.forEach(violation => {
+                    apiErr[violation.propertyPath] = violation.message;
                 })
                 setErrors(apiErr)
             }
@@ -39,7 +42,7 @@ const LocationAdd = ({ props }) => {
         <div className="mb-3 d-flex justify-content-between align-items-center">
             <h1>Crea luogo dei prodotti</h1>
             <button className="btn btn-outline-success">Scan CodeBarre</button>
-            <Link to="/locationadd"/>
+            <Link to="/locationadd" />
         </div>
         <form onSubmit={handleSubmit}>
             <Field name="locationName"

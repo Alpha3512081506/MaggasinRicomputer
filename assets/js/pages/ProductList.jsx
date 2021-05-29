@@ -121,7 +121,7 @@ const ProductList = (props) => {
                     <div className="mb-3 d-flex justify-content-between align-items-center">
                         <button className="btn btn-outline-success" onClick={handleQuaquaInit}><i className="fa fa-camera-retro">Scan CodeBarre</i></button>
                         <button className="btn btn-outline-success" onClick={() => { setIsScan(false) }}><i className="fa fa-camera-retro">Close Camera </i></button>
-                        <Link to="/productadd" className="btn btn-outline-success">crea prodotto</Link>
+                        <Link to="/productlist/:id" className="btn btn-outline-success">crea prodotto</Link>
                     </div>
                 </div>
             </div>
