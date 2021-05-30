@@ -74,7 +74,7 @@ const CategoryPage = (props) => {
 
                 {categories.map(category => (
                     <tr key={category.id}><td>
-                        <button className="btn btn-primary"><i className="fa fa-pencil"></i></button>
+                        <Link to={"/categorylist/" + category.id} className="btn btn-primary"><i className="fa fa-pencil"></i></Link>
                         <button onClick={() => handleDelete(category.id)}
                             className="btn btn-danger"><i className="fa fa-trash"></i></button>
                     </td>

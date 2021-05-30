@@ -25,7 +25,7 @@ const Location = (props) => {
         const originalLocations = [...locations];
         setLocation(locations.filter(location => location.id !== id));
         try {
-            await APISERVICE.deleteId(id)
+            await LOCATIONSERVICE.deleteId(id)
             toast.success("la location è stata cancellata")
         } catch (error) {
             setLocation(originalLocations);
@@ -34,7 +34,7 @@ const Location = (props) => {
 
     }
     return (<>
-        <Link to="/locationlist/:id" className="btn btn-outline-success">crea un luogo</Link>
+        <Link to={"/locationlist/" + location.id} className="btn btn-outline-success">crea un luogo</Link>
         {/*<button className="btn btn-outline-success">Scan CodeBarre</button>*/}
         <h1>Locations List</h1>
 
@@ -56,10 +56,11 @@ const Location = (props) => {
                     <tr key={location.id}><td>
                         {/* <button className="btn btn-outline-success"><i className="fa fa-search"></i></button>
                         <button className="btn btn-outline-success"><i className="fa fa-pencil"></i></button>*/}
+                        <Link to={"/locationlist/" + location.id} className="btn btn-outline-success"><i className="fa fa-pencil"></i></Link>
                         <button className="btn btn-outline-danger" onClick={() => handleDelete(location.id)}><i className="fa fa-trash"></i></button>
                     </td>
                         <td>{location.locationName}</td>
-                        <td></td>
+                        <td><button className="btn btn-outline-secondary">{location.prodcuts.length}</button></td>
 
                     </tr>
                 )
