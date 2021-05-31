@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
@@ -7,11 +7,24 @@ import LOCATIONSERVICE from "../services/LOCATIONSERVICE.JS";
 
 const LocationAdd = (props) => {
     const { id = "new" } = props.match.params;
-    console.log(props)
-    console.log(id)
     const [locationName, setLocationName] = useState({
         locationName: "",
     });
+    const [editing, setEditing] = useState(false);
+    const findLocation = async id => {
+        try {
+            const data = await LOCATIONSERVICE.findlocationById(id)
+            console.log(data)
+            setLocationName(data)
+        } catch (error) {
+            console.log(error)
+        }
+
+    }
+    useEffect(() => {
+        if (id !== "new") { setEditing(true) }
+        findLocation(id)
+    }, [id])
     const handleChange = ({ currentTarget }) => {
         const { name, value } = currentTarget;
         setLocationName({ ...locationName, [name]: value })
@@ -19,13 +32,22 @@ const LocationAdd = (props) => {
     const [errors, setErrors] = useState({
         locationName: "",
     });
+
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const response = await LOCATIONSERVICE.addNew(locationName);
-            setLocationName(response);
-            console.log(response);
-            toast.success("la location è stata creata")
+            if (editing) {
+                const response = LOCATIONSERVICE.editLocationById(id, locationName)
+                setLocationName(response);
+                toast.success("la location è stata creata")
+            } else {
+                const response = await LOCATIONSERVICE.addNew(locationName);
+                setLocationName(response);
+                console.log(response);
+                toast.success("la location è stata creata")
+            }
+
         } catch (error) {
 
             if (error.response.data.violations) {
@@ -37,10 +59,11 @@ const LocationAdd = (props) => {
             }
             toast.error("C'è stato un errore")
         }
+
     }
     return (<>
         <div className="mb-3 d-flex justify-content-between align-items-center">
-            <h1>Crea luogo dei prodotti</h1>
+            {!editing && (<h1>Creazione luogo</h1>) || (<h1>Edizione luogo </h1>)}
             <button className="btn btn-outline-success">Scan CodeBarre</button>
             <Link to="/locationadd" />
         </div>

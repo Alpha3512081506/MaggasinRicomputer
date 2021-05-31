@@ -84,10 +84,13 @@ const ProductList = (props) => {
         }
     }
     const handleScanSuccess = (data) => {
-        setDataScan(data)
-        setIsScan(false)
+        setIsScan(true)
+        console.log("Scan data")
+        // setDataScan(data)
+        // setIsScan(false)
 
-        console.log(dataScan)
+        // console.log(dataScan)
+
 
 
 
@@ -105,21 +108,28 @@ const ProductList = (props) => {
                 width={500}
                 height={500}
                 onUpdate={(err, result) => {
-                    dataScan = result;
-                    if (dataScan) {
-                        setDataScan(dataScan);
+                    if (result) {
+                        console.log(result)
+                        setDataScan(result.text);
+                        audio.play()
                         console.log(dataScan);
-                        setSearch(dataScan.text);
-                        setSearch(dataScan[0])
+                        console.log(dataScan);
+                    } else {
+                        setDataScan('')
                     }
+                }
+                    // setSearch(dataScan.text);
+                    // setSearch(dataScan[0])
+                }
 
-                }}
+
             />
             }
+            <p>{dataScan}</p>
             <div className="row">
                 <div className="col-sm-6">
                     <div className="mb-3 d-flex justify-content-between align-items-center">
-                        <button className="btn btn-outline-success" onClick={handleQuaquaInit}><i className="fa fa-camera-retro">Scan CodeBarre</i></button>
+                        <button className="btn btn-outline-success" onClick={handleScanSuccess}><i className="fa fa-camera-retro">Scan CodeBarre</i></button>
                         <button className="btn btn-outline-success" onClick={() => { setIsScan(false) }}><i className="fa fa-camera-retro">Close Camera </i></button>
                         <Link to="/productlist/:id" className="btn btn-outline-success">crea prodotto</Link>
                     </div>

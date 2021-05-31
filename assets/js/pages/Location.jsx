@@ -34,7 +34,7 @@ const Location = (props) => {
 
     }
     return (<>
-        <Link to={"/locationlist/" + location.id} className="btn btn-outline-success">crea un luogo</Link>
+        <Link to="/locationlist/new" className="btn btn-outline-success">crea un luogo</Link>
         {/*<button className="btn btn-outline-success">Scan CodeBarre</button>*/}
         <h1>Locations List</h1>
 
@@ -60,7 +60,7 @@ const Location = (props) => {
                         <button className="btn btn-outline-danger" onClick={() => handleDelete(location.id)}><i className="fa fa-trash"></i></button>
                     </td>
                         <td>{location.locationName}</td>
-                        <td><button className="btn btn-outline-secondary">{location.prodcuts.length}</button></td>
+                        <td><button className={"btn btn-outline-secondary"}>{location.prodcuts.length}</button></td>
 
                     </tr>
                 )
