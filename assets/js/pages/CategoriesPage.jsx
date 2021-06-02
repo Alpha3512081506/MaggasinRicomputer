@@ -56,7 +56,7 @@ const CategoryPage = (props) => {
 
         <div className="mb-3 d-flex justify-content-between align-items-center">
 
-            <Link to="/categorylist/:id" className="btn btn-outline-success">crea Categoria</Link>
+            <Link to="/categorylist/new" className="btn btn-outline-success">crea Categoria</Link>
         </div>
         <h3> Cateogories Liste</h3>
         {loading && <TableLoader />}

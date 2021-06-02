@@ -6,10 +6,10 @@ function findAll() {
         .get(API_PRODUCT)
         .then(response => response.data['hydra:member']);
 }
-function findId(id) {
+function finProductdById(id) {
     return axios
         .get(API_PRODUCT + "/" + id)
-        .then(response => response.data['hydra:member']);
+        .then(response => response.data);
 
 }
 function editId(id) {
@@ -33,5 +33,5 @@ export default {
     editId,
     deleteId,
     addNew,
-    findId
+    finProductdById
 }

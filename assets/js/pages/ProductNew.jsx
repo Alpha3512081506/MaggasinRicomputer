@@ -3,20 +3,16 @@ import { Link } from 'react-router-dom';
 
 import Field from '../form/Field';
 import PRODUCTSERVICE from '../services/PRODUCTSERVICE';
-import CategoryAdd from "./CategoryAdd";
-import LocationAdd from "./LocationAdd";
+
 import { toast } from "react-toastify";
 import Alert from '../components/Alert';
 import CATEGORYSERVICE from '../services/CATEGORYSERVICE.JS';
 import Select from '../form/Select';
 import LOCATIONSERVICE from '../services/LOCATIONSERVICE.JS';
+import axios from 'axios';
+import { API_PRODUCT } from '../services/Config';
 const ProductNew = props => {
-    console.log(props)
     const { id = "new" } = props.match.params;
-
-    console.log(id)
-
-
     const [product, setProduct] = useState({
         productId: "",
         productName: "",
@@ -27,7 +23,7 @@ const ProductNew = props => {
         customField1: "",
         customField2: "",
         customField3: "",
-        note: "Please write an essay about your favorite DOM element.",
+        note: "Scrivere Le Note:",
 
     });
     const [errors, setErrors] = useState({
@@ -53,14 +49,27 @@ const ProductNew = props => {
         setProduct({ ...product, [name]: value })
 
     }
+    const findProduct = async id => {
+        try {
+            const data = await PRODUCTSERVICE.finProductdById(id)
+            setProduct(data)
+        } catch (error) {
+            console.log("il ya une erreur")
+        }
+    }
     const handleSubmit = async (event) => {
         event.preventDefault();
-        try {
-            await PRODUCTSERVICE.addNew(product);
-            toast.success("il prodotto è stato registrato con successo")
 
+        try {
+            if (editing) {
+                const response = await axios.put("https://localhost:8000/api/products/" + id, product)
+                console.log(response.data)
+            } else {
+                await PRODUCTSERVICE.addNew(product);
+                toast.success("il prodotto è stato registrato con successo")
+            }
         } catch (error) {
-            console.log(error)
+            console.log(error.response)
         }
 
 
@@ -69,7 +78,8 @@ const ProductNew = props => {
 
 
     useEffect(() => {
-        if (id !== "new") setEditing(true)
+        if (id !== "new") setEditing(true),
+            findProduct(id)
     }, [id])
 
 
@@ -118,7 +128,7 @@ const ProductNew = props => {
             />
             <div className="row d-flex align-content-between align-items-center">
                 <div className="col-10">
-                    <Select label="Category"
+                    <Select label="Categoria"
                         name="category"
                         value="product.category['@id']"
                         onChange={handleChange}
@@ -135,7 +145,7 @@ const ProductNew = props => {
             <div className="row d-flex align-content-between align-items-center">
                 <div className="col-10">
                     <Select label="Location"
-                        name="location"
+                        name="luogo"
                         value="product.location"
                         onChange={handleChange}
                         error={errors.location}
@@ -162,13 +172,13 @@ const ProductNew = props => {
                 value={product.alertQuanty}
                 error={errors.alertQuanty}
             />
-            <Field name="customField1" label="Marque"
+            <Field name="customField1" label="Marca"
                 placeholder="marca del  prodotto"
                 onChange={handleChange}
                 value={product.customField1}
                 error={errors.customField1}
             />
-            <Field name="customField2" label="Model"
+            <Field name="customField2" label="Modello"
                 placeholder="modello  del  prodotto"
                 onChange={handleChange}
                 value={product.customField2}
@@ -181,14 +191,14 @@ const ProductNew = props => {
                 error={errors.customField3}
             />
             <div className="form-group">
-                <label htmlFor="note">Note:</label>
+                <label htmlFor="Note">Note:</label>
                 <textarea className="form-control" rows="5" id="note"
                     name="note"
                     onChange={handleChange}
                     value={product.note}
                     error={errors.note}
                 >
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Error omnis tempore impedit amet dolores, ratione autem minus blanditiis quo obcaecati saepe adipisci iure, rerum incidunt molestiae rem nihil vel accusamus.</p>
+                    <p> Note:</p>
                 </textarea>
             </div>
             <div className="form-group d-flex justify-content-between align-items-center">

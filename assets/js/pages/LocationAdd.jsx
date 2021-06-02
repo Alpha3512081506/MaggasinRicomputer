@@ -1,8 +1,10 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import Field from '../form/Field';
+import { API_LOCATION } from '../services/Config';
 import LOCATIONSERVICE from "../services/LOCATIONSERVICE.JS";
 
 const LocationAdd = (props) => {
@@ -14,7 +16,6 @@ const LocationAdd = (props) => {
     const findLocation = async id => {
         try {
             const data = await LOCATIONSERVICE.findlocationById(id)
-            console.log(data)
             setLocationName(data)
         } catch (error) {
             console.log(error)
@@ -38,9 +39,9 @@ const LocationAdd = (props) => {
         event.preventDefault();
         try {
             if (editing) {
-                const response = LOCATIONSERVICE.editLocationById(id, locationName)
-                setLocationName(response);
-                toast.success("la location è stata creata")
+                const response = await axios.put(API_LOCATION + "/" + id, locationName)
+                console.log(response.data)
+                toast.success("la location è stata modificata")
             } else {
                 const response = await LOCATIONSERVICE.addNew(locationName);
                 setLocationName(response);

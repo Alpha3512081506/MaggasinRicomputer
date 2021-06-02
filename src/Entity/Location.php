@@ -29,7 +29,7 @@ class Location
     private $id;
 
     /**
-     * @ORM\OneToMany(targetEntity=Product::class, mappedBy="location")
+     * @ORM\OneToMany(targetEntity=Product::class, mappedBy="location",cascade={"persist"})
      * @Groups({"location_read"})
      *
      */

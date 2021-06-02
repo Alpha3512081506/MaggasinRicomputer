@@ -86,10 +86,9 @@ const ProductList = (props) => {
     const handleScanSuccess = (data) => {
         setIsScan(true)
         console.log("Scan data")
+        setDataScan([data])
         // setDataScan(data)
         // setIsScan(false)
-
-        // console.log(dataScan)
 
 
 
@@ -109,11 +108,11 @@ const ProductList = (props) => {
                 height={500}
                 onUpdate={(err, result) => {
                     if (result) {
-                        console.log(result)
-                        setDataScan(result.text);
+                        console.log(result.text)
+                        setDataScan([result.text]);
+
                         audio.play()
-                        console.log(dataScan);
-                        console.log(dataScan);
+
                     } else {
                         setDataScan('')
                     }
@@ -125,13 +124,12 @@ const ProductList = (props) => {
 
             />
             }
-            <p>{dataScan}</p>
             <div className="row">
                 <div className="col-sm-6">
                     <div className="mb-3 d-flex justify-content-between align-items-center">
                         <button className="btn btn-outline-success" onClick={handleScanSuccess}><i className="fa fa-camera-retro">Scan CodeBarre</i></button>
                         <button className="btn btn-outline-success" onClick={() => { setIsScan(false) }}><i className="fa fa-camera-retro">Close Camera </i></button>
-                        <Link to="/productlist/:id" className="btn btn-outline-success">crea prodotto</Link>
+                        <Link to="/productlist/new" className="btn btn-outline-success">crea prodotto</Link>
                     </div>
                 </div>
             </div>
@@ -149,13 +147,13 @@ const ProductList = (props) => {
                         <th></th>
                         <th >ProductId</th>
                         <th>Grado</th>
-                        <th>Category</th>
-                        <th>Location</th>
+                        <th>Categoria</th>
+                        <th>Luogo</th>
                         <th>Prezzo</th>
                         <th>Prezzo minimale</th>
-                        <th>Marque</th>
-                        <th>Model</th>
-                        <th>Specifiques</th>
+                        <th>Marca</th>
+                        <th>Modello</th>
+                        <th>Specifiche</th>
                         <th>Note</th>
 
                     </tr>

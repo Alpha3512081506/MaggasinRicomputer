@@ -6,16 +6,16 @@ function findAll() {
         .get(API_CATEGORY)
         .then(response => response.data['hydra:member']);
 }
-function findId(id) {
+function findCategoryById(id) {
     return axios
         .get(API_CATEGORY + "/" + id)
-        .then(response => response.data['hydra:member']);
+        .then(response => response.data);
 
 }
-function editId(id) {
+function editCategoryById(id, resource) {
     axios
-        .put(API_CATEGORY + ressource + "/" + id)
-        .then(response => response.data['hydra:member']);
+        .put(API_CATEGORY + "/" + id, resource)
+        .then(response => response.data);
 }
 function addNew(data) {
     return axios
@@ -30,8 +30,8 @@ function deleteId(id) {
 
 export default {
     findAll,
-    editId,
+    editCategoryById,
     deleteId,
     addNew,
-    findId
+    findCategoryById
 }

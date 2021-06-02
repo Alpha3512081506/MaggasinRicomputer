@@ -48,7 +48,7 @@ const HomePage = (props) => {
         {loading && <ListLoader />}
         {!loading &&
             <div className="row d-flex align-items-center justify-content-between">
-                <div className="col-12 col-sm-12 col-md-6 col-lg-4 shadow-sm p-3 mb-3 bg-white rounded">
+                <div className="col-12 col-sm-12 col-md-6 col-lg-6 shadow-sm p-3 mb-3 bg-white rounded">
                     <Link to="/productlist">
                         <div className="card text-white bg-success mb-3" style={{ maxWidth: "20rem" }}>
                             <div className="card-body">
@@ -59,7 +59,7 @@ const HomePage = (props) => {
                                     <div className="col-8">
                                         <h2 className="card-title">{products.length}
                                         </h2>
-                                        <strong className="h2">Products</strong>
+                                        <strong className="h2">Prodotti</strong>
                                     </div>
                                 </div>
 
@@ -67,7 +67,7 @@ const HomePage = (props) => {
                         </div>
                     </Link>
                 </div>
-                <div className="col-12 col-sm-12 col-md-6 col-lg-4 shadow-sm p-3 mb-3 bg-white rounded">
+                <div className="col-12 col-sm-12 col-md-6 col-lg-6 shadow-sm p-3 mb-3 bg-white rounded">
                     <Link to="/categorylist">
 
                         <div className="card text-white bg-success mb-3" style={{ maxWidth: "20rem" }}>
@@ -79,7 +79,7 @@ const HomePage = (props) => {
                                     <div className="col-8">
                                         <h2 className="card-title">{categories.length}
                                         </h2>
-                                        <strong className="h2">Categories</strong>
+                                        <strong className="h2">Categorie</strong>
                                     </div>
                                 </div>
 
@@ -88,7 +88,7 @@ const HomePage = (props) => {
 
                     </Link>
                 </div>
-                <div className="col-12 col-sm-12 col-md-6 col-lg-4 shadow-sm p-3 mb-3 bg-white rounded">
+                <div className="col-12 col-sm-12 col-md-6 col-lg-6 shadow-sm p-3 mb-3 bg-white rounded">
                     <Link to="/locationlist">
                         <div className="card text-white bg-success mb-3" style={{ maxWidth: "20rem" }}>
                             <div className="card-body">
@@ -100,7 +100,7 @@ const HomePage = (props) => {
                                         <h2 className="card-title">
                                             {locations.length}
                                         </h2>
-                                        <strong className="h2">Locations</strong>
+                                        <strong className="h2">Luoghi</strong>
                                     </div>
                                 </div>
 
@@ -109,7 +109,7 @@ const HomePage = (props) => {
 
                     </Link>
                 </div>
-                <div className="col-12 col-sm-12 col-md-6 col-lg-4 shadow-sm p-3 mb-3 bg-white rounded">
+                <div className="col-12 col-sm-12 col-md-6 col-lg-6 shadow-sm p-3 mb-3 bg-white rounded">
                     <Link to="/users">
                         <div className="card text-white bg-success mb-3" style={{ maxWidth: "20rem" }}>
                             <div className="card-body">
@@ -119,7 +119,7 @@ const HomePage = (props) => {
                                     </div>
                                     <div className="col-8">
                                         <h2 className="card-title">0</h2>
-                                        <strong className="h2">Users</strong>
+                                        <strong className="h2">Utenti</strong>
                                     </div>
                                 </div>
 

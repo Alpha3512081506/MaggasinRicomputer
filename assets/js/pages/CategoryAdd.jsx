@@ -1,16 +1,33 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import Field from '../form/Field';
 import CATEGORYSERVICE from '../services/CATEGORYSERVICE.JS';
 import { toast } from "react-toastify";
+import axios from 'axios';
 const CategoryAdd = (props) => {
     const { id = "new" } = props.match.params;
-    console.log(id);
 
     const [category, setCategory] = useState({
         categoryName: "",
     });
+    const [editing, setEditing] = useState(false);
+    const findCategory = async id => {
+        try {
+            const response = await CATEGORYSERVICE.findCategoryById(id);
+            setCategory(response)
+            console.log(response)
+        } catch (error) {
+            console.log(error.data)
+        }
+    }
+    useEffect(() => {
+        if (id !== "new") {
+            setEditing(true)
+        }
+        findCategory(id)
+
+    }, [id])
     const handleChange = ({ currentTarget }) => {
         const { name, value } = currentTarget;
         setCategory({ ...category, [name]: value })
@@ -21,10 +38,17 @@ const CategoryAdd = (props) => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const response = await CATEGORYSERVICE.addNew(category);
-            setCategory(response);
-            // console.log(data);
-            toast.success("La Categoria è stata registrato")
+            if (editing) {
+                const response = await axios.put("https://localhost:8000/api/categories/" + id, category)
+                toast.success("la categoria è stata modificata")
+                console.log(response.data)
+
+            } else {
+                const response = await CATEGORYSERVICE.addNew(category);
+                setCategory(response);
+                // console.log(data);
+                toast.success("La Categoria è stata registrata")
+            }
         } catch (error) {
             if (error.response.data.violations) {
                 const apiErr = {};
