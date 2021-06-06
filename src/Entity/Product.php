@@ -115,16 +115,16 @@ class Product
     /**
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="products")
      * @ApiSubresource()
-     * @Groups({"product_read","product_write"})
+     * @Groups({"product_read","product_write",})
      * @Assert\NotBlank(message="la categoria del prodotto è obbligatoria")
      *  
      */
     private $category;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Location::class, inversedBy="prodcuts")
+     * @ORM\ManyToOne(targetEntity=Location::class, inversedBy="prodcuts",)
      * @ApiSubresource()
-     * @Groups({"product_read","product_write"})
+     * @Groups({"product_read","product_write","category_read"})
      * @Assert\NotBlank(message="la location del prodotto è obbligatoria")
      *  
      */

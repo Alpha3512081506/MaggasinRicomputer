@@ -148,7 +148,7 @@ const ProductList = (props) => {
                         <td>{product.productId}</td>
                         <td>{product.productName}</td>
                         <td>{product.category.categoryName}</td>
-                        <td>{product.location.categoryName}</td>
+                        <td>{product.location.locationName}</td>
                         <td>{product.currentQuantity}</td>
                         <td>{product.alertQuanty}</td>
                         <td>{product.customField1}</td>

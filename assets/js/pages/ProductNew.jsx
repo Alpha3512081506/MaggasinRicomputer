@@ -16,9 +16,9 @@ const ProductNew = props => {
     const [product, setProduct] = useState({
         productId: "",
         productName: "",
-        category: "",
-        location: "",
-        currentQuantity: 1,
+        category: "Select la Categoria",
+        location: "Select il Luogo",
+        currentQuantity: 0,
         alertQuanty: 0,
         customField1: "",
         customField2: "",
@@ -148,7 +148,7 @@ const ProductNew = props => {
                 <div className="col-10">
                     <Select label="Location"
                         name="location"
-                        value="product.location"
+                        value="product.location['@id']"
                         onChange={handleChange}
                         error={errors.location}
                     >
