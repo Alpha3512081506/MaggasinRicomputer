@@ -52,7 +52,7 @@ const ProductList = (props) => {
         || product.productName.toLowerCase().includes(search.toLowerCase())
         || product.category.categoryName.toLowerCase().includes(search.toLowerCase())
         || product.location.locationName.toLowerCase().includes(search.toLowerCase())
-        // || product.customField1.toLowerCase().includes(search.toLowerCase())
+        || product.customField1.toLowerCase().includes(search.toLowerCase())
         || product.customField2.toLowerCase().includes(search.toLowerCase())
         || product.customField3.toLowerCase().includes(search.toLowerCase())
         || product.note.toLowerCase().includes(search.toLowerCase())
@@ -153,7 +153,7 @@ const ProductList = (props) => {
                         <td>{product.alertQuanty}</td>
                         <td>{product.customField1}</td>
                         <td>{product.customField2}</td>
-                        <td>{product.customField1} </td>
+                        <td>{product.customField3} </td>
                         <td>{product.note}</td>
 
                     </tr>)}

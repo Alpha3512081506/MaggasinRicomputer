@@ -11,9 +11,9 @@ const Select = ({
         <div className="form-group row">
             <label htmlFor={name} className="col-sm-2 control-label">Sceglie  {label}:</label>
 
-            <select  name={name} onChange={onChange} defaultValue={value}
-                    className={"form-control" + (error && " invalid ")}
-                    className={"form-control" + (error && " invalid ")}
+            <select name={name} onChange={onChange} defaultValue={value}
+                className={"form-control" + (error && " invalid ")}
+                className={"form-control" + (error && " invalid ")}
             >
                 {children}
             </select>

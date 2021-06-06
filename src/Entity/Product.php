@@ -83,7 +83,7 @@ class Product
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"product_read"})
+     * @Groups({"product_read","product_write"})
      * 
      */
     private $customField1;
