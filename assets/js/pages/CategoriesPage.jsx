@@ -35,7 +35,7 @@ const CategoryPage = (props) => {
 
 
     };
-    const itemPerPage = 2;
+    const itemPerPage = 20;
     const pageCount = Math.ceil(categories.length / itemPerPage);
 
     const pages = [];

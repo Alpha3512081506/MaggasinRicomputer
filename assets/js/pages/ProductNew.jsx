@@ -62,8 +62,10 @@ const ProductNew = props => {
 
         try {
             if (editing) {
-                const response = await axios.put("https://localhost:8000/api/products/" + id, product)
-                console.log(response.data)
+                const response = await axios.put(API_PRODUCT + "/" + + id, product)
+                // const response = await PRODUCTSERVICE.editProductById(id, product)
+                toast.success("il prodotto è stato modificato con successo")
+                console.log(response)
             } else {
                 await PRODUCTSERVICE.addNew(product);
                 toast.success("il prodotto è stato registrato con successo")
@@ -145,7 +147,7 @@ const ProductNew = props => {
             <div className="row d-flex align-content-between align-items-center">
                 <div className="col-10">
                     <Select label="Location"
-                        name="luogo"
+                        name="location"
                         value="product.location"
                         onChange={handleChange}
                         error={errors.location}
@@ -198,7 +200,7 @@ const ProductNew = props => {
                     value={product.note}
                     error={errors.note}
                 >
-                    <p> Note:</p>
+
                 </textarea>
             </div>
             <div className="form-group d-flex justify-content-between align-items-center">

@@ -36,6 +36,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import ShowProductById from "./js/pages/ShowProductById";
 import Registration from './js/pages/Registration.jsx';
 import Product from "./js/pages/Product";
+import ErrorBoundary from './js/services/ErrorBoundary.jsx';
 
 AuthApi.setUp();
 
@@ -76,43 +77,45 @@ const App = () => {
         <HashRouter>
             <NavbarWithRouter isAuthenticated={isAuthenticated} onLogout={setIsAuthenticated} />
             <main className="container pt-5">
-                <Switch>
-                    <Route path="/login" render={props => <LoginPage isAuthenticated={isAuthenticated} {...props}
-                        onLogin={setIsAuthenticated} />} />
-                    {/* ===============CATEGORIES ROUTES ========================*/}
-                    <Route path="/categorylist/:id"
-                        render={props => isAuthenticated ? (< CategoryAdd{...props} />) :
-                            (<Redirect to="/login" />)} />
-                    <Route path="/categorylist"
-                        render={props => isAuthenticated ? (< CategoryPage{...props} />) :
-                            (<Redirect to="/login" />)} />
-                    <Route exact={true} path="/" render={props => isAuthenticated ? (< HomePage{...props} />) :
-                        (<Redirect to="/login" />)} />
-
-                    {/* ===============LOCATIONS ROUTES ========================*/}
-                    <Route path="/locationlist/:id"
-                        render={props => isAuthenticated ? (< LocationAdd{...props} />) :
-                            (<Redirect to="/login" />)} />
-                    <Route path="/locationlist"
-                        render={props => isAuthenticated ? (< Location{...props} />) :
-                            (<Redirect to="/login" />)} />
-                    {/* ===============PRODUCTS ROUTES ========================*/}
-                    <Route path="/productlist/show/:id"
-                        render={props => isAuthenticated ? (< ShowProductById{...props} />) :
-                            (<Redirect to="/login" />)} />
-                    <Route path="/productlist/:id"
-                        render={props => isAuthenticated ? (< ProductNew{...props} />) :
-                            (<Redirect to="/login" />)} />
-                    <Route path="/productlist"
-                        render={props => isAuthenticated ? (<ProductList {...props} />) :
-                            (<Redirect to="/login" />)} />
-                    <Route path="/inscription" component={Registration} />
-                    <Route path="/productadd"
-                        render={props => isAuthenticated ? (< ProductNew{...props} />) :
+                <ErrorBoundary>
+                    <Switch>
+                        <Route path="/login" render={props => <LoginPage isAuthenticated={isAuthenticated} {...props}
+                            onLogin={setIsAuthenticated} />} />
+                        {/* ===============CATEGORIES ROUTES ========================*/}
+                        <Route path="/categorylist/:id"
+                            render={props => isAuthenticated ? (< CategoryAdd{...props} />) :
+                                (<Redirect to="/login" />)} />
+                        <Route path="/categorylist"
+                            render={props => isAuthenticated ? (< CategoryPage{...props} />) :
+                                (<Redirect to="/login" />)} />
+                        <Route exact={true} path="/" render={props => isAuthenticated ? (< HomePage{...props} />) :
                             (<Redirect to="/login" />)} />
 
+                        {/* ===============LOCATIONS ROUTES ========================*/}
+                        <Route path="/locationlist/:id"
+                            render={props => isAuthenticated ? (< LocationAdd{...props} />) :
+                                (<Redirect to="/login" />)} />
+                        <Route path="/locationlist"
+                            render={props => isAuthenticated ? (< Location{...props} />) :
+                                (<Redirect to="/login" />)} />
+                        {/* ===============PRODUCTS ROUTES ========================*/}
+                        <Route path="/productlist/show/:id"
+                            render={props => isAuthenticated ? (< ShowProductById{...props} />) :
+                                (<Redirect to="/login" />)} />
+                        <Route path="/productlist/:id"
+                            render={props => isAuthenticated ? (< ProductNew{...props} />) :
+                                (<Redirect to="/login" />)} />
+                        <Route path="/productlist"
+                            render={props => isAuthenticated ? (<ProductList {...props} />) :
+                                (<Redirect to="/login" />)} />
+                        <Route path="/inscription" component={Registration} />
+                        <Route path="/productadd"
+                            render={props => isAuthenticated ? (< ProductNew{...props} />) :
+                                (<Redirect to="/login" />)} />
 
-                </Switch>
+
+                    </Switch>
+                </ErrorBoundary>
 
             </main>
         </HashRouter>

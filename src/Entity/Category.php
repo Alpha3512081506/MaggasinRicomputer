@@ -31,7 +31,7 @@ class Category
     private $id;
 
     /**
-     * @ORM\OneToMany(targetEntity=Product::class, mappedBy="category",cascade={"persist"})
+     * @ORM\OneToMany(targetEntity=Product::class, mappedBy="category",cascade={"all"})
      * @Groups({"category_read"})
      *
      */

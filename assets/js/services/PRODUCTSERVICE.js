@@ -12,10 +12,11 @@ function finProductdById(id) {
         .then(response => response.data);
 
 }
-function editId(id) {
+function editProductById(id, ressource) {
     axios
-        .put(API_PRODUCT + ressource + "/" + id)
-        .then(response => response.data['hydra:member']);
+        //"https://localhost:8000/api/products/" + id, product
+        .put(API_PRODUCT + "/" + id, ressource)
+        .then(response => response.data);
 }
 function addNew(data) {
     return axios
@@ -30,7 +31,7 @@ function deleteId(id) {
 
 export default {
     findAll,
-    editId,
+    editProductById,
     deleteId,
     addNew,
     finProductdById

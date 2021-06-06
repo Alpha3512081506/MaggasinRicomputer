@@ -19,7 +19,9 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ORM\Entity(repositoryClass=ProductRepository::class)
  * @ApiResource(
  * normalizationContext= {"groups" = {"product_read"}},
- * denormalizationContext={"disable_type_enforcement"=true}
+ * denormalizationContext={"disable_type_enforcement"=true
+ * ,"groups" = {"product_write"}}
+ * 
  * )
  * @UniqueEntity("productId")
  * @HasLifecycleCallbacks
@@ -38,7 +40,7 @@ class Product
 
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
-     * @Groups({"product_read","category_read"})
+     * @Groups({"product_read","category_read","product_write"})
      * @Assert\NotBlank(message="productId del prodotto è obligatorio")
      * @Assert\Length(
      *      min = 4,
@@ -51,7 +53,7 @@ class Product
 
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
-     * @Groups({"product_read","category_read"})
+     * @Groups({"product_read","category_read","product_write"})
      * @Assert\NotBlank(message="Il nome del prodotto è obligatorio")
      * @Assert\Length(
      *      min = 4,
@@ -64,7 +66,7 @@ class Product
 
     /**
      * @ORM\Column(type="decimal")
-     * @Groups({"product_read", "category_read"})
+     * @Groups({"product_read", "category_read","product_write"})
      * @Assert\NotBlank
      * @Assert\Type(
      *     type="numeric",
@@ -75,7 +77,7 @@ class Product
 
     /**
      * @ORM\Column(type="decimal", nullable=true)
-     * @Groups({"product_read", "category_read"})
+     * @Groups({"product_read", "category_read","product_write"})
      */
     private $alertQuanty;
 
@@ -88,32 +90,32 @@ class Product
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"product_read"})
+     * @Groups({"product_read","product_write"})
      */
     private $customField2;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"product_read"})
+     * @Groups({"product_read","product_write"})
      */
     private $customField3;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Groups({"product_read"})
+     * @Groups({"product_read","product_write"})
      */
     private $note;
 
-    /**
-     * @ORM\Column(type="datetime")
-     * @Assert\Date
-     */
-    private $createdAt;
+    // /**
+    //  * @ORM\Column(type="datetime")
+    //  * @Assert\Date
+    //  */
+    // private $createdAt;
 
     /**
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="products")
      * @ApiSubresource()
-     * @Groups({"product_read"})
+     * @Groups({"product_read","product_write"})
      * @Assert\NotBlank(message="la categoria del prodotto è obbligatoria")
      *  
      */
@@ -122,7 +124,7 @@ class Product
     /**
      * @ORM\ManyToOne(targetEntity=Location::class, inversedBy="prodcuts")
      * @ApiSubresource()
-     * @Groups({"product_read"})
+     * @Groups({"product_read","product_write"})
      * @Assert\NotBlank(message="la location del prodotto è obbligatoria")
      *  
      */
@@ -130,7 +132,7 @@ class Product
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="products")
-     * @Groups({"product_read"})
+     * @Groups({"product_read","product_write"})
      *  
      */
     private $user;
@@ -236,17 +238,17 @@ class Product
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
-    {
-        return $this->createdAt;
-    }
+    // public function getCreatedAt(): ?\DateTimeInterface
+    // {
+    //     return $this->createdAt;
+    // }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
-    {
-        $this->createdAt = $createdAt;
+    // public function setCreatedAt(\DateTimeInterface $createdAt): self
+    // {
+    //     $this->createdAt = $createdAt;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     public function getCategory(): ?Category
     {
@@ -284,9 +286,9 @@ class Product
         return $this;
     }
 
-    /** @PrePersist */
-    public function createdAtPrePersist()
-    {
-        $this->createdAt = new \DateTime();
-    }
+    // /** @PrePersist */
+    // public function createdAtPrePersist()
+    // {
+    //     $this->createdAt = new \DateTime();
+    // }
 }
