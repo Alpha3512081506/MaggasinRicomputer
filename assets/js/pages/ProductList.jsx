@@ -8,7 +8,7 @@ import APISERVICE from '../services/PRODUCTSERVICE';
 import { Link } from 'react-router-dom';
 import BarcodeScannerComponent from 'react-webcam-barcode-scanner';
 import { toast } from 'react-toastify';
-import Alert from '../components/Alert';
+import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 
 
 const ProductList = (props) => {
@@ -105,7 +105,7 @@ const ProductList = (props) => {
                 <div className="col-sm-6">
                     <div className="mb-3 d-flex justify-content-between align-items-center">
                         {/* <button className="btn btn-outline-success" onClick={handleScanSuccess}><i className="fa fa-camera-retro">Scan CodeBarre</i></button>
-                        <button className="btn btn-outline-success" onClick={() => { setIsScan(false) }}><i className="fa fa-camera-retro">Close Camera </i></button> */}
+                            <button className="btn btn-outline-success" onClick={() => { setIsScan(false) }}><i className="fa fa-camera-retro">Close Camera </i></button>*/}
                         <Link to="/productlist/new" className="btn btn-outline-success">crea prodotto</Link>
                     </div>
                 </div>
@@ -119,7 +119,7 @@ const ProductList = (props) => {
             </div>
             <h3 className="text-center">Lista dei Prodotti</h3>
             {loading && <Loading />}
-            {!loading && <table className="table table-responsive table-hover table-bordered table-sm w-100">
+            {!loading && <table className="table table-responsive table-hover table-bordered table-sm w-100" id="table-to-xls">
                 <thead className="thead-dark " >
                     <tr className="w-100">
                         <th></th>
@@ -128,7 +128,7 @@ const ProductList = (props) => {
                         <th>Categoria</th>
                         <th>Luogo</th>
                         <th>Prezzo</th>
-                        <th>Codice interno</th>
+                        <th>codice interno</th>
                         <th>Marca</th>
                         <th>Modello</th>
                         <th>Specifiche</th>
@@ -172,8 +172,13 @@ const ProductList = (props) => {
                     </tr>
                 </tfoot>
             </table>}
-            <Alert />
-
+            <ReactHTMLTableToExcel
+                id="test-table-xls-button"
+                className="download-table-xls-button btn btn-outline-primary btn-block"
+                table="table-to-xls"
+                filename="Prodotto In Magazzino"
+                sheet="Prodotto In Magazzino"
+                buttonText="export to Excel" />
         </>
     )
 }

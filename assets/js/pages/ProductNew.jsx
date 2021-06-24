@@ -169,7 +169,7 @@ const ProductNew = props => {
                 error={errors.currentQuantity}
             />
             <Field name="alertQuanty" label="Codice interno"
-                placeholder="quantita del  prodotto" type="number"
+                placeholder="codice interno del  prodotto"
                 onChange={handleChange}
                 value={product.alertQuanty}
                 error={errors.alertQuanty}
