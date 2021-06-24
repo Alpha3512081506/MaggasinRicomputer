@@ -19,7 +19,7 @@ const ProductNew = props => {
         category: "Select la Categoria",
         location: "Select il Luogo",
         currentQuantity: 0,
-        alertQuanty: 0,
+        alertQuanty: "",
         customField1: "",
         customField2: "",
         customField3: "",
@@ -62,7 +62,7 @@ const ProductNew = props => {
 
         try {
             if (editing) {
-                const response = await axios.put(API_PRODUCT + "/" + + id, product)
+                const response = await axios.put(API_PRODUCT + "/" + id, product)
                 // const response = await PRODUCTSERVICE.editProductById(id, product)
                 toast.success("il prodotto è stato modificato con successo")
                 console.log(response)
@@ -168,7 +168,7 @@ const ProductNew = props => {
                 value={product.currentQuantity}
                 error={errors.currentQuantity}
             />
-            <Field name="alertQuanty" label="Prezzo minimale"
+            <Field name="alertQuanty" label="Codice interno"
                 placeholder="quantita del  prodotto" type="number"
                 onChange={handleChange}
                 value={product.alertQuanty}

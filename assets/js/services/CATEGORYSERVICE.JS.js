@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { API_CATEGORY, API_URL } from './Config'
+import { API_CATEGORY } from './Config'
 
 function findAll() {
     return axios

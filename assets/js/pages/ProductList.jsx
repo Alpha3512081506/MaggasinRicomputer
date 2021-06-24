@@ -128,7 +128,7 @@ const ProductList = (props) => {
                         <th>Categoria</th>
                         <th>Luogo</th>
                         <th>Prezzo</th>
-                        <th>Prezzo minimale</th>
+                        <th>Codice interno</th>
                         <th>Marca</th>
                         <th>Modello</th>
                         <th>Specifiche</th>

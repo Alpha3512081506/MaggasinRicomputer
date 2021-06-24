@@ -77,7 +77,7 @@ const LocationAdd = (props) => {
             />
             <div className="form-group">
                 <button type="submit" className="btn btn-outline-success ">Crea la Location</button>
-                <Link to=""><button className="btn btn-outline-success ">tutti i luoghi</button>
+                <Link to="/locationlist"><button className="btn btn-outline-success ">tutti i luoghi</button>
                 </Link>
 
             </div>

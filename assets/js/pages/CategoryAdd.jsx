@@ -5,6 +5,7 @@ import Field from '../form/Field';
 import CATEGORYSERVICE from '../services/CATEGORYSERVICE.JS';
 import { toast } from "react-toastify";
 import axios from 'axios';
+import { API_CATEGORY } from '../services/Config';
 const CategoryAdd = (props) => {
     const { id = "new" } = props.match.params;
 
@@ -39,7 +40,7 @@ const CategoryAdd = (props) => {
         event.preventDefault();
         try {
             if (editing) {
-                const response = await axios.put("https://localhost:8000/api/categories/" + id, category)
+                const response = await axios.put(API_CATEGORY + "/" + id, category)
                 toast.success("la categoria è stata modificata")
                 console.log(response.data)
 

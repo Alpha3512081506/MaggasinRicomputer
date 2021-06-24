@@ -76,7 +76,7 @@ class Product
     private $currentQuantity;
 
     /**
-     * @ORM\Column(type="decimal", nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      * @Groups({"product_read", "category_read","product_write"})
      */
     private $alertQuanty;
@@ -178,12 +178,12 @@ class Product
         return $this;
     }
 
-    public function getAlertQuanty(): ?int
+    public function getAlertQuanty(): ?string
     {
         return $this->alertQuanty;
     }
 
-    public function setAlertQuanty(?int $alertQuanty): self
+    public function setAlertQuanty(?string $alertQuanty): self
     {
         $this->alertQuanty = $alertQuanty;
 
