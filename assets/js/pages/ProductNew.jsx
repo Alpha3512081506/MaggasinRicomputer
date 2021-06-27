@@ -23,6 +23,7 @@ const ProductNew = props => {
         customField2: "",
         customField3: "",
         note: "Scrivere Le Note:",
+        price: 0
 
     });
     const [errors, setErrors] = useState({
@@ -36,6 +37,7 @@ const ProductNew = props => {
         customField2: "",
         customField3: "",
         note: "",
+        price: ""
 
     });
     const [editing, setEditing] = useState(false)
@@ -190,6 +192,12 @@ const ProductNew = props => {
                 onChange={handleChange}
                 value={product.currentQuantity}
                 error={errors.currentQuantity}
+            />
+            <Field name="price" label="Prezzo al rivenditore"
+                placeholder="Prezzo al rivenditore" type="number"
+                onChange={handleChange}
+                value={product.price}
+                error={errors.price}
             />
             <Field name="alertQuanty" label="Codice interno"
                 placeholder="codice interno del  prodotto"

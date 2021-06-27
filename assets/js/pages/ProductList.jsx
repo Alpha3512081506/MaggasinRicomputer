@@ -112,6 +112,7 @@ const ProductList = (props) => {
                         <th>Categoria</th>
                         <th>Luogo</th>
                         <th>Prezzo</th>
+                        <th>Prezzo al Rivenditore</th>
                         <th>codice interno</th>
                         <th>Marca</th>
                         <th>Modello</th>
@@ -133,7 +134,8 @@ const ProductList = (props) => {
                         <td>{product.productName}</td>
                         <td>{product.category.categoryName}</td>
                         <td>{product.location.locationName}</td>
-                        <td>{product.currentQuantity}</td>
+                        <td>{product.currentQuantity}&euro;</td>
+                        <td>{product.price}&euro;</td>
                         <td>{product.alertQuanty}</td>
                         <td>{product.customField1}</td>
                         <td>{product.customField2}</td>

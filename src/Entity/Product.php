@@ -140,6 +140,11 @@ class Product
      */
     private $user;
 
+    /**
+     * @ORM\Column(type="decimal", precision=5, scale=2, nullable=true)
+     */
+    private $price;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -294,4 +299,16 @@ class Product
     // {
     //     $this->createdAt = new \DateTime();
     // }
+
+    public function getPrice(): ?string
+    {
+        return $this->price;
+    }
+
+    public function setPrice(?string $price): self
+    {
+        $this->price = $price;
+
+        return $this;
+    }
 }
