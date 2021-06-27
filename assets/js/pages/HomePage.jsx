@@ -6,6 +6,7 @@ import CATEGORYSERVICE from "../services/CATEGORYSERVICE.JS";
 import LOCATIONSERVICE from "../services/LOCATIONSERVICE.JS";
 import TableLoader from '../loader/ListLoader';
 import ListLoader from '../loader/ListLoader';
+import ExcelExporter from '../components/ExcelExporter';
 const HomePage = (props) => {
     const [products, setProducts] = useState([]);
     const [categories, setCategories] = useState([]);
@@ -210,7 +211,7 @@ const HomePage = (props) => {
             </div>}
 
         <hr className="mt-5" />
-        <Alert />
+
 
 
 

@@ -5,7 +5,6 @@ import Field from '../form/Field';
 import PRODUCTSERVICE from '../services/PRODUCTSERVICE';
 
 import { toast } from "react-toastify";
-import Alert from '../components/Alert';
 import CATEGORYSERVICE from '../services/CATEGORYSERVICE.JS';
 import Select from '../form/Select';
 import LOCATIONSERVICE from '../services/LOCATIONSERVICE.JS';
@@ -64,14 +63,30 @@ const ProductNew = props => {
             if (editing) {
                 const response = await axios.put(API_PRODUCT + "/" + id, product)
                 // const response = await PRODUCTSERVICE.editProductById(id, product)
-                toast.success("il prodotto è stato modificato con successo")
-                console.log(response)
+                toast.success("il prodotto è stato modificato con successo");
+                setErrors({})
+
+                props.history.push("/productlist");
+
+                // console.log(response)
             } else {
                 await PRODUCTSERVICE.addNew(product);
-                toast.success("il prodotto è stato registrato con successo")
+                toast.success("il prodotto è stato registrato con successo");
+                setErrors({});
+                console.log(product)
+                //  history.push("/productlist")
+
+
+                props.history.push("/productlist");
             }
         } catch (error) {
-            console.log(error.response)
+            if (error.response.data.violations) {
+                const apiError = {};
+                error.response.data.violations.forEach(violation => {
+                    apiError[violation.propertyPath] = violation.message
+                });
+                setErrors(apiError);
+            }
         }
 
 
@@ -88,7 +103,10 @@ const ProductNew = props => {
     const findAllCategories = async () => {
         try {
             const data = await CATEGORYSERVICE.findAll();
-            setCategories(data)
+            setCategories(data);
+            if (!product.category) {
+                setProduct({ ...product, category: data[0]["@id"] })
+            }
             //console.log(data)
         } catch (error) {
             console.log(error);
@@ -100,6 +118,11 @@ const ProductNew = props => {
         try {
             const data = await LOCATIONSERVICE.findAll()
             setLocation(data);
+            console.log(data)
+            if (!product.location) {
+                setProduct({ ...product, location: data[0]["@id"] });
+
+            }
             //console.log(data)
         } catch (error) {
             console.log(error)
@@ -237,7 +260,7 @@ const ProductNew = props => {
                 </div>
             </div>
         </div> */}
-        <Alert />
+
 
     </>);
 }

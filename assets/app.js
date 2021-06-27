@@ -17,6 +17,7 @@ import "../node_modules/font-awesome/css/font-awesome.css"
 import './styles/bootswatch.css'
 import './styles/app.css';
 
+
 // start the Stimulus application
 import './bootstrap';
 import Navbar from './js/components/Navbar';

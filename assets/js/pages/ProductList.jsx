@@ -6,9 +6,9 @@ import Pagination from '../components/Pagination';
 import Loading from '../components/Loading';
 import APISERVICE from '../services/PRODUCTSERVICE';
 import { Link } from 'react-router-dom';
-import BarcodeScannerComponent from 'react-webcam-barcode-scanner';
 import { toast } from 'react-toastify';
 import ReactHTMLTableToExcel from 'react-html-table-to-excel';
+import ExcelExporter from '../components/ExcelExporter';
 
 
 const ProductList = (props) => {
@@ -79,34 +79,18 @@ const ProductList = (props) => {
 
     return (
         <>
-            <p id="test"></p>
-            {isScan && <BarcodeScannerComponent
-                width={500}
-                height={500}
-                onUpdate={(err, result) => {
-                    if (result) {
-                        console.log(result.text)
-                        setDataScan([result.text]);
-
-                        audio.play()
-
-                    } else {
-                        setDataScan('')
-                    }
-                }
-                    // setSearch(dataScan.text);
-                    // setSearch(dataScan[0])
-                }
-
-
-            />
-            }
             <div className="row">
-                <div className="col-sm-6">
+                <div className="col-sm-12">
                     <div className="mb-3 d-flex justify-content-between align-items-center">
-                        {/* <button className="btn btn-outline-success" onClick={handleScanSuccess}><i className="fa fa-camera-retro">Scan CodeBarre</i></button>
-                            <button className="btn btn-outline-success" onClick={() => { setIsScan(false) }}><i className="fa fa-camera-retro">Close Camera </i></button>*/}
                         <Link to="/productlist/new" className="btn btn-outline-success">crea prodotto</Link>
+                        <ReactHTMLTableToExcel
+                            id="test-table-xls-button"
+                            className="download-table-xls-button btn btn-outline-success"
+                            table="table-to-xls"
+                            filename="Prodotto In Magazzino"
+                            sheet="Prodotto In Magazzino"
+                            buttonText="export to Excel" />
+                        <ExcelExporter />
                     </div>
                 </div>
             </div>
@@ -172,13 +156,7 @@ const ProductList = (props) => {
                     </tr>
                 </tfoot>
             </table>}
-            <ReactHTMLTableToExcel
-                id="test-table-xls-button"
-                className="download-table-xls-button btn btn-outline-primary btn-block"
-                table="table-to-xls"
-                filename="Prodotto In Magazzino"
-                sheet="Prodotto In Magazzino"
-                buttonText="export to Excel" />
+
         </>
     )
 }

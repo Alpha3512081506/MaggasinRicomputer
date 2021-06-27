@@ -23,7 +23,10 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * ,"groups" = {"product_write"}}
  * 
  * )
- * @UniqueEntity("productId")
+ * @UniqueEntity(
+ *     fields={"productId"},
+ *     message="Questo Prodotto è già registrato!"
+ * )
  * @HasLifecycleCallbacks
  * 
  */
@@ -45,7 +48,7 @@ class Product
      * @Assert\Length(
      *      min = 4,
      *      max = 50,
-     *      minMessage = "nom poi avere meno di {{ limit }} characters long",
+     *      minMessage = "l'id del prodotto non può essere vuoto et nom poi avere meno di {{ limit }} characters long",
      *      maxMessage = "Nom poi avere piu {{ limit }} characters"
      * )
      */
@@ -58,7 +61,7 @@ class Product
      * @Assert\Length(
      *      min = 4,
      *      max = 50,
-     *      minMessage = "nom poi avere meno di {{ limit }} characters long",
+     *      minMessage = "il productName  del prodotto non può essere vuoto et nom poi avere meno di {{ limit }} characters long",
      *      maxMessage = "Nom poi avere piu {{ limit }} characters"
      * )
      */
