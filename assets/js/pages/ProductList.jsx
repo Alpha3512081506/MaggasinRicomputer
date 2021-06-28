@@ -80,18 +80,22 @@ const ProductList = (props) => {
     return (
         <>
             <div className="row">
-                <div className="col-sm-12">
-                    <div className="mb-3 d-flex justify-content-between align-items-center">
-                        <Link to="/productlist/new" className="btn btn-outline-success">crea prodotto</Link>
-                        <ReactHTMLTableToExcel
-                            id="test-table-xls-button"
-                            className="download-table-xls-button btn btn-outline-success"
-                            table="table-to-xls"
-                            filename="Prodotto In Magazzino"
-                            sheet="Prodotto In Magazzino"
-                            buttonText="export to Excel" />
-                        <ExcelExporter />
-                    </div>
+                <div className="col-12 col-sm-12 col-md-6 col-lg-4 my-3">
+
+                    <Link to="/productlist/new" className="btn btn-outline-success">crea prodotto</Link>
+                </div>
+                <div className="col-12 col-sm-12 col-md-6 col-lg-4 my-3">
+                    <ReactHTMLTableToExcel
+                        id="test-table-xls-button"
+                        className="download-table-xls-button btn btn-outline-success"
+                        table="table-to-xls"
+                        filename="Prodotto In Magazzino"
+                        sheet="Prodotto In Magazzino"
+                        buttonText="export to Excel" />
+                </div>
+                <div className="col-12 col-sm-12 col-md-6 col-lg-4 my-3">
+                    <ExcelExporter />
+
                 </div>
             </div>
 

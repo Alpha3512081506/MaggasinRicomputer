@@ -78,7 +78,7 @@ class ExcelExporter extends Component {
                 <Container>
                     <form>
                         <FormGroup row>
-                            <Label for="exampleFile" xs={6} sm={4} lg={2} size="lg">Caricare </Label>
+
                             <Col xs={4} sm={8} lg={10}>
                                 <InputGroup>
                                     <InputGroupAddon addonType="prepend">
