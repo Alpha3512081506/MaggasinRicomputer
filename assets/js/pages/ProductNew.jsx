@@ -74,9 +74,8 @@ const ProductNew = props => {
             } else {
                 await PRODUCTSERVICE.addNew(product);
                 toast.success("il prodotto è stato registrato con successo");
-                setErrors({});
                 console.log(product)
-                //  history.push("/productlist")
+                setErrors({});
 
 
                 props.history.push("/productlist");
@@ -120,12 +119,11 @@ const ProductNew = props => {
         try {
             const data = await LOCATIONSERVICE.findAll()
             setLocation(data);
-            console.log(data)
             if (!product.location) {
                 setProduct({ ...product, location: data[0]["@id"] });
 
             }
-            //console.log(data)
+
         } catch (error) {
             console.log(error)
 

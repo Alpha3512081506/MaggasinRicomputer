@@ -142,6 +142,7 @@ class Product
 
     /**
      * @ORM\Column(type="decimal", precision=5, scale=2, nullable=true)
+     *  @Groups({"product_read","product_write"})
      */
     private $price;
 
@@ -300,15 +301,30 @@ class Product
     //     $this->createdAt = new \DateTime();
     // }
 
-    public function getPrice(): ?string
+    public function getPrice(): ?float
     {
         return $this->price;
     }
 
-    public function setPrice(?string $price): self
+    public function setPrice(?float $price): self
     {
         $this->price = $price;
 
         return $this;
+    }
+
+    /** @PrePersist */
+    public function pricePrePersist()
+    {
+        if (!$this->price) {
+            $this->price = 000.00;
+        }
+    }
+    /** @PrePersist */
+    public function prezzoPrePersist()
+    {
+        if (!$this->currentQuantity) {
+            $this->currentQuantity = 000.00;
+        }
     }
 }

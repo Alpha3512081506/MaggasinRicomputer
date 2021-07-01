@@ -80,11 +80,11 @@ const ProductList = (props) => {
     return (
         <>
             <div className="row">
-                <div className="col-12 col-sm-12 col-md-6 col-lg-4 my-3">
+                <div className="col-12 col-sm-12 col-md-6  my-3">
 
                     <Link to="/productlist/new" className="btn btn-outline-success">crea prodotto</Link>
                 </div>
-                <div className="col-12 col-sm-12 col-md-6 col-lg-4 my-3">
+                <div className="col-12 col-sm-12 col-md-6 my-3">
                     <ReactHTMLTableToExcel
                         id="test-table-xls-button"
                         className="download-table-xls-button btn btn-outline-success"
@@ -93,8 +93,10 @@ const ProductList = (props) => {
                         sheet="Prodotto In Magazzino"
                         buttonText="export to Excel" />
                 </div>
-                <div className="col-12 col-sm-12 col-md-6 col-lg-4 my-3">
+                <div className="row"><div className="col-12 col-sm-12  my-3">
                     <ExcelExporter />
+
+                </div>
 
                 </div>
             </div>
