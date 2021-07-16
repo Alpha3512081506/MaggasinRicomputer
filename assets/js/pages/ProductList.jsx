@@ -46,7 +46,7 @@ const ProductList = (props) => {
     }
     const PaginatedProduct = Pagination.getData(products, currentPage, 5)
     // console.log(PaginatedProduct)
-    const itemsPerPage = 50;
+    const itemsPerPage = 100;
     const filteredProducts = products.filter(product =>
         product.productId.toLowerCase().includes(search.toLowerCase())
         || product.productName.toLowerCase().includes(search.toLowerCase())
