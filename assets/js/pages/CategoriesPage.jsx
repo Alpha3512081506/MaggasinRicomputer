@@ -75,10 +75,13 @@ const CategoryPage = (props) => {
                 {categories.map(category => (
                     <tr key={category.id}><td>
                         <Link to={"/categorylist/" + category.id} className="btn btn-primary"><i className="fa fa-pencil"></i></Link>
-                        <button onClick={() => handleDelete(category.id)}
+                        <button disabled={category.products.length > 0} onClick={() => handleDelete(category.id)}
                             className="btn btn-danger"><i className="fa fa-trash"></i></button>
                     </td>
-                        <td>{category.categoryName}
+                        <td>
+                            <Link to={"/category/products/show/" + category.id}>
+                                {category.categoryName}
+                            </Link>
                         </td>
 
                         <td><button className="badge badge-info" >{category.products.length}</button>

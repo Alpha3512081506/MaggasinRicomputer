@@ -119,6 +119,7 @@ const ProductNew = props => {
         try {
             const data = await LOCATIONSERVICE.findAll()
             setLocation(data);
+
             if (!product.location) {
                 setProduct({ ...product, location: data[0]["@id"] });
 
