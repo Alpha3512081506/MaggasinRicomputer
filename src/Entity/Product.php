@@ -37,6 +37,7 @@ class Product
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      * @Groups({"product_read"})
+     * @Groups({"product_read","category_read","product_write"})
      * 
      */
     private $id;

@@ -46,7 +46,7 @@ const ProductList = (props) => {
     }
     const PaginatedProduct = Pagination.getData(products, currentPage, 5)
     // console.log(PaginatedProduct)
-    const itemsPerPage = 6;
+    const itemsPerPage = 100;
     const filteredProducts = products.filter(product =>
         product.productId.toLowerCase().includes(search.toLowerCase())
         || product.productName.toLowerCase().includes(search.toLowerCase())
@@ -116,15 +116,14 @@ const ProductList = (props) => {
                         <th >InternoId</th>
                         <th >ProductId</th>
                         <th>Categoria</th>
-                        <th>Modello</th>
-                        <th>C.P.U</th>
                         <th>Grado</th>
                         <th>Luogo</th>
                         <th>Prezzo</th>
                         <th>Prezzo al Rivenditore</th>
                         <th>codice interno</th>
                         <th>Marca</th>
-
+                        <th>Modello</th>
+                        <th>Specifiche</th>
                         <th>Note</th>
 
                     </tr>
@@ -137,18 +136,17 @@ const ProductList = (props) => {
 
 
                     </td>
-
                         <td>{product.id}</td>
                         <td>{product.productId}</td>
                         <td>{product.category.categoryName}</td>
-                        <td>{product.customField2}</td>
-                        <td>{product.customField3} </td>
                         <td>{product.productName}</td>
                         <td>{product.location.locationName}</td>
                         <td>{product.currentQuantity}&euro;</td>
                         <td>{product.price}&euro;</td>
                         <td>{product.alertQuanty}</td>
                         <td>{product.customField1}</td>
+                        <td>{product.customField2}</td>
+                        <td>{product.customField3} </td>
                         <td>{product.note}</td>
 
                     </tr>)}
@@ -172,4 +170,4 @@ const ProductList = (props) => {
     )
 }
 
-export default ProductList;
+export default ProductListCopy;
