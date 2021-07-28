@@ -216,7 +216,7 @@ const ProductNew = props => {
                 value={product.customField2}
                 error={errors.customField2}
             />
-            <Field name="customField3" label="Specifiche"
+            <Field name="customField3" label="C.P.U"
                 placeholder="specifiche del  prodotto"
                 onChange={handleChange}
                 value={product.customField3}

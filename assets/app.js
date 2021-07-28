@@ -39,6 +39,7 @@ import Registration from './js/pages/Registration.jsx';
 import Product from "./js/pages/Product";
 import ErrorBoundary from './js/services/ErrorBoundary.jsx';
 import CategoryProducts from './js/pages/In/CategoryProducts.jsx';
+import LocationProducts from './js/pages/In/LocationProducts.jsx';
 
 AuthApi.setUp();
 
@@ -94,6 +95,9 @@ const App = () => {
                             (<Redirect to="/login" />)} />
 
                         {/* ===============LOCATIONS ROUTES ========================*/}
+                        <Route path="/location/products/show/:id"
+                            render={props => isAuthenticated ? (< LocationProducts {...props} />) :
+                                (<Redirect to="/login" />)} />
                         <Route path="/locationlist/:id"
                             render={props => isAuthenticated ? (< LocationAdd{...props} />) :
                                 (<Redirect to="/login" />)} />
