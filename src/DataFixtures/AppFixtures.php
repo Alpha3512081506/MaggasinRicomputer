@@ -50,8 +50,10 @@ class AppFixtures extends Fixture
                 $desktop =new ProductDesktop;
                 $desktop->setProductId($faker->ean13)
                         ->setCategory($category)
-                        ->setGrade("A")
+                        ->setGrade("Grade A")
                         ->setHdd("500gb")
+                        ->setRam("8gb")
+                        ->setProcessor("i5")
                         ->setLocation($location)
                         ->setMarque($faker->sentence)
                         ->setNote($faker->word(5))

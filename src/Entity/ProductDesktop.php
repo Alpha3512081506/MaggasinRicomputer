@@ -45,25 +45,25 @@ class ProductDesktop
     private $model;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      *  @Groups({"productd_read","category_read","productd_write"})
      */
     private $processor;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      *  @Groups({"productd_read","category_read","productd_write"})
      */
     private $ram;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      *  @Groups({"productd_read","category_read","productd_write"})
      */
     private $hdd;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      *  @Groups({"productd_read","category_read","productd_write"})
      */
     private $grade;
