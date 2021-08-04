@@ -50,9 +50,15 @@ class Category
      */
     private $categoryName;
 
+    /**
+     * @ORM\OneToMany(targetEntity=ProductDesktop::class, mappedBy="category")
+     */
+    private $productDesktops;
+
     public function __construct()
     {
         $this->products = new ArrayCollection();
+        $this->productDesktops = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -98,6 +104,36 @@ class Category
     public function setCategoryName(string $categoryName): self
     {
         $this->categoryName = $categoryName;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ProductDesktop[]
+     */
+    public function getProductDesktops(): Collection
+    {
+        return $this->productDesktops;
+    }
+
+    public function addProductDesktop(ProductDesktop $productDesktop): self
+    {
+        if (!$this->productDesktops->contains($productDesktop)) {
+            $this->productDesktops[] = $productDesktop;
+            $productDesktop->setCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProductDesktop(ProductDesktop $productDesktop): self
+    {
+        if ($this->productDesktops->removeElement($productDesktop)) {
+            // set the owning side to null (unless already changed)
+            if ($productDesktop->getCategory() === $this) {
+                $productDesktop->setCategory(null);
+            }
+        }
 
         return $this;
     }

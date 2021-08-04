@@ -159,11 +159,12 @@ const ProductList = (props) => {
                 <tfoot>
                     <tr>
                         <td colSpan="11">
-                            {itemsPerPage < filteredProducts.length && <Pagination currentPage={currentPage}
+                            {/**itemsPerPage < filteredProducts.length && <Pagination currentPage={currentPage}
                                 itemsPerPage={itemsPerPage}
                                 length={filteredProducts.length}
                                 onPageChanged={handlePageChange}
-                            />}
+                    />*/}
+                            <p>Pagination</p>
 
                         </td>
                     </tr>

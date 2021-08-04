@@ -40,6 +40,18 @@ import Product from "./js/pages/Product";
 import ErrorBoundary from './js/services/ErrorBoundary.jsx';
 import CategoryProducts from './js/pages/In/CategoryProducts.jsx';
 import LocationProducts from './js/pages/In/LocationProducts.jsx';
+import ProductsType from './js/pages/ProductsType.jsx';
+import NoteBookShow from './js/pages/Type/NoteBook/NoteBookShow.jsx';
+import NoteBookAdd from './js/pages/Type/NoteBook/NoteBookAdd.jsx';
+import DesktopShow from './js/pages/Type/NoteBook/Desktop/Desktop.jsx';
+import GroupedProduct from './js/pages/Type/Componenti/Componenti.jsx';
+import PrinterShow from './js/pages/Type/Printer/PrinterShow.jsx';
+import PrinterAdd from './js/pages/Type/Printer/PrinterAdd.jsx';
+import DesktopAdd from './js/pages/Type/NoteBook/Desktop/DesktopAdd.jsx';
+import Componenti from './js/pages/Type/Componenti/Componenti.jsx';
+import ComponentAdd from './js/pages/Type/Componenti/ComponentAdd.jsx';
+import MonitorAdd from './js/pages/Type/monitors/MonitorAdd.jsx';
+import MonitorShow from './js/pages/Type/monitors/MonitorShow.jsx';
 
 AuthApi.setUp();
 
@@ -120,6 +132,53 @@ const App = () => {
                         <Route path="/inscription" component={Registration} />
                         <Route path="/productadd"
                             render={props => isAuthenticated ? (< ProductNew{...props} />) :
+                                (<Redirect to="/login" />)} />
+                        {/* ===============NoteBook ROUTES ========================*/}
+                        <Route path="/types/notebook/add/:id"
+                            render={props => isAuthenticated ? (<NoteBookAdd{...props} />) :
+                                (<Redirect to="/login" />)} />
+                        <Route path="/types/notebook"
+                            render={props => isAuthenticated ? (<NoteBookShow{...props} />) :
+                                (<Redirect to="/login" />)} />
+
+
+                        {/* ===============Desktop ROUTES ========================*/}
+                        <Route path="/types/desktop/add/:id"
+                            render={props => isAuthenticated ? (<DesktopAdd {...props} />) :
+                                (<Redirect to="/login" />)} />
+                        <Route path="/types/desktop"
+                            render={props => isAuthenticated ? (<DesktopShow {...props} />) :
+                                (<Redirect to="/login" />)} />
+
+
+                        {/* ===============Desktop ROUTES ========================*/}
+
+                        <Route path="/types/component/add/:id"
+                            render={props => isAuthenticated ? (<ComponentAdd{...props} />) :
+                                (<Redirect to="/login" />)} />
+                        <Route path="/types/component"
+                            render={props => isAuthenticated ? (<Componenti {...props} />) :
+                                (<Redirect to="/login" />)} />
+                        {/* ===============Monitor ROUTES ========================*/}
+
+                        <Route path="/types/monitors/add/:id"
+                            render={props => isAuthenticated ? (<MonitorAdd {...props} />) : (<Redirect to={"/login"} />)} />
+                        <Route path="/types/monitors"
+                            render={props => isAuthenticated ? (<MonitorShow {...props} />) :
+                                (<Redirect to="/login" />)} />
+
+
+
+                        {/* ===============Desktop ROUTES ========================*/}
+
+                        <Route path="/types/printers/add/:id"
+                            render={props => isAuthenticated ? (<PrinterAdd {...props} />) : (<Redirect to={"/login"} />)} />
+                        <Route path="/types/printers"
+                            render={props => isAuthenticated ? (<PrinterShow {...props} />) :
+                                (<Redirect to="/login" />)} />
+
+                        <Route path="/types"
+                            render={props => isAuthenticated ? (< ProductsType{...props} />) :
                                 (<Redirect to="/login" />)} />
 
 

@@ -47,9 +47,15 @@ class Location
      */
     private $locationName;
 
+    /**
+     * @ORM\OneToMany(targetEntity=ProductDesktop::class, mappedBy="location")
+     */
+    private $productDesktops;
+
     public function __construct()
     {
         $this->prodcuts = new ArrayCollection();
+        $this->productDesktops = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -95,6 +101,36 @@ class Location
     public function setLocationName(string $locationName): self
     {
         $this->locationName = $locationName;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ProductDesktop[]
+     */
+    public function getProductDesktops(): Collection
+    {
+        return $this->productDesktops;
+    }
+
+    public function addProductDesktop(ProductDesktop $productDesktop): self
+    {
+        if (!$this->productDesktops->contains($productDesktop)) {
+            $this->productDesktops[] = $productDesktop;
+            $productDesktop->setLocation($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProductDesktop(ProductDesktop $productDesktop): self
+    {
+        if ($this->productDesktops->removeElement($productDesktop)) {
+            // set the owning side to null (unless already changed)
+            if ($productDesktop->getLocation() === $this) {
+                $productDesktop->setLocation(null);
+            }
+        }
 
         return $this;
     }

@@ -7,6 +7,7 @@ use App\Entity\User;
 use App\Entity\Product;
 use App\Entity\Category;
 use App\Entity\Location;
+use App\Entity\ProductDesktop;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -45,7 +46,19 @@ class AppFixtures extends Fixture
             $location = new Location();
             $location->setLocationName($faker->word() . " " . $faker->buildingNumber);
 
-
+            for ($i=0; $i <10 ; $i++) { 
+                $desktop =new ProductDesktop;
+                $desktop->setProductId($faker->ean13)
+                        ->setCategory($category)
+                        ->setGrade("A")
+                        ->setHdd("500gb")
+                        ->setLocation($location)
+                        ->setMarque($faker->sentence)
+                        ->setNote($faker->word(5))
+                        ->setModel($faker->title)
+                        ->setPrice(340);
+                        $manager->persist($desktop);
+            }
             for ($i = 0; $i < mt_rand(5, 10); $i++) {
                 $product = new Product();
                 $product->setProductId($faker->word())
@@ -56,7 +69,7 @@ class AppFixtures extends Fixture
                     ->setCustomField2($faker->paragraph(1))
                     ->setCustomField3($faker->sentence())
                     ->setNote($faker->text())
-                    ->setCreatedAt(new \DateTime())
+                  
                     ->setCategory($category)
                     ->setLocation($location)
                     ->setUser($users[mt_rand(0, count($users) - 1)])
