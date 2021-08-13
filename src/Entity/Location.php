@@ -52,10 +52,34 @@ class Location
      */
     private $productDesktops;
 
+    /**
+     * @ORM\OneToMany(targetEntity=NoteBook::class, mappedBy="location")
+     */
+    private $noteBooks;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Monitor::class, mappedBy="location")
+     */
+    private $monitors;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Printer::class, mappedBy="location")
+     */
+    private $printers;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Component::class, mappedBy="location")
+     */
+    private $components;
+
     public function __construct()
     {
         $this->prodcuts = new ArrayCollection();
         $this->productDesktops = new ArrayCollection();
+        $this->noteBooks = new ArrayCollection();
+        $this->monitors = new ArrayCollection();
+        $this->printers = new ArrayCollection();
+        $this->components = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -129,6 +153,126 @@ class Location
             // set the owning side to null (unless already changed)
             if ($productDesktop->getLocation() === $this) {
                 $productDesktop->setLocation(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|NoteBook[]
+     */
+    public function getNoteBooks(): Collection
+    {
+        return $this->noteBooks;
+    }
+
+    public function addNoteBook(NoteBook $noteBook): self
+    {
+        if (!$this->noteBooks->contains($noteBook)) {
+            $this->noteBooks[] = $noteBook;
+            $noteBook->setLocation($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNoteBook(NoteBook $noteBook): self
+    {
+        if ($this->noteBooks->removeElement($noteBook)) {
+            // set the owning side to null (unless already changed)
+            if ($noteBook->getLocation() === $this) {
+                $noteBook->setLocation(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Monitor[]
+     */
+    public function getMonitors(): Collection
+    {
+        return $this->monitors;
+    }
+
+    public function addMonitor(Monitor $monitor): self
+    {
+        if (!$this->monitors->contains($monitor)) {
+            $this->monitors[] = $monitor;
+            $monitor->setLocation($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMonitor(Monitor $monitor): self
+    {
+        if ($this->monitors->removeElement($monitor)) {
+            // set the owning side to null (unless already changed)
+            if ($monitor->getLocation() === $this) {
+                $monitor->setLocation(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Printer[]
+     */
+    public function getPrinters(): Collection
+    {
+        return $this->printers;
+    }
+
+    public function addPrinter(Printer $printer): self
+    {
+        if (!$this->printers->contains($printer)) {
+            $this->printers[] = $printer;
+            $printer->setLocation($this);
+        }
+
+        return $this;
+    }
+
+    public function removePrinter(Printer $printer): self
+    {
+        if ($this->printers->removeElement($printer)) {
+            // set the owning side to null (unless already changed)
+            if ($printer->getLocation() === $this) {
+                $printer->setLocation(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Component[]
+     */
+    public function getComponents(): Collection
+    {
+        return $this->components;
+    }
+
+    public function addComponent(Component $component): self
+    {
+        if (!$this->components->contains($component)) {
+            $this->components[] = $component;
+            $component->setLocation($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComponent(Component $component): self
+    {
+        if ($this->components->removeElement($component)) {
+            // set the owning side to null (unless already changed)
+            if ($component->getLocation() === $this) {
+                $component->setLocation(null);
             }
         }
 

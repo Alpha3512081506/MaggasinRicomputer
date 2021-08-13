@@ -30,7 +30,7 @@ const LoginPage = ({ onLogin, history }) => {
         } catch (error) {
             setErrors("Invalide Credentials, il Nome dell'Utente o La Password non è Corretto ")
             toast.error("C'è Stato un errore 🥱🥱🥱🥱🥱🥱")
-            console.log(error.response)
+            console.log(error)
         }
 
 

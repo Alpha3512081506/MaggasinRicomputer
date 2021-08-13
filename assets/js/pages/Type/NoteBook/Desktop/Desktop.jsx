@@ -5,15 +5,17 @@ import { toast } from 'react-toastify';
 import Loading from '../../../../components/Loading';
 import Pagination from '../../../../components/Pagination';
 import DesktopService from '../../../../services/DesktopService';
+import { API_DESKTOP } from '../../../../services/Config';
 const DesktopShow = (props) => {
     const [desktop, setDesktop] = useState([]);
     const [loading, setLoading] = useState(true);
     const [currentPage, setCurrentPage] = useState(1)
     const [search, setSearch] = useState("")
+    const [itemsPerPage, setItemPerPage] = useState(10)
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const result = await axios.get('https://127.0.0.1:8000/api/product_desktops');
+                const result = await axios.get(API_DESKTOP);
                 setDesktop(result.data['hydra:member']);
                 // toast.success("connessione al server effettuata ✔")
                 setLoading(false);
@@ -28,13 +30,14 @@ const DesktopShow = (props) => {
         };
 
         fetchData();
-    }, [desktop]);
+    }, []);
 
     const handleDelete = async (id) => {
         const originalDesktop = [...desktop];
         setDesktop(desktop.filter(desktop => desktop.id !== id));
         try {
-            await axios.delete('https://127.0.0.1:8000/api/product_desktops/' + id)
+            await axios.delete(API_DESKTOP + "/" + id)
+
             toast.success("il prodotto è stato cancellato")
         } catch (error) {
             setDesktop(originalProduct);
@@ -42,7 +45,7 @@ const DesktopShow = (props) => {
         }
 
     }
-    const itemsPerPage = 10;
+    // const itemsPerPage = 10;
     const pageCount = Math.ceil(desktop.length / itemsPerPage);
     const pages = [];
     for (let i = 1; i < pageCount; i++) {
@@ -64,8 +67,8 @@ const DesktopShow = (props) => {
         d.ram.toLowerCase().includes(search.toLocaleLowerCase()) ||
         d.processor.toLowerCase().includes(search.toLocaleLowerCase()) ||
         d.grade.toLowerCase().includes(search.toLocaleLowerCase()) ||
-        (d.location.locationName && d.grade.toLowerCase().includes(search.toLocaleLowerCase())) ||
-        (d.category.categoryName && d.grade.toLowerCase().includes(search.toLocaleLowerCase()))
+        (d.location.locationName && d.location.locationName.toLowerCase().includes(search.toLocaleLowerCase())) ||
+        (d.category.categoryName && d.category.categoryName.toLowerCase().includes(search.toLocaleLowerCase()))
 
     )
     const paginatedDesktop = Pagination.getData(filteredDesktop, currentPage, itemsPerPage);
@@ -75,7 +78,10 @@ const DesktopShow = (props) => {
         setCurrentPage(1)
     }
 
-
+    const handleChangeItemsPerPage = ({ currentTarget }) => {
+        const { value } = currentTarget;
+        setItemPerPage(value)
+    }
     return (<>
 
         <div className="d-flex justify-content-between">
@@ -90,9 +96,8 @@ const DesktopShow = (props) => {
                 <input className="form-control" id="myInput" type="text" placeholder="Search.." value={search} onChange={handleSearch} />
                 <br></br>
                 <div className="alert alert-primary d-flex align-items-center" role="alert">
-                    <svg className="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:"></svg>
                     <div>
-                        {filteredDesktop.length}
+                        <h4 className="display-5 text-center text-justify">Filtro Totale : {filteredDesktop.length} </h4>
                     </div>
                 </div>
                 <table className="table table-responsive table-hover table-bordered table-sm w-100" id="table-to-xls">
@@ -119,7 +124,7 @@ const DesktopShow = (props) => {
                     </thead>
                     <tbody id="myTable">
                         {paginatedDesktop.map(desktop => <tr key={desktop.id}><td>
-                            <Link to={"/types/desktop/add/new"}> <button className="btn btn-outline-success "><i className="fa fa-pencil"></i></button></Link>
+                            <Link to={"/types/desktop/add/" + desktop.id}> <button className="btn btn-outline-success "><i className="fa fa-pencil"></i></button></Link>
                             <button className="btn btn-outline-danger " onClick={() => handleDelete(desktop.id)}><i className="fa fa-trash"></i></button>
 
 
@@ -151,12 +156,17 @@ const DesktopShow = (props) => {
                                         length={filteredDesktop.length} onPageChanged={handlePageChange} />}
                                     <div className="form-group">
                                         <label htmlFor="sel1">Select list:</label>
-                                        <select className="form-control" id="sel1">
-                                            <option>25</option>
-                                            <option>50</option>
-                                            <option>100</option>
-                                            <option>Tutti</option>
+                                        <select value={itemsPerPage} onChange={handleChangeItemsPerPage}>
+                                            <option value="5">5</option>
+                                            <option value="10">10</option>
+                                            <option value="20">20</option>
+                                            <option value="50">50</option>
+                                            <option value="75">75</option>
+                                            <option value="80">80</option>
+                                            <option value="100">100</option>
+                                            <option value={desktop.length}>tutti</option>
                                         </select>
+
                                     </div>
                                 </div>
 

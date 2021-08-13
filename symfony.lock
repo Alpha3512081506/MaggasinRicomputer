@@ -150,6 +150,9 @@
             "./config/packages/lexik_jwt_authentication.yaml"
         ]
     },
+    "liorchamla/faker-prices": {
+        "version": "2.0.0"
+    },
     "monolog/monolog": {
         "version": "2.2.0"
     },

@@ -1,10 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 import Field from '../../../../form/Field';
+import { API_DESKTOP } from '../../../../services/Config';
+import { toast } from 'react-toastify';
+import CATEGORYSERVICE from '../../../../services/CATEGORYSERVICE.JS';
+import LOCATIONSERVICE from '../../../../services/LOCATIONSERVICE.JS';
+import Select from '../../../../form/Select';
 const DesktopAdd = (props) => {
     const { id = "new" } = props.match.params;
-    console.log(id);
+    // console.log(id);
 
     const [desktop, setDesktop] = useState({
         productId: "",
@@ -14,7 +20,7 @@ const DesktopAdd = (props) => {
         processor: "",
         ram: "",
         hdd: "",
-        location: "Select il Luogo",
+        location: "",
         grade: "",
         note: "Scrivere Le Note:",
         price: 0,
@@ -35,9 +41,10 @@ const DesktopAdd = (props) => {
         price: "",
         priceb2b: ""
     });
-    const handleChange = (event) => {
-        const name = event.currentTarget.name;
-        const value = event.currentTarget.value;
+    const [category, setCategory] = useState([])
+    const [location, setLocation] = useState([])
+    const handleChange = ({ currentTarget }) => {
+        const { name, value } = currentTarget
         setDesktop({ ...desktop, [name]: value });
 
     }
@@ -46,8 +53,12 @@ const DesktopAdd = (props) => {
         event.preventDefault();
         try {
             //executer la request la request POST vers l'api à travers AXIOS
+            const response = await axios.post(API_DESKTOP, desktop);
+            console.log(response.data)
+            toast.success("Registrato")
             console.log(desktop);
         } catch (error) {
+            console.log(error.response)
             if (error.response.data.violations) {
                 const apiErr = {};
                 error.response.data.violations.forEach(violation => {
@@ -61,6 +72,45 @@ const DesktopAdd = (props) => {
 
         //console.log(printer);
     }
+
+    useEffect(() => {
+        const findAllCategories = async () => {
+            try {
+                const data = await CATEGORYSERVICE.findAll();
+                setCategory(data);
+                if (!desktop.category) setDesktop({ ...desktop, category: data[0]["@id"] })
+
+            } catch (error) {
+                console.log(error);
+                toast.error("Erreur de chargement des categories")
+            }
+        }
+
+        findAllCategories()
+    },
+        []);
+
+
+
+    useEffect(() => {
+
+        const findLocation = async () => {
+            try {
+                const data = await LOCATIONSERVICE.findAll()
+                setLocation(data);
+                // console.log(location)
+                if (!desktop.location) {
+                    //  setLocation({ ...desktop, location: data[0]["@id"] })
+
+                }
+
+            } catch (error) {
+                console.log(error)
+
+            }
+        }
+        findLocation()
+    }, []);
     return (<>
         <h1>Add desktop</h1>
         <form onSubmit={handleSubmit}>
@@ -70,11 +120,17 @@ const DesktopAdd = (props) => {
                 error={error.productId}
             />
 
-            <Field name="category"
-                label="Category" placeholder="categoria del product"
-                value={desktop.category} onChange={handleChange}
+            <Select
+                name="category"
+                label="Category"
+                value={desktop.category}
+                onChange={handleChange}
                 error={error.category}
-            />
+            >
+                {category.map(category => <option key={category["@id"]} value={category["@id"]}>
+                    {category.categoryName}</option>)}
+            </Select>
+
             <Field name="marque"
                 label="Marca" placeholder="Marca del product"
                 value={desktop.marque} onChange={handleChange}
@@ -91,11 +147,18 @@ const DesktopAdd = (props) => {
                 error={error.processor}
             />
 
-            <Field name="location"
-                label="LUOGO" placeholder="lougo del product"
-                value={desktop.location} onChange={handleChange}
+            <Select
+                name="location"
+                label="Luogo"
+                value={desktop.location}
+                onChange={handleChange}
                 error={error.location}
-            />
+            >
+                {location.map(location => <option key={location["@id"]} value={location["@id"]}>
+                    {location.locationName}</option>)}
+            </Select>
+
+
             <Field name="ram"
                 label="RAM" placeholder="la Ram del product"
                 value={desktop.ram} onChange={handleChange}

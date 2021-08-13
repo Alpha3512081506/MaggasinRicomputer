@@ -55,10 +55,34 @@ class Category
      */
     private $productDesktops;
 
+    /**
+     * @ORM\OneToMany(targetEntity=NoteBook::class, mappedBy="category")
+     */
+    private $noteBooks;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Monitor::class, mappedBy="category")
+     */
+    private $monitors;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Printer::class, mappedBy="category")
+     */
+    private $printers;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Component::class, mappedBy="category")
+     */
+    private $components;
+
     public function __construct()
     {
         $this->products = new ArrayCollection();
         $this->productDesktops = new ArrayCollection();
+        $this->noteBooks = new ArrayCollection();
+        $this->monitors = new ArrayCollection();
+        $this->printers = new ArrayCollection();
+        $this->components = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -132,6 +156,126 @@ class Category
             // set the owning side to null (unless already changed)
             if ($productDesktop->getCategory() === $this) {
                 $productDesktop->setCategory(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|NoteBook[]
+     */
+    public function getNoteBooks(): Collection
+    {
+        return $this->noteBooks;
+    }
+
+    public function addNoteBook(NoteBook $noteBook): self
+    {
+        if (!$this->noteBooks->contains($noteBook)) {
+            $this->noteBooks[] = $noteBook;
+            $noteBook->setCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNoteBook(NoteBook $noteBook): self
+    {
+        if ($this->noteBooks->removeElement($noteBook)) {
+            // set the owning side to null (unless already changed)
+            if ($noteBook->getCategory() === $this) {
+                $noteBook->setCategory(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Monitor[]
+     */
+    public function getMonitors(): Collection
+    {
+        return $this->monitors;
+    }
+
+    public function addMonitor(Monitor $monitor): self
+    {
+        if (!$this->monitors->contains($monitor)) {
+            $this->monitors[] = $monitor;
+            $monitor->setCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMonitor(Monitor $monitor): self
+    {
+        if ($this->monitors->removeElement($monitor)) {
+            // set the owning side to null (unless already changed)
+            if ($monitor->getCategory() === $this) {
+                $monitor->setCategory(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Printer[]
+     */
+    public function getPrinters(): Collection
+    {
+        return $this->printers;
+    }
+
+    public function addPrinter(Printer $printer): self
+    {
+        if (!$this->printers->contains($printer)) {
+            $this->printers[] = $printer;
+            $printer->setCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removePrinter(Printer $printer): self
+    {
+        if ($this->printers->removeElement($printer)) {
+            // set the owning side to null (unless already changed)
+            if ($printer->getCategory() === $this) {
+                $printer->setCategory(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Component[]
+     */
+    public function getComponents(): Collection
+    {
+        return $this->components;
+    }
+
+    public function addComponent(Component $component): self
+    {
+        if (!$this->components->contains($component)) {
+            $this->components[] = $component;
+            $component->setCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComponent(Component $component): self
+    {
+        if ($this->components->removeElement($component)) {
+            // set the owning side to null (unless already changed)
+            if ($component->getCategory() === $this) {
+                $component->setCategory(null);
             }
         }
 

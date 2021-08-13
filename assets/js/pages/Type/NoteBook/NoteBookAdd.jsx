@@ -1,6 +1,13 @@
-import React, { useState } from 'react';
+import axios from 'axios';
+import React, { useState, useEffect, Component } from 'react';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import Field from '../../../form/Field';
+import Select from '../../../form/Select';
+import CATEGORYSERVICE from '../../../services/CATEGORYSERVICE.JS';
+import { API_NOTEBOOK } from '../../../services/Config';
+import LOCATIONSERVICE from '../../../services/LOCATIONSERVICE.JS';
+import NOTEBOOKSERVICE from '../../../services/NOTEBOOKSERVICE';
 const NoteBookAdd = (props) => {
     const { id = "new" } = props.match.params;
     console.log(id);
@@ -36,6 +43,7 @@ const NoteBookAdd = (props) => {
         price: "",
         priceb2b: ""
     });
+    const [editing, setEditing] = useState(false);
     const handleChange = (event) => {
         const name = event.currentTarget.name;
         const value = event.currentTarget.value;
@@ -43,11 +51,38 @@ const NoteBookAdd = (props) => {
 
     }
 
+    const [category, setCategory] = useState([])
+    const [location, setLocation] = useState([])
+    useEffect(() => {
+        if (id !== "new") {
+            setEditing(true)
+            const findNoteBook = async id => {
+                try {
+                    const data = await NOTEBOOKSERVICE.findNotebookById(id)
+                    console.log(data)
+                    setProduct(data)
+                } catch (error) {
+                    console.log("il ya une erreur")
+                }
+            }
+            findNoteBook(id)
+        }
+    }, [id])
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
             //executer la request la request POST vers l'api à travers AXIOS
-            console.log(notebook);
+            if (editing) {
+                NOTEBOOKSERVICE.editNotebookById(id, Component)
+
+            } else {
+                //  const data = await axios.post(API_NOTEBOOK, notebook)
+                await NOTEBOOKSERVICE.addNewNotebook(Component)
+                setNotebok(data)
+                console.log(notebook);
+            }
+
+
         } catch (error) {
             if (error.response.data.violations) {
                 const apiErr = {};
@@ -62,6 +97,46 @@ const NoteBookAdd = (props) => {
 
         //console.log(printer);
     }
+
+
+    useEffect(() => {
+        const findAllCategories = async () => {
+            try {
+                const data = await CATEGORYSERVICE.findAll();
+                setCategory(data)
+
+                if (!notebook.category) setNotebok({ ...notebook, category: data[0]["@id"] })
+
+            } catch (error) {
+                console.log(error.data);
+                toast.error("Erreur de chargement des categories")
+            }
+        }
+        findAllCategories()
+    }, []);
+
+
+
+    useEffect(() => {
+        const findLocation = async () => {
+            try {
+                const data = await LOCATIONSERVICE.findAll()
+                setLocation(data);
+                // console.log(location)
+                if (!notebook.location) {
+                    //  setLocation({ ...notebook, location: data[0]["@id"] })
+
+                }
+
+
+
+            } catch (error) {
+                console.log(error)
+
+            }
+        }
+        findLocation()
+    }, []);
     return (<>
         <h1>Add NoteBook</h1>
         <form onSubmit={handleSubmit}>
@@ -70,12 +145,18 @@ const NoteBookAdd = (props) => {
                 value={notebook.printerId} onChange={handleChange}
                 error={error.productId}
             />
-
-            <Field name="category"
-                label="Category" placeholder="categoria del product"
-                value={notebook.category} onChange={handleChange}
+            <Select
+                name="category"
+                label="Category"
+                value={notebook.category}
+                onChange={handleChange}
                 error={error.category}
-            />
+            >
+                {category.map(category => <option key={category["@id"]} value={category["@id"]}>
+                    {category.categoryName}</option>)}
+            </Select>
+
+
             <Field name="marque"
                 label="Marca" placeholder="Marca del product"
                 value={notebook.marque} onChange={handleChange}
@@ -92,11 +173,16 @@ const NoteBookAdd = (props) => {
                 error={error.processor}
             />
 
-            <Field name="location"
-                label="LUOGO" placeholder="lougo del product"
-                value={notebook.location} onChange={handleChange}
+            <Select
+                name="location"
+                label="Luogo"
+                value={notebook.location}
+                onChange={handleChange}
                 error={error.location}
-            />
+            >
+                {location.map(location => <option key={location["@id"]} value={location["@id"]}>
+                    {location.locationName}</option>)}
+            </Select>
             <Field name="ram"
                 label="RAM" placeholder="la Ram del product"
                 value={notebook.ram} onChange={handleChange}

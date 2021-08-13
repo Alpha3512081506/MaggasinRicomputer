@@ -1,22 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 import Field from '../../../form/Field';
 import axios from 'axios';
 import { API_PRINTER } from '../../../services/Config';
+import PRINTERSERVICE from '../../../services/PRINTERSERVICE';
+import LOCATIONSERVICE from '../../../services/LOCATIONSERVICE.JS';
+import Select from '../../../form/Select';
+import CATEGORYSERVICE from '../../../services/CATEGORYSERVICE.JS';
 const PrinterAdd = (props) => {
     const { id = "new" } = props.match.params;
-    console.log(id);
+    // console.log(id);
 
     const [printer, setPrinter] = useState({
-        printerId: "",
+        productId: "",
         category: "",
         marque: "",
         model: "",
         paper: 0,
-        techno: "",
-        toner: "",
+        connector: "",
+        tonner: "",
         format: "",
         type: "",
         location: "Select il Luogo",
@@ -27,33 +31,105 @@ const PrinterAdd = (props) => {
     });
 
     const [error, setError] = useState({
-        printerId: "L'Id del prodotto è obligatoria",
-        category: "la categoria è obligatoria",
-        marque: "mla marca è obligatoria",
-        model: "il modello è obligatorio",
+        productId: "",
+        category: "",
+        marque: "",
+        model: "",
         paper: "",
-        techno: "",
-        toner: "",
+        connector: "",
+        tonner: "",
         format: "",
         type: "",
-        location: "Devi Scegliere per forza  il Luogo",
+        location: "",
         grade: "",
-        note: "Scrivere Le Note:",
+        note: "",
         price: "",
         priceb2b: ""
     });
+    const [category, setCategory] = useState([])
+    const [location, setLocation] = useState([])
     const handleChange = (event) => {
         const name = event.currentTarget.name;
         const value = event.currentTarget.value;
         setPrinter({ ...printer, [name]: value });
 
     }
+
+    useEffect(() => {
+        const findAllCategories = async () => {
+            try {
+                const data = await CATEGORYSERVICE.findAll();
+
+                setCategory(data)
+
+                if (!printer.category) setPrinter({ ...printer, category: data[0]["@id"] })
+
+            } catch (error) {
+                console.log(error);
+                toast.error("Erreur de chargement des categories")
+            }
+        }
+        findAllCategories()
+    }, []);
+
+    useEffect(() => {
+        const findLocation = async () => {
+            try {
+                const data = await LOCATIONSERVICE.findAll()
+                setLocation(data);
+                // console.log(location)
+                if (!printer.location) {
+                    setPrinter({ ...printer, location: data[0]["@id"] })
+
+                }
+
+
+
+            } catch (error) {
+                console.log(error)
+
+            }
+        }
+        findLocation()
+    }, []);
+    const [editing, setEditing] = useState(false);
+    useEffect(() => {
+        if (id !== "new") {
+            setEditing(true)
+
+            const fetchData = async (id) => {
+                try {
+                    const data = await PRINTERSERVICE.findPrinterById(id)
+                    console.log(data)
+                    const { productId, category, marque, model, paper, connector, tonner, format, type, location, grade, note, price, priceb2b } = data
+                    setPrinter({ productId, category, marque, model, paper, connector, tonner, format, type, location, grade, note, price, priceb2b })
+                    console.log(printer)
+                    // console.log(data)
+                } catch (error) {
+
+                }
+            }
+            fetchData(id)
+
+        }
+    }, [id])
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
             //executer la request la request POST vers l'api à travers AXIOS
-            const response = await axios.post(API_PRINTER, printer)
+            if (editing) {
+                //const data = await PRINTERSERVICE.editPrinterById(id, printer)
+                const data = await axios.put(API_PRINTER + "/" + id, printer)
+                console.log(data)
+                toast.success("La Stampante è stata modificata")
+            } else {
+                console.log(printer)
+                //  await PRINTERSERVICE.addNewPrinter(printer)
+                const response = await axios.post(API_PRINTER, printer)
+            }
+
         } catch (error) {
+            console.log(error)
             if (error.response.data.violations) {
                 const apiErr = {};
                 error.response.data.violations.forEach(violation => {
@@ -68,31 +144,36 @@ const PrinterAdd = (props) => {
         //console.log(printer);
     }
     return (<>
+        {!editing && <h1>CREAZIONE DI STAMPANTE</h1> || <h1>EDIZIONE DI STAMPANTE</h1>}
 
         <form onSubmit={handleSubmit}>
 
-            <Field name="PrinterId"
+            <Field name="productId"
                 label="Printer ID" placeholder="id della Stampante"
-                value={printer.PrinterId}
+                value={printer.productId}
                 onChange={handleChange}
-                error={error.printerId}
+                error={error.productId}
             />
-            <Field name="category"
-                label="Categoria" placeholder="categoria della Stampante"
+            <Select
+                name="category"
+                label="Category"
                 value={printer.category}
                 onChange={handleChange}
                 error={error.category}
-            />
+            >
+                {category.map(category => <option key={category["@id"]} value={category["@id"]}>
+                    {category.categoryName}</option>)}
+            </Select>
             <Field name="marque"
                 label="Marca" placeholder="Marca della Stampante"
-                value={printer.marca}
+                value={printer.marque}
                 onChange={handleChange}
                 error={error.marque}
             />
 
             <Field name="model"
                 label="modello" placeholder="modello della Stampante"
-                value={printer.modello}
+                value={printer.model}
                 onChange={handleChange}
                 error={error.model}
             />
@@ -102,26 +183,37 @@ const PrinterAdd = (props) => {
                 onChange={handleChange}
                 error={error.type}
             />
-            <Field name="tecno"
+            <Field name="connector"
                 label="Tecnologia" placeholder="Tecno della Stampante"
-                value={printer.techno}
+                value={printer.connector}
                 onChange={handleChange}
                 error={error.techno}
 
             />
-
-            <Field name="toner"
-                label="Toner" placeholder="Toner della Stampante"
-                value={printer.toner}
+            <Field name="format"
+                label="Format" placeholder="Format della Stampante"
+                value={printer.format}
                 onChange={handleChange}
-                error={error.toner}
+                error={error.format}
+
             />
-            <Field name="location"
-                label="location" placeholder="location della Stampante"
+
+            <Field name="tonner"
+                label="Toner" placeholder="Toner della Stampante"
+                value={printer.tonner}
+                onChange={handleChange}
+                error={error.tonner}
+            />
+            <Select
+                name="location"
+                label="Luogo"
                 value={printer.location}
                 onChange={handleChange}
                 error={error.location}
-            />
+            >
+                {location.map(location => <option key={location["@id"]} value={location["@id"]}>
+                    {location.locationName}</option>)}
+            </Select>
             <Field name="grade"
                 label="Grado" placeholder="Grado della Stampante"
                 value={printer.grade}

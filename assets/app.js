@@ -52,6 +52,8 @@ import Componenti from './js/pages/Type/Componenti/Componenti.jsx';
 import ComponentAdd from './js/pages/Type/Componenti/ComponentAdd.jsx';
 import MonitorAdd from './js/pages/Type/monitors/MonitorAdd.jsx';
 import MonitorShow from './js/pages/Type/monitors/MonitorShow.jsx';
+import ComponentAddQuantity from './js/pages/Type/Componenti/ComponentAddQuantity.jsx';
+import ComponentAddMinusQuantity from './js/pages/Type/Componenti/ComponentAddMinusQuantity.jsx';
 
 AuthApi.setUp();
 
@@ -153,9 +155,17 @@ const App = () => {
 
                         {/* ===============Desktop ROUTES ========================*/}
 
+                        <Route path="/types/component/plus/:id"
+                            render={props => isAuthenticated ? (<ComponentAddQuantity {...props} />) :
+                                (<Redirect to="/login" />)} />
+                        <Route path="/types/component/minus/:id"
+                            render={props => isAuthenticated ? (<ComponentAddMinusQuantity {...props} />) :
+                                (<Redirect to="/login" />)} />
                         <Route path="/types/component/add/:id"
                             render={props => isAuthenticated ? (<ComponentAdd{...props} />) :
                                 (<Redirect to="/login" />)} />
+
+
                         <Route path="/types/component"
                             render={props => isAuthenticated ? (<Componenti {...props} />) :
                                 (<Redirect to="/login" />)} />
