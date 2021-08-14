@@ -15,8 +15,8 @@ const Uploader = () => {
                     workbook.SheetNames.forEach(function (sheetName) {
 
                         var XL_row_object = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
-                        var json_object = JSON.stringify(XL_row_object);
-                        document.getElementById("jsonObject").innerHTML = json_object;
+                        console.log(XL_row_object);
+
 
                     })
                 };
@@ -33,6 +33,10 @@ const Uploader = () => {
     return (
         <>
             <input type="file" id="fileUploader" name="fileUploader" accept=".xls, .xlsx" /> <br />
+            <div className="d-grid gap-2">
+                <button onClick={() => handleUpload()} className="btn btn-primary" type="button">SFOGLIA</button>
+
+            </div>
         </>
     )
 }

@@ -5,6 +5,8 @@ import { toast } from 'react-toastify';
 import Loading from '../../../components/Loading';
 import Pagination from '../../../components/Pagination';
 import { API_PRINTER } from '../../../services/Config';
+import ExportToExcel from '../../../services/ExportToExcel';
+
 const PrinterShow = (props) => {
     const [printer, setPrinter] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -78,9 +80,12 @@ const PrinterShow = (props) => {
         const { value } = currentTarget;
         setItemPerPage(value)
     }
+    const fileName="Printer";
+    const {productId, marque, model , connector,type}= paginatedePrinter
     return (<>
 
         <div className="d-flex justify-content-between">
+        <ExportToExcel apiData={paginatedePrinter} fileName={fileName} />
             <h5 className="font-italic text text-success">Gestisci le stampante</h5>
             <Link to={"/types/printers/add/new"}> <button className="btn btn-outline-success "><i className="fa fa-plus">Aggiungi Prodotto</i></button></Link>
         </div>

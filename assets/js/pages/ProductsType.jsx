@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Caroussel from '../components/Carousel';
+import Uploader from '../services/Uploader';
 const ProductsType = (props) => {
     return (<>
         <div className="jumbotron jumbotron-fluid">
@@ -21,6 +22,7 @@ const ProductsType = (props) => {
                     <li className="nav-item">
                         <Link to={"/types/component"} className="nav-link "> COMPONENTI<span className="badge badge-secondary">54</span></Link>
                     </li>
+                    <li>{<Uploader />}</li>
                 </ul>
             </div>
         </div>
