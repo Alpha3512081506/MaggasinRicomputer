@@ -12,45 +12,58 @@ const HomePage = (props) => {
     const [categories, setCategories] = useState([]);
     const [locations, setLocation] = useState([]);
     const [loading, setLoading] = useState(true);
-    const findProducts = async () => {
-        try {
-            const data = await PRODUCTSERVICE.findAll()
-            setProducts(data)
-            setLoading(false)
 
-        } catch (e) {
-            console.log(e.data)
+    useEffect(() => {
+        const findProducts = async () => {
+            try {
+                const data = await PRODUCTSERVICE.findAll()
+                setProducts(data)
+                setLoading(false)
 
-        }
-    }
-    const findCategory = async () => {
-        try {
-            const response = await CATEGORYSERVICE.findAll();
-            setCategories(response)
-            setLoading(false)
-        } catch (e) {
-            console.log(e.response)
-        }
-    }
-    const findLocations = async () => {
-        try {
-            const response = await LOCATIONSERVICE.findAll()
-            setLocation(response)
-            setLoading(false)
-        } catch (e) {
-            console.log(e.response)
-        }
-    }
+            } catch (e) {
+                console.log(e.data)
 
-    useEffect(() => { findCategory() }, []);
-    useEffect(() => { findLocations() }, []);
-    useEffect(() => { findProducts() }, [])
+            }
+        }
+        findProducts()
+
+    }, [])
+    useEffect(() => {
+        const findCategory = async () => {
+            try {
+                const response = await CATEGORYSERVICE.findAll();
+                setCategories(response)
+                setLoading(false)
+            } catch (e) {
+                console.log(e.response)
+            }
+        }
+        findCategory()
+    }, [])
+
+
+
+
+    //useEffect(() => { findCategory() }, []);
+    useEffect(() => {
+        const findLocations = async () => {
+            try {
+                const response = await LOCATIONSERVICE.findAll()
+                setLocation(response)
+                setLoading(false)
+            } catch (e) {
+                console.log(e.response)
+            }
+        }
+        findLocations()
+    }, []);
+    // useEffect(() => { findProducts() }, [])
     return (<>
         {loading && <ListLoader />}
         {!loading &&
             <div className="row d-flex align-items-center justify-content-between">
                 <div className="col-12 col-sm-12 col-md-6 col-lg-6 shadow-sm p-3 mb-3 bg-white rounded">
-                    <Link to="/productlist">
+                    <Link to="/types/notebook">
                         <div className="card text-white bg-success mb-3" style={{ maxWidth: "20rem" }}>
                             <div className="card-body">
                                 <div className="row">
@@ -60,7 +73,7 @@ const HomePage = (props) => {
                                     <div className="col-8">
                                         <h2 className="card-title">{products.length}
                                         </h2>
-                                        <strong className="h2">Prodotti</strong>
+                                        <strong className="h3">NOTEBOOK</strong>
                                     </div>
                                 </div>
 
@@ -69,7 +82,7 @@ const HomePage = (props) => {
                     </Link>
                 </div>
                 <div className="col-12 col-sm-12 col-md-6 col-lg-6 shadow-sm p-3 mb-3 bg-white rounded">
-                    <Link to="/categorylist">
+                    <Link to="/types/printers">
 
                         <div className="card text-white bg-success mb-3" style={{ maxWidth: "20rem" }}>
                             <div className="card-body">
@@ -80,9 +93,68 @@ const HomePage = (props) => {
                                     <div className="col-8">
                                         <h2 className="card-title">{categories.length}
                                         </h2>
-                                        <strong className="h2">Categorie</strong>
+                                        <strong className="h3">PRINTERS</strong>
                                     </div>
                                 </div>
+
+                            </div>
+                        </div>
+
+                    </Link>
+                </div>
+
+                <div className="col-12 col-sm-12 col-md-6 col-lg-6 shadow-sm p-3 mb-3 bg-white rounded">
+                    <Link to="/types/desktop">
+                        <div className="card text-white bg-success mb-3" style={{ maxWidth: "20rem" }}>
+                            <div className="card-body">
+                                <div className="row">
+                                    <div className="col-4">
+                                        <i className="fa fa-users fa-4x"></i>
+                                    </div>
+                                    <div className="col-8">
+                                        <h2 className="card-title">0</h2>
+                                        <strong className="h3">DESKTOP</strong>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </Link>
+                </div>
+                <div className="col-12 col-sm-12 col-md-6 col-lg-6 shadow-sm p-3 mb-3 bg-white rounded">
+                    <Link to="/types/componenti">
+                        <div className="card text-white bg-success mb-3" style={{ maxWidth: "20rem" }}>
+                            <div className="card-body">
+                                <div className="row">
+                                    <div className="col-4">
+                                        <i className="fa fa-arrow-up fa-4x"></i>
+                                    </div>
+                                    <div className="col-8">
+                                        <h2 className="card-title">0</h2>
+                                        <strong className="h4">COMPONENTI</strong>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </Link>
+                </div>
+                <div className="col-12 col-sm-12 col-md-6 col-lg-6 shadow-sm p-3 mb-5 bg-white rounded">
+                    <Link to="/categorylist">
+                        <div className="card text-white bg-success mb-3" style={{ maxWidth: "20rem" }}>
+                            <div className="card-body">
+                                <div className="row">
+                                    <div className="col-4">
+                                        <i className="fa fa-arrow-down fa-4x"></i>
+                                    </div>
+                                    <div className="col-8">
+                                        <h2 className="card-title">0</h2>
+                                        <strong className="h3">Categorie</strong>
+                                    </div>
+                                </div>
+
 
                             </div>
                         </div>
@@ -101,7 +173,7 @@ const HomePage = (props) => {
                                         <h2 className="card-title">
                                             {locations.length}
                                         </h2>
-                                        <strong className="h2">Luoghi</strong>
+                                        <strong className="h3">Luoghi</strong>
                                     </div>
                                 </div>
 
@@ -110,17 +182,18 @@ const HomePage = (props) => {
 
                     </Link>
                 </div>
-                <div className="col-12 col-sm-12 col-md-6 col-lg-6 shadow-sm p-3 mb-3 bg-white rounded">
-                    <Link to="/users">
+                <div className="col-12 col-sm-12 col-md-6 col-lg-6 shadow-sm p-3 mb-5 bg-white rounded">
+                    <Link to="/types/monitors">
+
                         <div className="card text-white bg-success mb-3" style={{ maxWidth: "20rem" }}>
                             <div className="card-body">
                                 <div className="row">
                                     <div className="col-4">
-                                        <i className="fa fa-users fa-4x"></i>
+                                        <i className="fa fa-bell-o fa-4x"></i>
                                     </div>
                                     <div className="col-8">
                                         <h2 className="card-title">0</h2>
-                                        <strong className="h2">Utenti</strong>
+                                        <strong className="h3">MONITORS</strong>
                                     </div>
                                 </div>
 
@@ -129,85 +202,66 @@ const HomePage = (props) => {
 
                     </Link>
                 </div>
-                {/*   <div className="col-12 col-sm-12 col-md-6 col-lg-4 shadow-sm p-3 mb-3 bg-white rounded">
-                <Link to="/users">
-                    <div className="card text-white bg-success mb-3" style={{ maxWidth: "20rem" }}>
-                        <div className="card-body">
-                            <div className="row">
-                                <div className="col-4">
-                                    <i className="fa fa-arrow-up fa-4x"></i>
+                <div className="col-12 col-sm-12 col-md-6 col-lg-6 shadow-sm p-3 mb-5 bg-white rounded">
+                    <Link to="/types/monitors">
+
+                        <div className="card text-white bg-success mb-3" style={{ maxWidth: "20rem" }}>
+                            <div className="card-body">
+                                <div className="row">
+                                    <div className="col-4">
+                                        <i className="fa fa-bell-o fa-4x"></i>
+                                    </div>
+                                    <div className="col-8">
+                                        <h2 className="card-title">0</h2>
+                                        <strong className="h3">COMPITI</strong>
+                                    </div>
                                 </div>
-                                <div className="col-8">
-                                    <h2 className="card-title">0</h2>
-                                    <strong className="h2">StockInput</strong>
-                                </div>
+
                             </div>
-
                         </div>
-                    </div>
 
-                </Link>
-            </div> */}
-                {/*   <div className="col-12 col-sm-12 col-md-6 col-lg-4 shadow-sm p-3 mb-5 bg-white rounded">
-                <Link to="/users">
-                    <div className="card text-white bg-success mb-3" style={{ maxWidth: "20rem" }}>
-                        <div className="card-body">
-                            <div className="row">
-                                <div className="col-4">
-                                    <i className="fa fa-arrow-down fa-4x"></i>
+                    </Link>
+                </div>
+                <div className="col-12 col-sm-12 col-md-6 col-lg-6 shadow-sm p-3 mb-5 bg-white rounded">
+                    <Link to="/categorylist">
+
+                        <div className="card text-white bg-warning mb-3" style={{ maxWidth: "20rem" }}>
+                            <div className="card-body">
+                                <div className="row">
+                                    <div className="col-4">
+                                        <i className="fa fa-bell-o fa-4x"></i>
+                                    </div>
+                                    <div className="col-8">
+                                        <h2 className="card-title">0</h2>
+                                        <strong className="h3">Alert</strong>
+                                    </div>
                                 </div>
-                                <div className="col-8">
-                                    <h2 className="card-title">0</h2>
-                                    <strong className="h2">StokUscito</strong>
-                                </div>
+
                             </div>
-
-
                         </div>
-                    </div>
 
-                </Link>
-            </div> */}
-                {/*     <div className="col-12 col-sm-12 col-md-6 col-lg-4 shadow-sm p-3 mb-5 bg-white rounded">
-                <Link to="/categorylist">
+                    </Link>
+                </div>
+                <div className="col-12 col-sm-12 col-md-6 col-lg-6 shadow-sm p-3 mb-5 bg-white rounded">
+                    <Link to="/">
 
-                    <div className="card text-white bg-warning mb-3" style={{ maxWidth: "20rem" }}>
-                        <div className="card-body">
-                            <div className="row">
-                                <div className="col-4">
-                                    <i className="fa fa-bell-o fa-4x"></i>
+                        <div className="card text-white bg-danger mb-3" style={{ maxWidth: "20rem" }}>
+                            <div className="card-body">
+                                <div className="row">
+                                    <div className="col-4">
+                                        <i className="fa fa-bell-o fa-4x"></i>
+                                    </div>
+                                    <div className="col-8">
+                                        <h2 className="card-title">0</h2>
+                                        <strong className="h3">finita</strong>
+                                    </div>
                                 </div>
-                                <div className="col-8">
-                                    <h2 className="card-title">0</h2>
-                                    <strong className="h2">Alert</strong>
-                                </div>
+
                             </div>
-
                         </div>
-                    </div>
 
-                </Link>
-            </div> */}
-                {/*    <div className="col-12 col-sm-12 col-md-6 col-lg-4 shadow-sm p-3 mb-5 bg-white rounded">
-                <Link to="/categorylist">
-
-                    <div className="card text-white bg-danger mb-3" style={{ maxWidth: "20rem" }}>
-                        <div className="card-body">
-                            <div className="row">
-                                <div className="col-4">
-                                    <i className="fa fa-bell-o fa-4x"></i>
-                                </div>
-                                <div className="col-8">
-                                    <h2 className="card-title">0</h2>
-                                    <strong className="h2">finita</strong>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-
-                </Link>
-            </div> */}
+                    </Link>
+                </div>
             </div>}
 
         <hr className="mt-5" />

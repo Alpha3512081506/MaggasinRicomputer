@@ -97,7 +97,7 @@ const DesktopShow = (props) => {
                 <br></br>
                 <div className="alert alert-primary d-flex align-items-center" role="alert">
                     <div>
-                        <h4 className="display-5 text-center text-justify">Filtro Totale : {filteredDesktop.length} </h4>
+                        <h4 className="display-5 text-center text-justify">Filtro Totale : {paginatedDesktop.length} per {filteredDesktop.length} </h4>
                     </div>
                 </div>
                 <table className="table table-responsive table-hover table-bordered table-sm w-100" id="table-to-xls">

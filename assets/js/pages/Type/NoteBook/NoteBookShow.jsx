@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import Loading from '../../../components/Loading';
 import Pagination from '../../../components/Pagination';
 import { API_NOTEBOOK } from '../../../services/Config';
+import ExportToExcel from '../../../services/ExportToExcel';
 const NoteBookShow = (props) => {
     const [notebook, setNoteBook] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -43,7 +44,7 @@ const NoteBookShow = (props) => {
         }
 
     }
-    const itemsPerPage = 75;
+    const [itemsPerPage, setItemPerPage] = useState(10);
     const pageCount = Math.ceil(notebook.length / itemsPerPage);
     const pages = [];
     for (let i = 1; i < pageCount; i++) {
@@ -75,13 +76,61 @@ const NoteBookShow = (props) => {
         setSearch(value);
         setCurrentPage(1)
     }
+    const handleChangeItemsPerPage = (event) => {
+        setItemPerPage(event.currentTarget.value)
+    }
+    const [excelData, setExcelData] = useState([])
+    const fileName = "NOTEBOOK";
 
+    //Document
+    const [table, setTable] = useState([]);
+    const componentRef = React.useRef(null);
+    const handleTest = () => {
+        console.log(componentRef.current.table)
+    }
 
+    /*  function sortTable(n) {
+          var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+          table = document.getElementById("#myTable2");
+          switching = true;
+          dir = "asc";
+         
+          while (switching) {
+              switching = false;
+              rows = table.rows;
+              for (i = 1; i < (rows.length - 1); i++) {
+                  shouldSwitch = false;
+                  x = rows[i].getElementsByTagName("TD")[n];
+                  y = rows[i + 1].getElementsByTagName("TD")[n];
+                  if (dir == "asc") {
+                      if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                          shouldSwitch = true;
+                          break;
+                      }
+                  } else if (dir == "desc") {
+                      if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                          shouldSwitch = true;
+                          break;
+                      }
+                  }
+              }
+              if (shouldSwitch) {
+                  rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                  switching = true;
+                  switchcount++;
+              } else {
+                  if (switchcount == 0 && dir == "asc") {
+                      dir = "desc";
+                      switching = true;
+                  }
+              }
+          }
+      }*/
     return (<>
 
         <div className="d-flex justify-content-between">
             <h5 className="font-italic text text-success">Gestisci Computer Desktop</h5>
-            <Link to={"/types/notebook/add/:id"}> <button className="btn btn-outline-success "><i className="fa fa-plus">Aggiungi Prodotto</i></button></Link>
+            <Link to={"/types/notebook/add/new"}> <button className="btn btn-outline-success "><i className="fa fa-plus">Aggiungi Prodotto</i></button></Link>
 
         </div>
         <hr />
@@ -92,33 +141,33 @@ const NoteBookShow = (props) => {
                 <br></br>
                 <div className=" d-flex align-items-center justify-content-between">
                     <div className="alert alert-primary" role="alert ">
-                        <h4 className="display-5 text-center text-justify">Filtro Totale : {filteredNotebook.length} </h4>
+                        <h4 className="display-5 text-center text-justify">Filtro Totale : {paginatedNotebook.length} per {filteredNotebook.length} </h4>
                     </div>
 
                     <div className="btn-group">
                         <button type="button" className="btn btn-outline-success ">STAMPA</button>
-                        <button type="button" className="btn btn-outline-success ">ESPORTA EXCEL</button>
-                        <button type="button" className="btn btn-outline-success ">IMPORTA EXCEL</button>
+                        {<ExportToExcel apiData={paginatedNotebook} fileName={fileName} />}
+                        <button onClick={handleTest} type="button" className="btn btn-outline-success ">IMPORTA EXCEL</button>
                     </div>
                 </div>
-                <table className="table table-responsive table-hover table-bordered table-sm w-100" id="table-to-xls">
+                <table ref={componentRef} className="table table-responsive table-hover table-bordered table-sm w-100" id="myTable2">
 
                     <thead className="thead-dark " >
                         <tr className="w-100">
                             <th></th>
-                            <th >codiceInterno</th>
+                            <th  >codiceInterno <i className="fa fa-arrow-up"></i><i className="fa fa-arrow-down"></i></th>
                             <th >ProductId</th>
                             <th>Categoria</th>
-                            <th>Marca</th>
-                            <th>Modello</th>
-                            <th>C.P.U</th>
-                            <th>RAM</th>
-                            <th>HDD</th>
-                            <th>Display</th>
-                            <th>Grado</th>
-                            <th>Luogo</th>
-                            <th>Prezzo</th>
-                            <th>Prezzo al Rivenditore</th>
+                            <th>Marca  <i className="fa fa-arrow-up"></i><i className="fa fa-arrow-down"></i></th>
+                            <th>Modello  <i className="fa fa-arrow-up"></i><i className="fa fa-arrow-down"></i></th>
+                            <th>C.P.U  <i className="fa fa-arrow-up"></i><i className="fa fa-arrow-down"></i></th>
+                            <th>RAM  <i className="fa fa-arrow-up"></i><i className="fa fa-arrow-down"></i></th>
+                            <th>HDD  <i className="fa fa-arrow-up"></i><i className="fa fa-arrow-down"></i></th>
+                            <th>Display  <i className="fa fa-arrow-up"></i><i className="fa fa-arrow-down"></i></th>
+                            <th>Grado  <i className="fa fa-arrow-up"></i><i className="fa fa-arrow-down"></i></th>
+                            <th>Luogo  <i className="fa fa-arrow-up"></i><i className="fa fa-arrow-down"></i></th>
+                            <th>Prezzo  <i className="fa fa-arrow-up"></i><i className="fa fa-arrow-down"></i></th>
+                            <th>Prezzo al Rivenditore  <i className="fa fa-arrow-up"></i><i className="fa fa-arrow-down"></i></th>
                             <th>Note</th>
 
                         </tr>
@@ -159,11 +208,14 @@ const NoteBookShow = (props) => {
                                         length={filteredNotebook.length} onPageChanged={handlePageChange} />}
                                     <div className="form-group">
                                         <label htmlFor="sel1">Select list:</label>
-                                        <select className="form-control" id="sel1">
-                                            <option>25</option>
-                                            <option>50</option>
-                                            <option>100</option>
-                                            <option>Tutti</option>
+                                        <select className="form-control" id="sel1" onChange={handleChangeItemsPerPage}>
+                                            <option value="10">10</option>
+                                            <option value="20">20</option>
+                                            <option value="30">30</option>
+                                            <option value="50">50</option>
+                                            <option value="75">75</option>
+                                            <option value="100">100</option>
+                                            <option value={filteredNotebook.length}>tutti</option>
                                         </select>
                                     </div>
                                 </div>
@@ -174,6 +226,7 @@ const NoteBookShow = (props) => {
                 </table>
             </div>
             // condition ? true : false
+
 
 
         }

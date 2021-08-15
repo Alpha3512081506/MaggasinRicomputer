@@ -18,7 +18,7 @@ const PrinterAdd = (props) => {
         category: "",
         marque: "",
         model: "",
-        paper: 0,
+        paper: "",
         connector: "",
         tonner: "",
         format: "",
@@ -26,8 +26,8 @@ const PrinterAdd = (props) => {
         location: "Select il Luogo",
         grade: "",
         note: "Scrivere Le Note:",
-        price: 0,
-        priceb2b: 0
+        price: "",
+        priceb2b: ""
     });
 
     const [error, setError] = useState({
@@ -100,7 +100,7 @@ const PrinterAdd = (props) => {
             const fetchData = async (id) => {
                 try {
                     const data = await PRINTERSERVICE.findPrinterById(id)
-                    console.log(data)
+                    // console.log(data)
                     const { productId, category, marque, model, paper, connector, tonner, format, type, location, grade, note, price, priceb2b } = data
                     setPrinter({ productId, category, marque, model, paper, connector, tonner, format, type, location, grade, note, price, priceb2b })
                     console.log(printer)
@@ -116,6 +116,8 @@ const PrinterAdd = (props) => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
+
+            console.log(printer)
             //executer la request la request POST vers l'api à travers AXIOS
             if (editing) {
                 //const data = await PRINTERSERVICE.editPrinterById(id, printer)
@@ -124,12 +126,14 @@ const PrinterAdd = (props) => {
                 toast.success("La Stampante è stata modificata")
             } else {
                 console.log(printer)
-                //  await PRINTERSERVICE.addNewPrinter(printer)
-                const response = await axios.post(API_PRINTER, printer)
+                await PRINTERSERVICE.addNewPrinter(printer)
+                toast.success("La Stampante è stata creata")
+                //const response = await axios.post(API_PRINTER, printer)
+                console.log(response)
             }
 
         } catch (error) {
-            console.log(error)
+            console.log(error.response)
             if (error.response.data.violations) {
                 const apiErr = {};
                 error.response.data.violations.forEach(violation => {

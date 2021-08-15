@@ -8,6 +8,7 @@ import { toast } from 'react-toastify';
 import CATEGORYSERVICE from '../../../../services/CATEGORYSERVICE.JS';
 import LOCATIONSERVICE from '../../../../services/LOCATIONSERVICE.JS';
 import Select from '../../../../form/Select';
+import DesktopService from '../../../../services/DesktopService';
 const DesktopAdd = (props) => {
     const { id = "new" } = props.match.params;
     // console.log(id);
@@ -23,8 +24,8 @@ const DesktopAdd = (props) => {
         location: "",
         grade: "",
         note: "Scrivere Le Note:",
-        price: 0,
-        priceb2b: 0
+        price: "",
+        priceb2b: ""
     });
 
     const [error, setError] = useState({
@@ -49,14 +50,27 @@ const DesktopAdd = (props) => {
 
     }
 
+    //GESTION DE L'EDITION
+    const [editing, setEditing] = useState(false);
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
             //executer la request la request POST vers l'api à travers AXIOS
-            const response = await axios.post(API_DESKTOP, desktop);
-            console.log(response.data)
-            toast.success("Registrato")
-            console.log(desktop);
+            if (editing) {
+                console.log(desktop)
+                const response = DesktopService.editDesktopById(id, desktop);
+                toast.success("il Computer è stato modificato")
+                console.log(response)
+
+
+            } else {
+                const response = await axios.post(API_DESKTOP, desktop);
+                console.log(response.data)
+                toast.success("il computer è stato registrato")
+                console.log(desktop);
+            }
+
         } catch (error) {
             console.log(error.response)
             if (error.response.data.violations) {
@@ -98,9 +112,9 @@ const DesktopAdd = (props) => {
             try {
                 const data = await LOCATIONSERVICE.findAll()
                 setLocation(data);
-                // console.log(location)
+                console.log(data[0]["@id"])
                 if (!desktop.location) {
-                    //  setLocation({ ...desktop, location: data[0]["@id"] })
+                    setDesktop({ ...desktop, location: data[0]["@id"] })
 
                 }
 
@@ -111,12 +125,34 @@ const DesktopAdd = (props) => {
         }
         findLocation()
     }, []);
+    useEffect(() => {
+        if (id !== "new") {
+            setEditing(true)
+
+            const fetchData = async (id) => {
+                try {
+                    //const data = await axios.get(API_DESKTOP + "/" + id)
+                    const data = await DesktopService.findDesktopById(id)
+                    console.log(data)
+                    const { productId, category, marque, model, processor, ram, hdd, location, grade, note, price, priceb2b } = data
+                    setDesktop({ productId, category, marque, model, processor, ram, hdd, location, grade, note, price, priceb2b })
+                    //  console.log(printer)
+                    // console.log(data)
+                } catch (error) {
+
+                }
+            }
+            fetchData(id)
+
+        }
+    }
+        , [id])
     return (<>
-        <h1>Add desktop</h1>
+        {!editing && <h1>Add desktop</h1> || <h1>EDIZIONE DEL DESKTOP </h1>}
         <form onSubmit={handleSubmit}>
             <Field name="productId"
                 label="ProductId" placeholder="l'id del product"
-                value={desktop.printerId} onChange={handleChange}
+                value={desktop.productId} onChange={handleChange}
                 error={error.productId}
             />
 
@@ -193,7 +229,7 @@ const DesktopAdd = (props) => {
             />
             <div className="form-group">
                 <button type="submit" className="btn btn-success">Crea il Prodotto</button>
-                <Link to={"/types/ragrupati"}> Vai alla lista notebook</Link>
+                <Link to={"/types/desktop"}> Vai alla lista dei desktop</Link>
             </div>
 
         </form>

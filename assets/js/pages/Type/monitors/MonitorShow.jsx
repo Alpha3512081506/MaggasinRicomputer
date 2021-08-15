@@ -89,8 +89,8 @@ const MonitorShow = (props) => {
     return (<>
 
         <div className="d-flex justify-content-between">
-            <h5 className="font-italic text text-success">Gestisci Computer Monitors</h5>
-            <Link to={"/types/desktop/add/new"}> <button className="btn btn-outline-success "><i className="fa fa-plus">Aggiungi Prodotto</i></button></Link>
+            <h5 className="font-italic text text-success">Gestisci  Monitors</h5>
+            <Link to={"/types/monitors/add/new"}> <button className="btn btn-outline-success "><i className="fa fa-plus">Aggiungi Prodotto</i></button></Link>
 
         </div>
         <hr />
@@ -101,7 +101,7 @@ const MonitorShow = (props) => {
                 <br></br>
                 <div className=" d-flex align-items-center justify-content-between">
                     <div className="alert alert-primary" role="alert ">
-                        <h4 className="display-5 text-center text-justify">Filtro Totale : {filteredMonitor.length} </h4>
+                        <h4 className="display-5 text-center text-justify">Filtro Totale : {paginatedMonitor.length} per {filteredMonitor.length} </h4>
                     </div>
 
                     <div className="btn-group">
@@ -133,7 +133,7 @@ const MonitorShow = (props) => {
                     </thead>
                     <tbody id="myTable">
                         {paginatedMonitor.map(monitor => <tr key={monitor.id}><td>
-                            <Link to={"/types/desktop/add/new"}> <button className="btn btn-outline-success "><i className="fa fa-pencil"></i></button></Link>
+                            <Link to={"/types/monitors/add/" + monitor.id}> <button className="btn btn-outline-success "><i className="fa fa-pencil"></i></button></Link>
                             <button className="btn btn-outline-danger " onClick={() => handleDelete(monitor.id)}><i className="fa fa-trash"></i></button>
 
 

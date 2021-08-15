@@ -27,12 +27,7 @@ class Printer
      */
     private $id;
 
-    /**
-     * @ORM\Column(type="string")
-     * 
-     * @Groups({"printer_read","category_read","printer_write"})
-     */
-    private $productId;
+    
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -112,22 +107,18 @@ class Printer
      */
     private $category;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     *  @Groups({"printer_read","category_read","printer_write"})
+     */
+    private $productId;
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getProductId(): ?int
-    {
-        return $this->productId;
-    }
-
-    public function setProductId(int $productId): self
-    {
-        $this->productId = $productId;
-
-        return $this;
-    }
+   
 
    
 
@@ -283,6 +274,18 @@ class Printer
     public function setCategory(?Category $category): self
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    public function getProductId(): ?string
+    {
+        return $this->productId;
+    }
+
+    public function setProductId(?string $productId): self
+    {
+        $this->productId = $productId;
 
         return $this;
     }

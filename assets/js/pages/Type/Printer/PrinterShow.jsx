@@ -58,7 +58,7 @@ const PrinterShow = (props) => {
         setCurrentPage(page);
     }
     const filteredPrinter = printer.filter(d =>
-        // (d.productId && typeof (d.productId === 'string') && d.productId.toLowerCase().includes(search.toLocaleLowerCase())) ||
+        (d.productId && d.productId.toLowerCase().includes(search.toLocaleLowerCase())) ||
         (d.type && d.type.toLowerCase().includes(search.toLocaleLowerCase())) ||
         (d.model && d.model.toLowerCase().includes(search.toLocaleLowerCase())) ||
         (d.marque && d.marque.toLowerCase().includes(search.toLocaleLowerCase())) ||
@@ -80,12 +80,12 @@ const PrinterShow = (props) => {
         const { value } = currentTarget;
         setItemPerPage(value)
     }
-    const fileName="Printer";
-    const {productId, marque, model , connector,type}= paginatedePrinter
+    const fileName = "Printer";
+    const { productId, marque, model, connector, type } = paginatedePrinter
     return (<>
 
         <div className="d-flex justify-content-between">
-        <ExportToExcel apiData={paginatedePrinter} fileName={fileName} />
+            <ExportToExcel apiData={paginatedePrinter} fileName={fileName} />
             <h5 className="font-italic text text-success">Gestisci le stampante</h5>
             <Link to={"/types/printers/add/new"}> <button className="btn btn-outline-success "><i className="fa fa-plus">Aggiungi Prodotto</i></button></Link>
         </div>
@@ -97,7 +97,7 @@ const PrinterShow = (props) => {
                 <br></br>
                 <div className="alert alert-primary d-flex align-items-center" role="alert">
                     <div>
-                        <h4 className="display-5 text-center text-justify">Filtro Totale : {filteredPrinter.length} </h4>
+                        <h4 className="display-5 text-center text-justify">Filtro Totale : {paginatedePrinter.length} per {filteredPrinter.length} </h4>
                     </div>
                 </div>
                 <table className="table table-responsive table-hover table-bordered table-sm w-100" id="table-to-xls">
