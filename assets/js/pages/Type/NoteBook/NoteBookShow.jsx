@@ -16,13 +16,14 @@ const NoteBookShow = (props) => {
             try {
                 const result = await axios.get(API_NOTEBOOK);
                 setNoteBook(result.data['hydra:member']);
+                console.log(result.data['hydra:member'])
                 // toast.success("connessione al server effettuata ✔")
                 setLoading(false);
                 // console.log(desktop)
             } catch (error) {
                 console.log("Erreur!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                 toast.error("Devi effettuare il login per accedere alle risorse")
-                console.log(error.data)
+                console.log(error.result)
             }
 
 

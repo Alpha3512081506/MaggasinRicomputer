@@ -62,11 +62,11 @@ class Product
      * @Assert\Length(
      *      min = 4,
      *      max = 50,
-     *      minMessage = "il productName  del prodotto non può essere vuoto et nom poi avere meno di {{ limit }} characters long",
+     *      minMessage = "il marque  del prodotto non può essere vuoto et nom poi avere meno di {{ limit }} characters long",
      *      maxMessage = "Nom poi avere piu {{ limit }} characters"
      * )
      */
-    private $productName;
+    private $marque;
 
     /**
      * @ORM\Column(type="decimal")
@@ -77,32 +77,13 @@ class Product
      *     message="il valore {{ value }} non è un tipo valido {{ type }}."
      * )
      */
-    private $currentQuantity;
-
-    /**
-     * @ORM\Column(type="string", nullable=true)
-     * @Groups({"product_read", "category_read","product_write"})
-     */
-    private $alertQuanty;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"product_read","product_write"})
-     * 
-     */
-    private $customField1;
+    private $priceb2b;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Groups({"product_read","product_write"})
      */
-    private $customField2;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"product_read","product_write"})
-     */
-    private $customField3;
+    private $model;
 
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -147,6 +128,30 @@ class Product
      */
     private $price;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     *  @Groups({"product_read","category_read","product_write"})
+     */
+    private $ram;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     *  @Groups({"product_read","category_read","product_write"})
+     */
+    private $hdd;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     *   @Groups({"product_read","category_read","product_write"})
+     */
+    private $screen;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     *   @Groups({"product_read","category_read","product_write"})
+     */
+    private $processor;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -164,74 +169,38 @@ class Product
         return $this;
     }
 
-    public function getProductName(): ?string
+    public function getMarque(): ?string
     {
-        return $this->productName;
+        return $this->marque;
     }
 
-    public function setProductName(string $productName): self
+    public function setMarque(string $marque): self
     {
-        $this->productName = $productName;
+        $this->marque = $marque;
 
         return $this;
     }
 
-    public function getCurrentQuantity(): ?int
+    public function getPriceb2b(): ?int
     {
-        return $this->currentQuantity;
+        return $this->priceb2b;
     }
 
-    public function setCurrentQuantity($currentQuantity): self
+    public function setPriceb2b($priceb2b): self
     {
-        $this->currentQuantity = $currentQuantity;
+        $this->priceb2b = $priceb2b;
 
         return $this;
     }
 
-    public function getAlertQuanty(): ?string
+    public function getModel(): ?string
     {
-        return $this->alertQuanty;
+        return $this->model;
     }
 
-    public function setAlertQuanty(?string $alertQuanty): self
+    public function setModel(?string $model): self
     {
-        $this->alertQuanty = $alertQuanty;
-
-        return $this;
-    }
-
-    public function getCustomField1(): ?string
-    {
-        return $this->customField1;
-    }
-
-    public function setCustomField1(?string $customField1): self
-    {
-        $this->customField1 = $customField1;
-
-        return $this;
-    }
-
-    public function getCustomField2(): ?string
-    {
-        return $this->customField2;
-    }
-
-    public function setCustomField2(?string $customField2): self
-    {
-        $this->customField2 = $customField2;
-
-        return $this;
-    }
-
-    public function getCustomField3(): ?string
-    {
-        return $this->customField3;
-    }
-
-    public function setCustomField3(?string $customField3): self
-    {
-        $this->customField3 = $customField3;
+        $this->model = $model;
 
         return $this;
     }
@@ -324,8 +293,56 @@ class Product
     /** @PrePersist */
     public function prezzoPrePersist()
     {
-        if (!$this->currentQuantity) {
-            $this->currentQuantity = 000.00;
+        if (!$this->priceb2b) {
+            $this->priceb2b = 000.00;
         }
+    }
+
+    public function getRam(): ?string
+    {
+        return $this->ram;
+    }
+
+    public function setRam(?string $ram): self
+    {
+        $this->ram = $ram;
+
+        return $this;
+    }
+
+    public function getHdd(): ?string
+    {
+        return $this->hdd;
+    }
+
+    public function setHdd(?string $hdd): self
+    {
+        $this->hdd = $hdd;
+
+        return $this;
+    }
+
+    public function getScreen(): ?string
+    {
+        return $this->screen;
+    }
+
+    public function setScreen(string $screen): self
+    {
+        $this->screen = $screen;
+
+        return $this;
+    }
+
+    public function getProcessor(): ?string
+    {
+        return $this->processor;
+    }
+
+    public function setProcessor(?string $processor): self
+    {
+        $this->processor = $processor;
+
+        return $this;
     }
 }

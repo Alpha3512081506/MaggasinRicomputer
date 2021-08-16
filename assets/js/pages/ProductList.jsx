@@ -113,19 +113,18 @@ const ProductList = (props) => {
                 <thead className="thead-dark " >
                     <tr className="w-100">
                         <th></th>
-                        <th >InternoId</th>
+                        <th >CODICE INTERNO</th>
                         <th >ProductId</th>
                         <th>Categoria</th>
-                        <th>Marca</th>
-                        <th>Modello</th>
-                        <th>C.P.U</th>
-                        <th>Grado</th>
+                        <th>Model</th>
+                        <th>MARQUE</th>
                         <th>Luogo</th>
                         <th>Prezzo</th>
-                        <th>Prezzo al Rivenditore</th>
-                        <th>codice interno</th>
-
-
+                        <th>Prezzo B2B</th>
+                        <th>C.P.U  <i className="fa fa-arrow-up"></i><i className="fa fa-arrow-down"></i></th>
+                        <th>RAM  <i className="fa fa-arrow-up"></i><i className="fa fa-arrow-down"></i></th>
+                        <th>HDD  <i className="fa fa-arrow-up"></i><i className="fa fa-arrow-down"></i></th>
+                        <th>Display  <i className="fa fa-arrow-up"></i><i className="fa fa-arrow-down"></i></th>
                         <th>Note</th>
 
                     </tr>
@@ -142,14 +141,15 @@ const ProductList = (props) => {
                         <td>{product.id}</td>
                         <td>{product.productId}</td>
                         <td>{product.category.categoryName}</td>
-                        <td>{product.customField1}</td>
-                        <td>{product.customField2}</td>
-                        <td>{product.customField3} </td>
-                        <td>{product.productName}</td>
+                        <td>{product.model} </td>
+                        <td>{product.marque}</td>
                         <td>{product.location.locationName}</td>
-                        <td>{product.currentQuantity}&euro;</td>
                         <td>{product.price}&euro;</td>
-                        <td>{product.alertQuanty}</td>
+                        <td>{product.priceb2b}</td>
+                        <td>{product.processor}</td>
+                        <td>{product.ram} </td>
+                        <td>{product.hdd}</td>
+                        <td>{product.screen}</td>
 
                         <td>{product.note}</td>
 

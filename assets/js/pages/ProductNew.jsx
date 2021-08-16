@@ -14,28 +14,31 @@ const ProductNew = props => {
     const { id = "new" } = props.match.params;
     const [product, setProduct] = useState({
         productId: "",
-        productName: "",
-        category: "Select la Categoria",
-        location: "Select il Luogo",
-        currentQuantity: 0,
-        alertQuanty: "",
-        customField1: "",
-        customField2: "",
-        customField3: "",
+        marque: "",
+        category: "",
+        location: "",
+        priceb2b: 0,
+        hdd: "",
+        model: "",
         note: "Scrivere Le Note:",
+        processor: "",
+        ram: "",
+        screen: "",
         price: 0
 
     });
     const [errors, setErrors] = useState({
         productId: "",
-        productName: "",
+        marque: "",
         category: "",
         location: "",
-        currentQuantity: "",
-        alertQuanty: "",
-        customField1: "",
-        customField2: "",
-        customField3: "",
+        priceb2b: "",
+        processor: "",
+        ram: "",
+
+        screen: "",
+        hdd: "",
+        model: "",
         note: "",
         price: ""
 
@@ -72,7 +75,8 @@ const ProductNew = props => {
 
                 // console.log(response)
             } else {
-                await PRODUCTSERVICE.addNew(product);
+                console.log(product)
+                const response = await PRODUCTSERVICE.addNew(product);
                 toast.success("il prodotto è stato registrato con successo");
                 console.log(product)
                 setErrors({});
@@ -81,6 +85,7 @@ const ProductNew = props => {
                 props.history.push("/productlist");
             }
         } catch (error) {
+            console.log(error.response)
             if (error.response.data.violations) {
                 const apiError = {};
                 error.response.data.violations.forEach(violation => {
@@ -101,37 +106,43 @@ const ProductNew = props => {
     }, [id])
 
 
-    const findAllCategories = async () => {
-        try {
-            const data = await CATEGORYSERVICE.findAll();
-            setCategories(data);
-            if (!product.category) {
-                setProduct({ ...product, category: data[0]["@id"] })
+
+    useEffect(() => {
+        const findAllCategories = async () => {
+            try {
+                const data = await CATEGORYSERVICE.findAll();
+                setCategories(data);
+                if (!product.category) {
+                    setProduct({ ...product, category: data[0]["@id"] })
+                }
+                //console.log(data)
+            } catch (error) {
+                console.log(error);
+                toast.error("Erreur de chargement des categories")
             }
-            //console.log(data)
-        } catch (error) {
-            console.log(error);
-            toast.error("Erreur de chargement des categories")
         }
-    }
-    useEffect(() => { findAllCategories() }, []);
-    const findLocation = async () => {
-        try {
-            const data = await LOCATIONSERVICE.findAll()
-            setLocation(data);
+        findAllCategories()
+    }, []);
 
-            if (!product.location) {
-                setProduct({ ...product, location: data[0]["@id"] });
+
+    useEffect(() => {
+        const findLocation = async () => {
+            try {
+                const data = await LOCATIONSERVICE.findAll()
+                setLocation(data);
+
+                if (!product.location) {
+                    setProduct({ ...product, location: data[0]["@id"] });
+
+                }
+
+            } catch (error) {
+                console.log(error)
 
             }
-
-        } catch (error) {
-            console.log(error)
-
         }
-    }
-
-    useEffect(() => { findLocation() }, []);
+        findLocation()
+    }, []);
     return (<>
         {!editing && <h3 className="text-center">Crea prodotto</h3> || <h3 className="text-center">Edit Prodotto</h3>}
         <div className="mb-3 d-flex justify-content-between align-items-center">
@@ -146,11 +157,11 @@ const ProductNew = props => {
                 value={product.productId}
                 error={errors.productId}
             />
-            <Field name="productName" label="Grado"
+            <Field name="marque" label="Marque"
                 placeholder="Nome del prodotto"
                 onChange={handleChange}
-                value={product.productName}
-                error={errors.productName}
+                value={product.marque}
+                error={errors.marque}
             />
             <div className="row d-flex align-content-between align-items-center">
                 <div className="col-10">
@@ -186,41 +197,47 @@ const ProductNew = props => {
                 </div> */}
             </div>
 
-            <Field name="currentQuantity" label="Prezzo"
+            <Field name="priceb2b" label="Prezzo B2B"
                 placeholder="quantita del  prodotto" type="number"
                 onChange={handleChange}
-                value={product.currentQuantity}
-                error={errors.currentQuantity}
+                value={product.priceb2b}
+                error={errors.priceb2b}
             />
-            <Field name="price" label="Prezzo al rivenditore"
+            <Field name="price" label="Prezzo "
                 placeholder="Prezzo al rivenditore" type="number"
                 onChange={handleChange}
                 value={product.price}
                 error={errors.price}
             />
-            <Field name="alertQuanty" label="Codice interno"
+            <Field name="hdd" label="HDD"
                 placeholder="codice interno del  prodotto"
                 onChange={handleChange}
-                value={product.alertQuanty}
-                error={errors.alertQuanty}
+                value={product.hdd}
+                error={errors.hdd}
             />
-            <Field name="customField1" label="Marca"
-                placeholder="marca del  prodotto"
+            <Field name="processor" label="CPU"
+                placeholder="processor del  prodotto"
                 onChange={handleChange}
-                value={product.customField1}
-                error={errors.customField1}
+                value={product.processor}
+                error={errors.processor}
             />
-            <Field name="customField2" label="Modello"
-                placeholder="modello  del  prodotto"
+            <Field name="ram" label="RAM"
+                placeholder="memoria ram"
                 onChange={handleChange}
-                value={product.customField2}
-                error={errors.customField2}
+                value={product.ram}
+                error={errors.ram}
             />
-            <Field name="customField3" label="C.P.U"
+            <Field name="model" label="Model"
                 placeholder="specifiche del  prodotto"
                 onChange={handleChange}
-                value={product.customField3}
-                error={errors.customField3}
+                value={product.model}
+                error={errors.model}
+            />
+            <Field name="screen" label="Schermo"
+                placeholder="display del  prodotto"
+                onChange={handleChange}
+                value={product.screen}
+                error={errors.screen}
             />
             <div className="form-group">
                 <label htmlFor="Note">Note:</label>
