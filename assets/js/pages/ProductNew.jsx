@@ -53,21 +53,14 @@ const ProductNew = props => {
         setProduct({ ...product, [name]: value })
 
     }
-    const findProduct = async id => {
-        try {
-            const data = await PRODUCTSERVICE.finProductdById(id)
-            setProduct(data)
-        } catch (error) {
-            console.log("il ya une erreur")
-        }
-    }
+
     const handleSubmit = async (event) => {
         event.preventDefault();
 
         try {
             if (editing) {
-                const response = await axios.put(API_PRODUCT + "/" + id, product)
-                // const response = await PRODUCTSERVICE.editProductById(id, product)
+                //const response = await axios.put(API_PRODUCT + "/" + id, product)
+                const response = PRODUCTSERVICE.editProductById(id, product)
                 toast.success("il prodotto è stato modificato con successo");
                 setErrors({})
 
@@ -75,10 +68,10 @@ const ProductNew = props => {
 
                 // console.log(response)
             } else {
-                console.log(product)
+
                 const response = await PRODUCTSERVICE.addNew(product);
                 toast.success("il prodotto è stato registrato con successo");
-                console.log(product)
+
                 setErrors({});
 
 
@@ -101,8 +94,19 @@ const ProductNew = props => {
 
 
     useEffect(() => {
-        if (id !== "new") setEditing(true),
-            findProduct(id)
+        if (id !== "new") setEditing(true);
+        const findProduct = async id => {
+            try {
+                const data = await PRODUCTSERVICE.finProductdById(id)
+                console.log(data)
+                const { productId, marque, category, location, priceb2b, hdd, model, note, processor, ram, screen, price } = data
+                console.log(product)
+                setProduct({ productId, marque, category, location, priceb2b, hdd, model, note, processor, ram, screen, price })
+            } catch (error) {
+                console.log("il ya une erreur")
+            }
+        }
+        findProduct(id)
     }, [id])
 
 
@@ -112,10 +116,10 @@ const ProductNew = props => {
             try {
                 const data = await CATEGORYSERVICE.findAll();
                 setCategories(data);
-                if (!product.category) {
-                    setProduct({ ...product, category: data[0]["@id"] })
-                }
-                //console.log(data)
+
+                if (!product.category) setProduct({ ...product, category: data[0] })
+
+
             } catch (error) {
                 console.log(error);
                 toast.error("Erreur de chargement des categories")
@@ -131,10 +135,9 @@ const ProductNew = props => {
                 const data = await LOCATIONSERVICE.findAll()
                 setLocation(data);
 
-                if (!product.location) {
-                    setProduct({ ...product, location: data[0]["@id"] });
+                if (!product.location) setProduct({ ...product, location: data[0]["@id"] });
 
-                }
+
 
             } catch (error) {
                 console.log(error)

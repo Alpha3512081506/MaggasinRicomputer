@@ -75,6 +75,11 @@ class Category
      */
     private $components;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $alertQuantity;
+
     public function __construct()
     {
         $this->products = new ArrayCollection();
@@ -278,6 +283,18 @@ class Category
                 $component->setCategory(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getAlertQuantity(): ?int
+    {
+        return $this->alertQuantity;
+    }
+
+    public function setAlertQuantity(?int $alertQuantity): self
+    {
+        $this->alertQuantity = $alertQuantity;
 
         return $this;
     }

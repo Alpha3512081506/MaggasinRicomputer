@@ -8,10 +8,10 @@ function findAllMonitor() {
         .get(API_MONITOR)
         .then(response => response.data['hydra:member']);
 }
-function findMonitorById(id) {
-    return axios
-        .get(API_MONITOR + "/" + id)
-        .then(response => response.data);
+async function findMonitorById(id) {
+    const response = await axios
+        .get(API_MONITOR + "/" + id);
+    return response.data;
 
 }
 async function editMonitorById(id, ressource) {

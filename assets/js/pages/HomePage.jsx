@@ -63,12 +63,12 @@ const HomePage = (props) => {
         {!loading &&
             <div className="row d-flex align-items-center justify-content-between">
                 <div className="col-12 col-sm-12 col-md-6 col-lg-6 shadow-sm p-3 mb-3 bg-white rounded">
-                    <Link to="/types/notebook">
+                    <Link to="/productlist">
                         <div className="card text-white bg-success mb-3" style={{ maxWidth: "20rem" }}>
                             <div className="card-body">
                                 <div className="row">
                                     <div className="col-4">
-                                        <i className="fa fa-list fa-4x"></i>
+                                        <i className="fas fa-laptop fa-4x"></i>
                                     </div>
                                     <div className="col-8">
                                         <h2 className="card-title">{products.length}
@@ -109,7 +109,7 @@ const HomePage = (props) => {
                             <div className="card-body">
                                 <div className="row">
                                     <div className="col-4">
-                                        <i className="fa fa-users fa-4x"></i>
+                                        <i className="fas fa-desktop fa-4x"></i>
                                     </div>
                                     <div className="col-8">
                                         <h2 className="card-title">0</h2>
@@ -123,12 +123,12 @@ const HomePage = (props) => {
                     </Link>
                 </div>
                 <div className="col-12 col-sm-12 col-md-6 col-lg-6 shadow-sm p-3 mb-3 bg-white rounded">
-                    <Link to="/types/componenti">
+                    <Link to="/types/component">
                         <div className="card text-white bg-success mb-3" style={{ maxWidth: "20rem" }}>
                             <div className="card-body">
                                 <div className="row">
                                     <div className="col-4">
-                                        <i className="fa fa-arrow-up fa-4x"></i>
+                                        <i className="fa fa-list-up fa-4x"></i>
                                     </div>
                                     <div className="col-8">
                                         <h2 className="card-title">0</h2>
@@ -147,7 +147,7 @@ const HomePage = (props) => {
                             <div className="card-body">
                                 <div className="row">
                                     <div className="col-4">
-                                        <i className="fa fa-arrow-down fa-4x"></i>
+                                        <i className="fa fa-list fa-4x"></i>
                                     </div>
                                     <div className="col-8">
                                         <h2 className="card-title">0</h2>

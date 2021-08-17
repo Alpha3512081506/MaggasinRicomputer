@@ -40,7 +40,7 @@ const LoginPage = ({ onLogin, history }) => {
         <form onSubmit={handleSubmit}>
             <Field name="username"
                 icon="fa fa-user"
-                label="Nome del'Utente" placeholder="Nome del'Utente"
+                label="Nome Utente" placeholder="Nome del'Utente"
                 onChange={handleChange}
                 value={credentials.username}
                 error={errors}

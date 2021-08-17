@@ -92,6 +92,7 @@ const DesktopAdd = (props) => {
             try {
                 const data = await CATEGORYSERVICE.findAll();
                 setCategory(data);
+                console.log(data)
                 if (!desktop.category) setDesktop({ ...desktop, category: data[0]["@id"] })
 
             } catch (error) {
@@ -223,7 +224,7 @@ const DesktopAdd = (props) => {
                 error={error.price}
             />
             <Field name="priceb2b"
-                label="Prezzo al rivenditore" placeholder="Prezzo"
+                label="Prezzo B2B" placeholder="Prezzo"
                 value={desktop.priceb2b} onChange={handleChange}
                 error={error.priceb2b}
             />

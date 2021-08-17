@@ -75,6 +75,11 @@ class Component
      */
     private $category;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $alertQuantity;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -172,6 +177,18 @@ class Component
     public function setCategory(?Category $category): self
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    public function getAlertQuantity(): ?int
+    {
+        return $this->alertQuantity;
+    }
+
+    public function setAlertQuantity(?int $alertQuantity): self
+    {
+        $this->alertQuantity = $alertQuantity;
 
         return $this;
     }

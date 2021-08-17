@@ -103,7 +103,7 @@ const PrinterAdd = (props) => {
                     // console.log(data)
                     const { productId, category, marque, model, paper, connector, tonner, format, type, location, grade, note, price, priceb2b } = data
                     setPrinter({ productId, category, marque, model, paper, connector, tonner, format, type, location, grade, note, price, priceb2b })
-                    console.log(printer)
+
                     // console.log(data)
                 } catch (error) {
 
@@ -117,16 +117,16 @@ const PrinterAdd = (props) => {
         event.preventDefault();
         try {
 
-            console.log(printer)
+
             //executer la request la request POST vers l'api à travers AXIOS
             if (editing) {
-                //const data = await PRINTERSERVICE.editPrinterById(id, printer)
-                const data = await axios.put(API_PRINTER + "/" + id, printer)
-                console.log(data)
+                const data = await PRINTERSERVICE.editPrinterById(id, printer)
+                // const data = await axios.put(API_PRINTER + "/" + id, printer)
+
                 toast.success("La Stampante è stata modificata")
             } else {
-                console.log(printer)
-                await PRINTERSERVICE.addNewPrinter(printer)
+
+                const response = await PRINTERSERVICE.addNewPrinter(printer)
                 toast.success("La Stampante è stata creata")
                 //const response = await axios.post(API_PRINTER, printer)
                 console.log(response)
@@ -244,7 +244,7 @@ const PrinterAdd = (props) => {
                 error={error.price}
             />
             <Field name="priceb2b"
-                label="Price" placeholder="Price per i rivenditori della Stampante"
+                label="Price B2B" placeholder="Price per i rivenditori della Stampante"
                 value={printer.priceb2b}
                 onChange={handleChange}
                 error={error.priceb2b}

@@ -6,10 +6,10 @@ function findAll() {
         .get(API_PRODUCT)
         .then(response => response.data['hydra:member']);
 }
-function finProductdById(id) {
-    return axios
-        .get(API_PRODUCT + "/" + id)
-        .then(response => response.data);
+async function finProductdById(id) {
+    const response = await axios
+        .get(API_PRODUCT + "/" + id);
+    return response.data;
 
 }
 function editProductById(id, ressource) {
@@ -23,10 +23,10 @@ function addNew(data) {
         .post(API_PRODUCT, data);
 
 }
-function deleteId(id) {
-    return axios
-        .delete(API_PRODUCT + "/" + id)
-        .then(response => console.log(response));
+async function deleteId(id) {
+    const response = await axios
+        .delete(API_PRODUCT + "/" + id);
+    return console.log(response);
 }
 
 export default {

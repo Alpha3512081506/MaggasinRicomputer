@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Field from '../../../form/Field';
@@ -13,7 +13,6 @@ const ComponentAddQuantity = (props) => {
 
     const [component, setComponent] = useState({
         productId: "",
-        quantityNew: 0,
         quantity: "",
 
 
@@ -24,58 +23,33 @@ const ComponentAddQuantity = (props) => {
 
         quantity: ""
     });
+    const [quantityNew, setNewQuantityNew] = useState(0)
 
-
+    const handleChangeQuantity = (event) => {
+        setNewQuantityNew(event.currentTarget.value)
+        console.log(quantityNew)
+    }
     const handleChange = (event) => {
         const name = event.currentTarget.name;
         const value = event.currentTarget.value;
         setComponent({ ...component, [name]: value });
+        // console.log(quantityNew)
 
     }
-    /** const findComponent = async (id) => {
-        try {
-            // const data = await COMPONENTSERVICE.finComponentById(idComponent)
-            const data = await axios.get("https://localhost:8000/api/components/125")
-            setComponent(data)
-            //console.log(data)
-        } catch (error) {
-            console.log(error)
-            toast.error("Si è verificato un errore")
-        }
-    }
 
 
 
-    const [data, setData] = useState([]);
-  
-      useEffect(() => {
-  
-          function getFetchUrl() {
-              return API_COMPONENNT;
-          }
-          async function fetchData() {
-              const result = await axios.get(getFetchUrl());
-              setData(result.data);
-              console.log("**********************************************")
-              console.log(data)
-          }
-  
-          fetchData();
-      }, [data]); // ✅ Deps are OK
-  
-      // ...
-      */
 
 
-
-    const [quantityNew, setNuantityNew] = useState(0)
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
             console.log(component)
-            setComponent({ ...component })
-            //await COMPONENTSERVICE.editComponentById(idComponent, component);
+            // setComponent({ ...component })
+            const response = await COMPONENTSERVICE.editComponentById(id, { ...component, });
+            console.log(component)
             toast.success("il componente è stato modificato con successo");
+            history.push("/types/component")
             setErrors({})
 
             //  props.history.push("/types/component");
@@ -100,9 +74,9 @@ const ComponentAddQuantity = (props) => {
             try {
                 const data = await COMPONENTSERVICE.finComponentById(id)
                 // const data = await axios.get(API_COMPONENNT + "/" + id)
-                // console.log(data)
                 const { productId, quantity } = data
-                setComponent({ productId, quantity })
+                setComponent({ productId, quantity: quantity + quantityNew })
+
                 console.log(component)
 
 
@@ -113,6 +87,8 @@ const ComponentAddQuantity = (props) => {
         }
         findComponent(id)
     }, [id])
+
+
 
     return (<>
 
@@ -131,27 +107,25 @@ const ComponentAddQuantity = (props) => {
             <div className="form-group">
                 <label htmlFor="quantityActual">Quantità  :</label>
                 <input type="number" disabled className="form-control" placeholder=""
+
                     id="quantity" name="quantity"
                     defaultValue={component.quantity} onChange={handleChange}
                     error={error.quantityActual}
 
                 />
             </div>
-
-            <div className="form-group">
-                <label htmlFor="quantityNew">Nuova Quantità:</label>
-                <input type="number" className="form-control" name="quantityNew"
-                    placeholder="Nuova quantità" id="quantityNew"
-                    defaultValue={component.quantityNew} onChange={handleChange}
-                    error={error.quantityNew}
-                />
-            </div>
-
-
             <div className="form-group">
                 <button type="submit" className="btn btn-success">Crea il Prodotto</button>
             </div>
         </form>
+        <div className="form-group">
+            <label htmlFor="quantityNew">Nuova Quantità:</label>
+            <input type="number" className="form-control" name="quantityNew"
+                placeholder="Nuova quantità" id="quantityNew"
+                defaultValue={quantityNew} onChange={handleChangeQuantity}
+                error={error.quantityNew}
+            />
+        </div>
     </>);
 }
 

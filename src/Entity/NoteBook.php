@@ -104,7 +104,7 @@ class NoteBook
 
     /**
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="noteBooks")
-     *  @Groups({"notebook_read","category_read","notebook_write"})
+     *  @Groups({"notebook_read","notebook_write"})
      */
     private $category;
 

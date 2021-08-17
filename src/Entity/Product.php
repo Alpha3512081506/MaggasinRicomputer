@@ -60,7 +60,7 @@ class Product
      * @Groups({"product_read","category_read","product_write"})
      * @Assert\NotBlank(message="Il nome del prodotto è obligatorio")
      * @Assert\Length(
-     *      min = 4,
+     *      min = 2,
      *      max = 50,
      *      minMessage = "il marque  del prodotto non può essere vuoto et nom poi avere meno di {{ limit }} characters long",
      *      maxMessage = "Nom poi avere piu {{ limit }} characters"
@@ -82,12 +82,14 @@ class Product
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Groups({"product_read","product_write"})
+     *  @Assert\NotBlank(message="Il modello del prodotto è obligatorio")
      */
     private $model;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      * @Groups({"product_read","product_write"})
+     * 
      */
     private $note;
 
@@ -131,24 +133,28 @@ class Product
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      *  @Groups({"product_read","category_read","product_write"})
+     *  @Assert\NotBlank(message="la RAM del prodotto è obligatoria")
      */
     private $ram;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      *  @Groups({"product_read","category_read","product_write"})
+     *  @Assert\NotBlank(message="Il disco HDD del prodotto è no puo essere vuoto")
      */
     private $hdd;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      *   @Groups({"product_read","category_read","product_write"})
+     *   @Assert\NotBlank(message="lo schermo del prodotto è no puo essere vuoto")
      */
     private $screen;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      *   @Groups({"product_read","category_read","product_write"})
+     *  @Assert\NotBlank(message="Il  processore del prodotto è no puo essere vuoto")
      */
     private $processor;
 

@@ -3,15 +3,15 @@ import axios from 'axios';
 import { API_PRINTER } from './Config';
 
 
-function findAllPrinter() {
-    return axios
-        .get(API_PRINTER)
-        .then(response => response.data['hydra:member']);
+async function findAllPrinter() {
+    const response = await axios
+        .get(API_PRINTER);
+    return response.data['hydra:member'];
 }
-function findPrinterById(id) {
-    return axios
-        .get(API_PRINTER + "/" + id)
-        .then(response => response.data);
+async function findPrinterById(id) {
+    const response = await axios
+        .get(API_PRINTER + "/" + id);
+    return response.data;
 
 }
 function editPrinterById(id, ressource) {

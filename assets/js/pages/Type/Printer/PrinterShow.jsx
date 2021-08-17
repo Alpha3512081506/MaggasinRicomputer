@@ -6,6 +6,8 @@ import Loading from '../../../components/Loading';
 import Pagination from '../../../components/Pagination';
 import { API_PRINTER } from '../../../services/Config';
 import ExportToExcel from '../../../services/ExportToExcel';
+import PRINTERSERVICE from '../../../services/PRINTERSERVICE';
+
 
 const PrinterShow = (props) => {
     const [printer, setPrinter] = useState([]);
@@ -16,15 +18,17 @@ const PrinterShow = (props) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const result = await axios.get(API_PRINTER);
-                setPrinter(result.data['hydra:member']);
+                //const result = await axios.get(API_PRINTER);
+                const result = await PRINTERSERVICE.findAllPrinter()
+
+                setPrinter(result);
                 toast.success("connessione al server effettuata ✔")
                 setLoading(false);
 
             } catch (error) {
                 console.log("Erreur!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                 toast.error("Devi effettuare il login per accedere alle risorse")
-                console.log(error.data)
+                console.log(error)
             }
 
 
@@ -148,8 +152,8 @@ const PrinterShow = (props) => {
                             <td>{printer.grade}</td>
                             <td>{printer.format}</td>
 
-                            <td>{printer.category}</td>
-                            <td>{printer.location}</td>
+                            <td>{printer.category.categoryName}</td>
+                            <td>{printer.location.locationName}</td>
 
                             <td>{printer.price}</td>
                             <td>{printer.priceb2b}</td>

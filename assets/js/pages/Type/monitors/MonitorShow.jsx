@@ -125,7 +125,7 @@ const MonitorShow = (props) => {
                             <th>Display</th>
                             <th>Luogo</th>
                             <th>Prezzo</th>
-                            <th>Prezzo al Rivenditore</th>
+                            <th>Prezzo B2B</th>
                             <th>Note</th>
 
                         </tr>

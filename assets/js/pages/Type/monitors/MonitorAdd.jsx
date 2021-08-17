@@ -83,7 +83,7 @@ const MonitorAdd = (props) => {
             //executer la request la request POST vers l'api à travers AXIOS
             if (editing) {
                 console.log(monitor)
-                const data = await MONITORSERVICE.editMonitorById(id, monitor)
+                const response = await MONITORSERVICE.editMonitorById(id, monitor)
 
                 toast.success("il monitor è stato modificato")
                 console.log(response)
@@ -118,7 +118,7 @@ const MonitorAdd = (props) => {
             const fetchData = async (id) => {
                 try {
                     //const data = await axios.get(API_DESKTOP + "/" + id)
-                    const data = await MONITORSERVICE.findAllMonitor(id)
+                    const data = await MONITORSERVICE.findMonitorById(id)
                     const { productId, category, marque, model, display, location, grade, note, price, priceb2b } = data
                     setMonitor({ productId, category, marque, model, display, location, grade, note, price, priceb2b })
                     //  console.log(printer)
@@ -197,7 +197,7 @@ const MonitorAdd = (props) => {
                 error={error.price}
             />
             <Field name="priceb2b"
-                label="Prezzo al rivenditore" placeholder="Prezzo"
+                label="Prezzo B2B" placeholder="Prezzo"
                 value={monitor.priceb2b} onChange={handleChange}
                 error={error.priceb2b}
             />

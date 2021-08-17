@@ -148,7 +148,6 @@ const NoteBookShow = (props) => {
                     <div className="btn-group">
                         <button type="button" className="btn btn-outline-success ">STAMPA</button>
                         {<ExportToExcel apiData={paginatedNotebook} fileName={fileName} />}
-                        <button onClick={handleTest} type="button" className="btn btn-outline-success ">IMPORTA EXCEL</button>
                     </div>
                 </div>
                 <table ref={componentRef} className="table table-responsive table-hover table-bordered table-sm w-100" id="myTable2">
