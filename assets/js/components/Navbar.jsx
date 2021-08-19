@@ -41,7 +41,7 @@ const Navbar = ({ history, isAuthenticated, onLogout }) => {
                     <a className="nav-link " href="https://ricomputer.net/" target="_blank">Vai Negozzio</a>
                 </li>
                 <li className="nav-item mr-5">
-                    <a className="nav-link " href="https://localhost:8000/ricomputer/magazzino" target="_blank">Visita Magazzini</a>
+                    <a className="nav-link " href="https://agazzino.website/ricomputer/magazzino" target="_blank">Visita Magazzini</a>
                 </li>
 
             </ul>
