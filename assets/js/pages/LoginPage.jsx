@@ -56,8 +56,8 @@ const LoginPage = ({ onLogin, history }) => {
             />
             <div className="form-group align-items-center">
                 <button type="submit" className="btn btn-outline-success mr-4">Login</button>
-                <Link to="/inscription" className="tooltip" ><button className="btn btn-outline-success mr-4 " disabled>Register</button>
-                    <span className="tooltiptext">Tooltip text</span>
+                <Link to="/inscription"><button className="btn btn-outline-success mr-4 " >Register</button>
+
                 </Link>
 
             </div>

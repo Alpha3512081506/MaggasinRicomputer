@@ -68,7 +68,7 @@ const HomePage = (props) => {
                             <div className="card-body">
                                 <div className="row">
                                     <div className="col-4">
-                                        <i className="fas fa-laptop fa-4x"></i>
+                                        <i className="fas fa-list fa-4x"></i>
                                     </div>
                                     <div className="col-8">
                                         <h2 className="card-title">{products.length}
@@ -109,7 +109,7 @@ const HomePage = (props) => {
                             <div className="card-body">
                                 <div className="row">
                                     <div className="col-4">
-                                        <i className="fas fa-desktop fa-4x"></i>
+                                        <i className="fas fa-list fa-4x"></i>
                                     </div>
                                     <div className="col-8">
                                         <h2 className="card-title">0</h2>
