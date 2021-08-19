@@ -11,6 +11,7 @@ const CategoryAdd = (props) => {
 
     const [category, setCategory] = useState({
         categoryName: "",
+        alertQuantity: 0
     });
     const [editing, setEditing] = useState(false);
     const findCategory = async id => {
@@ -35,6 +36,7 @@ const CategoryAdd = (props) => {
     }
     const [errors, setErrors] = useState({
         categoryName: "",
+        alertQuantity: ""
     });
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -74,6 +76,20 @@ const CategoryAdd = (props) => {
                 value={category.categoryName}
                 error={errors.categoryName}
             />
+
+            <Field name="alertQuantity"
+                label="Alert Quantità" placeholder="alert"
+                onChange={handleChange}
+                value={category.alertQuantity}
+                error={errors.alertQuantity}
+                type="numeric"
+            />
+            <div className="form-group">
+                <input className="chek-button">
+
+                </input>
+            </div>
+
 
 
             <div className="form-group">

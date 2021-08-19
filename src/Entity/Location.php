@@ -37,7 +37,11 @@ class Location
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"location_read", "product_read"})
+     * @Groups({
+     * "location_read", "product_read",
+     * "printer_read",
+     * "notebook_read","component_read","monitor_read"
+     * })
      * @Assert\NotNull(message="Il nome della location è obligatorio")
      * @Assert\Length(
      *      min = 4,

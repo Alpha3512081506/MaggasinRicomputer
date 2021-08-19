@@ -3,6 +3,7 @@ import Field from "../form/Field";
 import { Link } from "react-router-dom";
 import AuthAPI from "../services/AuthApi";
 import { toast } from "react-toastify";
+
 const LoginPage = ({ onLogin, history }) => {
 
     const [credentials, setCredentials] = useState({
@@ -55,7 +56,8 @@ const LoginPage = ({ onLogin, history }) => {
             />
             <div className="form-group align-items-center">
                 <button type="submit" className="btn btn-outline-success mr-4">Login</button>
-                <Link to="/inscription" className="disabled" ><button className="btn btn-outline-success mr-4  disabled">Register</button>
+                <Link to="/inscription" className="tooltip" ><button className="btn btn-outline-success mr-4 " disabled>Register</button>
+                    <span className="tooltiptext">Tooltip text</span>
                 </Link>
 
             </div>

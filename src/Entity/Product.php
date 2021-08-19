@@ -71,7 +71,6 @@ class Product
     /**
      * @ORM\Column(type="decimal")
      * @Groups({"product_read", "category_read","product_write"})
-     * @Assert\NotBlank
      * @Assert\Type(
      *     type="numeric",
      *     message="il valore {{ value }} non è un tipo valido {{ type }}."

@@ -5,7 +5,11 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\PrinterRepository;
 use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Validator\Constraints\Type;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=PrinterRepository::class)
@@ -32,12 +36,26 @@ class Printer
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"printer_read","category_read","printer_write"})
+     * @Assert\NotBlank(message="Il nome del prodotto è obligatorio")
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 50,
+     *      minMessage = "il marca  del prodotto non può essere vuoto et nom poi avere meno di {{ limit }} characters long",
+     *      maxMessage = "Nom poi avere piu {{ limit }} characters"
+     * )
      */
     private $marque;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"printer_read","category_read","printer_write"})
+     * @Assert\NotBlank(message="Il nome del prodotto è obligatorio")
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 50,
+     *      minMessage = "il modello  del prodotto non può essere vuoto et nom poi avere meno di {{ limit }} characters long",
+     *      maxMessage = "Nom poi avere piu {{ limit }} characters"
+     * )
      */
     private $model;
 
@@ -80,12 +98,20 @@ class Printer
     /**
      * @ORM\Column(type="decimal", precision=5, scale=2, nullable=true)
      * @Groups({"printer_read","category_read","printer_write"})
+     *  @Assert\Type(
+     *     type="numeric",
+     *     message="il valore {{ value }} non è un tipo valido {{ type }}."
+     * )
      */
     private $price;
 
     /**
      * @ORM\Column(type="decimal", precision=5, scale=2, nullable=true)
      * @Groups({"printer_read","category_read","printer_write"})
+     *  @Assert\Type(
+     *     type="numeric",
+     *     message="il valore {{ value }} non è un tipo valido {{ type }}."
+     * )
      */
     private $priceb2b;
 
@@ -110,6 +136,13 @@ class Printer
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      *  @Groups({"printer_read","category_read","printer_write"})
+     * @Assert\NotBlank(message="productId del prodotto è obligatorio")
+     * @Assert\Length(
+     *      min = 4,
+     *      max = 50,
+     *      minMessage = "l'id del prodotto non può essere vuoto et nom poi avere meno di {{ limit }} characters long",
+     *      maxMessage = "Nom poi avere piu {{ limit }} characters"
+     * )
      */
     private $productId;
 

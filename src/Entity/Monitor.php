@@ -6,6 +6,9 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\MonitorRepository;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=MonitorRepository::class)
@@ -27,36 +30,53 @@ class Monitor
     /**
      * @ORM\Column(type="string")
      *  @Groups({"monitor_read","category_read","monitor_write"})
+     *  @Assert\NotBlank(message="productId del prodotto è obligatorio")
+     * @Assert\Length(
+     *      min = 4,
+     *      max = 50,
+     *      minMessage = "l'id del prodotto non può essere vuoto et nom poi avere meno di {{ limit }} characters long",
+     *      maxMessage = "Nom poi avere piu {{ limit }} characters"
+     * )
      */
     private $productId;
 
     /**
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="monitors")
      *  @Groups({"monitor_read","category_read","monitor_write"})
+     *@Assert\NotBlank(message="Il modello del prodotto è obligatorio")
+
      */
     private $category;
 
     /**
      * @ORM\Column(type="string", length=255)
      *  @Groups({"monitor_read","category_read","monitor_write"})
+     * @Assert\NotBlank(message="la marca del prodotto è obligatorio")
+
      */
     private $marca;
 
     /**
      * @ORM\Column(type="string", length=255)
      *  @Groups({"monitor_read","category_read","monitor_write"})
+     *  @Assert\NotBlank(message="Il modello del prodotto è obligatorio")
+
      */
     private $model;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"monitor_read","category_read","monitor_write"})
+     * @Assert\NotBlank(message="Il grado del prodotto è obligatorio")
+
      */
     private $grade;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"monitor_read","category_read","monitor_write"})
+     *  @Assert\NotBlank(message="lo schermo del prodotto è obligatorio")
+
      */
     private $display;
 

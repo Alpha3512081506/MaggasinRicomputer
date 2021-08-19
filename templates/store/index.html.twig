@@ -1,0 +1,107 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}BENVENUTO AL NOSTRO MAGAZZINO
+{% endblock %}
+{% block style %}
+	<style>
+		.map-container-3 {
+			overflow: hidden;
+			padding-bottom: 56.25%;
+			position: relative;
+			height: 0;
+		}
+		.map-container-3 iframe {
+			left: 0;
+			top: 0;
+			height: 100%;
+			width: 100%;
+			position: absolute;
+		}
+	</style>
+{% endblock %}
+
+{% block body %}
+	<div class="row">
+		{% for item in 1..3 %}
+			<div class="col">
+				<div class="card">
+					<img src="https://picsum.photos/400/400" alt="image du negizzio" class="img-fluid">
+					<div class="card-body">
+						<h4 class="card-title">Scaffalo</h4>
+						<p class="card text">Lorem ipsum dolor sit amet consectetur boriodae unde accusantium eveniet sint ut
+						</p>
+					</div>
+				</div>
+			</div>
+
+		{% endfor %}
+	</div>
+	<hr>
+	<div class="row">
+		<div class="col">
+			<div class="alert alert-dismissible alert-primary">
+				<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+				<h4 class="alert-heading">text!</h4>
+				<p class="mb-0">Best check yo self, you're not looking too good. Nulla vitae elit libero, a pharetra augue. Praesent commodo cursus magna,
+					<a href="#" class="alert-link">vel scelerisque nisl consectetur et</a>.</p>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col">
+			<ul class="list-group">
+				<li class="list-group-item d-flex justify-content-between align-items-center">
+					<p>Diamo nuovamente vita a Computer, Stampanti e accessori di fascia professional.
+						 
+						RiComputer, presente da più di 10 anni a Cassino (FR), opera a livello nazionale ed europeo nella compravendita di dispositivi elettronici ricondizionati.</p>
+
+				</li>
+				<li class="list-group-item d-flex justify-content-between align-items-center">
+					<strong>via:</strong>le dante........
+
+				</li>
+				<li class="list-group-item d-flex justify-content-between align-items-center">
+					<strong>TELEFONO:</strong>35345545674567
+				</li>
+				<li class="list-group-item d-flex justify-content-between align-items-center">
+					<strong>EMAIL:</strong>test@gmail.it
+				</li>
+			</ul>
+		</div>
+		<div class="col">
+			<form>
+				<fieldset>
+					<legend>CONTATTI</legend>
+
+					<div class="form-group">
+						<input type="email" class="form-control" placeholder="Nome">
+					</div>
+					<br>
+					<div class="form-group">
+						<input type="email" class="form-control" placeholder="Enter email">
+					</div>
+					<br>
+					<div class="form-group">
+
+						<input type="email" class="form-control" placeholder="Oggetto">
+					</div>
+					<br>
+					<div class="form-group">
+						<textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
+					</div>
+					<div class="form-group">
+						<button type="submit" class="btn btn-primary">Submit</button>
+					</div>
+
+				</form>
+			</div>
+			<div
+				class="col">
+				<!--Google map-->
+				<div id="map-container-google-3" class="z-depth-1-half map-container-3">
+					<iframe src="https://maps.google.com/maps?q=warsaw&t=k&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" style="border:0" allowfullscreen></iframe>
+				</div>
+			</div>
+		</div>
+
+	{% endblock %}

@@ -54,13 +54,48 @@ const ProductNew = props => {
 
     }
 
+    useEffect(() => {
+        const findLocation = async () => {
+            try {
+                const data = await LOCATIONSERVICE.findAll()
+                setLocation(data);
+
+                if (!product.location) setProduct({ ...product, location: data[0]["@id"] });
+
+
+
+            } catch (error) {
+                console.log(error)
+
+            }
+        }
+        findLocation()
+    }, []);
+
+    useEffect(() => {
+        const findAllCategories = async () => {
+            try {
+                const data = await CATEGORYSERVICE.findAll();
+                setCategories(data);
+
+                if (!product.category) setProduct({ ...product, category: data[0] })
+
+
+            } catch (error) {
+                console.log(error);
+                toast.error("Erreur de chargement des categories")
+            }
+        }
+        findAllCategories()
+    }, []);
+
     const handleSubmit = async (event) => {
         event.preventDefault();
 
         try {
             if (editing) {
-                //const response = await axios.put(API_PRODUCT + "/" + id, product)
-                const response = PRODUCTSERVICE.editProductById(id, product)
+                const response = await axios.put(API_PRODUCT + "/" + id, product)
+                //  const response = PRODUCTSERVICE.editProductById(id, product)
                 toast.success("il prodotto è stato modificato con successo");
                 setErrors({})
 
@@ -94,59 +129,28 @@ const ProductNew = props => {
 
 
     useEffect(() => {
-        if (id !== "new") setEditing(true);
-        const findProduct = async id => {
-            try {
-                const data = await PRODUCTSERVICE.finProductdById(id)
-                console.log(data)
-                const { productId, marque, category, location, priceb2b, hdd, model, note, processor, ram, screen, price } = data
-                console.log(product)
-                setProduct({ productId, marque, category, location, priceb2b, hdd, model, note, processor, ram, screen, price })
-            } catch (error) {
-                console.log("il ya une erreur")
+        if (id !== "new") {
+            setEditing(true)
+            const findProduct = async (idProduct) => {
+                try {
+                    const data = await PRODUCTSERVICE.finProductdById(id)
+                    const { productId, marque, category, location, priceb2b, hdd, model, note, processor, ram, screen, price } = data
+
+                    setProduct({ productId, marque, category, location, priceb2b, hdd, model, note, processor, ram, screen, price })
+                } catch (error) {
+                    console.log(error.data)
+                    console.log("il ya une erreur")
+                }
             }
+            findProduct(id)
         }
-        findProduct(id)
+
     }, [id])
 
 
 
-    useEffect(() => {
-        const findAllCategories = async () => {
-            try {
-                const data = await CATEGORYSERVICE.findAll();
-                setCategories(data);
-
-                if (!product.category) setProduct({ ...product, category: data[0] })
-
-
-            } catch (error) {
-                console.log(error);
-                toast.error("Erreur de chargement des categories")
-            }
-        }
-        findAllCategories()
-    }, []);
-
-
-    useEffect(() => {
-        const findLocation = async () => {
-            try {
-                const data = await LOCATIONSERVICE.findAll()
-                setLocation(data);
-
-                if (!product.location) setProduct({ ...product, location: data[0]["@id"] });
-
-
-
-            } catch (error) {
-                console.log(error)
-
-            }
-        }
-        findLocation()
-    }, []);
     return (<>
+        {console.log(product)}
         {!editing && <h3 className="text-center">Crea prodotto</h3> || <h3 className="text-center">Edit Prodotto</h3>}
         <div className="mb-3 d-flex justify-content-between align-items-center">
 

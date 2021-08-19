@@ -25,7 +25,7 @@ const MonitorShow = (props) => {
             } catch (error) {
                 console.log("Erreur!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                 toast.error("Devi effettuare il login per accedere alle risorse")
-                console.log(error.data)
+                console.log(error.result)
             }
 
 
@@ -61,7 +61,7 @@ const MonitorShow = (props) => {
     //const start = (currentPage * itemsPerPage - itemsPerPage);
     // const paginatedDesktop = desktop.slice(start, start + itemsPerPage)
     const filteredMonitor = monitor.filter(d =>
-        // (d.productId && d.productId.toString().toLowerCase().includes(search.toLocaleLowerCase())) ||
+        (d.productId && d.productId.toString().toLowerCase().includes(search.toLocaleLowerCase())) ||
         (d.marca && d.marca.toLowerCase().includes(search.toLocaleLowerCase())) ||
         (d.model && d.model.toLowerCase().includes(search.toLocaleLowerCase())) ||
         d.display.toLowerCase().includes(search.toLocaleLowerCase()) ||
@@ -146,9 +146,9 @@ const MonitorShow = (props) => {
                             <td>{monitor.model}</td>
                             <td>{monitor.grade}</td>
                             <td>{monitor.display}</td>
-                            <td>{monitor.location.locationName}&euro;</td>
+                            <td>{monitor.location.locationName}</td>
                             <td>{monitor.price}&euro;</td>
-                            <td>{monitor.priceb2b}</td>
+                            <td>{monitor.priceb2b}&euro;</td>
                             <td>{monitor.note}</td>
 
                         </tr>)}

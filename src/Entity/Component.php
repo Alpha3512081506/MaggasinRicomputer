@@ -6,6 +6,9 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ComponentRepository;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ComponentRepository::class)
@@ -30,18 +33,27 @@ class Component
     /**
      * @ORM\Column(type="string")
      *  @Groups({"component_read","category_read","component_write"})
+     *   @Assert\NotBlank(message="productId del prodotto è obligatorio")
+     * @Assert\Length(
+     *      min = 4,
+     *      max = 50,
+     *      minMessage = "l'id del prodotto non può essere vuoto et nom poi avere meno di {{ limit }} characters long",
+     *      maxMessage = "Nom poi avere piu {{ limit }} characters"
+     * )
      */
     private $productId;
 
     /**
      * @ORM\Column(type="string", length=255)
      *  @Groups({"component_read","category_read","component_write"})
+     * @Assert\NotBlank(message="Il tipo del prodotto è obligatorio")
      */
     private $type;
 
     /**
      * @ORM\Column(type="string", length=255)
      *  @Groups({"component_read","category_read","component_write"})
+     * @Assert\NotBlank(message="Il marca del prodotto è obligatorio")
      */
     private $marque;
 
@@ -54,12 +66,14 @@ class Component
     /**
      * @ORM\Column(type="integer")
      *  @Groups({"component_read","category_read","component_write"})
+     * @Assert\NotBlank(message="la quantità dei prodotti è obligatorio")
      */
     private $quantity;
 
     /**
      * @ORM\Column(type="string", length=255)
      *  @Groups({"component_read","category_read","component_write"})
+     * @Assert\NotBlank(message="Il grado del prodotto è obligatorio")
      */
     private $grade;
 

@@ -139,7 +139,7 @@ const PrinterAdd = (props) => {
                 error.response.data.violations.forEach(violation => {
                     apiErr[violation.propertyPath] = violation.message;
                 })
-                setErrors(apiErr)
+                setError(apiErr)
             }
 
             toast.error("Erreur! impossibile di registrare la Stampante")

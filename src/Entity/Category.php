@@ -39,7 +39,10 @@ class Category
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"category_read","product_read"})
+     * @Groups({
+     * "category_read","product_read","printer_read",
+     * "notebook_read","component_read","monitor_read"
+     * })
      * @Assert\NotBlank(message="Il nome della categoria è obligatorio")
      * @Assert\Length(
      *      min = 4,
@@ -77,6 +80,8 @@ class Category
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     *  @Groups({"category_read"})
+     * 
      */
     private $alertQuantity;
 

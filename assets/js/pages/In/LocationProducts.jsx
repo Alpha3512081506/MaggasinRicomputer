@@ -1,22 +1,30 @@
-import React, { useEffect } from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
+
+import { API_LOCATION } from '../../services/Config';
 const LocationProducts = (props) => {
     const [products, setProduct] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    const findAll = async () => {
-        try {
-            const data = await APISERVICE.findAll();
-            setProduct(data);
-            setLoading(false)
-            toast.success("connessione al server effettuata ✔")
-        } catch (error) {
-            toast.error("Devi effettuare il login per accedere alle risorse");
-        }
 
-    }
-    useEffect(() => { findAll() }, []);
+    useEffect(() => {
+        const findAll = async (id) => {
+            try {
+                const data = await axios.get(API_LOCATION + "/" + props.match.params.id)
+                console.log(data)
+                setProduct(data);
+                setLoading(false)
+                toast.success("connessione al server effettuata ✔")
+            } catch (error) {
+                toast.error("Devi effettuare il login per accedere alle risorse");
+            }
+
+        }
+        findAll(props.match.params.id)
+    }, [props.match.params.id]);
     return (<>
-        <h1>Hello le test</h1>
+        <h1>{console.log(products.data.products[0])}</h1>
     </>);
 }
 

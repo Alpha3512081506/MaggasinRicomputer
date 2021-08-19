@@ -76,7 +76,7 @@ const Registration = ({ firstName, lastName, email, avatar }) => {
                 value={users.avatar}
                 error={errors.avatar}
             />
-            <button type="submit" className="btn btn-outline-success">Mi Registro</button>
+            <button type="submit" className="btn btn-outline-success" disabled>Mi Registro</button>
             <Link to="/login"><button className="btn btn-outline-success ">mi collego</button>
             </Link>
         </form>

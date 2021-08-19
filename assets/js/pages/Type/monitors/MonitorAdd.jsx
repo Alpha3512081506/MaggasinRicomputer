@@ -17,11 +17,11 @@ const MonitorAdd = (props) => {
         model: "",
         grade: "",
         display: "",
-        price: "",
-        priceb2b: "",
+        price: 0,
+        priceb2b: 0,
         location: ""
     });
-    const [error, seError] = useState({
+    const [error, setError] = useState({
         productId: "",
         category: "",
         marca: "",
@@ -65,7 +65,6 @@ const MonitorAdd = (props) => {
             try {
                 const data = await LOCATIONSERVICE.findAll()
                 setLocation(data);
-                console.log(data[0]["@id"])
                 if (!monitor.location) setMonitor({ ...monitor, location: data[0]["@id"] })
 
 
@@ -103,7 +102,7 @@ const MonitorAdd = (props) => {
                 error.response.data.violations.forEach(violation => {
                     apiErr[violation.propertyPath] = violation.message;
                 })
-                setErrors(apiErr)
+                setError(apiErr)
             }
 
             toast.error("Erreur! impossibile di registrare la Stampante")
@@ -119,8 +118,8 @@ const MonitorAdd = (props) => {
                 try {
                     //const data = await axios.get(API_DESKTOP + "/" + id)
                     const data = await MONITORSERVICE.findMonitorById(id)
-                    const { productId, category, marque, model, display, location, grade, note, price, priceb2b } = data
-                    setMonitor({ productId, category, marque, model, display, location, grade, note, price, priceb2b })
+                    const { productId, category, marca, model, display, location, grade, note, price, priceb2b } = data
+                    setMonitor({ productId, category, marca, model, display, location, grade, note, price, priceb2b })
                     //  console.log(printer)
                     // console.log(data)
                 } catch (error) {
@@ -134,7 +133,7 @@ const MonitorAdd = (props) => {
         , [id])
 
     return (<>
-        {!editing && <h1>Add monitor</h1> || <h1>EDIZIONE DEL monitor </h1>}
+        {!editing && <h2>AGGIUNGI UN MONITOR</h2> || <h1>MODIFICA IL MONITOR </h1>}
         <form onSubmit={handleSubmit}>
             <Field name="productId"
                 label="ProductId" placeholder="l'id del product"
@@ -153,10 +152,10 @@ const MonitorAdd = (props) => {
                     {category.categoryName}</option>)}
             </Select>
 
-            <Field name="marque"
+            <Field name="marca"
                 label="Marca" placeholder="Marca del product"
-                value={monitor.marque} onChange={handleChange}
-                error={error.marque}
+                value={monitor.marca} onChange={handleChange}
+                error={error.marca}
             />
             <Field name="model"
                 label="Modello" placeholder="Modello del product"
@@ -203,7 +202,7 @@ const MonitorAdd = (props) => {
             />
             <div className="form-group">
                 <button type="submit" className="btn btn-success">Crea il Prodotto</button>
-                <Link to={"/types/monitor"}> Vai alla lista dei monitor</Link>
+                <Link to={"/types/monitors"}> Vai alla lista dei monitor</Link>
             </div>
 
         </form>

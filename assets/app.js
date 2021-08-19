@@ -14,8 +14,9 @@ import "../node_modules/bootstrap/dist/js/bootstrap.min.js"
 import "../node_modules/font-awesome/css/font-awesome.css"
 
 // any CSS you import will output into a single css file (app.css in this case)
-import './styles/bootswatch.css'
+import './styles/bootswatch.css';
 import './styles/app.css';
+import './styles/tooltype.css';
 
 
 // start the Stimulus application

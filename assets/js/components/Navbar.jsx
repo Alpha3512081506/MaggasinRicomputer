@@ -23,20 +23,29 @@ const Navbar = ({ history, isAuthenticated, onLogout }) => {
         <div className="collapse navbar-collapse" id="navbarColor02">
             <ul className="navbar-nav mr-auto">
                 <li className="nav-item mr-5 text-white">
-                    <Link to="/"><span className="text-white">Home</span></Link>
+                    <Link to="/"><span className="text-white active">Home</span></Link>
+                </li>
+                {/**  <li className="nav-item mr-5 text-white">
+                    <Link to="/productlist"><span className="text-white">Product</span></Link>
+                </li>
+                <li className="nav-item mr-5 text-white">
+                    <Link to="/categorylist"><span className="text-white"> Category</span></Link>
                 </li>
                 <li className="nav-item mr-5 text-white">
                     <Link to="/productlist"><span className="text-white">Product</span></Link>
                 </li>
                 <li className="nav-item mr-5 text-white">
                     <Link to="/categorylist"><span className="text-white"> Category</span></Link>
+                </li> */}
+                <li className="nav-item mr-5">
+                    <a className="nav-link " href="https://ricomputer.net/" target="_blank">Vai Negozzio</a>
                 </li>
                 <li className="nav-item mr-5">
-                    <Link to="/locationlist"><span className="text-white"> Location</span></Link>
+                    <a className="nav-link " href="https://magazzino.website/ricomputer/magazzino" target="_blank">Visita Magazzini</a>
                 </li>
 
             </ul>
-           {/* <ul className="navbar-nav ml-auto ">
+            {/* <ul className="navbar-nav ml-auto ">
 
                 <li className="nav-item"><NavLink to="/inscription"
                     className="nav-link">Inscription</NavLink></li>
@@ -46,9 +55,9 @@ const Navbar = ({ history, isAuthenticated, onLogout }) => {
                     className="btn btn-danger">logout</button></li>
 
             </ul>*/}
-             <ul className="navbar-nav ml-auto ">
+            <ul className="navbar-nav ml-auto ">
                 {!isAuthenticated && <>
-                    <li className="nav-item"><NavLink to="/inscription"
+                    <li className="nav-item" desabled="true"><NavLink to="/inscription"
                         className="nav-link">Inscription</NavLink></li>
                     <li className="nav-item"><NavLink to="/login"
                         className="btn btn-success mx-3">connexion</NavLink></li>
