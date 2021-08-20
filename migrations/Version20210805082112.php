@@ -24,6 +24,7 @@ final class Version20210805082112 extends AbstractMigration
 
        # $this->addSql('DROP TABLE note_book');
         $this->addSql('ALTER TABLE note_book DROP category, DROP location, CHANGE priceb2b priceb2b NUMERIC(5, 2) DEFAULT NULL');
+        $this->addSql('DROP TABLE note_book');
     }
 
     public function down(Schema $schema) : void
