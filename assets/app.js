@@ -55,6 +55,7 @@ import MonitorAdd from './js/pages/Type/monitors/MonitorAdd.jsx';
 import MonitorShow from './js/pages/Type/monitors/MonitorShow.jsx';
 import ComponentAddQuantity from './js/pages/Type/Componenti/ComponentAddQuantity.jsx';
 import ComponentAddMinusQuantity from './js/pages/Type/Componenti/ComponentAddMinusQuantity.jsx';
+import AlertQuantity from './js/pages/AlertQuantity.jsx';
 
 AuthApi.setUp();
 
@@ -166,7 +167,9 @@ const App = () => {
                             render={props => isAuthenticated ? (<ComponentAdd{...props} />) :
                                 (<Redirect to="/login" />)} />
 
-
+                        <Route path="/types/component/alert"
+                            render={props => isAuthenticated ? (<AlertQuantity {...props} />) :
+                                (<Redirect to="/login" />)} />
                         <Route path="/types/component"
                             render={props => isAuthenticated ? (<Componenti {...props} />) :
                                 (<Redirect to="/login" />)} />

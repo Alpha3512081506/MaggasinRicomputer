@@ -14,20 +14,23 @@ const CategoryAdd = (props) => {
         alertQuantity: 0
     });
     const [editing, setEditing] = useState(false);
-    const findCategory = async id => {
-        try {
-            const response = await CATEGORYSERVICE.findCategoryById(id);
-            setCategory(response)
-            console.log(response)
-        } catch (error) {
-            console.log(error.data)
-        }
-    }
+
     useEffect(() => {
         if (id !== "new") {
-            setEditing(true)
+            setEditing(true);
+            const findCategory = async id => {
+                try {
+                    const response = await CATEGORYSERVICE.findCategoryById(id);
+                    setCategory(response)
+                    console.log(response)
+                } catch (error) {
+                    console.log(error.data)
+                }
+            }
+
+            findCategory(id)
         }
-        findCategory(id)
+
 
     }, [id])
     const handleChange = ({ currentTarget }) => {
@@ -53,6 +56,7 @@ const CategoryAdd = (props) => {
                 toast.success("La Categoria è stata registrata")
             }
         } catch (error) {
+            console.log(error.response)
             if (error.response.data.violations) {
                 const apiErr = {};
                 error.response.data.violations.forEach(violation => {
@@ -67,7 +71,6 @@ const CategoryAdd = (props) => {
     return (<>
         <div className="mb-3 d-flex justify-content-between align-items-center">
             <h3>Crea Categoria</h3>
-            <button className="btn btn-outline-success">Scan CodeBarre</button>
         </div>
         <form onSubmit={handleSubmit}>
             <Field name="categoryName"
@@ -76,22 +79,12 @@ const CategoryAdd = (props) => {
                 value={category.categoryName}
                 error={errors.categoryName}
             />
-
-            <Field name="alertQuantity"
-                label="Alert Quantità" placeholder="alert"
+            {/**  <Field name="alertQuantity" label="alerta "
+                placeholder="Alert Quantità" type="number"
                 onChange={handleChange}
                 value={category.alertQuantity}
                 error={errors.alertQuantity}
-                type="numeric"
-            />
-            <div className="form-group">
-                <input className="chek-button">
-
-                </input>
-            </div>
-
-
-
+    />*/}
             <div className="form-group">
                 <button type="submit" className="btn btn-outline-success ">Crea la Categoria</button>
                 <Link to="/categorylist"><button className="btn btn-outline-success ">Vai alla lista delle categorie</button>

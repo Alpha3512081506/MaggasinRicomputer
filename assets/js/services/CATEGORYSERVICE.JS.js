@@ -6,10 +6,10 @@ function findAll() {
         .get(API_CATEGORY)
         .then(response => response.data['hydra:member']);
 }
-function findCategoryById(id) {
-    return axios
-        .get(API_CATEGORY + "/" + id)
-        .then(response => response.data);
+async function findCategoryById(id) {
+    const response = await axios
+        .get(API_CATEGORY + "/" + id);
+    return response.data;
 
 }
 function editCategoryById(id, resource) {

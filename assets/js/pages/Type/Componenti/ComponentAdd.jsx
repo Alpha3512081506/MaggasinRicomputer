@@ -45,6 +45,45 @@ const ComponentAdd = (props) => {
 
     }
 
+    useEffect(() => {
+        const findAllCategories = async () => {
+            try {
+                const data = await CATEGORYSERVICE.findAll();
+                setCategory(data);
+                if (!component.category) setComponent({ ...component, category: data[0]["@id"] })
+
+            } catch (error) {
+                console.log(error);
+                toast.error("Erreur de chargement des categories")
+            }
+        }
+        findAllCategories()
+    }, []);
+
+    useEffect(() => {
+        const findLocation = async () => {
+            try {
+                const data = await LOCATIONSERVICE.findAll()
+                setLocation(data);
+                // console.log(location)
+                if (!component.location) {
+                    //  setLocation({ ...component, location: data[0]["@id"] })
+
+                }
+
+
+
+            } catch (error) {
+                console.log(error)
+
+            }
+        }
+        findLocation()
+
+
+    }, []);
+
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
@@ -83,20 +122,6 @@ const ComponentAdd = (props) => {
 
         //console.log(printer);
     }
-
-
-    const findAllCategories = async () => {
-        try {
-            const data = await CATEGORYSERVICE.findAll();
-            setCategory(data);
-            if (!component.category) setComponent({ ...component, category: data[0]["@id"] })
-
-        } catch (error) {
-            console.log(error);
-            toast.error("Erreur de chargement des categories")
-        }
-    }
-    useEffect(() => { findAllCategories() }, []);
     useEffect(() => {
         if (id !== "new") {
             setEditing(true);
@@ -118,25 +143,8 @@ const ComponentAdd = (props) => {
     }, [id])
 
 
-    const findLocation = async () => {
-        try {
-            const data = await LOCATIONSERVICE.findAll()
-            setLocation(data);
-            // console.log(location)
-            if (!component.location) {
-                //  setLocation({ ...component, location: data[0]["@id"] })
-
-            }
 
 
-
-        } catch (error) {
-            console.log(error)
-
-        }
-    }
-
-    useEffect(() => { findLocation() }, []);
     return (<>
         {!editing && <h1>Add component</h1> || <h1>Modifica Componente</h1>}
         <form onSubmit={handleSubmit}>

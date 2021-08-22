@@ -123,7 +123,7 @@ const Componenti = (props) => {
                             <th>Quantità</th>
                             <th>Grado</th>
                             <th>Luogo</th>
-                            <th>Azioni</th>
+                            {/**   <th>Azioni</th>*/}
 
 
                         </tr>
@@ -146,10 +146,10 @@ const Componenti = (props) => {
                             <td>{component.quantity}</td>
                             <td>{component.grade}</td>
                             <td>{component.location.locationName}</td>
-                            <td>
+                            {/**<td>
                                 <Link to={"/types/component/plus/" + component.id}><button className="btn btn-outline-primary "><i className="fa fa-plus"></i></button></Link>
                                 <Link to={"/types/component/minus/" + component.id}> <button className="btn btn-outline-primary " ><i className="fa fa-minus"></i></button></Link>
-                            </td>
+                            </td>*/}
 
 
                         </tr>)}

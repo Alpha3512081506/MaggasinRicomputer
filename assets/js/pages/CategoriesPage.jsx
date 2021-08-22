@@ -66,6 +66,7 @@ const CategoryPage = (props) => {
                     <th></th>
                     <th>CategoryName</th>
                     <th>ProductCount</th>
+                    <th>Quantità Alerta</th>
 
                 </tr>
 
@@ -87,6 +88,11 @@ const CategoryPage = (props) => {
                         <td><button className="badge badge-info" >{category.products.length}</button>
 
                         </td>
+                        {/* <td>
+
+                            {category.alertQuantity}
+
+                        </td>* */}
                     </tr>
 
                 ))}

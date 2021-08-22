@@ -22,10 +22,10 @@ function addNew(data) {
         .post(API_LOCATION, data);
 
 }
-function deleteId(id) {
-    return axios
-        .delete(API_LOCATION + "/" + id)
-        .then(response => console.log(response));
+async function deleteId(id) {
+    const response = await axios
+        .delete(API_LOCATION + "/" + id);
+    return console.log(response);
 }
 
 export default {

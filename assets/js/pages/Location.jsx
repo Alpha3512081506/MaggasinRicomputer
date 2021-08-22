@@ -8,19 +8,22 @@ import TableLoader from '../loader/TableLoader';
 const Location = (props) => {
     const [locations, setLocation] = useState([]);
     const [loading, setLoading] = useState(true);
-    const findAll = async () => {
-        try {
-            const data = await LOCATIONSERVICE.findAll();
-            setLocation(data);
 
-            setLoading(false)
-            toast.success("connessione al server effettuata ✔ ")
-        } catch (error) {
-            console.log(error)
-            toast.error("Devi effettuare il login per accedere alle risorse")
+    useEffect(() => {
+        const findAll = async () => {
+            try {
+                const data = await LOCATIONSERVICE.findAll();
+                setLocation(data);
+
+                setLoading(false)
+                toast.success("connessione al server effettuata ✔ ")
+            } catch (error) {
+                console.log(error)
+                toast.error("Devi effettuare il login per accedere alle risorse")
+            }
         }
-    }
-    useEffect(() => { findAll() }, [])
+        findAll()
+    }, [])
     const handleDelete = async (id) => {
         const originalLocations = [...locations];
         setLocation(locations.filter(location => location.id !== id));

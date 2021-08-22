@@ -6,12 +6,11 @@ import Field from '../../../form/Field';
 import COMPONENTSERVICE from '../../../services/COMPONENTSERVICE';
 
 const ComponentAddMinusQuantity = (props) => {
-    const id = props.match.params;
+    const id = props.match.params.id;
     //  console.log(id);
-
+    const [quantityActual, setquantityActual] = useState(0)
     const [component, setComponent] = useState({
         productId: "",
-        quantityActual: "",
         quantity: "",
 
 
@@ -33,6 +32,7 @@ const ComponentAddMinusQuantity = (props) => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        console.log(component)
         try {
             //executer la re
             const data = COMPONENTSERVICE.editComponentById(id, component);
@@ -61,7 +61,7 @@ const ComponentAddMinusQuantity = (props) => {
         <form onSubmit={handleSubmit}>
             <div className="form-group">
                 <label htmlFor="productId">Quantità  :</label>
-                <input type="text" disabled className="form-control" placeholder=""
+                <input type="text" className="form-control" placeholder=""
                     id="productId" name="productId"
                     value={component.productId} onChange={handleChange}
                     error={error.productId}
@@ -69,21 +69,21 @@ const ComponentAddMinusQuantity = (props) => {
                 />
             </div>
             <div className="form-group">
-                <label htmlFor="quantityActual">Quantità  :</label>
-                <input type="number" disabled className="form-control" placeholder=""
-                    id="quantityActual" name="quantityActual"
-                    value={component.quantityActual} onChange={handleChange}
-                    error={error.quantityActual}
+                <label htmlFor="quantity">Quantità  :</label>
+                <input type="number" className="form-control" placeholder=""
+                    id="quantity" name="quantity"
+                    value={component.quantity} onChange={handleChange}
+                    error={error.quantity}
 
                 />
             </div>
 
             <div className="form-group">
-                <label htmlFor="quantity">Nuova Quantità:</label>
-                <input type="number" className="form-control" name="quantity"
-                    placeholder="Nuova quantità" id="quantity"
-                    value={component.quantity} onChange={handleChange}
-                    error={error.quantity}
+                <label htmlFor="quantityActual">Nuova Quantità:</label>
+                <input type="number" className="form-control" name="quantityActual"
+                    placeholder="Nuova quantità" id="quantityActual"
+                    value={quantityActual} onChange={handleChange}
+                    error={error.quantityActual}
                 />
             </div>
 

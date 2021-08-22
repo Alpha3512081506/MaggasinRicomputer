@@ -68,7 +68,7 @@ const HomePage = (props) => {
                             <div className="card-body">
                                 <div className="row">
                                     <div className="col-4">
-                                        <i className="fas fa-list fa-4x"></i>
+                                        <i className="fa fa-laptop fa-4x"></i>
                                     </div>
                                     <div className="col-8">
                                         <h2 className="card-title">{products.length}
@@ -88,7 +88,7 @@ const HomePage = (props) => {
                             <div className="card-body">
                                 <div className="row">
                                     <div className="col-4">
-                                        <i className="fa fa-list fa-4x"></i>
+                                        <i className="fa fa-print fa-4x"></i>
                                     </div>
                                     <div className="col-8">
                                         <h2 className="card-title">{categories.length}
@@ -109,7 +109,7 @@ const HomePage = (props) => {
                             <div className="card-body">
                                 <div className="row">
                                     <div className="col-4">
-                                        <i className="fas fa-list fa-4x"></i>
+                                        <i className="fa fa-desktop fa-4x"></i>
                                     </div>
                                     <div className="col-8">
                                         <h2 className="card-title">0</h2>
@@ -128,7 +128,7 @@ const HomePage = (props) => {
                             <div className="card-body">
                                 <div className="row">
                                     <div className="col-4">
-                                        <i className="fa fa-list-up fa-4x"></i>
+                                        <i className="fa fa-list fa-4x"></i>
                                     </div>
                                     <div className="col-8">
                                         <h2 className="card-title">0</h2>
@@ -167,7 +167,7 @@ const HomePage = (props) => {
                             <div className="card-body">
                                 <div className="row">
                                     <div className="col-4">
-                                        <i className="fa fa-list fa-4x"></i>
+                                        <i className="fa fa-home fa-4x"></i>
                                     </div>
                                     <div className="col-8">
                                         <h2 className="card-title">
@@ -189,7 +189,7 @@ const HomePage = (props) => {
                             <div className="card-body">
                                 <div className="row">
                                     <div className="col-4">
-                                        <i className="fa fa-bell-o fa-4x"></i>
+                                        <i className="fa fa-desktop fa-4x"></i>
                                     </div>
                                     <div className="col-8">
                                         <h2 className="card-title">0</h2>
@@ -202,28 +202,9 @@ const HomePage = (props) => {
 
                     </Link>
                 </div>
+
                 <div className="col-12 col-sm-12 col-md-6 col-lg-6 shadow-sm p-3 mb-5 bg-white rounded">
-                    <Link to="/types/monitors">
-
-                        <div className="card text-white bg-success mb-3" style={{ maxWidth: "20rem" }}>
-                            <div className="card-body">
-                                <div className="row">
-                                    <div className="col-4">
-                                        <i className="fa fa-bell-o fa-4x"></i>
-                                    </div>
-                                    <div className="col-8">
-                                        <h2 className="card-title">0</h2>
-                                        <strong className="h3">COMPITI</strong>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-
-                    </Link>
-                </div>
-                <div className="col-12 col-sm-12 col-md-6 col-lg-6 shadow-sm p-3 mb-5 bg-white rounded">
-                    <Link to="/categorylist">
+                    <Link to="/types/component/alert">
 
                         <div className="card text-white bg-warning mb-3" style={{ maxWidth: "20rem" }}>
                             <div className="card-body">
@@ -242,26 +223,7 @@ const HomePage = (props) => {
 
                     </Link>
                 </div>
-                <div className="col-12 col-sm-12 col-md-6 col-lg-6 shadow-sm p-3 mb-5 bg-white rounded">
-                    <Link to="/">
 
-                        <div className="card text-white bg-danger mb-3" style={{ maxWidth: "20rem" }}>
-                            <div className="card-body">
-                                <div className="row">
-                                    <div className="col-4">
-                                        <i className="fa fa-bell-o fa-4x"></i>
-                                    </div>
-                                    <div className="col-8">
-                                        <h2 className="card-title">0</h2>
-                                        <strong className="h3">finita</strong>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-
-                    </Link>
-                </div>
             </div>}
 
         <hr className="mt-5" />
