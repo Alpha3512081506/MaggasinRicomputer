@@ -18,7 +18,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * ,"groups" = {"notebook_write"}}
  * 
  * )
- * @UniSqueEntity(
+ * @UniqueEntity(
  *     fields={"productId"},
  *     message="Questo Prodotto è già registrato!"
  * )
