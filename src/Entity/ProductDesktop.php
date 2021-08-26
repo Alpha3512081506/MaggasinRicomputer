@@ -7,6 +7,7 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\ProductDesktopRepository;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /** 
  * @ORM\Entity(repositoryClass=ProductDesktopRepository::class)
@@ -15,6 +16,10 @@ use Symfony\Component\Validator\Constraints as Assert;
  * denormalizationContext={"disable_type_enforcement"=true
  * ,"groups" = {"productd_write"}}
  * 
+ * )
+ * @UniqueEntity(
+ *     fields={"productId"},
+ *     message="Questo Prodotto è già registrato!"
  * )
  */
 class ProductDesktop

@@ -7,9 +7,12 @@ import LOCATIONSERVICE from "../services/LOCATIONSERVICE.JS";
 import TableLoader from '../loader/ListLoader';
 import ListLoader from '../loader/ListLoader';
 import ExcelExporter from '../components/ExcelExporter';
+import axios from 'axios';
+import { API_PRINTER } from '../services/Config';
 const HomePage = (props) => {
     const [products, setProducts] = useState([]);
     const [categories, setCategories] = useState([]);
+    const [printer, setPrinter] = useState([]);
     const [locations, setLocation] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -57,11 +60,26 @@ const HomePage = (props) => {
         }
         findLocations()
     }, []);
+    useEffect(() => {
+        const findPrinters = async () => {
+            try {
+                const response = await axios.get(API_PRINTER);
+
+                setPrinter(response)
+                setLoading(false)
+            } catch (e) {
+                console.log(e.response)
+            }
+        }
+        findPrinters()
+    }, []);
     // useEffect(() => { findProducts() }, [])
     return (<>
+        {console.log(printer)}
         {loading && <ListLoader />}
         {!loading &&
-            <div className="row d-flex align-items-center justify-content-between">
+
+            < div className="row d-flex align-items-center justify-content-between">
                 <div className="col-12 col-sm-12 col-md-6 col-lg-6 shadow-sm p-3 mb-3 bg-white rounded">
                     <Link to="/productlist">
                         <div className="card text-white bg-success mb-3" style={{ maxWidth: "20rem" }}>
@@ -71,8 +89,7 @@ const HomePage = (props) => {
                                         <i className="fa fa-laptop fa-4x"></i>
                                     </div>
                                     <div className="col-8">
-                                        <h2 className="card-title">{products.length}
-                                        </h2>
+
                                         <strong className="h3">NOTEBOOK</strong>
                                     </div>
                                 </div>
@@ -91,8 +108,7 @@ const HomePage = (props) => {
                                         <i className="fa fa-print fa-4x"></i>
                                     </div>
                                     <div className="col-8">
-                                        <h2 className="card-title">{categories.length}
-                                        </h2>
+
                                         <strong className="h3">PRINTERS</strong>
                                     </div>
                                 </div>
@@ -112,7 +128,6 @@ const HomePage = (props) => {
                                         <i className="fa fa-desktop fa-4x"></i>
                                     </div>
                                     <div className="col-8">
-                                        <h2 className="card-title">0</h2>
                                         <strong className="h3">DESKTOP</strong>
                                     </div>
                                 </div>
@@ -131,7 +146,6 @@ const HomePage = (props) => {
                                         <i className="fa fa-list fa-4x"></i>
                                     </div>
                                     <div className="col-8">
-                                        <h2 className="card-title">0</h2>
                                         <strong className="h4">COMPONENTI</strong>
                                     </div>
                                 </div>
@@ -150,7 +164,6 @@ const HomePage = (props) => {
                                         <i className="fa fa-list fa-4x"></i>
                                     </div>
                                     <div className="col-8">
-                                        <h2 className="card-title">0</h2>
                                         <strong className="h3">Categorie</strong>
                                     </div>
                                 </div>
@@ -170,9 +183,7 @@ const HomePage = (props) => {
                                         <i className="fa fa-home fa-4x"></i>
                                     </div>
                                     <div className="col-8">
-                                        <h2 className="card-title">
-                                            {locations.length}
-                                        </h2>
+
                                         <strong className="h3">Luoghi</strong>
                                     </div>
                                 </div>
@@ -192,7 +203,6 @@ const HomePage = (props) => {
                                         <i className="fa fa-desktop fa-4x"></i>
                                     </div>
                                     <div className="col-8">
-                                        <h2 className="card-title">0</h2>
                                         <strong className="h3">MONITORS</strong>
                                     </div>
                                 </div>
@@ -213,7 +223,6 @@ const HomePage = (props) => {
                                         <i className="fa fa-bell-o fa-4x"></i>
                                     </div>
                                     <div className="col-8">
-                                        <h2 className="card-title">0</h2>
                                         <strong className="h3">Alert</strong>
                                     </div>
                                 </div>

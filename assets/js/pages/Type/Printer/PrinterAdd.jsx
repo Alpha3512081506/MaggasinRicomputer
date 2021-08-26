@@ -26,8 +26,8 @@ const PrinterAdd = (props) => {
         location: "Select il Luogo",
         grade: "",
         note: "Scrivere Le Note:",
-        price: "",
-        priceb2b: ""
+        price: 0,
+        priceb2b: 0
     });
 
     const [error, setError] = useState({

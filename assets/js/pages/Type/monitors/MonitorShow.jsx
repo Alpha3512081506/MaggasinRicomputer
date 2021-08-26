@@ -19,13 +19,13 @@ const MonitorShow = (props) => {
             try {
                 const result = await axios.get(API_MONITOR);
                 setMonitor(result.data['hydra:member']);
-                // toast.success("connessione al server effettuata ✔")
+                toast.success("connessione al server effettuata ✔")
                 setLoading(false);
                 // console.log(desktop)
             } catch (error) {
                 console.log("Erreur!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                 toast.error("Devi effettuare il login per accedere alle risorse")
-                console.log(error.result)
+                console.log(error)
             }
 
 

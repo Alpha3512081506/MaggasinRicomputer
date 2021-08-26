@@ -7,6 +7,7 @@ use App\Repository\NoteBookRepository;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=NoteBookRepository::class)
@@ -16,6 +17,10 @@ use Symfony\Component\Validator\Constraints as Assert;
  * denormalizationContext={"disable_type_enforcement"=true
  * ,"groups" = {"notebook_write"}}
  * 
+ * )
+ * @UniSqueEntity(
+ *     fields={"productId"},
+ *     message="Questo Prodotto è già registrato!"
  * )
  */
 class NoteBook

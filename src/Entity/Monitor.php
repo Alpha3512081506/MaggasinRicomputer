@@ -9,6 +9,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=MonitorRepository::class)
@@ -16,6 +17,11 @@ use Symfony\Component\Validator\Constraints as Assert;
  * normalizationContext= {"groups" = {"monitor_read"}},
  * denormalizationContext={"disable_type_enforcement"=true
  * ,"groups" = {"monitor_write"}} )
+ * 
+ * @UniqueEntity(
+ *     fields={"productId"},
+ *     message="Questo Prodotto è già registrato!"
+ * )
  */
 class Monitor
 {
@@ -97,6 +103,12 @@ class Monitor
      * @Groups({"monitor_read","category_read","monitor_write"})
      */
     private $location;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     * @Groups({"monitor_read","category_read","monitor_write"})
+     */
+    private $note;
 
     public function getId(): ?int
     {
@@ -209,6 +221,18 @@ class Monitor
     public function setLocation(?Location $location): self
     {
         $this->location = $location;
+
+        return $this;
+    }
+
+    public function getNote(): ?string
+    {
+        return $this->note;
+    }
+
+    public function setNote(?string $note): self
+    {
+        $this->note = $note;
 
         return $this;
     }

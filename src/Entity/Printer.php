@@ -10,6 +10,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=PrinterRepository::class)
@@ -19,6 +20,10 @@ use Symfony\Component\Validator\Constraints as Assert;
  * denormalizationContext={"disable_type_enforcement"=true
  * ,"groups" = {"printer_write"}}
  * 
+ * )
+ * @UniqueEntity(
+ *     fields={"productId"},
+ *     message="Questo Prodotto è già registrato!"
  * )
  */
 class Printer
