@@ -116,12 +116,7 @@ class Product
      */
     private $location;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="products")
-     * @Groups({"product_read","product_write"})
-     *  
-     */
-    private $user;
+   
 
     /**
      * @ORM\Column(type="decimal", precision=5, scale=2, nullable=true)
