@@ -18,7 +18,7 @@ const Product = (props) => {
        const [errors, setErrors] = useState({
               productId: "",
               productName: "",
-              category: "",
+
               location: "",
               currentQuantity: "",
               alertQuantity: "",

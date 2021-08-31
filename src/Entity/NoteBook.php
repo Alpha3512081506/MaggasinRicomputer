@@ -108,12 +108,7 @@ class NoteBook
      */
     private $location;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="noteBooks")
-     *  @Groups({"notebook_read","notebook_write"})
-     */
-    private $category;
-
+   
     public function getId(): ?int
     {
         return $this->id;
@@ -250,17 +245,7 @@ class NoteBook
 
         return $this;
     }
-    public function getCategory(): ?Category
-    {
-        return $this->category;
-    }
-
-    public function setCategory(?Category $category): self
-    {
-        $this->category = $category;
-
-        return $this;
-    }
+  
 
     public function getLocation(): ?Location
     {

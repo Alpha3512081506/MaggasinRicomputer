@@ -15,7 +15,6 @@ const DesktopAdd = (props) => {
 
     const [desktop, setDesktop] = useState({
         productId: "",
-        category: "",
         marque: "",
         model: "",
         processor: "",
@@ -24,13 +23,12 @@ const DesktopAdd = (props) => {
         location: "",
         grade: "",
         note: "Scrivere Le Note:",
-        price: "",
-        priceb2b: ""
+        price: 0,
+        priceb2b: 0
     });
 
     const [error, setError] = useState({
         productId: "",
-        category: "",
         marque: "",
         model: "",
         processor: "",
@@ -42,7 +40,7 @@ const DesktopAdd = (props) => {
         price: "",
         priceb2b: ""
     });
-    const [category, setCategory] = useState([])
+    //const [category, setCategory] = useState([])
     const [location, setLocation] = useState([])
     const handleChange = ({ currentTarget }) => {
         const { name, value } = currentTarget
@@ -87,7 +85,7 @@ const DesktopAdd = (props) => {
         //console.log(printer);
     }
 
-    useEffect(() => {
+    {/** useEffect(() => {
         const findAllCategories = async () => {
             try {
                 const data = await CATEGORYSERVICE.findAll();
@@ -103,7 +101,7 @@ const DesktopAdd = (props) => {
 
         findAllCategories()
     },
-        []);
+[]);*/}
 
 
 
@@ -135,8 +133,8 @@ const DesktopAdd = (props) => {
                     //const data = await axios.get(API_DESKTOP + "/" + id)
                     const data = await DesktopService.findDesktopById(id)
                     console.log(data)
-                    const { productId, category, marque, model, processor, ram, hdd, location, grade, note, price, priceb2b } = data
-                    setDesktop({ productId, category, marque, model, processor, ram, hdd, location, grade, note, price, priceb2b })
+                    const { productId, marque, model, processor, ram, hdd, location, grade, note, price, priceb2b } = data
+                    setDesktop({ productId, marque, model, processor, ram, hdd, location, grade, note, price, priceb2b })
                     //  console.log(printer)
                     // console.log(data)
                 } catch (error) {
@@ -156,17 +154,6 @@ const DesktopAdd = (props) => {
                 value={desktop.productId} onChange={handleChange}
                 error={error.productId}
             />
-
-            <Select
-                name="category"
-                label="Category"
-                value={desktop.category}
-                onChange={handleChange}
-                error={error.category}
-            >
-                {category.map(category => <option key={category["@id"]} value={category["@id"]}>
-                    {category.categoryName}</option>)}
-            </Select>
 
             <Field name="marque"
                 label="Marca" placeholder="Marca del product"

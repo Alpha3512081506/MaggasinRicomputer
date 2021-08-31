@@ -69,7 +69,7 @@ const PrinterShow = (props) => {
         (d.connector && d.connector.toLowerCase().includes(search.toLocaleLowerCase())) ||
         (d.grade && d.grade.toLowerCase().includes(search.toLocaleLowerCase())) ||
         (d.tonner && d.tonner.toLowerCase().includes(search.toLocaleLowerCase()))
-        // (d.location.locationName && d.location.locationName.toLowerCase().includes(search.toLocaleLowerCase()))
+            (d.location.locationName && d.location.locationName.toLowerCase().includes(search.toLocaleLowerCase()))
         //||(d.category.categoryName && d.category.categoryName.toLowerCase().includes(search.toLocaleLowerCase()))
 
     )
@@ -90,6 +90,7 @@ const PrinterShow = (props) => {
 
         <div className="d-flex justify-content-between">
             <ExportToExcel apiData={paginatedePrinter} fileName={fileName} />
+            <button className="btn btn-success">Import</button>
             <h5 className="font-italic text text-success">Gestisci le stampante</h5>
             <Link to={"/types/printers/add/new"}> <button className="btn btn-outline-success "><i className="fa fa-plus">Aggiungi Prodotto</i></button></Link>
         </div>
@@ -121,7 +122,6 @@ const PrinterShow = (props) => {
                             <th>Grado</th>
                             <th>Formato</th>
 
-                            <th>Categoria</th>
                             <th>Location</th>
 
                             <th>Prezzo</th>
@@ -152,7 +152,6 @@ const PrinterShow = (props) => {
                             <td>{printer.grade}</td>
                             <td>{printer.format}</td>
 
-                            <td>{printer.category.categoryName}</td>
                             <td>{printer.location.locationName}</td>
 
                             <td>{printer.price}</td>
@@ -178,7 +177,6 @@ const PrinterShow = (props) => {
                                             <option value="35">35</option>
                                             <option value="50">50</option>
                                             <option value="100">100</option>
-                                            <option value={filteredPrinter.length}>tutti</option>
                                             <option value={printer.length}>tutti</option>
                                         </select>
 

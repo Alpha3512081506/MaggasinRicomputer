@@ -51,7 +51,6 @@ const ProductList = (props) => {
     const filteredProducts = products.filter(product =>
         product.productId.toLowerCase().includes(search.toLowerCase())
         || product.ram.toLowerCase().includes(search.toLowerCase())
-        || product.category.categoryName.toLowerCase().includes(search.toLowerCase())
         || product.location.locationName.toLowerCase().includes(search.toLowerCase())
         || product.processor.toLowerCase().includes(search.toLowerCase())
         || product.hdd.toLowerCase().includes(search.toLowerCase())
@@ -111,16 +110,15 @@ const ProductList = (props) => {
                         <th></th>
                         <th >CODICE INTERNO</th>
                         <th >ProductId</th>
-                        <th>Categoria</th>
-                        <th>Model</th>
-                        <th>MARQUE</th>
+                        <th>Modello</th>
+                        <th>MARCA</th>
                         <th>Luogo</th>
                         <th>Prezzo</th>
                         <th>Prezzo B2B</th>
-                        <th>C.P.U  <i className="fa fa-arrow-up"></i><i className="fa fa-arrow-down"></i></th>
-                        <th>RAM  <i className="fa fa-arrow-up"></i><i className="fa fa-arrow-down"></i></th>
-                        <th>HDD  <i className="fa fa-arrow-up"></i><i className="fa fa-arrow-down"></i></th>
-                        <th>Display  <i className="fa fa-arrow-up"></i><i className="fa fa-arrow-down"></i></th>
+                        <th>C.P.U </th>
+                        <th>RAM </th>
+                        <th>HDD </th>
+                        <th>Display </th>
                         <th>Note</th>
 
                     </tr>
@@ -136,7 +134,6 @@ const ProductList = (props) => {
 
                         <td>{product.id}</td>
                         <td>{product.productId}</td>
-                        <td>{product.category.categoryName}</td>
                         <td>{product.model} </td>
                         <td>{product.marque}</td>
                         <td>{product.location.locationName}</td>

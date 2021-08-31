@@ -12,7 +12,6 @@ const MonitorAdd = (props) => {
     const { id = "new" } = props.match.params;
     const [monitor, setMonitor] = useState({
         productId: "",
-        category: "",
         marca: "",
         model: "",
         grade: "",
@@ -23,7 +22,6 @@ const MonitorAdd = (props) => {
     });
     const [error, setError] = useState({
         productId: "",
-        category: "",
         marca: "",
         model: "",
         grade: "",
@@ -40,22 +38,7 @@ const MonitorAdd = (props) => {
         const { name, value } = currentTarget
         setMonitor({ ...monitor, [name]: value });
     }
-    useEffect(() => {
-        const findAllCategories = async () => {
-            try {
-                const data = await CATEGORYSERVICE.findAll();
-                setCategory(data);
-                if (!monitor.category) setMonitor({ ...monitor, category: data[0]["@id"] })
 
-            } catch (error) {
-                console.log(error);
-                toast.error("Erreur de chargement des categories")
-            }
-        }
-
-        findAllCategories()
-    },
-        []);
 
 
 
@@ -141,16 +124,6 @@ const MonitorAdd = (props) => {
                 error={error.productId}
             />
 
-            <Select
-                name="category"
-                label="Category"
-                value={monitor.category}
-                onChange={handleChange}
-                error={error.category}
-            >
-                {category.map(category => <option key={category["@id"]} value={category["@id"]}>
-                    {category.categoryName}</option>)}
-            </Select>
 
             <Field name="marca"
                 label="Marca" placeholder="Marca del product"

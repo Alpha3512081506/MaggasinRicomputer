@@ -15,7 +15,6 @@ const ProductNew = props => {
     const [product, setProduct] = useState({
         productId: "",
         marque: "",
-        category: "",
         location: "",
         priceb2b: 0,
         hdd: "",
@@ -30,7 +29,6 @@ const ProductNew = props => {
     const [errors, setErrors] = useState({
         productId: "",
         marque: "",
-        category: "",
         location: "",
         priceb2b: "",
         processor: "",
@@ -44,7 +42,7 @@ const ProductNew = props => {
 
     });
     const [editing, setEditing] = useState(false)
-    const [categories, setCategories] = useState([]);
+    //const [categories, setCategories] = useState([]);
     const [locations, setLocation] = useState([]);
 
 
@@ -72,7 +70,7 @@ const ProductNew = props => {
         findLocation()
     }, []);
 
-    useEffect(() => {
+    {/** useEffect(() => {
         const findAllCategories = async () => {
             try {
                 const data = await CATEGORYSERVICE.findAll();
@@ -87,7 +85,7 @@ const ProductNew = props => {
             }
         }
         findAllCategories()
-    }, []);
+    }, []);*/}
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -152,11 +150,7 @@ const ProductNew = props => {
     return (<>
         {console.log(product)}
         {!editing && <h3 className="text-center">Crea prodotto</h3> || <h3 className="text-center">Edit Prodotto</h3>}
-        <div className="mb-3 d-flex justify-content-between align-items-center">
 
-            <button className="btn btn-outline-success" ><i className="fa fa-camera-retro">Scan CodeBarre</i></button>
-            <button className="btn btn-outline-success" ><i className="fa fa-camera-retro">Close Camera </i></button>
-        </div>
         <form onSubmit={handleSubmit} className="form-horizontal" >
             <Field name="productId"
                 label="ProductID" placeholder="id del prodotto"
@@ -170,22 +164,7 @@ const ProductNew = props => {
                 value={product.marque}
                 error={errors.marque}
             />
-            <div className="row d-flex align-content-between align-items-center">
-                <div className="col-10">
-                    <Select label="Categoria"
-                        name="category"
-                        value="product.category['@id']"
-                        onChange={handleChange}
-                        error={errors.category}
-                    >
-                        {categories.map(category => <option key={category["@id"]}
-                            value={category["@id"]}>{category.categoryName}</option>)}
-                    </Select>
-                </div>
-                {/* <div className="col-2">
-                    <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#myModal"><i className="fa fa-plus"></i></button>
-                </div> */}
-            </div>
+
             <div className="row d-flex align-content-between align-items-center">
                 <div className="col-10">
                     <Select label="Location"

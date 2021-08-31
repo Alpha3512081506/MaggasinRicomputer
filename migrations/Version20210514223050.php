@@ -20,10 +20,10 @@ final class Version20210514223050 extends AbstractMigration
     public function up(Schema $schema) : void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('CREATE TABLE `group` (id INT AUTO_INCREMENT NOT NULL, name_group VARCHAR(255) NOT NULL, current_quantity INT DEFAULT NULL, alert_quantity INT DEFAULT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('ALTER TABLE product ADD groupe_id INT DEFAULT NULL');
-        $this->addSql('ALTER TABLE product ADD CONSTRAINT FK_D34A04AD7A45358C FOREIGN KEY (groupe_id) REFERENCES `group` (id)');
-        $this->addSql('CREATE INDEX IDX_D34A04AD7A45358C ON product (groupe_id)');
+        //$this->addSql('CREATE TABLE `group` (id INT AUTO_INCREMENT NOT NULL, name_group VARCHAR(255) NOT NULL, current_quantity INT DEFAULT NULL, alert_quantity INT DEFAULT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+       // $this->addSql('ALTER TABLE product ADD groupe_id INT DEFAULT NULL');
+        //$this->addSql('ALTER TABLE product ADD CONSTRAINT FK_D34A04AD7A45358C FOREIGN KEY (groupe_id) REFERENCES `group` (id)');
+        //$this->addSql('CREATE INDEX IDX_D34A04AD7A45358C ON product (groupe_id)');
     }
 
     public function down(Schema $schema) : void

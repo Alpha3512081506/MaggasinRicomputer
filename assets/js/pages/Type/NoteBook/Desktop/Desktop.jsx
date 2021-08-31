@@ -6,6 +6,7 @@ import Loading from '../../../../components/Loading';
 import Pagination from '../../../../components/Pagination';
 import DesktopService from '../../../../services/DesktopService';
 import { API_DESKTOP } from '../../../../services/Config';
+import ExportToExcel from '../../../../services/ExportToExcel';
 const DesktopShow = (props) => {
     const [desktop, setDesktop] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -19,7 +20,7 @@ const DesktopShow = (props) => {
                 setDesktop(result.data['hydra:member']);
                 // toast.success("connessione al server effettuata ✔")
                 setLoading(false);
-                // console.log(desktop)
+                console.log(desktop)
             } catch (error) {
                 console.log("Erreur!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                 toast.error("Devi effettuare il login per accedere alle risorse")
@@ -67,8 +68,7 @@ const DesktopShow = (props) => {
         d.ram.toLowerCase().includes(search.toLocaleLowerCase()) ||
         d.processor.toLowerCase().includes(search.toLocaleLowerCase()) ||
         d.grade.toLowerCase().includes(search.toLocaleLowerCase()) ||
-        (d.location.locationName && d.location.locationName.toLowerCase().includes(search.toLocaleLowerCase())) ||
-        (d.category.categoryName && d.category.categoryName.toLowerCase().includes(search.toLocaleLowerCase()))
+        (d.location.locationName && d.location.locationName.toLowerCase().includes(search.toLocaleLowerCase()))
 
     )
     const paginatedDesktop = Pagination.getData(filteredDesktop, currentPage, itemsPerPage);
@@ -82,10 +82,14 @@ const DesktopShow = (props) => {
         const { value } = currentTarget;
         setItemPerPage(value)
     }
+    const fileName = "Desktop"
     return (<>
 
         <div className="d-flex justify-content-between">
             <h5 className="font-italic text text-success">Gestisci Computer Desktop</h5>
+            {<ExportToExcel apiData={paginatedDesktop} fileName={fileName} />}
+            <button className="btn btn-success">Import</button>
+
             <Link to={"/types/desktop/add/new"}> <button className="btn btn-outline-success "><i className="fa fa-plus">Aggiungi Prodotto</i></button></Link>
 
         </div>
@@ -105,9 +109,8 @@ const DesktopShow = (props) => {
                     <thead className="thead-dark " >
                         <tr className="w-100">
                             <th></th>
-                            <th >codiceInterno</th>
+                            <th >codice Interno</th>
                             <th >ProductId</th>
-                            <th>Categoria</th>
                             <th>Marca</th>
                             <th>Modello</th>
                             <th>C.P.U</th>
@@ -132,16 +135,15 @@ const DesktopShow = (props) => {
 
                             <td>{desktop.id}</td>
                             <td>{desktop.productId}</td>
-                            <td>{desktop.category.categoryName}</td>
                             <td>{desktop.marque}</td>
                             <td>{desktop.model}</td>
                             <td>{desktop.processor}</td>
                             <td>{desktop.ram} </td>
                             <td>{desktop.hdd}</td>
                             <td>{desktop.grade}</td>
-                            <td>{desktop.location.locationName}&euro;</td>
+                            <td>{desktop.location.locationName}</td>
                             <td>{desktop.price}&euro;</td>
-                            <td>{desktop.priceb2b}</td>
+                            <td>{desktop.priceb2b}&euro;</td>
 
                             <td>{desktop.note}</td>
 

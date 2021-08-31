@@ -10,14 +10,12 @@ const Registration = ({ firstName, lastName, email, avatar }) => {
         firstName: "",
         lastName: "",
         email: "",
-        avatar: "",
         password: ""
     });
     const [errors, setErrors] = useState({
         firstName: "",
         lastName: "",
-        email: "",
-        avatar: ""
+        email: ""
     });
     const handleChange = ({ currentTarget }) => {
         const { name, value } = currentTarget;
@@ -70,12 +68,7 @@ const Registration = ({ firstName, lastName, email, avatar }) => {
                 value={users.password}
                 error={errors.password}
             />
-            <Field name="avatar"
-                label="Avatar" placeholder="indirizzio email"
-                onChange={handleChange}
-                value={users.avatar}
-                error={errors.avatar}
-            />
+
             <Link to="/login"><button className="btn btn-outline-success ">mi collego</button></Link>
             <button type="submit" className="btn btn-success">Mi Registro</button>
         </form>

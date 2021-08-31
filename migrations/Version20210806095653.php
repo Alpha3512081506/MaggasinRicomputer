@@ -20,11 +20,11 @@ final class Version20210806095653 extends AbstractMigration
     public function up(Schema $schema) : void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE component ADD location_id INT DEFAULT NULL, ADD category_id INT DEFAULT NULL');
+        $this->addSql('ALTER TABLE component ADD location_id INT DEFAULT NULL');
         $this->addSql('ALTER TABLE component ADD CONSTRAINT FK_49FEA15764D218E FOREIGN KEY (location_id) REFERENCES location (id)');
-        $this->addSql('ALTER TABLE component ADD CONSTRAINT FK_49FEA15712469DE2 FOREIGN KEY (category_id) REFERENCES category (id)');
+       // $this->addSql('ALTER TABLE component ADD CONSTRAINT FK_49FEA15712469DE2 FOREIGN KEY (category_id) REFERENCES category (id)');
         $this->addSql('CREATE INDEX IDX_49FEA15764D218E ON component (location_id)');
-        $this->addSql('CREATE INDEX IDX_49FEA15712469DE2 ON component (category_id)');
+        //$this->addSql('CREATE INDEX IDX_49FEA15712469DE2 ON component (category_id)');
     }
 
     public function down(Schema $schema) : void

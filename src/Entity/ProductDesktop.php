@@ -28,79 +28,74 @@ class ProductDesktop
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"productd_read","category_read","productd_write"})
+     * @Groups({"productd_read","productd_write"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     *  @Groups({"productd_read","category_read","productd_write"})
+     *  @Groups({"productd_read","productd_write"})
      */
     private $productId;
 
     /**
      * @ORM\Column(type="string", length=255)
-     *  @Groups({"productd_read","category_read","productd_write"})
+     *  @Groups({"productd_read","productd_write"})
      */
     private $marque;
 
     /**
      * @ORM\Column(type="string", length=255)
-     *  @Groups({"productd_read","category_read","productd_write"})
+     *  @Groups({"productd_read","productd_write"})
      */
     private $model;
 
     /**
      * @ORM\Column(type="string", length=255)
-     *  @Groups({"productd_read","category_read","productd_write"})
+     *  @Groups({"productd_read","productd_write"})
      */
     private $processor;
 
     /**
      * @ORM\Column(type="string", length=255)
-     *  @Groups({"productd_read","category_read","productd_write"})
+     *  @Groups({"productd_read","productd_write"})
      */
     private $ram;
 
     /**
      * @ORM\Column(type="string", length=255)
-     *  @Groups({"productd_read","category_read","productd_write"})
+     *  @Groups({"productd_read","productd_write"})
      */
     private $hdd;
 
     /**
      * @ORM\Column(type="string", length=255)
-     *  @Groups({"productd_read","category_read","productd_write"})
+     *  @Groups({"productd_read","productd_write"})
      */
     private $grade;
 
     /**
      * @ORM\Column(type="decimal", precision=5, scale=2, nullable=true)
-     *  @Groups({"productd_read","category_read","productd_write"})
+     *  @Groups({"productd_read","productd_write"})
      */
     private $price;
 
     /**
      * @ORM\Column(type="decimal", precision=5, scale=2, nullable=true)
-     *  @Groups({"productd_read","category_read","productd_write"})
+     *  @Groups({"productd_read","productd_write"})
      */
     private $priceb2b;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     *  @Groups({"productd_read","category_read","productd_write"})
+     *  @Groups({"productd_read","productd_write"})
      */
     private $note;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="productDesktops")
-     *  @Groups({"productd_read","category_read","productd_write"})
-     */
-    private $category;
-
+ 
     /**
      * @ORM\ManyToOne(targetEntity=Location::class, inversedBy="productDesktops")
-     *  @Groups({"productd_read","category_read","productd_write"})
+     *  @Groups({"productd_read","productd_write","location_read"})
      */
     private $location;
 
@@ -229,17 +224,7 @@ class ProductDesktop
         return $this;
     }
 
-    public function getCategory(): ?Category
-    {
-        return $this->category;
-    }
-
-    public function setCategory(?Category $category): self
-    {
-        $this->category = $category;
-
-        return $this;
-    }
+  
 
     public function getLocation(): ?Location
     {

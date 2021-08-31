@@ -6,7 +6,7 @@ import Loading from '../../../components/Loading';
 import Pagination from '../../../components/Pagination';
 import Select from '../../../form/Select';
 import COMPONENTSERVICE from '../../../services/COMPONENTSERVICE';
-import { API_COMPONENNT } from '../../../services/Config';
+import ExportToExcel from '../../../services/ExportToExcel';
 const Componenti = (props) => {
     const [component, setComponent] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -68,8 +68,7 @@ const Componenti = (props) => {
         (d.marque && d.marque.toLowerCase().includes(search.toLocaleLowerCase())) ||
         // (d.quantity && d.quantity.toLowerCase().includes(search.toLocaleLowerCase())) ||
         (d.grade && d.grade.toLowerCase().includes(search.toLocaleLowerCase())) ||
-        (d.location.locationName && d.location.locationName.toLowerCase().includes(search.toLocaleLowerCase())) ||
-        (d.category.categoryName && d.category.categoryName.toLowerCase().includes(search.toLocaleLowerCase()))
+        (d.location.locationName && d.location.locationName.toLowerCase().includes(search.toLocaleLowerCase()))
 
     )
     const paginatedComponent = Pagination.getData(filteredComponent, currentPage, itemsPerPage);
@@ -85,10 +84,13 @@ const Componenti = (props) => {
         setItemPerPage(value)
 
     }
+    const fileName = "Componenti";
     return (<>
 
         <div className="d-flex justify-content-between">
             <h5 className="font-italic text text-success">GESTISCI COMPONENTI</h5>
+            {<ExportToExcel apiData={paginatedComponent} fileName={fileName} />}
+            <button className="btn btn-success">Import</button>
             <Link to={"/types/component/add/new"}> <button className="btn btn-outline-success "><i className="fa fa-plus">Aggiungi Componente</i></button></Link>
 
         </div>
@@ -102,12 +104,6 @@ const Componenti = (props) => {
                     <div className="alert alert-primary" role="alert ">
                         <h4 className="display-5 text-center text-justify">Filtro Totale : {filteredComponent.length} </h4>
                     </div>
-
-                    <div className="btn-group">
-                        <button type="button" className="btn btn-outline-success ">STAMPA</button>
-                        <button type="button" className="btn btn-outline-success ">ESPORTA EXCEL</button>
-                        <button type="button" className="btn btn-outline-success ">IMPORTA EXCEL</button>
-                    </div>
                 </div>
                 <table className="table table-responsive table-hover table-bordered table-sm w-100" id="table-to-xls">
 
@@ -116,7 +112,6 @@ const Componenti = (props) => {
                             <th></th>
                             <th >codiceInterno</th>
                             <th >ProductId</th>
-                            <th>Categoria</th>
                             <th>Marca</th>
                             <th>Tipologia</th>
                             <th>Specifiche</th>
@@ -139,7 +134,6 @@ const Componenti = (props) => {
 
                             <td>{component.id}</td>
                             <td>{component.productId}</td>
-                            <td>{component.category.categoryName}</td>
                             <td>{component.marque}</td>
                             <td>{component.type}</td>
                             <td>{component.specify}</td>
@@ -157,7 +151,7 @@ const Componenti = (props) => {
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td colSpan="15">
+                            <td colSpan="9">
                                 <div className="d-flex justify-content-between">
                                     {itemsPerPage < filteredComponent.length && <Pagination currentPage={currentPage} itemsPerPage={itemsPerPage}
                                         length={filteredComponent.length} onPageChanged={handlePageChange} />}

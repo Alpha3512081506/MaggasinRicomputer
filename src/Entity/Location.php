@@ -38,7 +38,7 @@ class Location
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({
-     * "location_read", "product_read",
+     * "location_read", "productd_read",
      * "printer_read",
      * "notebook_read","component_read","monitor_read"
      * })

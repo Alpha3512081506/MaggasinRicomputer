@@ -20,9 +20,9 @@ final class Version20210806093001 extends AbstractMigration
     public function up(Schema $schema) : void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE printer ADD category_id INT DEFAULT NULL');
-        $this->addSql('ALTER TABLE printer ADD CONSTRAINT FK_8D4C79ED12469DE2 FOREIGN KEY (category_id) REFERENCES category (id)');
-        $this->addSql('CREATE INDEX IDX_8D4C79ED12469DE2 ON printer (category_id)');
+      //  $this->addSql('ALTER TABLE printer ADD category_id INT DEFAULT NULL');
+       // $this->addSql('ALTER TABLE printer ADD CONSTRAINT FK_8D4C79ED12469DE2 FOREIGN KEY (category_id) REFERENCES category (id)');
+        //$this->addSql('CREATE INDEX IDX_8D4C79ED12469DE2 ON printer (category_id)');
     }
 
     public function down(Schema $schema) : void

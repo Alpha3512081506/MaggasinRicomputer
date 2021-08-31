@@ -19,7 +19,6 @@ const ComponentAdd = (props) => {
         specify: "",
         grade: "",
         quantity: "",
-        category: "",
         location: ""
 
     });
@@ -32,7 +31,7 @@ const ComponentAdd = (props) => {
         grade: "",
         quantity: ""
     });
-    const [category, setCategory] = useState([])
+    // const [category, setCategory] = useState([])
     const [location, setLocation] = useState([])
     const [editing, setEditing] = useState(false)
 
@@ -45,7 +44,7 @@ const ComponentAdd = (props) => {
 
     }
 
-    useEffect(() => {
+    {/** useEffect(() => {
         const findAllCategories = async () => {
             try {
                 const data = await CATEGORYSERVICE.findAll();
@@ -58,7 +57,7 @@ const ComponentAdd = (props) => {
             }
         }
         findAllCategories()
-    }, []);
+    }, []);*/}
 
     useEffect(() => {
         const findLocation = async () => {
@@ -106,7 +105,7 @@ const ComponentAdd = (props) => {
                 props.history.push("/types/component");
             }
 
-            if (!component.category) setComponent({ ...component, category: data[0]["@id"] })
+            if (!component.location) setComponent({ ...component, location: data[0]["@id"] })
             console.log(component);
         } catch (error) {
             if (error.response.data.violations) {
@@ -130,8 +129,8 @@ const ComponentAdd = (props) => {
                     const data = await COMPONENTSERVICE.finComponentById(id)
                     //const data = await axios.get(API_COMPONENNT + "/" + id)
                     // console.log(data)
-                    const { productId, marque, type, specify, grade, quantity, category, location } = data
-                    setComponent({ productId, marque, type, specify, grade, quantity, category, location })
+                    const { productId, marque, type, specify, grade, quantity, location } = data
+                    setComponent({ productId, marque, type, specify, grade, quantity, location })
 
                 } catch (error) {
                     console.log(error.data)
@@ -181,17 +180,6 @@ const ComponentAdd = (props) => {
                 error={error.processor}
             />
 
-
-            <Select
-                name="category"
-                label="Category"
-                value={component.category}
-                onChange={handleChange}
-                error={error.category}
-            >
-                {category.map(category => <option key={category["@id"]} value={category["@id"]}>
-                    {category.categoryName}</option>)}
-            </Select>
 
             <Select
                 name="location"

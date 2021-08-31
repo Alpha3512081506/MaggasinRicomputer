@@ -20,7 +20,7 @@ final class Version20210806092903 extends AbstractMigration
     public function up(Schema $schema) : void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE printer DROP category, CHANGE product_id product_id VARCHAR(255) NOT NULL');
+        $this->addSql('ALTER TABLE printer  CHANGE product_id product_id VARCHAR(255) NOT NULL');
     }
 
     public function down(Schema $schema) : void

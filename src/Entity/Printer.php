@@ -132,12 +132,7 @@ class Printer
      */
     private $location;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="printers")
-     * @Groups({"printer_read","category_read","printer_write"})
-     */
-    private $category;
-
+ 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      *  @Groups({"printer_read","category_read","printer_write"})
@@ -304,17 +299,6 @@ class Printer
         return $this;
     }
 
-    public function getCategory(): ?Category
-    {
-        return $this->category;
-    }
-
-    public function setCategory(?Category $category): self
-    {
-        $this->category = $category;
-
-        return $this;
-    }
 
     public function getProductId(): ?string
     {

@@ -20,7 +20,7 @@ final class Version20210806062039 extends AbstractMigration
     public function up(Schema $schema) : void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE monitor ADD location_id INT DEFAULT NULL, DROP location, DROP note');
+        $this->addSql('ALTER TABLE monitor ADD location_id INT DEFAULT NULL, DROP location');
         $this->addSql('ALTER TABLE monitor ADD CONSTRAINT FK_E115998564D218E FOREIGN KEY (location_id) REFERENCES location (id)');
         $this->addSql('CREATE INDEX IDX_E115998564D218E ON monitor (location_id)');
     }

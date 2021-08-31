@@ -31,18 +31,6 @@ const HomePage = (props) => {
         findProducts()
 
     }, [])
-    useEffect(() => {
-        const findCategory = async () => {
-            try {
-                const response = await CATEGORYSERVICE.findAll();
-                setCategories(response)
-                setLoading(false)
-            } catch (e) {
-                console.log(e.response)
-            }
-        }
-        findCategory()
-    }, [])
 
 
 
@@ -75,7 +63,6 @@ const HomePage = (props) => {
     }, []);
     // useEffect(() => { findProducts() }, [])
     return (<>
-        {console.log(printer)}
         {loading && <ListLoader />}
         {!loading &&
 
@@ -109,7 +96,7 @@ const HomePage = (props) => {
                                     </div>
                                     <div className="col-8">
 
-                                        <strong className="h3">PRINTERS</strong>
+                                        <strong className="h3">PRINTER</strong>
                                     </div>
                                 </div>
 
@@ -155,25 +142,7 @@ const HomePage = (props) => {
 
                     </Link>
                 </div>
-                <div className="col-12 col-sm-12 col-md-6 col-lg-6 shadow-sm p-3 mb-5 bg-white rounded">
-                    <Link to="/categorylist">
-                        <div className="card text-white bg-success mb-3" style={{ maxWidth: "20rem" }}>
-                            <div className="card-body">
-                                <div className="row">
-                                    <div className="col-4">
-                                        <i className="fa fa-list fa-4x"></i>
-                                    </div>
-                                    <div className="col-8">
-                                        <strong className="h3">Categorie</strong>
-                                    </div>
-                                </div>
 
-
-                            </div>
-                        </div>
-
-                    </Link>
-                </div>
                 <div className="col-12 col-sm-12 col-md-6 col-lg-6 shadow-sm p-3 mb-3 bg-white rounded">
                     <Link to="/locationlist">
                         <div className="card text-white bg-success mb-3" style={{ maxWidth: "20rem" }}>
@@ -203,7 +172,7 @@ const HomePage = (props) => {
                                         <i className="fa fa-desktop fa-4x"></i>
                                     </div>
                                     <div className="col-8">
-                                        <strong className="h3">MONITORS</strong>
+                                        <strong className="h3">MONITOR</strong>
                                     </div>
                                 </div>
 

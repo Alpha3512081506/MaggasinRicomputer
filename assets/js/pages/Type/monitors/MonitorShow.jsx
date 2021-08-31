@@ -6,6 +6,10 @@ import Loading from '../../../components/Loading';
 import Pagination from '../../../components/Pagination';
 import Select from '../../../form/Select';
 import { API_MONITOR } from '../../../services/Config';
+import EXCELIMPORTER from '../../../services/EXCELIMPORTER';
+import ExportToExcel from '../../../services/ExportToExcel';
+import IMPORTXLSX from '../../../services/IMPORTXLSX';
+
 
 const MonitorShow = (props) => {
     const [monitor, setMonitor] = useState([]);
@@ -66,8 +70,7 @@ const MonitorShow = (props) => {
         (d.model && d.model.toLowerCase().includes(search.toLocaleLowerCase())) ||
         d.display.toLowerCase().includes(search.toLocaleLowerCase()) ||
         d.grade.toLowerCase().includes(search.toLocaleLowerCase()) ||
-        (d.location.locationName && d.location.locationName.toLowerCase().includes(search.toLocaleLowerCase())) ||
-        (d.category.categoryName && d.category.categoryName.toLowerCase().includes(search.toLocaleLowerCase()))
+        (d.location.locationName && d.location.locationName.toLowerCase().includes(search.toLocaleLowerCase()))
 
     )
     const paginatedMonitor = Pagination.getData(filteredMonitor, currentPage, itemsPerPage);
@@ -86,11 +89,15 @@ const MonitorShow = (props) => {
         // setNotebok({ ...notebook, [name]: value });
 
     }
+    const fileName = "Monitors";
     return (<>
-
+        <IMPORTXLSX />
+        <EXCELIMPORTER />
         <div className="d-flex justify-content-between">
             <h5 className="font-italic text text-success">Gestisci  Monitors</h5>
             <Link to={"/types/monitors/add/new"}> <button className="btn btn-outline-success "><i className="fa fa-plus">Aggiungi Prodotto</i></button></Link>
+            {<ExportToExcel apiData={paginatedMonitor} fileName={fileName} />}
+
 
         </div>
         <hr />
@@ -104,11 +111,7 @@ const MonitorShow = (props) => {
                         <h4 className="display-5 text-center text-justify">Filtro Totale : {paginatedMonitor.length} per {filteredMonitor.length} </h4>
                     </div>
 
-                    <div className="btn-group">
-                        <button type="button" className="btn btn-outline-success ">STAMPA</button>
-                        <button type="button" className="btn btn-outline-success ">ESPORTA EXCEL</button>
-                        <button type="button" className="btn btn-outline-success ">IMPORTA EXCEL</button>
-                    </div>
+
                 </div>
 
                 <table className="table table-responsive table-hover table-bordered table-sm w-100" id="table-to-xls">
@@ -118,7 +121,6 @@ const MonitorShow = (props) => {
                             <th></th>
                             <th >codiceInterno</th>
                             <th >ProductId</th>
-                            <th>Categoria</th>
                             <th>Marca</th>
                             <th>Modello</th>
                             <th>Grado</th>
@@ -141,7 +143,6 @@ const MonitorShow = (props) => {
 
                             <td>{monitor.id}</td>
                             <td>{monitor.productId}</td>
-                            <td>{monitor.category.categoryName}</td>
                             <td>{monitor.marca}</td>
                             <td>{monitor.model}</td>
                             <td>{monitor.grade}</td>

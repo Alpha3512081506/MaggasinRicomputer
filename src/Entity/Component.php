@@ -88,11 +88,7 @@ class Component
      */
     private $location;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="components")
-     *  @Groups({"component_read","category_read","component_write"})
-     */
-    private $category;
+    
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -188,17 +184,7 @@ class Component
         return $this;
     }
 
-    public function getCategory(): ?Category
-    {
-        return $this->category;
-    }
-
-    public function setCategory(?Category $category): self
-    {
-        $this->category = $category;
-
-        return $this;
-    }
+ 
 
     public function getAlertQuantity(): ?int
     {

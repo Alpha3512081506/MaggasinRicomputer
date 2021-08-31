@@ -29,13 +29,13 @@ class Monitor
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     *  @Groups({"monitor_read","category_read","monitor_write"})
+     *  @Groups({"monitor_read","location_read","monitor_write"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string")
-     *  @Groups({"monitor_read","category_read","monitor_write"})
+     *  @Groups({"monitor_read","location_read","monitor_write"})
      *  @Assert\NotBlank(message="productId del prodotto è obligatorio")
      * @Assert\Length(
      *      min = 4,
@@ -46,17 +46,11 @@ class Monitor
      */
     private $productId;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="monitors")
-     *  @Groups({"monitor_read","category_read","monitor_write"})
-     *@Assert\NotBlank(message="Il modello del prodotto è obligatorio")
-
-     */
-    private $category;
+   
 
     /**
      * @ORM\Column(type="string", length=255)
-     *  @Groups({"monitor_read","category_read","monitor_write"})
+     *  @Groups({"monitor_read","location_read","monitor_write"})
      * @Assert\NotBlank(message="la marca del prodotto è obligatorio")
 
      */
@@ -64,7 +58,7 @@ class Monitor
 
     /**
      * @ORM\Column(type="string", length=255)
-     *  @Groups({"monitor_read","category_read","monitor_write"})
+     *  @Groups({"monitor_read","location_read","monitor_write"})
      *  @Assert\NotBlank(message="Il modello del prodotto è obligatorio")
 
      */
@@ -72,7 +66,7 @@ class Monitor
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"monitor_read","category_read","monitor_write"})
+     * @Groups({"monitor_read","location_read","monitor_write"})
      * @Assert\NotBlank(message="Il grado del prodotto è obligatorio")
 
      */
@@ -80,7 +74,7 @@ class Monitor
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"monitor_read","category_read","monitor_write"})
+     * @Groups({"monitor_read","location_read","monitor_write"})
      *  @Assert\NotBlank(message="lo schermo del prodotto è obligatorio")
 
      */
@@ -88,27 +82,29 @@ class Monitor
 
     /**
      * @ORM\Column(type="float", nullable=true)
-     * @Groups({"monitor_read","category_read","monitor_write"})
+     * @Groups({"monitor_read","location_read","monitor_write"})
      */
     private $price;
 
     /**
      * @ORM\Column(type="decimal", precision=5, scale=2, nullable=true)
-     * @Groups({"monitor_read","category_read","monitor_write"})
+     * @Groups({"monitor_read","location_read","monitor_write"})
      */
     private $priceb2b;
 
     /**
      * @ORM\ManyToOne(targetEntity=Location::class, inversedBy="monitors")
-     * @Groups({"monitor_read","category_read","monitor_write"})
+     * @Groups({"monitor_read","location_read","monitor_write"})
      */
     private $location;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Groups({"monitor_read","category_read","monitor_write"})
+     * @Groups({"monitor_read","location_read","monitor_write"})
      */
     private $note;
+
+   
 
     public function getId(): ?int
     {
@@ -127,17 +123,7 @@ class Monitor
         return $this;
     }
 
-    public function getCategory(): ?Category
-    {
-        return $this->category;
-    }
-
-    public function setCategory(?Category $category): self
-    {
-        $this->category = $category;
-
-        return $this;
-    }
+ 
 
     public function getMarca(): ?string
     {
@@ -236,4 +222,5 @@ class Monitor
 
         return $this;
     }
+
 }

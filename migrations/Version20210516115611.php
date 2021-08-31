@@ -20,7 +20,7 @@ final class Version20210516115611 extends AbstractMigration
     public function up(Schema $schema) : void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE `group` CHANGE current_quantity current_quantity NUMERIC(10, 0) DEFAULT NULL, CHANGE alert_quantity alert_quantity NUMERIC(10, 0) DEFAULT NULL');
+       // $this->addSql('ALTER TABLE `group` CHANGE current_quantity current_quantity NUMERIC(10, 0) DEFAULT NULL, CHANGE alert_quantity alert_quantity NUMERIC(10, 0) DEFAULT NULL');
     }
 
     public function down(Schema $schema) : void

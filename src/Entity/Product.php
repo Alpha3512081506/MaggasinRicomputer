@@ -37,14 +37,14 @@ class Product
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      * @Groups({"product_read"})
-     * @Groups({"product_read","category_read","product_write"})
+     * @Groups({"product_read","product_write"})
      * 
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
-     * @Groups({"product_read","category_read","product_write"})
+     * @Groups({"product_read","product_write"})
      * @Assert\NotBlank(message="productId del prodotto è obligatorio")
      * @Assert\Length(
      *      min = 4,
@@ -57,7 +57,7 @@ class Product
 
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
-     * @Groups({"product_read","category_read","product_write"})
+     * @Groups({"product_read","product_write"})
      * @Assert\NotBlank(message="Il nome del prodotto è obligatorio")
      * @Assert\Length(
      *      min = 2,
@@ -98,19 +98,11 @@ class Product
     //  */
     // private $createdAt;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="products")
-     * @ApiSubresource()
-     * @Groups({"product_read","product_write",})
-     * @Assert\NotBlank(message="la categoria del prodotto è obbligatoria")
-     *  
-     */
-    private $category;
-
+ 
     /**
      * @ORM\ManyToOne(targetEntity=Location::class, inversedBy="prodcuts",)
      * @ApiSubresource()
-     * @Groups({"product_read","product_write","category_read"})
+     * @Groups({"product_read","product_write"})
      * @Assert\NotBlank(message="la location del prodotto è obbligatoria")
      *  
      */
@@ -126,28 +118,28 @@ class Product
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     *  @Groups({"product_read","category_read","product_write"})
+     *  @Groups({"product_read","product_write"})
      *  @Assert\NotBlank(message="la RAM del prodotto è obligatoria")
      */
     private $ram;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     *  @Groups({"product_read","category_read","product_write"})
+     *  @Groups({"product_read","product_write"})
      *  @Assert\NotBlank(message="Il disco HDD del prodotto è no puo essere vuoto")
      */
     private $hdd;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     *   @Groups({"product_read","category_read","product_write"})
+     *   @Groups({"product_read","product_write"})
      *   @Assert\NotBlank(message="lo schermo del prodotto è no puo essere vuoto")
      */
     private $screen;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     *   @Groups({"product_read","category_read","product_write"})
+     *   @Groups({"product_read","product_write"})
      *  @Assert\NotBlank(message="Il  processore del prodotto è no puo essere vuoto")
      */
     private $processor;
@@ -229,17 +221,7 @@ class Product
     //     return $this;
     // }
 
-    public function getCategory(): ?Category
-    {
-        return $this->category;
-    }
-
-    public function setCategory(?Category $category): self
-    {
-        $this->category = $category;
-
-        return $this;
-    }
+    
 
     public function getLocation(): ?Location
     {

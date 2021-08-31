@@ -15,7 +15,7 @@ const PrinterAdd = (props) => {
 
     const [printer, setPrinter] = useState({
         productId: "",
-        category: "",
+
         marque: "",
         model: "",
         paper: "",
@@ -32,7 +32,7 @@ const PrinterAdd = (props) => {
 
     const [error, setError] = useState({
         productId: "",
-        category: "",
+
         marque: "",
         model: "",
         paper: "",
@@ -46,7 +46,7 @@ const PrinterAdd = (props) => {
         price: "",
         priceb2b: ""
     });
-    const [category, setCategory] = useState([])
+    //const [category, setCategory] = useState([])
     const [location, setLocation] = useState([])
     const handleChange = (event) => {
         const name = event.currentTarget.name;
@@ -55,7 +55,7 @@ const PrinterAdd = (props) => {
 
     }
 
-    useEffect(() => {
+    { /**useEffect(() => {
         const findAllCategories = async () => {
             try {
                 const data = await CATEGORYSERVICE.findAll();
@@ -70,7 +70,7 @@ const PrinterAdd = (props) => {
             }
         }
         findAllCategories()
-    }, []);
+    }, []);*/}
 
     useEffect(() => {
         const findLocation = async () => {
@@ -101,8 +101,8 @@ const PrinterAdd = (props) => {
                 try {
                     const data = await PRINTERSERVICE.findPrinterById(id)
                     // console.log(data)
-                    const { productId, category, marque, model, paper, connector, tonner, format, type, location, grade, note, price, priceb2b } = data
-                    setPrinter({ productId, category, marque, model, paper, connector, tonner, format, type, location, grade, note, price, priceb2b })
+                    const { productId, marque, model, paper, connector, tonner, format, type, location, grade, note, price, priceb2b } = data
+                    setPrinter({ productId, marque, model, paper, connector, tonner, format, type, location, grade, note, price, priceb2b })
 
                     // console.log(data)
                 } catch (error) {
@@ -158,16 +158,7 @@ const PrinterAdd = (props) => {
                 onChange={handleChange}
                 error={error.productId}
             />
-            <Select
-                name="category"
-                label="Category"
-                value={printer.category}
-                onChange={handleChange}
-                error={error.category}
-            >
-                {category.map(category => <option key={category["@id"]} value={category["@id"]}>
-                    {category.categoryName}</option>)}
-            </Select>
+
             <Field name="marque"
                 label="Marca" placeholder="Marca della Stampante"
                 value={printer.marque}

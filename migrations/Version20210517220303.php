@@ -20,9 +20,9 @@ final class Version20210517220303 extends AbstractMigration
     public function up(Schema $schema) : void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE product DROP FOREIGN KEY FK_D34A04AD7A45358C');
-        $this->addSql('DROP INDEX IDX_D34A04AD7A45358C ON product');
-        $this->addSql('ALTER TABLE product DROP groupe_id');
+       // $this->addSql('ALTER TABLE product DROP FOREIGN KEY FK_D34A04AD7A45358C');
+        //$this->addSql('DROP INDEX IDX_D34A04AD7A45358C ON product');
+       // $this->addSql('ALTER TABLE product DROP groupe_id');
     }
 
     public function down(Schema $schema) : void
