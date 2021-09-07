@@ -65,6 +65,7 @@ class Component
     /**
      * @ORM\Column(type="string", length=255)
      *  @Groups({"component_read","category_read","component_write"})
+     * @Assert\NotBlank(message="Devi dare le specifiche")
      */
     private $specify;
 
@@ -85,6 +86,7 @@ class Component
     /**
      * @ORM\ManyToOne(targetEntity=Location::class, inversedBy="components")
      *  @Groups({"component_read","category_read","component_write"})
+     * @Assert\NotBlank(message="Il luogo del prodotto è obligatorio")
      */
     private $location;
 

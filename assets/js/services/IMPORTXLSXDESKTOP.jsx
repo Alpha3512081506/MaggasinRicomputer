@@ -2,9 +2,9 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import * as XLSX from "xlsx";
-import { API_PRODUCT } from './Config';
+import { API_DESKTOP, API_PRODUCT } from './Config';
 
-const IMPORTXLSX = ({ API_URLEx }) => {
+const IMPORTXLSXDESKTOP = () => {
     const [items, setItems] = useState([]);
     //  const [isUploaded, setIsUploaded] = false;
     const [product, setProduct] = useState({});
@@ -50,7 +50,7 @@ const IMPORTXLSX = ({ API_URLEx }) => {
             for (let i = 0; i < items.length; i++) {
                 const saveData = async (data) => {
                     try {
-                        const response = await axios.post({ API_URLEx }, items[i])
+                        const response = await axios.post(API_DESKTOP, items[i])
                         toast.success("successo registrazione")
                     } catch (error) {
                         console.log(error)
@@ -79,4 +79,4 @@ const IMPORTXLSX = ({ API_URLEx }) => {
         </div>
     );
 }
-export default IMPORTXLSX
+export default IMPORTXLSXDESKTOP

@@ -10,6 +10,9 @@ import { toast } from 'react-toastify';
 import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 import ExcelExporter from '../components/ExcelExporter';
 import ExportToExcel from '../services/ExportToExcel';
+import IMPORTXLSX from '../services/IMPORTXLSX';
+import { API_PRODUCT } from '../services/Config';
+
 
 
 const ProductList = (props) => {
@@ -89,16 +92,33 @@ const ProductList = (props) => {
 
             </div>
             <hr />
-            <input className="form-control" id="myInput" type="text" placeholder="Search.." value={search} onChange={handleSearch} />
+            <div className="card">
+                <div className="card-header">
+                    <h3 className="display-5 text-center"> Excel Dati</h3>
+                </div>
+                <div className="card-body">
+                    <div className="row">
+                        <div className="col">
+                            {<IMPORTXLSX API_URLEx={API_PRODUCT} />}
+                        </div>
+                        <div className="col">
+                            <div className="alert alert-primary my-5" role="alert">
+                                {<ExportToExcel apiData={paginatedProducts} fileName={fileName} />}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <input className="form-control my-4" id="myInput" type="text" placeholder="Search.." value={search} onChange={handleSearch} />
             <br></br>
             <div className=" d-flex align-items-center justify-content-between">
                 <div className="alert alert-primary" role="alert ">
-                    <h4 className="display-5 text-center text-justify">Filtro Totale : {paginatedProducts.length} per {filteredProducts.length} </h4>
+                    <h4 className="display-5 text-center text-justify">Filtro Totale : {products.length} per {filteredProducts.length} </h4>
                 </div>
 
                 <div className="btn-group">
-                    <button type="button" className="btn btn-outline-success ">IMPORTA</button>
-                    {<ExportToExcel apiData={paginatedProducts} fileName={fileName} />}
+
+
                 </div>
             </div>
 

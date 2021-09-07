@@ -8,7 +8,7 @@ import Select from '../../../form/Select';
 import { API_MONITOR } from '../../../services/Config';
 import EXCELIMPORTER from '../../../services/EXCELIMPORTER';
 import ExportToExcel from '../../../services/ExportToExcel';
-import IMPORTXLSX from '../../../services/IMPORTXLSX';
+import IMPORTXLSXMONITOR from '../../../services/IMPORTXLSXMONITOR';
 
 
 const MonitorShow = (props) => {
@@ -91,20 +91,34 @@ const MonitorShow = (props) => {
     }
     const fileName = "Monitors";
     return (<>
-        <IMPORTXLSX />
-        <EXCELIMPORTER />
         <div className="d-flex justify-content-between">
             <h5 className="font-italic text text-success">Gestisci  Monitors</h5>
             <Link to={"/types/monitors/add/new"}> <button className="btn btn-outline-success "><i className="fa fa-plus">Aggiungi Prodotto</i></button></Link>
-            {<ExportToExcel apiData={paginatedMonitor} fileName={fileName} />}
-
-
         </div>
         <hr />
+        <div className="card">
+            <div className="card-header">
+                <h3 className="text-center"> Excel Dati</h3>
+            </div>
+            <div className="card-body">
+                <div className="row">
+                    <div className="col">
+                        <IMPORTXLSXMONITOR />
+                    </div>
+                    <div className="col">
+                        <div className="alert alert-primary my-5" role="alert">
+                            {<ExportToExcel apiData={paginatedMonitor} fileName={fileName} />}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
         {loading && <Loading />}
         {!loading &&
             <div>
-                <input className="form-control" id="myInput" type="text" placeholder="Search.." value={search} onChange={handleSearch} />
+                <input className="form-control my-4" id="myInput" type="text" placeholder="Search.." value={search} onChange={handleSearch} />
                 <br></br>
                 <div className=" d-flex align-items-center justify-content-between">
                     <div className="alert alert-primary" role="alert ">

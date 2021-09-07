@@ -6,6 +6,7 @@ import Loading from '../../../components/Loading';
 import Pagination from '../../../components/Pagination';
 import { API_PRINTER } from '../../../services/Config';
 import ExportToExcel from '../../../services/ExportToExcel';
+import IMPORTXLSX from '../../../services/IMPORTXLSX';
 import PRINTERSERVICE from '../../../services/PRINTERSERVICE';
 
 
@@ -20,11 +21,11 @@ const PrinterShow = (props) => {
             try {
                 //const result = await axios.get(API_PRINTER);
                 const result = await PRINTERSERVICE.findAllPrinter()
-
+                // console.log(result)
                 setPrinter(result);
                 toast.success("connessione al server effettuata ✔")
                 setLoading(false);
-
+                // console.log(result)
             } catch (error) {
                 console.log("Erreur!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                 toast.error("Devi effettuare il login per accedere alle risorse")
@@ -68,8 +69,8 @@ const PrinterShow = (props) => {
         (d.marque && d.marque.toLowerCase().includes(search.toLocaleLowerCase())) ||
         (d.connector && d.connector.toLowerCase().includes(search.toLocaleLowerCase())) ||
         (d.grade && d.grade.toLowerCase().includes(search.toLocaleLowerCase())) ||
-        (d.tonner && d.tonner.toLowerCase().includes(search.toLocaleLowerCase()))
-            (d.location.locationName && d.location.locationName.toLowerCase().includes(search.toLocaleLowerCase()))
+        //(d.tonner && d.tonner.toLowerCase().includes(search.toLocaleLowerCase()))
+        (d.location.locationName && d.location.locationName.toLowerCase().includes(search.toLocaleLowerCase()))
         //||(d.category.categoryName && d.category.categoryName.toLowerCase().includes(search.toLocaleLowerCase()))
 
     )
@@ -87,18 +88,35 @@ const PrinterShow = (props) => {
     const fileName = "Printer";
     const { productId, marque, model, connector, type } = paginatedePrinter
     return (<>
-
         <div className="d-flex justify-content-between">
-            <ExportToExcel apiData={paginatedePrinter} fileName={fileName} />
+
             <button className="btn btn-success">Import</button>
             <h5 className="font-italic text text-success">Gestisci le stampante</h5>
             <Link to={"/types/printers/add/new"}> <button className="btn btn-outline-success "><i className="fa fa-plus">Aggiungi Prodotto</i></button></Link>
         </div>
         <hr />
+        <div className="card">
+            <div className="card-header">
+                <h3 className="text-center"> Excel Dati</h3>
+            </div>
+            <div className="card-body">
+                <div className="row">
+                    <div className="col">
+                        <IMPORTXLSX API_URL={API_PRINTER} />
+                    </div>
+                    <div className="col">
+                        <div className="alert alert-primary my-5" role="alert">
+                            <ExportToExcel apiData={paginatedePrinter} fileName={fileName} />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         {loading && <Loading />}
         {!loading &&
             <div>
-                <input className="form-control" id="myInput" type="text" placeholder="Search.." value={search} onChange={handleSearch} />
+                <input className="form-control my-4" id="myInput" type="text" placeholder="Search.." value={search} onChange={handleSearch} />
                 <br></br>
                 <div className="alert alert-primary d-flex align-items-center" role="alert">
                     <div>

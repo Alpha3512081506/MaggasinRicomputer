@@ -6,7 +6,10 @@ import Loading from '../../../components/Loading';
 import Pagination from '../../../components/Pagination';
 import Select from '../../../form/Select';
 import COMPONENTSERVICE from '../../../services/COMPONENTSERVICE';
+import { API_COMPONENNT } from '../../../services/Config';
 import ExportToExcel from '../../../services/ExportToExcel';
+import IMPORTXLSX from '../../../services/IMPORTXLSX';
+import IMPORTXLSXCOMPONENT from '../../../services/IMPORTXLSXCOMPONENT';
 const Componenti = (props) => {
     const [component, setComponent] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -86,19 +89,36 @@ const Componenti = (props) => {
     }
     const fileName = "Componenti";
     return (<>
-
         <div className="d-flex justify-content-between">
             <h5 className="font-italic text text-success">GESTISCI COMPONENTI</h5>
-            {<ExportToExcel apiData={paginatedComponent} fileName={fileName} />}
-            <button className="btn btn-success">Import</button>
             <Link to={"/types/component/add/new"}> <button className="btn btn-outline-success "><i className="fa fa-plus">Aggiungi Componente</i></button></Link>
 
         </div>
         <hr />
+        <div className="card">
+            <div className="card-header">
+                <h3 className="text-center"> Excel Dati</h3>
+            </div>
+            <div className="card-body">
+                <div className="row">
+                    <div className="col">
+                        <IMPORTXLSXCOMPONENT />
+                    </div>
+                    <div className="col">
+                        <div className="alert alert-primary my-5" role="alert">
+                            {<ExportToExcel apiData={paginatedComponent} fileName={fileName} />}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
         {loading && <Loading />}
         {!loading &&
             <div>
-                <input className="form-control" id="myInput" type="text" placeholder="Search.." value={search} onChange={handleSearch} />
+                <input className="form-control my-4" id="myInput" type="text" placeholder="Search.." value={search} onChange={handleSearch} />
                 <br></br>
                 <div className=" d-flex align-items-center justify-content-between">
                     <div className="alert alert-primary" role="alert ">

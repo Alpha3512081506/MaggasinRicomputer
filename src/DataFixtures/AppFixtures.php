@@ -6,7 +6,6 @@ use Faker\Factory;
 use App\Entity\User;
 use App\Entity\Product;
 use Liior\Faker\Prices;
-use App\Entity\Category;
 use App\Entity\Component;
 use App\Entity\Location;
 use App\Entity\Monitor;
@@ -47,15 +46,14 @@ class AppFixtures extends Fixture
         }
         $key = array_rand($users);
         for ($c = 0; $c < 10; $c++) {
-            $category = new Category();
-            $category->setCategoryName($faker->word());
+            
             $location = new Location();
             $location->setLocationName($faker->word() . " " . $faker->buildingNumber);
 
             for ($i=0; $i <10 ; $i++) { 
                 $desktop =new ProductDesktop;
                 $desktop->setProductId($faker->ean13)
-                        ->setCategory($category)
+                       
                         ->setGrade("Grade A")
                         ->setHdd("500gb")
                         ->setRam("8gb")
@@ -71,18 +69,14 @@ class AppFixtures extends Fixture
             for ($i = 0; $i < mt_rand(5, 10); $i++) {
                 $product = new Product();
                 $product->setProductId($faker->word())
-                    ->setProductName($faker->sentence())
-                    ->setCurrentQuantity(mt_rand(20, 50))
-                    ->setAlertQuanty(mt_rand(5, 10))
-                    ->setCustomField1($faker->paragraph(1))
-                    ->setCustomField2($faker->paragraph(1))
-                    ->setCustomField3($faker->sentence())
+                ->setProcessor("i5")
+                ->setHdd("500")
+                ->setMarque("MARQUE")
+                ->setPrice(300)
+                    
                     ->setNote($faker->text())
-                  
-                    ->setCategory($category)
                     ->setLocation($location)
-                    ->setUser($users[mt_rand(0, count($users) - 1)])
-                    ->setCategory($category);
+                    ->setUser($users[mt_rand(0, count($users) - 1)]);
 
 
                 $manager->persist($product);
@@ -94,7 +88,7 @@ class AppFixtures extends Fixture
                 ->setHdd($faker->randomElement(["160 gb","256gb","320gb","500gb"]))
                 ->setLocation($location)
                 ->setProcessor($faker->macProcessor)
-                ->setCategory($category)
+                
                 ->setRam($faker->randomElement(["2 gb","4 gb","8 gb","16 gb"]))
                 ->setMarque($faker->word)
                 ->setGrade($faker->randomElement(["Grade A","Grade B","Grade C","Grade A-","Grade B-"]))
@@ -108,7 +102,7 @@ class AppFixtures extends Fixture
                 $monitor->setProductId($faker->ean13)
                 ->setPrice($faker->price(200, 400, true, true))
                 ->setPriceb2b($faker->price(100, 300, true, true))
-                ->setCategory($category)->setLocation($location)
+                ->setLocation($location)
                 ->setMarca($faker->name)->setModel($faker->sentence)
                 ->setDisplay($faker->price(12,24))
                 ->setGrade($faker->randomElement(["Grade A","Grade B","Grade C","Grade A-","Grade B-"]))
@@ -126,6 +120,7 @@ class AppFixtures extends Fixture
                         ->setPaper($faker->numberBetween(5,50))
                          ->settype($faker->sentence)
                          ->setTonner($faker->word)
+                         ->setLocation($location)
                          ->setFormat($faker->randomElement(["A4","A3","A2"]))
                         ->setConnector($faker->randomElement(["USB","WIFI"]));
                         $manager->persist($printer);
@@ -139,13 +134,13 @@ class AppFixtures extends Fixture
                             ->setQuantity($faker->randomDigit)
                             ->setMarque($faker->randomElement(["HP","SAMSUNG","XEROX","EPSON","LEXMARK","BROTHER","CANON"]))
                             ->setGrade($faker->randomElement(["Grade A","Grade B","Grade C","Grade A-","Grade B-"]))
-                            ->setCategory($category)
+                            
                             ->setLocation($location)
                             ;
                             $manager->persist($component);
             }
             $manager->persist($location);
-            $manager->persist($category);
+          
         }
 
 

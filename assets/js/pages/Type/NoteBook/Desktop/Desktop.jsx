@@ -7,6 +7,7 @@ import Pagination from '../../../../components/Pagination';
 import DesktopService from '../../../../services/DesktopService';
 import { API_DESKTOP } from '../../../../services/Config';
 import ExportToExcel from '../../../../services/ExportToExcel';
+import IMPORTXLSXDESKTOP from '../../../../services/IMPORTXLSXDESKTOP';
 const DesktopShow = (props) => {
     const [desktop, setDesktop] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -84,16 +85,34 @@ const DesktopShow = (props) => {
     }
     const fileName = "Desktop"
     return (<>
-
         <div className="d-flex justify-content-between">
             <h5 className="font-italic text text-success">Gestisci Computer Desktop</h5>
-            {<ExportToExcel apiData={paginatedDesktop} fileName={fileName} />}
+
             <button className="btn btn-success">Import</button>
 
             <Link to={"/types/desktop/add/new"}> <button className="btn btn-outline-success "><i className="fa fa-plus">Aggiungi Prodotto</i></button></Link>
 
         </div>
         <hr />
+        <div className="card">
+            <div className="card-header">
+                <h3 className="text-center"> Excel Dati</h3>
+            </div>
+            <div className="card-body">
+                <div className="row">
+                    <div className="col">
+                        <IMPORTXLSXDESKTOP />
+                    </div>
+                    <div className="col">
+                        <div className="alert alert-primary my-5" role="alert">
+                            {<ExportToExcel apiData={paginatedDesktop} fileName={fileName} />}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
         {loading && <Loading />}
         {!loading &&
             <div>

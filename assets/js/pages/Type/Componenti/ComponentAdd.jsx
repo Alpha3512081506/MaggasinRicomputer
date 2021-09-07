@@ -98,6 +98,7 @@ const ComponentAdd = (props) => {
                 props.history.push("/types/component");
             } else {
                 const data = COMPONENTSERVICE.addNewComponent(component)
+                console.log(data);
                 //const data = await axios.post(API_COMPONENNT, component);
                 setErrors({});
                 setComponent(data)
