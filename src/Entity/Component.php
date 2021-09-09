@@ -15,6 +15,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ORM\Entity(repositoryClass=ComponentRepository::class)
  * 
  *  @ApiResource(
+ * attributes={"order"={"id": "DESC"}},
  * normalizationContext= {"groups" = {"component_read"}},
  * denormalizationContext={"disable_type_enforcement"=true
  * ,"groups" = {"component_write"}}
