@@ -92,9 +92,9 @@ const ProductList = (props) => {
 
             </div>
             <hr />
-            <div className="card">
-                <div className="card-header">
-                    <h3 className="display-5 text-center"> Excel Dati</h3>
+            <div className="card border-success">
+                <div className="card-header bg-success">
+                    <h4 className="text-white text-center"> Excel Dati</h4>
                 </div>
                 <div className="card-body">
                     <div className="row">
@@ -102,14 +102,14 @@ const ProductList = (props) => {
                             {<IMPORTXLSX API_URLEx={API_PRODUCT} />}
                         </div>
                         <div className="col">
-                            <div className="alert alert-primary my-5" role="alert">
+                            <div className="alert alert-primary my-1" role="alert">
                                 {<ExportToExcel apiData={paginatedProducts} fileName={fileName} />}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <input className="form-control my-4" id="myInput" type="text" placeholder="Search.." value={search} onChange={handleSearch} />
+            <input className="form-control mt-2" id="myInput" type="text" placeholder="Search.." value={search} onChange={handleSearch} />
             <br></br>
             <div className=" d-flex align-items-center justify-content-between">
                 <div className="alert alert-primary" role="alert ">

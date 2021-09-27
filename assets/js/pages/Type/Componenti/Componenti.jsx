@@ -16,7 +16,7 @@ const Componenti = (props) => {
     const [currentPage, setCurrentPage] = useState(1)
     const [search, setSearch] = useState("")
     const [itemsPerPage, setItemPerPage] = useState(10)
-    const paginationItem = [5, 10, 20, 30, 40, 50, 80, 100];
+    const paginationItem = [5, 10, 50, 80, 100, 150, 200, 300];
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -95,9 +95,9 @@ const Componenti = (props) => {
 
         </div>
         <hr />
-        <div className="card">
-            <div className="card-header">
-                <h3 className="text-center"> Excel Dati</h3>
+        <div className="card border-success">
+            <div className="card-header bg-success">
+                <h4 className="text-center text-white"> Excel Dati</h4>
             </div>
             <div className="card-body">
                 <div className="row">
@@ -105,7 +105,7 @@ const Componenti = (props) => {
                         <IMPORTXLSXCOMPONENT />
                     </div>
                     <div className="col">
-                        <div className="alert alert-primary my-5" role="alert">
+                        <div className="alert alert-primary my-1" role="alert">
                             {<ExportToExcel apiData={paginatedComponent} fileName={fileName} />}
 
                         </div>
@@ -122,7 +122,7 @@ const Componenti = (props) => {
                 <br></br>
                 <div className=" d-flex align-items-center justify-content-between">
                     <div className="alert alert-primary" role="alert ">
-                        <h4 className="display-5 text-center text-justify">Filtro Totale : {filteredComponent.length} </h4>
+                        <h4 className="display-5 text-center text-justify">Filtro Totale : {paginatedComponent.length} per {component.length}</h4>
                     </div>
                 </div>
                 <table className="table table-responsive table-hover table-bordered table-sm w-100" id="table-to-xls">
@@ -138,7 +138,7 @@ const Componenti = (props) => {
                             <th>Quantità</th>
                             <th>Grado</th>
                             <th>Luogo</th>
-                            {/**   <th>Azioni</th>*/}
+                            <th>Prememoria</th>
 
 
                         </tr>
@@ -157,9 +157,10 @@ const Componenti = (props) => {
                             <td>{component.marque}</td>
                             <td>{component.type}</td>
                             <td>{component.specify}</td>
-                            <td>{component.quantity}</td>
+                            <td className="text-center">{component.quantity}</td>
                             <td>{component.grade}</td>
                             <td>{component.location.locationName}</td>
+                            <td>{component.isAlertActivate}</td>
                             {/**<td>
                                 <Link to={"/types/component/plus/" + component.id}><button className="btn btn-outline-primary "><i className="fa fa-plus"></i></button></Link>
                                 <Link to={"/types/component/minus/" + component.id}> <button className="btn btn-outline-primary " ><i className="fa fa-minus"></i></button></Link>

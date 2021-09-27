@@ -98,6 +98,11 @@ class Component
      */
     private $alertQuantity;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $isAlertActivate;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -197,6 +202,18 @@ class Component
     public function setAlertQuantity(?int $alertQuantity): self
     {
         $this->alertQuantity = $alertQuantity;
+
+        return $this;
+    }
+
+    public function getIsAlertActivate(): ?bool
+    {
+        return $this->isAlertActivate;
+    }
+
+    public function setIsAlertActivate(?bool $isAlertActivate): self
+    {
+        $this->isAlertActivate = $isAlertActivate;
 
         return $this;
     }

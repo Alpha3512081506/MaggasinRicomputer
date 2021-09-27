@@ -40,9 +40,9 @@ const Navbar = ({ history, isAuthenticated, onLogout }) => {
                 <li className="nav-item mr-5">
                     <a className="nav-link " href="https://ricomputer.net/" target="_blank">Vai Negozio</a>
                 </li>
-                <li className="nav-item mr-5">
+                {/**<li className="nav-item mr-5">
                     <a className="nav-link " href="https://ricomputer.store/ricomputer/magazzino" target="_blank">Visita Magazzino</a>
-                </li>
+            </li>*/}
 
             </ul>
             {/* <ul className="navbar-nav ml-auto ">
@@ -57,8 +57,7 @@ const Navbar = ({ history, isAuthenticated, onLogout }) => {
             </ul>*/}
             <ul className="navbar-nav ml-auto ">
                 {!isAuthenticated && <>
-                    <li className="nav-item" desabled="true"><NavLink to="/inscription"
-                        className="nav-link">Inscription</NavLink></li>
+
                     <li className="nav-item"><NavLink to="/login"
                         className="btn btn-success mx-3">connexion</NavLink></li>
                 </> || <li className="nav-item"><button onClick={handleLogout}

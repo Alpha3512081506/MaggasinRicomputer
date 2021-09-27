@@ -96,9 +96,9 @@ const MonitorShow = (props) => {
             <Link to={"/types/monitors/add/new"}> <button className="btn btn-outline-success "><i className="fa fa-plus">Aggiungi Prodotto</i></button></Link>
         </div>
         <hr />
-        <div className="card">
-            <div className="card-header">
-                <h3 className="text-center"> Excel Dati</h3>
+        <div className="card border-success">
+            <div className="card-header bg-success">
+                <h4 className="text-center text-white"> Excel Dati</h4>
             </div>
             <div className="card-body">
                 <div className="row">
@@ -106,7 +106,7 @@ const MonitorShow = (props) => {
                         <IMPORTXLSXMONITOR />
                     </div>
                     <div className="col">
-                        <div className="alert alert-primary my-5" role="alert">
+                        <div className="alert alert-primary my-1" role="alert">
                             {<ExportToExcel apiData={paginatedMonitor} fileName={fileName} />}
                         </div>
                     </div>
@@ -133,7 +133,7 @@ const MonitorShow = (props) => {
                     <thead className="thead-dark " >
                         <tr className="w-100">
                             <th></th>
-                            <th >codiceInterno</th>
+                            <th >codice Interno</th>
                             <th >ProductId</th>
                             <th>Marca</th>
                             <th>Modello</th>
@@ -155,15 +155,15 @@ const MonitorShow = (props) => {
 
                         </td>
 
-                            <td>{monitor.id}</td>
+                            <td className="text-center">{monitor.id}</td>
                             <td>{monitor.productId}</td>
                             <td>{monitor.marca}</td>
                             <td>{monitor.model}</td>
                             <td>{monitor.grade}</td>
                             <td>{monitor.display}</td>
                             <td>{monitor.location.locationName}</td>
-                            <td>{monitor.price}&euro;</td>
-                            <td>{monitor.priceb2b}&euro;</td>
+                            <td className="text-center">{monitor.price}&euro;</td>
+                            <td className="text-center">{monitor.priceb2b}&euro;</td>
                             <td>{monitor.note}</td>
 
                         </tr>)}

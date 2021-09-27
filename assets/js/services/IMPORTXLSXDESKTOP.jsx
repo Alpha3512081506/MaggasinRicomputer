@@ -68,7 +68,7 @@ const IMPORTXLSXDESKTOP = () => {
     return (
         <div>
 
-            <input className="btn btn-primary btn-lg btn-block my-5"
+            <input className="btn btn-primary btn-lg btn-block my-1"
                 type="file"
                 onChange={(e) => {
                     const file = e.target.files[0];

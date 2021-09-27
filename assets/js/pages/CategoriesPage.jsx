@@ -8,18 +8,22 @@ import TableLoader from '../loader/TableLoader';
 const CategoryPage = (props) => {
     const [categories, setCategories] = useState([]);
     const [loading, setLoading] = useState(true);
-    const findAll = async () => {
-        try {
-            const data = await CATEGORYSERVICE.findAll();
-            setCategories(data)
-            setLoading(false)
-            toast.success("connessione al server effettuata ✔ ")
-        } catch (error) {
-            toast.error("Devi effettuare il login per accedere alle risorse")
 
+    useEffect(() => {
+        const findAll = async () => {
+            try {
+                const data = await CATEGORYSERVICE.findAll();
+                setCategories(data)
+                setLoading(false)
+                toast.success("connessione al server effettuata ✔ ")
+            } catch (error) {
+                toast.error("Devi effettuare il login per accedere alle risorse")
+                console.log(error)
+
+            }
         }
-    }
-    useEffect(() => { findAll() }, []);
+        findAll()
+    }, []);
     const [currentPage, setCurrentPage] = useState(1);
     const handleDelete = async (id) => {
         const originalCategories = [...categories]

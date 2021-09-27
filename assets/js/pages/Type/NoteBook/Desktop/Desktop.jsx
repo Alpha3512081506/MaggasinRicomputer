@@ -88,15 +88,13 @@ const DesktopShow = (props) => {
         <div className="d-flex justify-content-between">
             <h5 className="font-italic text text-success">Gestisci Computer Desktop</h5>
 
-            <button className="btn btn-success">Import</button>
-
             <Link to={"/types/desktop/add/new"}> <button className="btn btn-outline-success "><i className="fa fa-plus">Aggiungi Prodotto</i></button></Link>
 
         </div>
         <hr />
-        <div className="card">
-            <div className="card-header">
-                <h3 className="text-center"> Excel Dati</h3>
+        <div className="card border-success">
+            <div className="card-header bg-success">
+                <h4 className="text-center text-white"> Excel Dati</h4>
             </div>
             <div className="card-body">
                 <div className="row">
@@ -104,7 +102,7 @@ const DesktopShow = (props) => {
                         <IMPORTXLSXDESKTOP />
                     </div>
                     <div className="col">
-                        <div className="alert alert-primary my-5" role="alert">
+                        <div className="alert alert-primary my-1" role="alert">
                             {<ExportToExcel apiData={paginatedDesktop} fileName={fileName} />}
                         </div>
                     </div>
@@ -116,7 +114,7 @@ const DesktopShow = (props) => {
         {loading && <Loading />}
         {!loading &&
             <div>
-                <input className="form-control" id="myInput" type="text" placeholder="Search.." value={search} onChange={handleSearch} />
+                <input className="form-control mt-1" id="myInput" type="text" placeholder="Search.." value={search} onChange={handleSearch} />
                 <br></br>
                 <div className="alert alert-primary d-flex align-items-center" role="alert">
                     <div>

@@ -30,7 +30,7 @@ const AlertQuantity = (props) => {
             <h3>COMPONNEMTI CHE STANNO PER FINIRE O FINITI</h3>
 
         </div>
-        <div className="row">
+        {/** <div className="row">
             <div className="col">
                 <div className="alert alert-warning" role="alert">
                     <h4>ID:XXXFREYT-RAM:DDR3-4GB- Quantità Rimanente<span className="badge badge-light badge-pill">4</span></h4>
@@ -70,7 +70,7 @@ const AlertQuantity = (props) => {
             </div>
 
         </div>
-
+*/}
     </>);
 }
 
