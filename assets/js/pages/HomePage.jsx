@@ -178,7 +178,7 @@ const HomePage = (props) => {
 
         fetchData();
     }, []);
-    const FilteredComponent = component.filter(c => c.quantity < 5);
+    const FilteredComponent = component.filter(c => c.quantity < 5 && c.isAlertActivate == "Sì");
     //  const [data, setCharData] = useState({});
     // const dataAray = [products.length, printer.length, component.length, desktop.length, monitor.length];
     {/**useEffect(() => {
@@ -206,7 +206,7 @@ const HomePage = (props) => {
         {loading && <ListLoader />}
         {!loading && <div className="container-fluid">
             <div className="row">
-                <div className="col-4 bg-info shadow-p3  mb-5 bg-success rounded">
+                <div className="col-sm-4 col-md-5 col-lg-6 bg-info shadow-p3  mb-5 bg-success rounded">
                     <h6 className="text-white text-center"><u>COMPONNEMTI CHE STANNO PER FINIRE O FINITI</u></h6>
                     <table className="my-2 table table-responsive table-stiped text-white table-hover table-bordered table-sm w-100" id="table-to-xls">
                         <thead className="thead-dark " >
@@ -371,7 +371,7 @@ const HomePage = (props) => {
                     </div>
 
                     <hr className="my-3" />
-
+                    <h4 className="text-center"> Utenti</h4>
                     {!loading &&
                         <table className="table table-responsive table-hover table-bordered table-sm  table-dark">
                             <thead >

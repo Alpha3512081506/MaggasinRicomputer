@@ -99,7 +99,8 @@ class Component
     private $alertQuantity;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     *@ORM\Column(type="string", length=255)
+     *@Groups({"component_read","category_read","component_write"})
      */
     private $isAlertActivate;
 
@@ -206,12 +207,12 @@ class Component
         return $this;
     }
 
-    public function getIsAlertActivate(): ?bool
+    public function getIsAlertActivate(): ?string
     {
         return $this->isAlertActivate;
     }
 
-    public function setIsAlertActivate(?bool $isAlertActivate): self
+    public function setIsAlertActivate(?string $isAlertActivate): self
     {
         $this->isAlertActivate = $isAlertActivate;
 
