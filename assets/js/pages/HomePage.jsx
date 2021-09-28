@@ -178,7 +178,7 @@ const HomePage = (props) => {
 
         fetchData();
     }, []);
-    const FilteredComponent = component.filter(c => c.quantity < 5 && c.isAlertActivate == "Sì");
+    const FilteredComponent = component.filter(c => c.quantity < 10 && c.isAlertActivate == "Sì");
     //  const [data, setCharData] = useState({});
     // const dataAray = [products.length, printer.length, component.length, desktop.length, monitor.length];
     {/**useEffect(() => {
