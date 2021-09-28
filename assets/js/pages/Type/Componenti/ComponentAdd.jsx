@@ -19,7 +19,8 @@ const ComponentAdd = (props) => {
         specify: "",
         grade: "",
         quantity: "",
-        location: ""
+        location: "",
+        isAlertActivate: "No"
 
     });
 
@@ -29,7 +30,8 @@ const ComponentAdd = (props) => {
         type: "",
         specify: "",
         grade: "",
-        quantity: ""
+        quantity: "",
+        isAlertActivate: ""
     });
     // const [category, setCategory] = useState([])
     const [location, setLocation] = useState([])
@@ -191,6 +193,16 @@ const ComponentAdd = (props) => {
             >
                 {location.map(location => <option key={location["@id"]} value={location["@id"]}>
                     {location.locationName}</option>)}
+            </Select>
+            <Select
+                name="isAlertActivate"
+                label="Premomria"
+                value={component.isAlertActivate}
+                onChange={handleChange}
+                error={error.isAlertActivate}
+            >
+                <option value="Sì"> Sì </option>
+                <option value="No"> No </option>
             </Select>
 
             <div className="form-group">

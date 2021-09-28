@@ -115,6 +115,8 @@ const Componenti = (props) => {
         </div>
 
 
+
+
         {loading && <Loading />}
         {!loading &&
             <div>
